@@ -5,8 +5,8 @@ interface Props {
 }
 
 const {
-  title = 'Dasein Foresight — Prospectiva editorial para decisiones complejas',
-  description = 'Prospectiva estrategica para pilotos donde tecnologia, regulacion y contexto humano se cruzan. Dasein Foresight convierte senales y tensiones en decisiones accionables.'
+  title = 'Dasein Foresight — Prospectiva estratégica basada en IA',
+  description = 'Consultora de prospectiva estratégica basada en IA para equipos que necesitan leer señales, modelar sistemas y decidir mejor bajo complejidad.'
 } = Astro.props;
 ---
 <!DOCTYPE html>
@@ -38,7 +38,39 @@ const {
   </script>
 </head>
 <body class="grain">
+  <div class="cursor-dot" aria-hidden="true"></div>
   <slot />
+
+  <script is:inline>
+    (() => {
+      const dot = document.querySelector('.cursor-dot');
+      if (!dot || window.matchMedia('(pointer: coarse)').matches) return;
+
+      let mx = 0, my = 0, dx = 0, dy = 0;
+
+      document.addEventListener('mousemove', (e) => {
+        mx = e.clientX;
+        my = e.clientY;
+      });
+
+      function tick() {
+        dx += (mx - dx) * 0.15;
+        dy += (my - dy) * 0.15;
+        dot.style.left = dx + 'px';
+        dot.style.top = dy + 'px';
+        requestAnimationFrame(tick);
+      }
+      tick();
+
+      const growTargets = 'a, button, [data-cursor-grow], .audience-lane, .hero-lexicon-word, .engine-card, .marquee-item';
+      document.addEventListener('mouseover', (e) => {
+        if (e.target.closest(growTargets)) dot.classList.add('is-grow');
+      });
+      document.addEventListener('mouseout', (e) => {
+        if (e.target.closest(growTargets)) dot.classList.remove('is-grow');
+      });
+    })();
+  </script>
 </body>
 </html>
 

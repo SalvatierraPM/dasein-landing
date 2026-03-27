@@ -1,0 +1,202 @@
+---
+interface Props {
+  /** CSS class to add to the wrapper */
+  class?: string;
+  /** Base color for particles in hex */
+  color?: string;
+  /** Number of particles (auto-reduced on mobile) */
+  count?: number;
+  /** Overall opacity of the canvas, 0-1 */
+  opacity?: number;
+  /** Maximum connection distance in px */
+  linkDistance?: number;
+}
+
+const {
+  class: className = '',
+  color = '#4865ff',
+  count = 60,
+  opacity = 0.32,
+  linkDistance = 120,
+} = Astro.props;
+---
+
+<div
+  class={`particle-network ${className}`}
+  data-particle-network
+  data-pn-color={color}
+  data-pn-count={String(count)}
+  data-pn-opacity={String(opacity)}
+  data-pn-link-distance={String(linkDistance)}
+  aria-hidden="true"
+>
+  <canvas class="particle-network__canvas"></canvas>
+</div>
+
+<style>
+  .particle-network {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .particle-network__canvas {
+    width: 100%;
+    height: 100%;
+  }
+</style>
+
+<script>
+  function initAllParticleNetworks() {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const allNets = document.querySelectorAll('[data-particle-network]');
+
+    allNets.forEach((root) => {
+      if (
+        !(root instanceof HTMLElement) ||
+        root.dataset.pnMounted === 'true' ||
+        reducedMotion
+      ) return;
+
+      root.dataset.pnMounted = 'true';
+
+      const observer = new IntersectionObserver((entries) => {
+        if (!entries.some((e) => e.isIntersecting)) return;
+        observer.disconnect();
+        const canvas = root.querySelector('canvas');
+        if (canvas) initNetwork(root, canvas as HTMLCanvasElement);
+      }, { rootMargin: '200px 0px' });
+
+      observer.observe(root);
+    });
+  }
+
+  interface Particle {
+    x: number;
+    y: number;
+    vx: number;
+    vy: number;
+    r: number;
+    baseAlpha: number;
+  }
+
+  function initNetwork(root: HTMLElement, canvas: HTMLCanvasElement) {
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const colorHex = root.dataset.pnColor || '#4865ff';
+    const isMobile = window.innerWidth < 768;
+    const baseCount = parseInt(root.dataset.pnCount || '60', 10);
+    const particleCount = isMobile ? Math.floor(baseCount * 0.5) : baseCount;
+    const globalOpacity = parseFloat(root.dataset.pnOpacity || '0.32');
+    const linkDist = parseInt(root.dataset.pnLinkDistance || '120', 10);
+
+    // Parse hex to rgb
+    const r = parseInt(colorHex.slice(1, 3), 16);
+    const g = parseInt(colorHex.slice(3, 5), 16);
+    const b = parseInt(colorHex.slice(5, 7), 16);
+
+    let w = 0;
+    let h = 0;
+    let disposed = false;
+    let rafId = 0;
+    const dpr = Math.min(window.devicePixelRatio, 2);
+
+    const particles: Particle[] = [];
+
+    const resize = () => {
+      w = root.clientWidth;
+      h = root.clientHeight;
+      if (!w || !h) return;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+
+    const resizeObserver = new ResizeObserver(resize);
+    resizeObserver.observe(root);
+    resize();
+
+    // Seed particles
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * (w || 800),
+        y: Math.random() * (h || 600),
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        r: 1 + Math.random() * 1.5,
+        baseAlpha: 0.3 + Math.random() * 0.7,
+      });
+    }
+
+    // Visibility tracking to pause when off-screen
+    let isVisible = true;
+    const visObs = new IntersectionObserver((entries) => {
+      isVisible = entries.some((e) => e.isIntersecting);
+    }, { threshold: 0 });
+    visObs.observe(root);
+
+    const animate = () => {
+      if (disposed) return;
+      rafId = requestAnimationFrame(animate);
+      if (!isVisible || !w || !h) return;
+
+      ctx.clearRect(0, 0, w, h);
+
+      // Move particles
+      for (const p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < -10) p.x = w + 10;
+        if (p.x > w + 10) p.x = -10;
+        if (p.y < -10) p.y = h + 10;
+        if (p.y > h + 10) p.y = -10;
+      }
+
+      // Draw links
+      const linkDistSq = linkDist * linkDist;
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distSq = dx * dx + dy * dy;
+
+          if (distSq < linkDistSq) {
+            const alpha = (1 - distSq / linkDistSq) * globalOpacity * 0.5;
+            ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+            ctx.lineWidth = 0.5;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw particles
+      for (const p of particles) {
+        const alpha = p.baseAlpha * globalOpacity;
+        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    };
+
+    animate();
+
+    const cleanup = () => {
+      disposed = true;
+      cancelAnimationFrame(rafId);
+      resizeObserver.disconnect();
+      visObs.disconnect();
+    };
+
+    document.addEventListener('astro:before-preparation', cleanup, { once: true });
+  }
+
+  initAllParticleNetworks();
+</script>

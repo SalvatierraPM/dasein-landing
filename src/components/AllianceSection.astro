@@ -1,91 +1,388 @@
-<section class="alliances section" id="alianzas">
-  <div class="container-wide">
-    <div class="section-heading" data-reveal>
-      <div class="eyebrow">Alliance logic</div>
-      <div>
-        <h2 class="section-title">Donde termina Dasein y donde entran partners.</h2>
-        <p class="section-copy">
-          La promesa no es hacer todo. La promesa es entregar una lectura estrategica mas rigurosa
-          para que la implementacion posterior tenga mejor punto de partida.
-        </p>
+<section class="alliance-section" id="alianzas">
+  <div class="container">
+
+    <!-- Asymmetric header -->
+    <div class="alliance-head" data-reveal>
+      <span class="alliance-kicker">06 / Alianzas</span>
+      <h2 class="alliance-title">Dasein no compite con implementadores.<br>Les deja un mapa mejor.</h2>
+    </div>
+
+    <p class="alliance-lede" data-reveal>
+      El modelo de colaboración está pensado para que el trabajo estratégico llegue hasta donde agrega
+      más valor: lectura del sistema, escenarios, criterio y decisión. La implementación puede entrar después.
+    </p>
+
+    <!-- Handoff flow -->
+    <div class="alliance-flow" data-reveal-stagger>
+
+      <article class="alliance-col alliance-col--dasein">
+        <span class="alliance-step" aria-hidden="true">01</span>
+        <div class="alliance-accent alliance-accent--blue"></div>
+        <small class="alliance-role">Dasein hace</small>
+        <h3 class="alliance-col-title">Lectura, modelamiento y simulación.</h3>
+        <p class="alliance-col-body">Pregunta estratégica, señales, actores, escenarios, tensiones y recomendaciones con trazabilidad.</p>
+      </article>
+
+      <div class="alliance-connector" aria-hidden="true">
+        <div class="alliance-connector-line"></div>
+        <svg class="alliance-connector-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <path d="M1 6h10M7 2l4 4-4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
       </div>
+
+      <article class="alliance-col alliance-col--partner">
+        <span class="alliance-step" aria-hidden="true">02</span>
+        <div class="alliance-accent alliance-accent--gradient"></div>
+        <small class="alliance-role">Partner implementa</small>
+        <h3 class="alliance-col-title">Cambio, despliegue y operación.</h3>
+        <p class="alliance-col-body">Transformación, producto, automatización, change management o ejecución institucional según el caso.</p>
+      </article>
+
+      <div class="alliance-connector" aria-hidden="true">
+        <div class="alliance-connector-line"></div>
+        <svg class="alliance-connector-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <path d="M1 6h10M7 2l4 4-4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <article class="alliance-col alliance-col--cliente">
+        <span class="alliance-step" aria-hidden="true">03</span>
+        <div class="alliance-accent alliance-accent--red"></div>
+        <small class="alliance-role">Cliente decide</small>
+        <h3 class="alliance-col-title">La organización conserva criterio y secuencia.</h3>
+        <p class="alliance-col-body">El objetivo es que el equipo tome decisiones con más claridad, no que delegue la lectura del riesgo.</p>
+      </article>
+
     </div>
 
-    <div class="alliance-grid" data-reveal-stagger>
-      <article class="alliance-card surface-card">
-        <small>Dasein hace</small>
-        <h3>Leer, estructurar, simular y traducir.</h3>
-        <ul>
-          <li>Preguntas estrategicas mejor formuladas</li>
-          <li>Escenarios comparables con evidencia visible</li>
-          <li>Recomendaciones con criterio operativo</li>
-        </ul>
-      </article>
+    <!-- Monumental quote -->
+    <blockquote class="alliance-quote" data-reveal>
+      <div class="alliance-quote-rule"></div>
+      <p>Where our work <span class="alliance-quote-accent">ends</span>, yours <span class="alliance-quote-accent">begins</span>.</p>
+      <div class="alliance-quote-rule"></div>
+    </blockquote>
 
-      <article class="alliance-card surface-card">
-        <small>Partners hacen</small>
-        <h3>Implementar, transformar y escalar.</h3>
-        <ul>
-          <li>Cambio organizacional y adopcion</li>
-          <li>Despliegue tecnico o de producto</li>
-          <li>Operacionalizacion posterior al mapa</li>
-        </ul>
-      </article>
-
-      <article class="alliance-card alliance-card--quote surface-card-soft">
-        <small>Working rule</small>
-        <h3>Where our work ends, yours begins.</h3>
-        <p>
-          Esa separacion mantiene la promesa honesta: Dasein no se disfraza de implementador total,
-          y los partners no entran a ciegas.
-        </p>
-      </article>
-    </div>
   </div>
 </section>
 
 <style>
-  .alliance-grid {
+  /* ── Section ── */
+  .alliance-section {
+    padding-block: var(--space-section);
+    position: relative;
+    overflow: visible;
+  }
+
+  /* ── Asymmetric Header ── */
+  .alliance-head {
     display: grid;
-    gap: 1rem;
+    grid-template-columns: auto 1fr;
+    gap: clamp(2rem, 3vw, 4rem);
+    align-items: start;
+    margin-bottom: clamp(2rem, 3vw, 3.5rem);
   }
 
-  .alliance-card {
-    padding: 1.45rem;
-  }
-
-  .alliance-card small {
-    display: inline-block;
+  .alliance-kicker {
     font-family: var(--font-mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.16em;
+    font-size: var(--text-overline);
+    letter-spacing: var(--tracking-overline);
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    padding-top: 0.65em;
+    white-space: nowrap;
+  }
+
+  .alliance-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 1.2rem + 2.4vw, 3.4rem);
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-heading);
+    color: var(--ink);
+    max-width: 28ch;
+  }
+
+  .alliance-lede {
+    color: var(--ink-soft);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    max-width: 52ch;
+    margin-left: auto;
+    margin-bottom: clamp(4rem, 5vw, 7rem);
+  }
+
+  /* ── Flow Grid ── */
+  .alliance-flow {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    align-items: start;
+    gap: 0;
+    margin-bottom: clamp(5rem, 6vw, 8rem);
+  }
+
+  /* ── Column (NOT a card) ── */
+  .alliance-col {
+    position: relative;
+    padding: clamp(2.5rem, 3vw, 3.5rem) clamp(1.5rem, 2vw, 2.5rem);
+    padding-top: clamp(3.5rem, 4vw, 5rem);
+  }
+
+  .alliance-col:hover .alliance-accent {
+    filter: brightness(1.3);
+    opacity: 1;
+  }
+
+  /* Step watermark */
+  .alliance-step {
+    position: absolute;
+    top: clamp(0.5rem, 1vw, 1rem);
+    right: clamp(1rem, 2vw, 2rem);
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 3rem + 3vw, 7rem);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--ink);
+    opacity: 0.04;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* Top accent line */
+  .alliance-accent {
+    position: absolute;
+    top: 0;
+    left: clamp(1.5rem, 2vw, 2.5rem);
+    right: clamp(1.5rem, 2vw, 2.5rem);
+    height: 2px;
+    border-radius: 1px;
+    transition: filter 0.4s var(--ease-out-expo), opacity 0.4s var(--ease-out-expo);
+    opacity: 0.8;
+  }
+
+  .alliance-accent--blue {
+    background: var(--signal-blue);
+  }
+
+  .alliance-accent--gradient {
+    background: linear-gradient(90deg, var(--signal-blue), var(--signal-red));
+  }
+
+  .alliance-accent--red {
+    background: var(--signal-red);
+  }
+
+  .alliance-role {
+    display: block;
+    margin-bottom: clamp(0.75rem, 1vw, 1.25rem);
+    font-family: var(--font-mono);
+    font-size: var(--text-overline);
+    letter-spacing: var(--tracking-overline);
     text-transform: uppercase;
     color: var(--ink-faint);
   }
 
-  .alliance-card h3 {
-    margin: 0.8rem 0 0;
-    font-size: clamp(1.34rem, 1.08rem + 0.8vw, 1.92rem);
-    line-height: 1.08;
-    letter-spacing: -0.04em;
+  .alliance-col-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 1rem + 0.8vw, 2rem);
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-heading);
+    color: var(--ink);
+    margin-bottom: clamp(0.75rem, 1vw, 1rem);
   }
 
-  .alliance-card ul,
-  .alliance-card p {
-    margin: 0.85rem 0 0;
+  .alliance-col-body {
     color: var(--ink-soft);
+    font-size: clamp(0.92rem, 0.88rem + 0.2vw, 1.04rem);
+    line-height: var(--leading-body);
   }
 
-  .alliance-card ul {
-    display: grid;
-    gap: 0.65rem;
-    padding-left: 1.1rem;
+
+  /* ── Connectors ── */
+  .alliance-connector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    padding-top: clamp(4rem, 5vw, 6.5rem);
+    width: clamp(2.5rem, 3vw, 4rem);
   }
 
-  @media (min-width: 980px) {
-    .alliance-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      align-items: stretch;
+  .alliance-connector-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--signal-blue), var(--signal-red));
+    opacity: 0.18;
+    transform-origin: left center;
+  }
+
+  .alliance-connector-arrow {
+    flex-shrink: 0;
+    color: var(--ink-faint);
+    opacity: 0.4;
+  }
+
+  /* Animate connector line draw-in */
+  [data-reveal-stagger] .alliance-connector-line {
+    transform: scaleX(0);
+    transition: transform 0.7s var(--ease-out-expo);
+  }
+
+  [data-reveal-stagger].revealed .alliance-connector-line {
+    transform: scaleX(1);
+  }
+
+  /* Stagger: connectors animate after columns */
+  [data-reveal-stagger].revealed .alliance-connector:nth-of-type(2) .alliance-connector-line {
+    transition-delay: 0.35s;
+  }
+
+  [data-reveal-stagger].revealed .alliance-connector:nth-of-type(4) .alliance-connector-line {
+    transition-delay: 0.5s;
+  }
+
+  /* Column stagger overrides */
+  [data-reveal-stagger] > .alliance-col {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo);
+  }
+
+  [data-reveal-stagger].revealed > .alliance-col:nth-child(1) {
+    transition-delay: 0s;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  [data-reveal-stagger].revealed > .alliance-col:nth-child(3) {
+    transition-delay: 0.15s;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  [data-reveal-stagger].revealed > .alliance-col:nth-child(5) {
+    transition-delay: 0.3s;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Connectors also hidden initially */
+  [data-reveal-stagger] > .alliance-connector {
+    opacity: 0;
+    transition: opacity 0.5s var(--ease-out-expo);
+  }
+
+  [data-reveal-stagger].revealed > .alliance-connector:nth-child(2) {
+    transition-delay: 0.25s;
+    opacity: 1;
+  }
+
+  [data-reveal-stagger].revealed > .alliance-connector:nth-child(4) {
+    transition-delay: 0.4s;
+    opacity: 1;
+  }
+
+  /* ── Quote ── */
+  .alliance-quote {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    max-width: 54rem;
+    margin-inline: auto;
+  }
+
+  .alliance-quote p {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-size: clamp(2.8rem, 2rem + 3vw, 5rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--ink-faint);
+    padding-block: clamp(2rem, 3vw, 3.5rem);
+  }
+
+  .alliance-quote-accent {
+    color: var(--signal-red);
+  }
+
+  .alliance-quote-rule {
+    height: 1px;
+    background: var(--line);
+    width: 100%;
+  }
+
+  /* ── Reduced motion ── */
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal-stagger] > .alliance-col,
+    [data-reveal-stagger] > .alliance-connector {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
+    [data-reveal-stagger] .alliance-connector-line {
+      transform: scaleX(1);
+      transition: none;
+    }
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .alliance-head {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+
+    .alliance-lede {
+      margin-left: 0;
+    }
+
+    .alliance-flow {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .alliance-col {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .alliance-accent {
+      left: 0;
+      right: 0;
+    }
+
+    .alliance-step {
+      right: 0;
+    }
+
+    /* Vertical connectors on mobile */
+    .alliance-connector {
+      flex-direction: column;
+      width: 100%;
+      padding-top: 0;
+      padding-block: clamp(1rem, 2vw, 1.5rem);
+    }
+
+    .alliance-connector-line {
+      width: 1px;
+      height: 2.5rem;
+      flex: none;
+      transform-origin: top center;
+      background: linear-gradient(180deg, var(--signal-blue), var(--signal-red));
+    }
+
+    .alliance-connector-arrow {
+      transform: rotate(90deg);
+    }
+
+    /* Re-sequence stagger for vertical layout */
+    [data-reveal-stagger] > *:nth-child(1) { transition-delay: 0s !important; }
+    [data-reveal-stagger] > *:nth-child(2) { transition-delay: 0.1s !important; }
+    [data-reveal-stagger] > *:nth-child(3) { transition-delay: 0.2s !important; }
+    [data-reveal-stagger] > *:nth-child(4) { transition-delay: 0.3s !important; }
+    [data-reveal-stagger] > *:nth-child(5) { transition-delay: 0.4s !important; }
+
+    .alliance-quote p {
+      font-size: clamp(2rem, 1.5rem + 3vw, 3.5rem);
     }
   }
 </style>

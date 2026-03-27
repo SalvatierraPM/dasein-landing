@@ -1,189 +1,318 @@
 ---
 import ParticleScene from './ParticleScene.astro';
 
-const lanes = [
+const layers = [
   {
-    label: 'Open signal world',
-    text: 'La esfera donde reaccion publica, medios, competidores y ruido de mercado cambian rapido la temperatura del caso.',
+    num: '01',
+    label: 'Mundo abierto',
+    title: 'Mercado, opinión pública y entorno expandido.',
+    body: 'Señales, opinión pública, presión mediática y efectos reputacionales cuando una decisión sale al mundo.',
   },
   {
-    label: 'Institutional world',
-    text: 'La capa donde regulacion, gobernanza, directorio y procesos internos ralentizan o redirigen el movimiento.',
+    num: '02',
+    label: 'Mundo institucional',
+    title: 'Reguladores, directorios, sindicatos y actores con veto.',
+    body: 'La capa donde importa la gobernanza, la secuencia política y la forma en que cada actor interpreta el riesgo.',
   },
   {
-    label: 'Evidence trail',
-    text: 'Cada escenario necesita una cadena argumental visible: fuentes, supuestos, relaciones y thresholds.',
-  },
-];
-
-const chamberCards = [
-  {
-    title: 'Agentes con memoria',
-    body: 'No solo reaccionan; recuerdan, cargan contexto y alteran rondas futuras.',
+    num: '03',
+    label: 'Memoria de agentes',
+    title: 'Agentes con postura, fricción y memoria.',
+    body: 'No reaccionan una vez y desaparecen. Acumulan trayectorias, negocian y cambian según la información disponible.',
   },
   {
-    title: 'Rondas comparables',
-    body: 'Cada corrida devuelve una estructura legible para contrastar escenarios y no perderse en anecdotas.',
-  },
-  {
-    title: 'Scenario delta',
-    body: 'La diferencia entre mundos importa tanto como el escenario dominante.',
-  },
-  {
-    title: 'Auditabilidad',
-    body: 'El valor no esta en impresionar. Esta en poder reconstruir por que la simulacion sugiere una accion.',
+    num: '04',
+    label: 'Trazabilidad',
+    title: 'Cada escenario deja una lógica revisable.',
+    body: 'No se entrega una intuición elegante; se entrega una estructura argumental para discutir de dónde sale cada recomendación.',
   },
 ];
 ---
 
-<section class="signal section" id="signaltwin">
+<section
+  class="st section-dark"
+  id="signaltwin"
+  data-particle-host
+>
   <ParticleScene />
+  <div class="st-noise" aria-hidden="true"></div>
+  <div class="st-vignette" aria-hidden="true"></div>
 
-  <div class="container-wide signal-shell">
-    <div class="section-heading signal-heading" data-reveal>
-      <div class="eyebrow signal-eyebrow">SignalTwin theater</div>
-      <div>
-        <h2 class="section-title">La camara oscura donde las tensiones se vuelven visibles.</h2>
-        <p class="section-copy">
-          Cuando entra SignalTwin, la pregunta deja de ser que podria pasar en abstracto y
-          pasa a ser que ocurre cuando actores con incentivos reales interactuan en mundos paralelos.
+  <!-- Sage knot — glows on dark background -->
+  <div class="st-3d-wrap" data-parallax="0.07" aria-hidden="true">
+    <img src="/3d/knot-sage.png" alt="" class="st-3d" loading="lazy" decoding="async" width="320" height="280" />
+  </div>
+
+  <div class="container st-container">
+
+    <!-- Asymmetric header — kicker left, headline right -->
+    <header class="st-header" data-reveal>
+      <span class="st-kicker">04 / SignalTwin</span>
+      <div class="st-header-right">
+        <h2 class="st-title">
+          El motor de simulación detrás de la <em>recomendación.</em>
+        </h2>
+        <p class="st-lead">
+          SignalTwin convierte una lectura compleja en escenarios discutibles.
+          Modela actores, separa reacciones internas y externas, conserva memoria
+          y deja trazabilidad sobre por qué una recomendación gana fuerza frente a otra.
         </p>
       </div>
+    </header>
+
+    <!-- Engine layers — numbered editorial rows -->
+    <div class="st-layers" data-reveal-stagger>
+      {layers.map((layer) => (
+        <article class="st-layer" data-cursor-grow>
+          <div class="st-layer-num">
+            <span>{layer.num}</span>
+          </div>
+          <div class="st-layer-label">
+            <span>{layer.label}</span>
+          </div>
+          <div class="st-layer-content">
+            <h3 class="st-layer-title">{layer.title}</h3>
+            <p class="st-layer-body">{layer.body}</p>
+          </div>
+        </article>
+      ))}
     </div>
 
-    <div class="signal-grid">
-      <div class="signal-story" data-reveal-stagger>
-        {lanes.map((lane) => (
-          <article class="signal-lane surface-card-dark">
-            <small>{lane.label}</small>
-            <p>{lane.text}</p>
-          </article>
-        ))}
-      </div>
-
-      <article class="signal-panel surface-card-dark" data-reveal>
-        <small>Dual-world engine</small>
-        <h3>Lo que cambia cuando la simulacion tiene memoria y friccion.</h3>
-        <p>
-          El bloque oscuro no vende un software. Explica el motor intelectual que permite
-          pasar de senales dispersas a escenarios comparables y decisiones mejor fundadas.
-        </p>
-
-        <div class="signal-cards">
-          {chamberCards.map((card) => (
-            <div class="signal-card">
-              <strong>{card.title}</strong>
-              <span>{card.body}</span>
-            </div>
-          ))}
-        </div>
-      </article>
+    <!-- Bottom rule with mono note -->
+    <div class="st-footer" data-reveal>
+      <div class="st-footer-line"></div>
+      <p class="st-footer-note">
+        SignalTwin es infraestructura interna, no producto.
+        Lo que se entrega es la recomendación con trazabilidad, no acceso al motor.
+      </p>
     </div>
+
   </div>
 </section>
 
 <style>
-  .signal {
-    overflow: hidden;
-    color: var(--slate-white);
-    background: var(--gradient-chamber);
+  /* ─── Section ─── */
+  .st {
+    position: relative;
+    overflow: clip;
+    isolation: isolate;
+    background: #0f1a2e;
+    padding: var(--space-section) 0;
   }
 
-  .signal::before {
-    content: '';
+  .st-container {
+    position: relative;
+    z-index: 3;
+  }
+
+  /* ─── Texture ─── */
+  .st-noise {
     position: absolute;
     inset: 0;
-    z-index: 0;
-    background:
-      linear-gradient(90deg, rgba(10, 22, 40, 0.92), rgba(10, 22, 40, 0.42)),
-      linear-gradient(180deg, rgba(8, 17, 31, 0.15), rgba(8, 17, 31, 0.65));
-  }
-
-  .signal-shell {
-    position: relative;
     z-index: 1;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
   }
 
-  .signal-heading :global(.section-copy),
-  .signal-heading :global(.section-title) {
-    color: var(--slate-white);
+  .st-vignette {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse 80% 70% at 50% 40%,
+      transparent 0%,
+      rgba(15, 26, 46, 0.6) 100%
+    );
   }
 
-  .signal-eyebrow {
-    color: rgba(247, 243, 236, 0.62);
-  }
-
-  .signal-grid {
+  /* ─── Asymmetric header ─── */
+  .st-header {
     display: grid;
-    gap: 1rem;
+    grid-template-columns: auto 1fr;
+    gap: 2rem 3rem;
+    align-items: start;
+    margin-bottom: clamp(4rem, 5vw, 7rem);
   }
 
-  .signal-story {
-    display: grid;
-    gap: 1rem;
-  }
-
-  .signal-lane,
-  .signal-panel {
-    position: relative;
-    overflow: hidden;
-    padding: 1.45rem;
-    background: rgba(10, 22, 40, 0.58);
-  }
-
-  .signal-lane small,
-  .signal-panel small {
-    display: inline-block;
+  .st-kicker {
     font-family: var(--font-mono);
-    font-size: 0.64rem;
-    letter-spacing: 0.16em;
+    font-size: var(--text-overline);
+    letter-spacing: var(--tracking-overline);
     text-transform: uppercase;
-    color: rgba(247, 243, 236, 0.58);
+    color: rgba(243, 245, 248, 0.4);
+    padding-top: 0.65em;
+    white-space: nowrap;
   }
 
-  .signal-lane p,
-  .signal-panel p {
-    margin: 0.7rem 0 0;
-    color: rgba(247, 243, 236, 0.76);
+  .st-kicker::before {
+    content: '';
+    display: inline-block;
+    width: 1.4rem;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.55;
+    vertical-align: middle;
+    margin-right: 0.6rem;
   }
 
-  .signal-panel h3 {
-    margin: 0.9rem 0 0;
-    font-size: clamp(1.6rem, 1.2rem + 1.1vw, 2.2rem);
-    line-height: 1.04;
-    letter-spacing: -0.04em;
-    max-width: 12ch;
-  }
-
-  .signal-cards {
+  .st-header-right {
     display: grid;
-    gap: 0.75rem;
-    margin-top: 1.25rem;
+    gap: 1.6rem;
   }
 
-  .signal-card {
+  .st-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 1.2rem + 3vw, 3.6rem);
+    line-height: 1;
+    letter-spacing: var(--tracking-display);
+    font-weight: 600;
+    color: var(--slate-white, #f3f5f8);
+    max-width: 24ch;
+  }
+
+  .st-title em {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--signal-red);
+  }
+
+  .st-lead {
+    max-width: 48ch;
+    color: rgba(243, 245, 248, 0.52);
+    font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.08rem);
+    line-height: 1.7;
+  }
+
+  /* ─── Engine layers — numbered rows ─── */
+  .st-layers {
+    border-top: 1px solid rgba(243, 245, 248, 0.1);
+  }
+
+  .st-layer {
     display: grid;
-    gap: 0.4rem;
-    padding: 1rem;
-    border-radius: var(--radius-lg);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(255, 255, 255, 0.03);
+    grid-template-columns: 3.5rem 10rem 1fr;
+    gap: 0 2rem;
+    align-items: start;
+    padding: clamp(2rem, 3vw, 3rem) 0;
+    border-bottom: 1px solid rgba(243, 245, 248, 0.08);
+    transition: border-color 0.3s ease;
   }
 
-  .signal-card strong {
-    font-size: 1rem;
-    letter-spacing: -0.03em;
+  .st-layer:hover {
+    border-bottom-color: rgba(255, 92, 56, 0.2);
   }
 
-  .signal-card span {
-    color: rgba(247, 243, 236, 0.7);
-    font-size: var(--text-sm);
+  .st-layer-num span {
+    font-family: var(--font-mono);
+    font-size: var(--text-overline);
+    letter-spacing: 0.1em;
+    color: var(--signal-red);
+    font-weight: 600;
   }
 
-  @media (min-width: 980px) {
-    .signal-grid {
-      grid-template-columns: minmax(0, 0.95fr) minmax(340px, 1.05fr);
-      align-items: start;
+  .st-layer-label span {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(243, 245, 248, 0.36);
+  }
+
+  .st-layer-content {
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .st-layer-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.15rem, 1rem + 0.6vw, 1.5rem);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+    color: var(--slate-white, #e8ecf1);
+    max-width: 32ch;
+  }
+
+  .st-layer-body {
+    color: rgba(243, 245, 248, 0.46);
+    font-size: clamp(0.88rem, 0.85rem + 0.15vw, 0.96rem);
+    line-height: 1.65;
+    max-width: 52ch;
+  }
+
+  /* Hover reveal body */
+  .st-layer-body {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s var(--ease-out-expo), opacity 0.4s var(--ease-out-expo);
+  }
+
+  .st-layer:hover .st-layer-body {
+    max-height: 8rem;
+    opacity: 1;
+  }
+
+  /* ─── Footer note ─── */
+  .st-footer {
+    margin-top: clamp(3rem, 4vw, 5rem);
+    display: grid;
+    gap: 1.2rem;
+  }
+
+  .st-footer-line {
+    width: 2.5rem;
+    height: 1px;
+    background: rgba(243, 245, 248, 0.16);
+  }
+
+  .st-footer-note {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: rgba(243, 245, 248, 0.28);
+    max-width: 48ch;
+    line-height: 1.7;
+  }
+
+  /* ─── Mobile ─── */
+  @media (max-width: 860px) {
+    .st-header {
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+    }
+
+    .st-layer {
+      grid-template-columns: 2.5rem 1fr;
+      gap: 0 1rem;
+    }
+
+    .st-layer-label {
+      display: none;
+    }
+
+    .st-layer-content {
+      grid-column: 2;
+    }
+
+    /* On mobile show body always — no hover */
+    .st-layer-body {
+      max-height: none;
+      opacity: 1;
+    }
+  }
+
+  /* ─── Reduced motion ─── */
+  @media (prefers-reduced-motion: reduce) {
+    .st-layer-body {
+      max-height: none;
+      opacity: 1;
+      transition: none;
     }
   }
 </style>

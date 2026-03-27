@@ -1,119 +1,393 @@
-<section class="founder section" id="sobre">
-  <div class="container-wide">
-    <div class="section-heading" data-reveal>
-      <div class="eyebrow">Founder proof</div>
-      <div>
-        <h2 class="section-title">Dasein nace de implementar IA donde el error tiene costo real.</h2>
-      </div>
-    </div>
+---
+const proofCells = [
+  {
+    title: 'Implementación real de IA',
+    body: 'No desde la promesa, sino desde entornos donde una mala decisión pega en operaciones, ventas y clientes.',
+  },
+  {
+    title: 'Modelamiento de sistemas complejos',
+    body: 'Actores, incentivos, fricciones, relaciones y restricciones antes de cualquier recomendación.',
+  },
+  {
+    title: 'Decisión bajo complejidad',
+    body: 'Estructuras para decidir mejor cuando no hay certezas y lo que se juega es relevante.',
+  },
+];
+---
 
-    <div class="founder-grid">
-      <article class="founder-copy surface-card" data-reveal>
-        <p>
-          Soy Pablo Moraga. Trabajo en la interseccion entre inteligencia artificial, sistemas
-          y toma de decisiones. No vengo del mundo tradicional de la consultoria; vengo de
-          implementar agentes de IA en entornos reales, donde un error impacta operaciones,
-          ventas y clientes.
-        </p>
-        <p>
-          Ese contexto me obligo a pensar la tecnologia como un sistema vivo, no como una promesa.
-          Dasein Foresight nace desde ahi: una forma de leer actores, incentivos, fricciones y
-          horizontes para decidir mejor bajo incertidumbre.
-        </p>
+<section class="founder-section" id="sobre">
+  <div class="container">
 
-        <div class="link-cluster">
-          <a class="link-chip" href="https://github.com/SalvatierraPM" target="_blank" rel="noreferrer">GitHub</a>
-          <a class="link-chip" href="https://substack.com/@pavlogalgo" target="_blank" rel="noreferrer">Substack</a>
-        </div>
-      </article>
+    <!-- Section header — asymmetric kicker + massive title -->
+    <header class="founder-header" data-reveal>
+      <span class="section-kicker">03 / Origen del enfoque</span>
+      <h2 class="founder-title">Dasein nace de implementar IA donde el error tiene costo real.</h2>
+    </header>
 
-      <div class="founder-side" data-reveal-stagger>
-        <article class="founder-card surface-card-soft">
-          <small>Implementacion real de IA</small>
-          <p>Agentes y sistemas desplegados donde el error pega en la operacion, no en una demo.</p>
-        </article>
+    <!-- Editorial spread — pull quote + narrative -->
+    <div class="editorial-spread">
+      <blockquote class="pull-quote" data-reveal>
+        <p>No vengo del mundo tradicional de la consultoría.</p>
+      </blockquote>
 
-        <article class="founder-card surface-card-soft">
-          <small>Modelamiento de sistemas complejos</small>
-          <p>Actores, incentivos, fricciones y dependencias convertidos en estructura legible.</p>
-        </article>
-
-        <article class="founder-card surface-card-soft">
-          <small>Decision bajo incertidumbre</small>
-          <p>IA como herramienta de exploracion y contraste, nunca como reemplazo del criterio.</p>
-        </article>
-
-        <article class="founder-contrast surface-card">
-          <small>Entre dos extremos</small>
-          <h3>Ni foresight bonito pero inutil, ni analisis tecnico ciego al contexto humano.</h3>
+      <div class="narrative" data-reveal>
+        <div class="narrative-inner">
           <p>
-            El trabajo esta justo al medio: traducir tendencias en decisiones accionables,
-            simular escenarios con logica operativa y mantener trazabilidad sobre lo que sostiene cada lectura.
+            Soy Pablo Moraga. Vengo de implementar agentes de IA en entornos reales,
+            donde los errores no son teóricos y las decisiones cambian operaciones,
+            ventas y clientes.
           </p>
-        </article>
+          <p>
+            Ese contexto me obligó a pensar la tecnología como un sistema vivo: actores,
+            incentivos, fricciones, restricciones y efectos de segundo orden antes de
+            cualquier promesa.
+          </p>
+          <p>
+            Dasein Foresight nace desde ahí. No como un ejercicio académico de futuros
+            posibles, sino como una herramienta para tomar mejores decisiones hoy cuando
+            la complejidad ya afecta el negocio, la institución o el proyecto.
+          </p>
+        </div>
       </div>
     </div>
+
+    <!-- Byline -->
+    <div class="byline" data-reveal>
+      <span class="byline-name">Pablo Moraga</span>
+      <span class="byline-sep">/</span>
+      <span class="byline-role">Founder, Dasein Foresight</span>
+      <div class="byline-links">
+        <a href="https://github.com/SalvatierraPM" target="_blank" rel="noreferrer">
+          GitHub <span class="link-arrow" aria-hidden="true">&rarr;</span>
+        </a>
+        <a href="https://substack.com/@pavlogalgo" target="_blank" rel="noreferrer">
+          Substack <span class="link-arrow" aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Proof cells — horizontal numbered list -->
+    <div class="proof-row" data-reveal-stagger>
+      {proofCells.map((cell, i) => (
+        <article class="proof-item">
+          <span class="proof-number">{String(i + 1).padStart(2, '0')}</span>
+          <h3 class="proof-title">{cell.title}</h3>
+          <p class="proof-body">{cell.body}</p>
+        </article>
+      ))}
+    </div>
+
+    <!-- Difference — asymmetric 60/40 -->
+    <div class="difference-row">
+      <article class="diff-card diff-card--wide" data-reveal>
+        <small class="diff-kicker">Qué me diferencia</small>
+        <h3 class="diff-heading">La mayoría de la prospectiva cae en dos extremos.</h3>
+        <p class="diff-body">
+          Demasiado abstracto para ser útil, o demasiado técnico para ver el contexto humano.
+          El enfoque de Dasein trabaja al medio: traduce señales en decisiones accionables,
+          simula escenarios con lógica operativa y usa IA como herramienta de exploración, no
+          como reemplazo del criterio.
+        </p>
+      </article>
+      <article class="diff-card diff-card--narrow" data-reveal>
+        <small class="diff-kicker">Por qué importa</small>
+        <h3 class="diff-heading">Implementar tecnología sin lectura sistémica ya es una apuesta riesgosa.</h3>
+        <p class="diff-body">
+          Dasein existe para reducir ese riesgo. No promete control absoluto; construye estructuras
+          que permiten decidir mejor bajo complejidad.
+        </p>
+      </article>
+    </div>
+
   </div>
 </section>
 
 <style>
-  .founder-grid {
+  /* ------------------------------------------------
+     SECTION HEADER — asymmetric kicker + title
+  ------------------------------------------------ */
+  .founder-header {
     display: grid;
-    gap: 1rem;
+    grid-template-columns: auto 1fr;
+    gap: 2rem 3rem;
+    align-items: start;
+    margin-bottom: clamp(4rem, 3rem + 3vw, 7rem);
   }
 
-  .founder-copy,
-  .founder-card,
-  .founder-contrast {
-    padding: 1.45rem;
-  }
-
-  .founder-copy p {
-    margin: 0;
-    color: var(--ink-soft);
-    font-size: clamp(1.02rem, 0.96rem + 0.22vw, 1.16rem);
-  }
-
-  .founder-copy p + p {
-    margin-top: 1rem;
-  }
-
-  .founder-copy .link-cluster {
-    margin-top: 1.4rem;
-  }
-
-  .founder-side {
-    display: grid;
-    gap: 1rem;
-  }
-
-  .founder-card small,
-  .founder-contrast small {
-    display: inline-block;
+  .section-kicker {
     font-family: var(--font-mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.16em;
+    font-size: var(--text-overline);
+    letter-spacing: var(--tracking-overline);
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    padding-top: 0.65em;
+    white-space: nowrap;
+  }
+
+  .founder-title {
+    font-family: var(--font-display);
+    font-size: var(--text-h1);
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-heading);
+    color: var(--ink);
+    max-width: 22ch;
+  }
+
+  /* ------------------------------------------------
+     EDITORIAL SPREAD — pull quote + narrative
+  ------------------------------------------------ */
+  .editorial-spread {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: clamp(2.5rem, 2rem + 2vw, 4rem);
+  }
+
+  .pull-quote {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .pull-quote p {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-size: clamp(1.8rem, 1.2rem + 1.5vw, 2.8rem);
+    line-height: 1.25;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    max-width: 18ch;
+  }
+
+  .narrative {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .narrative-inner {
+    border-left: 2px solid var(--signal-red);
+    padding-left: clamp(1.5rem, 1rem + 1vw, 2.5rem);
+    display: grid;
+    gap: 1.15rem;
+  }
+
+  .narrative-inner p {
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    color: var(--ink-soft);
+  }
+
+  .narrative-inner p:first-child {
+    color: var(--ink);
+  }
+
+  /* ------------------------------------------------
+     BYLINE
+  ------------------------------------------------ */
+  .byline {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: clamp(4rem, 3rem + 3vw, 7rem);
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .byline-name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    color: var(--ink);
+  }
+
+  .byline-sep {
+    color: var(--ink-faint);
+    font-size: var(--text-sm);
+  }
+
+  .byline-role {
+    font-family: var(--font-mono);
+    font-size: var(--text-overline);
+    letter-spacing: var(--tracking-overline);
     text-transform: uppercase;
     color: var(--ink-faint);
   }
 
-  .founder-card p,
-  .founder-contrast p {
-    margin: 0.7rem 0 0;
+  .byline-links {
+    display: flex;
+    gap: 1.2rem;
+    margin-left: auto;
+  }
+
+  .byline-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-overline);
+    letter-spacing: var(--tracking-mono);
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color var(--dur-fast) var(--ease-out-expo);
+  }
+
+  .byline-links a:hover {
+    color: var(--signal-red);
+  }
+
+  .byline-links a:focus-visible {
+    outline: 2px solid var(--signal-blue);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .link-arrow {
+    display: inline-block;
+    transition: transform var(--dur-normal) var(--ease-out-expo);
+  }
+
+  .byline-links a:hover .link-arrow {
+    transform: translateX(4px);
+  }
+
+  /* ------------------------------------------------
+     PROOF ROW — horizontal numbered items
+  ------------------------------------------------ */
+  .proof-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin-bottom: clamp(4rem, 3rem + 3vw, 7rem);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .proof-item {
+    padding: clamp(2rem, 1.5rem + 1.5vw, 3rem) clamp(1.5rem, 1rem + 1vw, 2.5rem);
+  }
+
+  .proof-item:not(:last-child) {
+    border-right: 1px solid var(--line);
+  }
+
+  .proof-number {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: clamp(1.6rem, 1.2rem + 1vw, 2.2rem);
+    font-weight: 500;
+    letter-spacing: var(--tracking-mono);
+    color: var(--signal-red);
+    margin-bottom: 1rem;
+  }
+
+  .proof-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 1rem + 0.3vw, 1.3rem);
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: var(--tracking-heading);
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+  }
+
+  .proof-body {
+    font-size: var(--text-sm);
+    line-height: var(--leading-body);
+    color: var(--ink-faint);
+  }
+
+  /* ------------------------------------------------
+     DIFFERENCE ROW — asymmetric 60/40
+  ------------------------------------------------ */
+  .difference-row {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 2rem;
+  }
+
+  .diff-card {
+    padding-top: clamp(1.5rem, 1rem + 1vw, 2.5rem);
+    border-top: 2px solid var(--line);
+  }
+
+  .diff-card--wide {
+    border-top-color: var(--signal-red);
+  }
+
+  .diff-kicker {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--text-overline);
+    letter-spacing: var(--tracking-overline);
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1rem;
+  }
+
+  .diff-heading {
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 1rem + 0.5vw, 1.5rem);
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: var(--tracking-heading);
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+
+  .diff-card--wide .diff-heading {
+    font-size: clamp(1.35rem, 1rem + 0.8vw, 1.85rem);
+    max-width: 28ch;
+  }
+
+  .diff-body {
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
     color: var(--ink-soft);
   }
 
-  .founder-contrast h3 {
-    margin: 0.8rem 0 0;
-    font-size: clamp(1.34rem, 1.1rem + 0.7vw, 1.95rem);
-    line-height: 1.08;
-    letter-spacing: -0.04em;
-  }
+  /* ------------------------------------------------
+     RESPONSIVE
+  ------------------------------------------------ */
+  @media (max-width: 900px) {
+    .founder-header {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
 
-  @media (min-width: 980px) {
-    .founder-grid {
-      grid-template-columns: minmax(0, 1.06fr) minmax(320px, 0.94fr);
-      align-items: start;
+    .editorial-spread {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .pull-quote p {
+      max-width: none;
+    }
+
+    .byline {
+      flex-wrap: wrap;
+      gap: 0.4rem 0.6rem;
+    }
+
+    .byline-links {
+      margin-left: 0;
+      width: 100%;
+      padding-top: 0.5rem;
+    }
+
+    .proof-row {
+      grid-template-columns: 1fr;
+    }
+
+    .proof-item:not(:last-child) {
+      border-right: none;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .difference-row {
+      grid-template-columns: 1fr;
+    }
+
+    .diff-card--wide .diff-heading {
+      max-width: none;
     }
   }
 </style>

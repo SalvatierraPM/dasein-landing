@@ -1,0 +1,359 @@
+<section class="contact-closing section-dark" id="contacto">
+  <div class="container">
+
+    <!-- Kicker -->
+    <div class="contact-kicker" data-reveal>
+      <span class="tag">Siguiente paso / conversación inicial</span>
+    </div>
+
+    <!-- Headline -->
+    <h2 class="contact-headline" data-reveal>
+      La decisión importante no espera.
+      <span class="contact-headline-italic">Hablemos del caso.</span>
+    </h2>
+
+    <!-- Body -->
+    <p class="contact-body" data-reveal>
+      Una conversación breve basta para entender si el caso necesita un pulso
+      estratégico, una simulación completa o una colaboración posterior con partners.
+    </p>
+
+    <!-- CTAs -->
+    <div class="contact-ctas" data-reveal>
+      <a class="cta-primary" href="mailto:salvatierra.pablom@gmail.com">Agenda una conversación</a>
+      <a class="cta-secondary" href="https://wa.me/56939056565" target="_blank" rel="noreferrer">WhatsApp</a>
+    </div>
+
+    <!-- Decorative divider -->
+    <div class="contact-divider" aria-hidden="true">
+      <span class="contact-divider-dot"></span>
+    </div>
+
+    <!-- Contact meta row -->
+    <div class="contact-meta-row" data-reveal>
+      <div class="contact-meta-item">
+        <small>Email</small>
+        <a href="mailto:salvatierra.pablom@gmail.com">salvatierra.pablom@gmail.com</a>
+      </div>
+      <div class="contact-meta-item">
+        <small>Teléfono</small>
+        <a href="https://wa.me/56939056565" target="_blank" rel="noreferrer">+56 9 3905 6565</a>
+      </div>
+      <div class="contact-meta-item">
+        <small>Base</small>
+        <span>Santiago, Chile</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="contact-footer" data-reveal>
+    <div class="container contact-footer-inner">
+      <div class="contact-footer-brand">
+        <strong>Dasein Foresight</strong>
+        <p>Pablo Moraga / prospectiva estratégica basada en IA / simulación de escenarios</p>
+      </div>
+      <nav class="contact-footer-links" aria-label="External links">
+        <a href="https://github.com/SalvatierraPM" target="_blank" rel="noreferrer">
+          <span>GitHub</span>
+          <span class="link-arrow" aria-hidden="true">&rarr;</span>
+        </a>
+        <a href="https://substack.com/@pavlogalgo" target="_blank" rel="noreferrer">
+          <span>Substack</span>
+          <span class="link-arrow" aria-hidden="true">&rarr;</span>
+        </a>
+      </nav>
+    </div>
+    <div class="container">
+      <p class="contact-copyright">&copy; 2025 Dasein Foresight</p>
+    </div>
+  </footer>
+</section>
+
+<style>
+  /* ------------------------------------------------
+     Contact Closing — dark editorial full-width
+     ------------------------------------------------ */
+  .contact-closing {
+    padding-top: clamp(6rem, 5rem + 6vw, 12rem);
+    padding-bottom: 0;
+  }
+
+  /* Kicker */
+  .contact-kicker {
+    text-align: center;
+    margin-bottom: clamp(1.5rem, 1rem + 1.5vw, 2.5rem);
+  }
+
+  .contact-kicker .tag {
+    justify-content: center;
+  }
+
+  /* Headline */
+  .contact-headline {
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: clamp(3.2rem, 1.5rem + 5.5vw, 7rem);
+    font-weight: 600;
+    line-height: 0.92;
+    letter-spacing: -0.05em;
+    color: var(--slate-white);
+    margin: 0 auto;
+    max-width: 52rem;
+  }
+
+  .contact-headline-italic {
+    display: block;
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--signal-red);
+    margin-top: 0.15em;
+  }
+
+  /* Body */
+  .contact-body {
+    text-align: center;
+    max-width: 36rem;
+    margin: clamp(1.5rem, 1rem + 1.5vw, 2.5rem) auto 0;
+    color: rgba(243, 245, 248, 0.62);
+    line-height: 1.65;
+  }
+
+  /* CTAs */
+  .contact-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: clamp(2rem, 1.5rem + 1.5vw, 3rem);
+  }
+
+  .cta-primary,
+  .cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: var(--text-caption);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 1rem 2.25rem;
+    border-radius: 2px;
+    text-decoration: none;
+    transition:
+      transform var(--dur-normal) var(--ease-out-expo),
+      background-color var(--dur-normal) var(--ease-out-expo),
+      border-color var(--dur-normal) var(--ease-out-expo);
+  }
+
+  .cta-primary {
+    background: var(--slate-white);
+    color: var(--navy-deep);
+    border: 1px solid var(--slate-white);
+  }
+
+  .cta-primary:hover {
+    transform: translateY(-2px);
+    background: #fff;
+  }
+
+  .cta-primary:focus-visible {
+    outline: 2px solid var(--signal-red);
+    outline-offset: 3px;
+  }
+
+  .cta-secondary {
+    background: transparent;
+    color: rgba(243, 245, 248, 0.82);
+    border: 1px solid rgba(243, 245, 248, 0.2);
+  }
+
+  .cta-secondary:hover {
+    background: rgba(243, 245, 248, 0.06);
+    border-color: rgba(243, 245, 248, 0.4);
+    transform: translateY(-2px);
+  }
+
+  .cta-secondary:focus-visible {
+    outline: 2px solid var(--signal-red);
+    outline-offset: 3px;
+  }
+
+  /* Decorative divider */
+  .contact-divider {
+    position: relative;
+    width: 100%;
+    height: 1px;
+    background: rgba(243, 245, 248, 0.1);
+    margin: clamp(3.5rem, 3rem + 3vw, 6rem) 0 clamp(2.5rem, 2rem + 2vw, 4rem);
+  }
+
+  .contact-divider-dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(243, 245, 248, 0.3);
+    transform: translate(-50%, -50%);
+  }
+
+  /* Contact meta row — newspaper masthead */
+  .contact-meta-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding-top: clamp(1.5rem, 1rem + 1vw, 2rem);
+    border-top: 1px solid rgba(243, 245, 248, 0.1);
+  }
+
+  .contact-meta-item {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .contact-meta-item small {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: rgba(243, 245, 248, 0.38);
+  }
+
+  .contact-meta-item a,
+  .contact-meta-item span {
+    color: rgba(243, 245, 248, 0.72);
+    font-size: var(--text-sm);
+    text-decoration: none;
+    transition: color var(--dur-fast) ease;
+  }
+
+  .contact-meta-item a:hover {
+    color: var(--slate-white);
+  }
+
+  /* Footer */
+  .contact-footer {
+    margin-top: clamp(4rem, 3rem + 4vw, 8rem);
+    border-top: 1px solid rgba(243, 245, 248, 0.08);
+    padding: clamp(2rem, 1.5rem + 1.5vw, 3rem) 0 0;
+  }
+
+  .contact-footer-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    justify-content: space-between;
+  }
+
+  .contact-footer-brand strong {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--slate-white);
+  }
+
+  .contact-footer-brand p {
+    color: rgba(243, 245, 248, 0.36);
+    font-size: var(--text-sm);
+    margin-top: 0.35rem;
+    line-height: 1.5;
+  }
+
+  .contact-footer-links {
+    display: flex;
+    gap: 1.75rem;
+  }
+
+  .contact-footer-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: rgba(243, 245, 248, 0.56);
+    font-size: var(--text-sm);
+    text-decoration: none;
+    transition: color var(--dur-normal) var(--ease-out-expo);
+  }
+
+  .contact-footer-links a:hover {
+    color: var(--slate-white);
+  }
+
+  .link-arrow {
+    display: inline-block;
+    transition: transform var(--dur-normal) var(--ease-out-expo);
+  }
+
+  .contact-footer-links a:hover .link-arrow {
+    transform: translateX(4px);
+  }
+
+  .contact-footer-links a:focus-visible {
+    outline: 2px solid var(--signal-red);
+    outline-offset: 2px;
+  }
+
+  /* Copyright */
+  .contact-copyright {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(243, 245, 248, 0.22);
+    margin-top: clamp(2rem, 1.5rem + 1vw, 3rem);
+    padding-bottom: clamp(2rem, 1.5rem + 1vw, 3rem);
+  }
+
+  /* --------------------------------
+     Responsive: tablet+
+     -------------------------------- */
+  @media (min-width: 768px) {
+    .contact-meta-row {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      text-align: center;
+    }
+
+    .contact-meta-item:not(:last-child) {
+      border-right: 1px solid rgba(243, 245, 248, 0.08);
+    }
+
+    .contact-meta-item {
+      justify-items: center;
+    }
+  }
+
+  @media (min-width: 960px) {
+    .contact-footer-inner {
+      flex-direction: row;
+      align-items: flex-end;
+    }
+  }
+
+  /* --------------------------------
+     Reduced motion
+     -------------------------------- */
+  @media (prefers-reduced-motion: reduce) {
+    .cta-primary,
+    .cta-secondary,
+    .link-arrow,
+    .contact-meta-item a {
+      transition: none;
+    }
+
+    .cta-primary:hover,
+    .cta-secondary:hover {
+      transform: none;
+    }
+
+    .contact-footer-links a:hover .link-arrow {
+      transform: none;
+    }
+  }
+</style>

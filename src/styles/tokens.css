@@ -1,74 +1,73 @@
 :root {
   --paper: #f5efe5;
   --paper-soft: #fbf7f1;
-  --paper-strong: #f0e7d9;
+  --paper-deep: #efe6d8;
   --bone: #e7ddd0;
   --mist: #dce6f5;
-  --mist-strong: #c7d7f0;
+  --metal: #c6cbd4;
   --ink: #111111;
   --ink-soft: #4e4a43;
   --ink-faint: #8f877a;
-  --white: #ffffff;
   --navy: #0a1628;
   --navy-soft: #132238;
-  --navy-deep: #08111f;
-  --signal-blue: #4865ff;
-  --signal-blue-soft: rgba(72, 101, 255, 0.12);
-  --horizon-violet: #7c5cff;
-  --horizon-violet-soft: rgba(124, 92, 255, 0.12);
-  --foresight-teal: #1da79a;
-  --foresight-teal-soft: rgba(29, 167, 154, 0.12);
-  --red: #ff5c38;
-  --red-soft: rgba(255, 92, 56, 0.12);
-  --line: rgba(17, 17, 17, 0.09);
-  --line-strong: rgba(17, 17, 17, 0.16);
-  --line-light: rgba(255, 255, 255, 0.14);
+  --navy-deep: #07111f;
   --surface-dark: rgba(19, 34, 56, 0.88);
-  --surface-elevated: rgba(255, 255, 255, 0.56);
-  --surface-hover: rgba(255, 255, 255, 0.74);
-  --deep-navy: var(--navy);
-  --slate-white: #f7f3ec;
-  --muted: #675f54;
-  --muted-dim: #8f877a;
-  --danger: #b34128;
-  --warning-amber: #b8873b;
+  --surface-elevated: rgba(22, 38, 63, 0.92);
+  --surface-hover: rgba(72, 101, 255, 0.12);
+  --slate-white: #f3f5f8;
+  --muted: #70685d;
+  --muted-dim: #9a9084;
+  --signal-blue: #4865ff;
+  --signal-blue-dim: rgba(72, 101, 255, 0.12);
+  --signal-blue-glow: rgba(72, 101, 255, 0.28);
+  --horizon-violet: #7a68d6;
+  --horizon-violet-dim: rgba(122, 104, 214, 0.12);
+  --foresight-teal: #2f9e90;
+  --foresight-teal-dim: rgba(47, 158, 144, 0.12);
+  --danger: #ff5c38;
+  --danger-dim: rgba(255, 92, 56, 0.1);
+  --warning-amber: #c89f33;
+  --signal-red: #ff5c38;
+  --line: rgba(17, 17, 17, 0.1);
+  --paper-glass: rgba(255, 252, 247, 0.7);
 
   --gradient-accent: linear-gradient(135deg, var(--signal-blue), var(--horizon-violet));
-  --gradient-paper:
-    radial-gradient(circle at top left, rgba(220, 230, 245, 0.78), transparent 30%),
-    radial-gradient(circle at top right, rgba(255, 92, 56, 0.08), transparent 18%),
-    linear-gradient(180deg, #f9f4ed 0%, var(--paper) 48%, #f6efe4 100%);
-  --gradient-chamber:
-    radial-gradient(circle at top left, rgba(72, 101, 255, 0.16), transparent 22%),
-    radial-gradient(circle at bottom right, rgba(124, 92, 255, 0.18), transparent 28%),
-    linear-gradient(180deg, #0c182b 0%, #08111f 100%);
-  --gradient-card-hover: linear-gradient(180deg, rgba(72, 101, 255, 0.08) 0%, rgba(124, 92, 255, 0.04) 100%);
+  --gradient-paper: linear-gradient(180deg, #f8f4ed 0%, var(--paper) 48%, #f6f0e6 100%);
+  --gradient-hero-glow:
+    radial-gradient(circle at top left, rgba(220, 230, 245, 0.82), transparent 28%),
+    radial-gradient(circle at top right, rgba(255, 92, 56, 0.08), transparent 22%),
+    radial-gradient(circle at 50% 14%, rgba(72, 101, 255, 0.08), transparent 34%);
+  --gradient-dark: linear-gradient(180deg, rgba(8, 16, 30, 0.92) 0%, rgba(12, 26, 45, 0.98) 100%);
+  --gradient-card-hover: linear-gradient(180deg, rgba(72, 101, 255, 0.06) 0%, rgba(122, 104, 214, 0.03) 100%);
   --gradient-timeline: linear-gradient(180deg, rgba(17, 17, 17, 0.16), var(--signal-blue), var(--horizon-violet), var(--foresight-teal));
+  --gradient-divider: linear-gradient(90deg, rgba(17, 17, 17, 0), rgba(17, 17, 17, 0.16), rgba(17, 17, 17, 0));
+  --paper-raised: linear-gradient(180deg, rgba(255, 252, 247, 0.94) 0%, rgba(255, 248, 239, 0.88) 100%);
 
   --font-display: 'Switzer', 'Helvetica Neue', Arial, sans-serif;
   --font-body: 'Switzer', 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'Azeret Mono', 'JetBrains Mono', monospace;
   --font-editorial: 'Instrument Serif', Georgia, serif;
 
-  --text-display: clamp(3.5rem, 2.2rem + 6vw, 7.4rem);
-  --text-h1: clamp(2.4rem, 1.8rem + 3vw, 4.8rem);
-  --text-h2: clamp(1.8rem, 1.35rem + 1.9vw, 3rem);
-  --text-h3: clamp(1.2rem, 1rem + 0.9vw, 1.85rem);
-  --text-body: clamp(1rem, 0.94rem + 0.25vw, 1.12rem);
-  --text-sm: clamp(0.88rem, 0.84rem + 0.15vw, 0.96rem);
-  --text-caption: clamp(0.74rem, 0.71rem + 0.1vw, 0.82rem);
-  --text-overline: clamp(0.68rem, 0.65rem + 0.12vw, 0.78rem);
+  --text-hero: clamp(3.6rem, 2rem + 6.2vw, 7.25rem);
+  --text-display: clamp(3.75rem, 2rem + 6vw, 7.5rem);
+  --text-h1: clamp(2.4rem, 1.75rem + 3vw, 4.9rem);
+  --text-h2: clamp(1.8rem, 1.3rem + 1.8vw, 3rem);
+  --text-h3: clamp(1.24rem, 1rem + 1vw, 1.85rem);
+  --text-body: clamp(1rem, 0.95rem + 0.28vw, 1.16rem);
+  --text-sm: clamp(0.875rem, 0.85rem + 0.15vw, 0.9375rem);
+  --text-caption: clamp(0.75rem, 0.73rem + 0.1vw, 0.8125rem);
+  --text-overline: clamp(0.7rem, 0.67rem + 0.1vw, 0.78rem);
 
-  --leading-display: 0.93;
-  --leading-heading: 1.02;
-  --leading-body: 1.72;
-  --tracking-display: -0.06em;
-  --tracking-heading: -0.04em;
+  --leading-display: 0.94;
+  --leading-heading: 1.15;
+  --leading-body: 1.7;
+  --tracking-display: -0.055em;
+  --tracking-heading: -0.02em;
   --tracking-overline: 0.18em;
   --tracking-mono: -0.02em;
 
-  --space-xs: 0.35rem;
-  --space-sm: 0.65rem;
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
   --space-md: 1rem;
   --space-lg: 1.5rem;
   --space-xl: 2rem;
@@ -76,29 +75,41 @@
   --space-3xl: 4rem;
   --space-4xl: 6rem;
   --space-5xl: 8rem;
-  --space-section: clamp(5.5rem, 4rem + 6vw, 10rem);
+  --space-section: clamp(8rem, 6rem + 7vw, 14rem);
+  --section-space: var(--space-section);
+  --hero-space: clamp(6rem, 4rem + 8vw, 12rem);
 
-  --max-w-content: 76rem;
-  --max-w-text: 44rem;
-  --max-w-wide: 88rem;
+  --max-w-content: 92rem;
+  --max-w-text: 48rem;
+  --max-w-wide: 110rem;
+  --max-w-full: 100%;
 
-  --radius-sm: 0.85rem;
-  --radius-md: 1.15rem;
-  --radius-lg: 1.6rem;
-  --radius-xl: 2.2rem;
-  --radius-full: 999px;
-
-  --shadow-xl: 0 34px 90px rgba(15, 18, 24, 0.14);
-  --shadow-lg: 0 22px 60px rgba(15, 18, 24, 0.12);
-  --shadow-md: 0 16px 38px rgba(15, 18, 24, 0.08);
-  --shadow-soft: 0 8px 22px rgba(15, 18, 24, 0.05);
+  --radius-sm: 0.75rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-xl: 2rem;
+  --radius-full: 100px;
+  --radius-pill: var(--radius-full);
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Spring / physics easings — overshoot then settle */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-spring-soft: cubic-bezier(0.25, 1.2, 0.5, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --ease-elastic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   --dur-fast: 150ms;
   --dur-normal: 300ms;
   --dur-slow: 600ms;
   --dur-slower: 1000ms;
+
+  --border-subtle: 1px solid rgba(17, 17, 17, 0.1);
+  --border-light: 1px solid rgba(255, 255, 255, 0.14);
+  --border-hover: 1px solid rgba(72, 101, 255, 0.25);
+  --shadow-md: 0 18px 48px rgba(15, 18, 24, 0.08);
+  --shadow-xl: 0 32px 90px rgba(15, 18, 24, 0.14);
 }
 
 @media (prefers-reduced-motion: reduce) {

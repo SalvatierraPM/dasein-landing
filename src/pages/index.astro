@@ -1,0 +1,171 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import AudienceLanes from '../components/AudienceLanes.astro';
+import Timeline from '../components/Timeline.astro';
+import FounderSection from '../components/FounderSection.astro';
+import SignalTwinSection from '../components/SignalTwinSection.astro';
+import DeliverablesSection from '../components/DeliverablesSection.astro';
+import AllianceSection from '../components/AllianceSection.astro';
+import Contact from '../components/Contact.astro';
+import DecorativeAccents from '../components/DecorativeAccents.astro';
+---
+
+<Layout
+  title="Dasein Foresight — Prospectiva estratégica basada en IA"
+  description="Dasein Foresight es una consultora de prospectiva estratégica basada en IA que combina señales, simulación y lectura de sistemas complejos para ayudar a organizaciones a decidir mejor bajo incertidumbre."
+>
+  <nav class="site-nav" id="site-nav">
+    <div class="container nav-wrap">
+      <a href="#hero" class="brand-lockup">
+        <strong>Dasein Foresight</strong>
+        <span>prospectiva estratégica basada en IA</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#audiencias">Audiencias</a>
+        <a href="#metodo">Método</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#signaltwin">SignalTwin</a>
+        <a href="#contacto" class="nav-cta">Agenda</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="page-shell">
+    <DecorativeAccents />
+    <Hero />
+    <AudienceLanes />
+    <Timeline />
+    <FounderSection />
+    <SignalTwinSection />
+    <DeliverablesSection />
+    <AllianceSection />
+    <Contact />
+  </main>
+
+  <script>
+    const nav = document.getElementById('site-nav');
+    let lastY = window.scrollY;
+
+    const syncNav = () => {
+      const currentY = window.scrollY;
+      nav?.classList.toggle('is-scrolled', currentY > 12);
+      nav?.classList.toggle('is-hidden', currentY > lastY && currentY > 260);
+      lastY = currentY;
+    };
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('revealed');
+        revealObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.18, rootMargin: '0px 0px -12% 0px' });
+
+    document.querySelectorAll('[data-reveal], [data-reveal-stagger]').forEach((element) => {
+      revealObserver.observe(element);
+    });
+
+    syncNav();
+    window.addEventListener('scroll', syncNav, { passive: true });
+
+    document.addEventListener('astro:before-preparation', () => {
+      revealObserver.disconnect();
+      window.removeEventListener('scroll', syncNav);
+    }, { once: true });
+  </script>
+</Layout>
+
+<style>
+  .page-shell {
+    position: relative;
+  }
+
+  .site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    backdrop-filter: blur(18px);
+    background: rgba(248, 244, 237, 0.82);
+    border-bottom: 1px solid rgba(17, 17, 17, 0.08);
+    transition: transform var(--dur-normal) var(--ease-out-expo), background-color var(--dur-normal) ease;
+  }
+
+  .site-nav.is-scrolled {
+    background: rgba(248, 244, 237, 0.92);
+  }
+
+  .site-nav.is-hidden {
+    transform: translateY(-100%);
+  }
+
+  .nav-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .brand-lockup {
+    display: grid;
+    gap: 0.1rem;
+  }
+
+  .brand-lockup strong {
+    font-size: 0.92rem;
+    letter-spacing: 0.02em;
+  }
+
+  .brand-lockup span {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem 1.1rem;
+    align-items: center;
+  }
+
+  .nav-links a {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .nav-links a:hover {
+    color: var(--ink);
+  }
+
+  .nav-links .nav-cta {
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-full);
+    background: rgba(17, 17, 17, 0.06);
+    color: var(--ink);
+  }
+
+  .nav-links .nav-cta:hover {
+    background: rgba(17, 17, 17, 0.12);
+  }
+
+  @media (max-width: 840px) {
+    .nav-wrap {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .nav-links {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+</style>

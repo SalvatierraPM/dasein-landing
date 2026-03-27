@@ -22,3 +22,19 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# editor / AI tool config
+.cursor/
+.claude/
+.mcp.json
+.cursorrules
+.vscode/
+
+# dev-only assets (screenshots, reference images)
+image.png
+image_frame*.png
+brand-kit.html
+inspiration-gallery.html
+references/
+output/
+video-remotion/

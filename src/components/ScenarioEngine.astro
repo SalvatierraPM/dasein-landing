@@ -1,0 +1,436 @@
+---
+const scenarios = [
+  {
+    id: 'coordinated',
+    title: 'Aterrizaje coordinado',
+    description: 'La organizacion alinea narrativa, tiempos y manejo politico antes de escalar la decision.',
+    signals: ['Stakeholders alineados', 'Mensajes consistentes', 'Ritmo de despliegue medido'],
+  },
+  {
+    id: 'prolonged',
+    title: 'Tension prolongada',
+    description: 'La decision sigue viva, pero acumulando friccion hasta volver mas cara cada semana de espera.',
+    signals: ['Comites abiertos', 'Plazos elasticos', 'Senales mixtas del entorno'],
+  },
+  {
+    id: 'reactive',
+    title: 'Escalamiento reactivo',
+    description: 'El contexto obliga a responder sin encuadre previo y la organizacion termina jugando a la defensiva.',
+    signals: ['Presion publica', 'Regulacion abrupta', 'Baja preparacion interna'],
+  },
+];
+---
+
+<section class="section-shell demo-shell" id="demo">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <p class="section-kicker">06 / Demo de simulacion</p>
+      <div>
+        <h2 class="section-title">Una muestra simplificada de como cambian los escenarios.</h2>
+        <p class="section-copy">
+          No vende producto. Deja ver, de forma acotada, como pequenas variaciones en presion
+          y preparacion cambian la probabilidad de cada escenario.
+        </p>
+      </div>
+    </div>
+
+    <div class="demo-grid" data-reveal>
+      <aside class="demo-controls editorial-card">
+        <span class="tag">Drivers estrategicos</span>
+        <h3>Ajusta presion y preparacion organizacional.</h3>
+
+        <label class="driver">
+          <div class="driver-head">
+            <span>Presion regulatoria</span>
+            <output id="value-regulatory">45</output>
+          </div>
+          <input id="input-regulatory" type="range" min="0" max="100" value="45" />
+        </label>
+
+        <label class="driver">
+          <div class="driver-head">
+            <span>Friccion politica</span>
+            <output id="value-political">50</output>
+          </div>
+          <input id="input-political" type="range" min="0" max="100" value="50" />
+        </label>
+
+        <label class="driver">
+          <div class="driver-head">
+            <span>Preparacion interna</span>
+            <output id="value-readiness">58</output>
+          </div>
+          <input id="input-readiness" type="range" min="0" max="100" value="58" />
+        </label>
+
+        <div class="demo-summary">
+          <small>Lectura actual</small>
+          <p id="demo-summary">Con la configuracion actual, el escenario dominante es una tension prolongada con margen de coordinacion todavia abierto.</p>
+        </div>
+      </aside>
+
+      <div class="demo-results">
+        <article class="demo-stage editorial-card" data-demo-stage data-demo-label="TENSION">
+          <span class="tag">ScenarioEngine / simplified</span>
+          <small>Dominant scenario</small>
+          <strong id="demo-stage-title">Tension prolongada</strong>
+          <p id="demo-stage-caption">Una vista reducida del motor: presion, preparacion y friccion moviendo un escenario dominante.</p>
+        </article>
+
+        <div class="demo-results-list">
+          {scenarios.map((scenario) => (
+            <article class="scenario-card editorial-card" data-card={scenario.id}>
+              <div class="scenario-card-top">
+                <h3>{scenario.title}</h3>
+                <strong data-prob={scenario.id}>0%</strong>
+              </div>
+              <div class="scenario-bar">
+                <span data-bar={scenario.id}></span>
+              </div>
+              <p>{scenario.description}</p>
+              <div class="scenario-signals">
+                {scenario.signals.map((signal) => (
+                  <span>{signal}</span>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .demo-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .demo-controls,
+  .scenario-card {
+    padding: clamp(1.5rem, 2.5vw, 2.2rem);
+  }
+
+  .demo-controls {
+    display: grid;
+    gap: 1.2rem;
+    align-self: start;
+  }
+
+  .demo-controls h3 {
+    font-size: clamp(1.8rem, 1.2rem + 1.2vw, 2.4rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    font-weight: 500;
+  }
+
+  .driver {
+    display: grid;
+    gap: 0.55rem;
+  }
+
+  .driver-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .driver-head span,
+  .driver-head output {
+    font-size: 0.95rem;
+  }
+
+  .driver-head output {
+    font-family: var(--font-mono);
+    color: var(--signal-blue);
+  }
+
+  input[type='range'] {
+    width: 100%;
+    height: 0.35rem;
+    border-radius: 999px;
+    background: rgba(18, 17, 15, 0.1);
+    appearance: none;
+  }
+
+  input[type='range']::-webkit-slider-thumb {
+    appearance: none;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background: var(--ink);
+    box-shadow: 0 0 0 4px rgba(72, 101, 255, 0.12);
+  }
+
+  input[type='range']::-moz-range-thumb {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    border: 0;
+    background: var(--ink);
+    box-shadow: 0 0 0 4px rgba(72, 101, 255, 0.12);
+  }
+
+  .demo-summary {
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .demo-summary small {
+    display: inline-block;
+    margin-bottom: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-caption);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .demo-summary p {
+    color: var(--ink-soft);
+  }
+
+  .demo-results {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .demo-stage {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    gap: 0.65rem;
+    min-height: 13.5rem;
+    padding: 1.25rem;
+    background:
+      radial-gradient(circle at top right, rgba(72, 101, 255, 0.14), transparent 22%),
+      radial-gradient(circle at bottom left, rgba(255, 92, 56, 0.08), transparent 22%),
+      var(--paper-raised);
+  }
+
+  .demo-stage::after {
+    content: attr(data-demo-label);
+    position: absolute;
+    right: 1rem;
+    bottom: -0.4rem;
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 13vw, 9rem);
+    line-height: 0.84;
+    letter-spacing: -0.08em;
+    color: rgba(17, 17, 17, 0.06);
+    pointer-events: none;
+  }
+
+  .demo-stage > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .demo-stage small {
+    font-family: var(--font-mono);
+    font-size: var(--text-caption);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .demo-stage strong {
+    max-width: 11ch;
+    font-size: clamp(2.2rem, 1.6rem + 2vw, 3.4rem);
+    line-height: 0.92;
+    letter-spacing: -0.06em;
+  }
+
+  .demo-stage p {
+    max-width: 26rem;
+    color: var(--ink-soft);
+  }
+
+  .demo-results-list {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .scenario-card {
+    display: grid;
+    gap: 0.9rem;
+    transform-origin: 50% 0;
+    transform: perspective(1200px) rotateX(12deg);
+    transition: transform var(--dur-normal) var(--ease-out-expo), box-shadow var(--dur-normal) var(--ease-out-expo), border-color var(--dur-fast) ease;
+  }
+
+  .scenario-card.is-active {
+    transform: perspective(1200px) rotateX(0deg) translateY(-2px);
+    border-color: rgba(72, 101, 255, 0.22);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .scenario-card-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .scenario-card-top h3 {
+    font-size: clamp(1.35rem, 1rem + 0.7vw, 1.7rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    font-weight: 500;
+  }
+
+  .scenario-card-top strong {
+    font-family: var(--font-mono);
+    color: var(--signal-blue);
+  }
+
+  .scenario-bar {
+    overflow: hidden;
+    height: 0.45rem;
+    border-radius: 999px;
+    background: rgba(18, 17, 15, 0.08);
+  }
+
+  .scenario-bar span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    transform-origin: left center;
+    transform: scaleX(0);
+    background: var(--gradient-accent);
+    transition: transform var(--dur-slow) var(--ease-out-expo);
+  }
+
+  .scenario-card p {
+    color: var(--ink-soft);
+  }
+
+  .scenario-signals {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+  }
+
+  .scenario-signals span {
+    border-radius: var(--radius-pill);
+    background: rgba(18, 17, 15, 0.05);
+    padding: 0.45rem 0.65rem;
+    font-size: var(--text-caption);
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+  }
+
+  @media (min-width: 980px) {
+    .demo-grid {
+      grid-template-columns: minmax(340px, 420px) minmax(0, 1fr);
+    }
+
+    .demo-results-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      align-items: start;
+    }
+  }
+</style>
+
+<script>
+  const inputs = {
+    regulatory: document.getElementById('input-regulatory'),
+    political: document.getElementById('input-political'),
+    readiness: document.getElementById('input-readiness'),
+  };
+
+  const outputs = {
+    regulatory: document.getElementById('value-regulatory'),
+    political: document.getElementById('value-political'),
+    readiness: document.getElementById('value-readiness'),
+  };
+
+  const summary = document.getElementById('demo-summary');
+  const demoStage = document.querySelector('[data-demo-stage]');
+  const demoStageTitle = document.getElementById('demo-stage-title');
+  const demoStageCaption = document.getElementById('demo-stage-caption');
+
+  const cards = {
+    coordinated: document.querySelector('[data-card="coordinated"]'),
+    prolonged: document.querySelector('[data-card="prolonged"]'),
+    reactive: document.querySelector('[data-card="reactive"]'),
+  };
+
+  const probs = {
+    coordinated: document.querySelector('[data-prob="coordinated"]'),
+    prolonged: document.querySelector('[data-prob="prolonged"]'),
+    reactive: document.querySelector('[data-prob="reactive"]'),
+  };
+
+  const bars = {
+    coordinated: document.querySelector('[data-bar="coordinated"]'),
+    prolonged: document.querySelector('[data-bar="prolonged"]'),
+    reactive: document.querySelector('[data-bar="reactive"]'),
+  };
+
+  const summaries = {
+    coordinated: 'Con la configuracion actual, la ventana dominante es un aterrizaje coordinado: hay espacio para ordenar actores, ritmo y mensajes antes de ejecutar.',
+    prolonged: 'Con la configuracion actual, el escenario dominante es una tension prolongada con ventana de coordinacion todavia abierta.',
+    reactive: 'Con la configuracion actual, el riesgo dominante es un escalamiento reactivo: el entorno empuja mas rapido de lo que la organizacion logra encuadrar.',
+  };
+
+  const stageLabels = {
+    coordinated: 'COORDINA',
+    prolonged: 'TENSION',
+    reactive: 'REACTIVO',
+  };
+
+  const isReady = Object.values(inputs).every((input) => input instanceof HTMLInputElement);
+
+  if (isReady) {
+    const update = () => {
+      const regulatory = Number(inputs.regulatory.value);
+      const political = Number(inputs.political.value);
+      const readiness = Number(inputs.readiness.value);
+
+      outputs.regulatory.textContent = String(regulatory);
+      outputs.political.textContent = String(political);
+      outputs.readiness.textContent = String(readiness);
+
+      const raw = {
+        coordinated: readiness * 0.52 + (100 - political) * 0.23 + (100 - regulatory) * 0.25,
+        prolonged: regulatory * 0.32 + political * 0.33 + readiness * 0.35,
+        reactive: political * 0.46 + regulatory * 0.39 + (100 - readiness) * 0.15,
+      };
+
+      const total = raw.coordinated + raw.prolonged + raw.reactive;
+      const normalized = Object.fromEntries(
+        Object.entries(raw).map(([key, value]) => [key, Math.round((value / total) * 100)])
+      );
+
+      const leader = Object.entries(normalized).sort((a, b) => b[1] - a[1])[0][0];
+
+      Object.entries(normalized).forEach(([key, value]) => {
+        probs[key].textContent = `${value}%`;
+        bars[key].style.transform = `scaleX(${value / 100})`;
+        cards[key].classList.toggle('is-active', key === leader);
+      });
+
+      if (summary) {
+        summary.textContent = summaries[leader];
+      }
+
+      if (demoStage) {
+        demoStage.dataset.demoLabel = stageLabels[leader];
+      }
+
+      if (demoStageTitle) {
+        demoStageTitle.textContent = cards[leader].querySelector('h3')?.textContent ?? '';
+      }
+
+      if (demoStageCaption) {
+        demoStageCaption.textContent = summaries[leader];
+      }
+    };
+
+    update();
+    Object.values(inputs).forEach((input) => input.addEventListener('input', update));
+  }
+</script>

@@ -1,0 +1,669 @@
+---
+import ParticleNetwork from './ParticleNetwork.astro';
+
+const steps = [
+  {
+    number: '01',
+    title: 'Exploración general',
+    body: 'Delimitamos la pregunta estratégica, el contexto y los frentes donde una mala lectura puede disparar costos innecesarios.',
+    output: 'Pregunta afinada y entorno legible',
+    short: 'Exploración',
+  },
+  {
+    number: '02',
+    title: 'Insumos del cliente',
+    body: 'Pedimos restricciones, tensiones políticas, supuestos y material de base para no modelar en abstracto.',
+    output: 'Base situada y no teórica',
+    short: 'Insumos',
+  },
+  {
+    number: '03',
+    title: 'Marco conceptual',
+    body: 'Definimos actores, conceptos, incentivos, fricciones y relaciones para convertir el problema en una estructura discutible.',
+    output: 'Taxonomía útil para el caso',
+    short: 'Marco',
+  },
+  {
+    number: '04',
+    title: 'Cartografía del sistema',
+    body: 'Visualizamos relaciones, conflictos y puntos de presión para que el sistema deje de ser una intuición dispersa.',
+    output: 'Mapa navegable del sistema',
+    short: 'Mapa',
+  },
+  {
+    number: '05',
+    title: 'Diseño de actores',
+    body: 'Diseñamos perfiles, posturas, memoria y cantidad de rondas según el nivel de complejidad que realmente exige la decisión.',
+    output: 'Simulación con actores plausibles',
+    short: 'Actores',
+  },
+  {
+    number: '06',
+    title: 'Simulación y plan a 90 días',
+    body: 'Ejecutamos escenarios, identificamos señales y traducimos hallazgos en una recomendación con trazabilidad y prioridad de acción.',
+    output: 'Memo ejecutivo y plan inmediato',
+    short: 'Plan',
+  },
+];
+---
+
+<section class="method-section" id="metodo">
+  <!-- Section intro - full width -->
+  <div class="method-intro">
+    <div class="method-intro-inner">
+      <p class="section-kicker">Método Dasein / prueba de proceso</p>
+      <h2 class="method-headline">
+        La metodología se ve<br />como secuencia,<br />
+        <em>no como slogan.</em>
+      </h2>
+      <p class="method-lead">
+        El valor no está en decir que se usa IA. Está en mostrar cómo se estructura
+        una decisión compleja antes de escalarla.
+      </p>
+    </div>
+  </div>
+
+  <!-- Scrollytelling: sticky cube + scroll-driven steps -->
+  <div class="method-scrolly" data-method-root data-active-step="0">
+    <!-- Sticky panel: cube + HUD -->
+    <div class="method-sticky">
+      <div class="method-sticky-inner">
+        <!-- HUD top bar -->
+        <div class="method-hud">
+          <div class="method-hud-left">
+            <span class="method-hud-label">Process</span>
+            <span class="method-hud-counter" data-method-readout>01 / 06</span>
+          </div>
+          <div class="method-hud-progress">
+            <span data-method-progress></span>
+          </div>
+        </div>
+
+        <!-- Particle network behind the cube -->
+        <ParticleNetwork
+          class="method-particles"
+          color="#4865ff"
+          count={45}
+          opacity={0.22}
+          linkDistance={100}
+        />
+
+        <!-- Big cube -->
+        <div class="method-cube-viewport" aria-hidden="true">
+          <div class="method-cube">
+            <div class="method-face method-face--front">
+              <strong>{steps[0].number}</strong>
+              <span>{steps[0].short}</span>
+            </div>
+            <div class="method-face method-face--right">
+              <strong>{steps[1].number}</strong>
+              <span>{steps[1].short}</span>
+            </div>
+            <div class="method-face method-face--back">
+              <strong>{steps[2].number}</strong>
+              <span>{steps[2].short}</span>
+            </div>
+            <div class="method-face method-face--left">
+              <strong>{steps[3].number}</strong>
+              <span>{steps[3].short}</span>
+            </div>
+            <div class="method-face method-face--top">
+              <strong>{steps[4].number}</strong>
+              <span>{steps[4].short}</span>
+            </div>
+            <div class="method-face method-face--bottom">
+              <strong>{steps[5].number}</strong>
+              <span>{steps[5].short}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Active step info overlay -->
+        <div class="method-active-info">
+          <span class="method-active-number" data-method-active-num>01</span>
+          <span class="method-active-output" data-method-active-output>Pregunta afinada y entorno legible</span>
+        </div>
+
+        <!-- Dots -->
+        <div class="method-dots" data-method-dots>
+          {steps.map((_step, index) => (
+            <button
+              class={`method-dot ${index === 0 ? 'is-active' : ''}`}
+              data-dot-index={index}
+              aria-label={`Step ${index + 1}: ${steps[index].title}`}
+            >
+              <span class="method-dot-label">{steps[index].short}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll-driven step panels -->
+    <div class="method-panels">
+      {steps.map((step, index) => (
+        <article
+          class={`method-panel ${index === 0 ? 'is-active' : ''}`}
+          data-step-index={index}
+        >
+          <div class="method-panel-content">
+            <div class="method-panel-num">{step.number}</div>
+            <h3 class="method-panel-title">{step.title}</h3>
+            <p class="method-panel-body">{step.body}</p>
+            <div class="method-panel-output">
+              <span class="method-panel-output-label">Output</span>
+              <span class="method-panel-output-value">{step.output}</span>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+
+  <!-- Bottom note -->
+  <div class="method-bottom-note">
+    <p>
+      El método no se presenta como misterio. Se despliega como sistema visible,
+      con pasos, outputs y fricciones explícitas.
+    </p>
+  </div>
+</section>
+
+<style>
+  .method-section {
+    position: relative;
+    padding: 0;
+    overflow: clip;
+  }
+
+  /* === Intro === */
+  .method-intro {
+    padding: var(--space-section) 0;
+    padding-bottom: clamp(4rem, 6vw, 8rem);
+  }
+
+  .method-intro-inner {
+    max-width: var(--max-w-content);
+    margin: 0 auto;
+    padding: 0 clamp(2rem, 6vw, 5rem);
+    display: grid;
+    gap: 1.6rem;
+  }
+
+  .method-headline {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 2rem + 4.5vw, 6.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.05em;
+    font-weight: 600;
+    max-width: 18ch;
+  }
+
+  .method-headline em {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--signal-red);
+  }
+
+  .method-lead {
+    max-width: 38rem;
+    color: var(--ink-soft);
+    font-size: clamp(1.05rem, 1rem + 0.3vw, 1.2rem);
+  }
+
+  /* === Scrollytelling container === */
+  .method-scrolly {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+  }
+
+  /* === Particle network behind cube === */
+  .method-particles {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.7;
+    mask-image: radial-gradient(ellipse 60% 50% at 50% 50%, black 0%, transparent 100%);
+  }
+
+  /* === Sticky cube panel (left half) === */
+  .method-sticky {
+    position: sticky;
+    top: 0;
+    height: fit-content;
+    align-self: start;
+  }
+
+  .method-sticky-inner {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem clamp(2rem, 4vw, 4rem);
+  }
+
+  /* === HUD === */
+  .method-hud {
+    position: absolute;
+    top: clamp(5rem, 6vw, 7rem);
+    left: clamp(2rem, 4vw, 4rem);
+    right: clamp(2rem, 4vw, 4rem);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .method-hud-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+
+  .method-hud-label,
+  .method-hud-counter {
+    font-family: var(--font-mono);
+    font-size: var(--text-caption);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .method-hud-progress {
+    flex: 1;
+    height: 2px;
+    background: rgba(17, 17, 17, 0.08);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .method-hud-progress span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    transform-origin: left center;
+    transform: scaleX(0.167);
+    background: var(--gradient-accent);
+    transition: transform 0.6s var(--ease-out-expo);
+  }
+
+  /* === Cube === */
+  .method-cube-viewport {
+    display: grid;
+    place-items: center;
+    perspective: 1400px;
+    width: 100%;
+    flex: 0 0 auto;
+  }
+
+  .method-cube {
+    --cube-size: clamp(16rem, 22vw, 24rem);
+    position: relative;
+    width: var(--cube-size);
+    height: var(--cube-size);
+    transform-style: preserve-3d;
+    transition: transform 0.9s var(--ease-out-expo);
+    transform: rotateX(-18deg) rotateY(0deg);
+  }
+
+  /* Cube rotation per step */
+  .method-scrolly[data-active-step='0'] .method-cube { transform: rotateX(-18deg) rotateY(0deg); }
+  .method-scrolly[data-active-step='1'] .method-cube { transform: rotateX(-18deg) rotateY(-90deg); }
+  .method-scrolly[data-active-step='2'] .method-cube { transform: rotateX(-18deg) rotateY(-180deg); }
+  .method-scrolly[data-active-step='3'] .method-cube { transform: rotateX(-18deg) rotateY(-270deg); }
+  .method-scrolly[data-active-step='4'] .method-cube { transform: rotateX(-108deg) rotateY(0deg); }
+  .method-scrolly[data-active-step='5'] .method-cube { transform: rotateX(72deg) rotateY(0deg); }
+
+  .method-face {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    gap: 0.6rem;
+    padding: 1.5rem;
+    border-radius: 1.6rem;
+    border: 1px solid rgba(17, 17, 17, 0.08);
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.88), rgba(255,248,240,0.65)),
+      var(--paper-raised);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.9),
+      0 24px 60px rgba(15, 18, 24, 0.1);
+    backface-visibility: hidden;
+    text-align: center;
+  }
+
+  .method-face strong {
+    font-family: var(--font-mono);
+    font-size: var(--text-overline);
+    letter-spacing: 0.2em;
+    color: var(--signal-red);
+  }
+
+  .method-face span {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 1.2rem + 1.5vw, 2.8rem);
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    font-weight: 600;
+  }
+
+  .method-face--front  { transform: translateZ(calc(var(--cube-size) / 2)); }
+  .method-face--right  { transform: rotateY(90deg) translateZ(calc(var(--cube-size) / 2)); }
+  .method-face--back   { transform: rotateY(180deg) translateZ(calc(var(--cube-size) / 2)); }
+  .method-face--left   { transform: rotateY(-90deg) translateZ(calc(var(--cube-size) / 2)); }
+  .method-face--top    { transform: rotateX(90deg) translateZ(calc(var(--cube-size) / 2)); }
+  .method-face--bottom { transform: rotateX(-90deg) translateZ(calc(var(--cube-size) / 2)); }
+
+  /* === Active step info === */
+  .method-active-info {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1rem 1.5rem;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.62);
+    border: 1px solid rgba(17, 17, 17, 0.08);
+    backdrop-filter: blur(12px);
+    transition: opacity 0.4s ease;
+  }
+
+  .method-active-number {
+    font-family: var(--font-mono);
+    font-size: var(--text-caption);
+    letter-spacing: 0.12em;
+    color: var(--signal-red);
+    font-weight: 600;
+  }
+
+  .method-active-output {
+    font-family: var(--font-mono);
+    font-size: var(--text-caption);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  /* === Dots === */
+  .method-dots {
+    position: absolute;
+    bottom: clamp(2rem, 4vw, 4rem);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .method-dot {
+    appearance: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.6rem;
+    border-radius: var(--radius-full);
+    background: rgba(17, 17, 17, 0.04);
+    transition: background-color 0.3s ease, transform 0.3s var(--ease-out-expo);
+  }
+
+  .method-dot::before {
+    content: '';
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: rgba(17, 17, 17, 0.16);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .method-dot.is-active {
+    background: rgba(72, 101, 255, 0.08);
+  }
+
+  .method-dot.is-active::before {
+    background: var(--signal-blue);
+    transform: scale(1.4);
+  }
+
+  .method-dot-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    transition: color 0.3s ease;
+  }
+
+  .method-dot.is-active .method-dot-label {
+    color: var(--signal-blue);
+  }
+
+  /* === Scroll panels (right half) === */
+  .method-panels {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .method-panel {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: clamp(3rem, 5vw, 6rem);
+    padding-left: clamp(3rem, 6vw, 8rem);
+    position: relative;
+  }
+
+  .method-panel::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 15%;
+    bottom: 15%;
+    width: 1px;
+    background: var(--line);
+  }
+
+  .method-panel-content {
+    display: grid;
+    gap: 1.5rem;
+    max-width: 32rem;
+    opacity: 0.35;
+    transform: translateY(20px);
+    transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo);
+  }
+
+  .method-panel.is-active .method-panel-content {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .method-panel-num {
+    font-family: var(--font-mono);
+    font-size: clamp(0.75rem, 0.7rem + 0.2vw, 0.85rem);
+    letter-spacing: 0.2em;
+    color: var(--signal-red);
+    font-weight: 600;
+  }
+
+  .method-panel-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 1.5rem + 2.5vw, 3.8rem);
+    line-height: 0.94;
+    letter-spacing: -0.04em;
+    font-weight: 600;
+  }
+
+  .method-panel-body {
+    font-size: clamp(1.05rem, 1rem + 0.3vw, 1.2rem);
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+
+  .method-panel-output {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .method-panel-output-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-overline);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    flex-shrink: 0;
+  }
+
+  .method-panel-output-value {
+    font-family: var(--font-mono);
+    font-size: var(--text-caption);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+
+  /* === Bottom note === */
+  .method-bottom-note {
+    max-width: var(--max-w-content);
+    margin: 0 auto;
+    padding: clamp(3rem, 5vw, 6rem) clamp(2rem, 6vw, 5rem);
+    border-top: 1px solid var(--line);
+  }
+
+  .method-bottom-note p {
+    max-width: 40rem;
+    color: var(--ink-soft);
+    font-size: clamp(1.05rem, 1rem + 0.3vw, 1.2rem);
+  }
+
+  /* === Mobile: stack vertically === */
+  @media (max-width: 860px) {
+    .method-scrolly {
+      grid-template-columns: 1fr;
+    }
+
+    .method-sticky {
+      position: relative;
+    }
+
+    .method-sticky-inner {
+      height: auto;
+      min-height: 70vh;
+      padding-top: 4rem;
+      padding-bottom: 3rem;
+    }
+
+    .method-hud {
+      position: relative;
+      top: auto;
+      left: auto;
+      right: auto;
+      margin-bottom: 1rem;
+    }
+
+    .method-dots {
+      position: relative;
+      bottom: auto;
+      left: auto;
+      transform: none;
+    }
+
+    .method-panel {
+      min-height: auto;
+      padding: clamp(2rem, 4vw, 4rem) clamp(2rem, 5vw, 4rem);
+    }
+
+    .method-panel::before {
+      display: none;
+    }
+
+    .method-panel-content {
+      opacity: 1;
+      transform: none;
+    }
+
+    .method-cube {
+      --cube-size: clamp(13rem, 50vw, 18rem);
+    }
+  }
+</style>
+
+<script>
+  const methodRoot = document.querySelector('[data-method-root]');
+
+  if (methodRoot) {
+    const panels = Array.from(methodRoot.querySelectorAll('[data-step-index]'));
+    const dots = Array.from(methodRoot.querySelectorAll('.method-dot'));
+    const meter = methodRoot.querySelector('[data-method-progress]');
+    const readout = methodRoot.querySelector('[data-method-readout]');
+    const activeNum = methodRoot.querySelector('[data-method-active-num]');
+    const activeOutput = methodRoot.querySelector('[data-method-active-output]');
+
+    const outputs = [
+      'Pregunta afinada y entorno legible',
+      'Base situada y no teórica',
+      'Taxonomía útil para el caso',
+      'Mapa navegable del sistema',
+      'Simulación con actores plausibles',
+      'Memo ejecutivo y plan inmediato',
+    ];
+
+    const setActive = (index) => {
+      methodRoot.dataset.activeStep = String(index);
+      panels.forEach((panel, i) => panel.classList.toggle('is-active', i === index));
+      dots.forEach((dot, i) => dot.classList.toggle('is-active', i === index));
+
+      if (meter instanceof HTMLElement) {
+        meter.style.transform = `scaleX(${(index + 1) / panels.length})`;
+      }
+      if (readout) {
+        readout.textContent = `${String(index + 1).padStart(2, '0')} / ${String(panels.length).padStart(2, '0')}`;
+      }
+      if (activeNum) {
+        activeNum.textContent = String(index + 1).padStart(2, '0');
+      }
+      if (activeOutput) {
+        activeOutput.textContent = outputs[index] ?? '';
+      }
+    };
+
+    setActive(0);
+
+    // IntersectionObserver triggers cube rotation as panels scroll into view
+    const observer = new IntersectionObserver((entries) => {
+      entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)
+        .forEach((entry) => {
+          const index = Number(entry.target.getAttribute('data-step-index'));
+          if (Number.isFinite(index)) {
+            setActive(index);
+          }
+        });
+    }, {
+      threshold: 0.4,
+      rootMargin: '-30% 0px -30% 0px',
+    });
+
+    panels.forEach((panel) => observer.observe(panel));
+
+    // Dot click navigation
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        panels[i]?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    });
+  }
+</script>

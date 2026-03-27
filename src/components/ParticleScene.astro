@@ -14,45 +14,62 @@
   .particle-scene__canvas {
     width: 100%;
     height: 100%;
-    opacity: 0.9;
+    opacity: 0.94;
   }
 </style>
 
-<script is:inline>
-  const sceneRoot = document.querySelector('[data-particle-scene]');
+<script>
+  import * as THREE from 'three';
 
-  if (sceneRoot && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const observer = new IntersectionObserver(async (entries) => {
-      if (!entries.some((entry) => entry.isIntersecting)) return;
-      observer.disconnect();
+  function initAllParticleScenes() {
+    const allScenes = document.querySelectorAll('[data-particle-scene]');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      const THREE = await import('three');
-      const canvas = sceneRoot.querySelector('canvas');
-      if (!canvas) return;
+    allScenes.forEach((sceneRoot) => {
+      if (
+        !(sceneRoot instanceof HTMLElement) ||
+        sceneRoot.dataset.particleSceneMounted === 'true' ||
+        reducedMotion
+      ) return;
 
-      initScene(sceneRoot, canvas, THREE);
-    }, {
-      rootMargin: '280px 0px',
+      sceneRoot.dataset.particleSceneMounted = 'true';
+
+      const observer = new IntersectionObserver((entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        observer.disconnect();
+
+        const canvas = sceneRoot.querySelector('canvas');
+        if (!canvas) return;
+
+        initScene(sceneRoot, canvas as HTMLCanvasElement, THREE);
+      }, {
+        rootMargin: '280px 0px',
+      });
+
+      observer.observe(sceneRoot);
     });
-
-    observer.observe(sceneRoot);
   }
 
-  function initScene(root, canvas, THREE) {
+  initAllParticleScenes();
+
+  function initScene(root: HTMLElement, canvas: HTMLCanvasElement, THREE: typeof import('three')) {
+    const hostSection = root.closest('[data-particle-host]') || root.closest('.signaltwin-section');
     const isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
+    const particleCount = isMobile ? 1800 : 4000;
+    const linkCount = isMobile ? 80 : 200;
+
     const geometry = new THREE.BufferGeometry();
-    const particleCount = isMobile ? 900 : 1800;
     const positions = new Float32Array(particleCount * 3);
     const originalPositions = new Float32Array(particleCount * 3);
 
     for (let i = 0; i < particleCount; i += 1) {
-      const radius = 2.2 + Math.random() * 3.6;
+      const radius = 1.2 + Math.random() * 7.5;
       const angle = Math.random() * Math.PI * 2;
-      const height = (Math.random() - 0.5) * 7.5;
+      const height = (Math.random() - 0.5) * 14;
 
       const x = Math.cos(angle) * radius;
       const y = height;
-      const z = Math.sin(angle) * radius * (0.65 + Math.random() * 0.35);
+      const z = Math.sin(angle) * radius * (0.5 + Math.random() * 0.6);
 
       positions[i * 3] = x;
       positions[i * 3 + 1] = y;
@@ -65,22 +82,54 @@
 
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
-    const material = new THREE.PointsMaterial({
-      size: isMobile ? 0.034 : 0.026,
+    const baseMaterial = new THREE.PointsMaterial({
+      size: isMobile ? 0.038 : 0.03,
       color: new THREE.Color('#6c84ff'),
       transparent: true,
-      opacity: 0.74,
+      opacity: 0.76,
       blending: THREE.AdditiveBlending,
       depthWrite: false,
     });
 
-    const points = new THREE.Points(geometry, material);
+    const haloMaterial = new THREE.PointsMaterial({
+      size: isMobile ? 0.085 : 0.065,
+      color: new THREE.Color('#8de6ff'),
+      transparent: true,
+      opacity: 0.09,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+    });
+
+    const points = new THREE.Points(geometry, baseMaterial);
+    const haloPoints = new THREE.Points(geometry, haloMaterial);
+
+    const linkIndices = Array.from({ length: linkCount }, (_, index) => {
+      const first = (index * 17) % particleCount;
+      const second = (first + 37 + index * 7) % particleCount;
+      return [first, second];
+    });
+
+    const linkPositions = new Float32Array(linkCount * 6);
+    const linkGeometry = new THREE.BufferGeometry();
+    linkGeometry.setAttribute('position', new THREE.BufferAttribute(linkPositions, 3));
+
+    const linkMaterial = new THREE.LineBasicMaterial({
+      color: new THREE.Color('#7bc2ff'),
+      transparent: true,
+      opacity: 0.12,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+    });
+
+    const links = new THREE.LineSegments(linkGeometry, linkMaterial);
 
     const scene = new THREE.Scene();
+    scene.add(haloPoints);
     scene.add(points);
+    scene.add(links);
 
-    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
-    camera.position.set(0, 0.4, 9.5);
+    const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 100);
+    camera.position.set(0, 0.3, 12);
 
     const renderer = new THREE.WebGLRenderer({
       canvas,
@@ -88,16 +137,14 @@
       antialias: false,
       powerPreference: 'high-performance',
     });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.8));
 
     let rafId = 0;
     let disposed = false;
-    let width = 0;
-    let height = 0;
 
     const resize = () => {
-      width = root.clientWidth;
-      height = root.clientHeight;
+      const width = root.clientWidth;
+      const height = root.clientHeight;
       if (!width || !height) return;
 
       camera.aspect = width / height;
@@ -109,31 +156,80 @@
     resizeObserver.observe(root);
     resize();
 
-    const positionsAttr = geometry.attributes.position;
+    const positionsAttr = geometry.attributes.position as THREE.BufferAttribute;
+    const linkAttr = linkGeometry.attributes.position as THREE.BufferAttribute;
+    const cool = new THREE.Color('#6c84ff');
+    const warm = new THREE.Color('#ffb873');
+    const lime = new THREE.Color('#ff8c5c');
+    const mixColor = new THREE.Color();
+
+    const getProgress = () => {
+      if (!(hostSection instanceof HTMLElement)) return 0;
+      const rect = hostSection.getBoundingClientRect();
+      const total = rect.height + window.innerHeight;
+      return THREE.MathUtils.clamp((window.innerHeight - rect.top) / total, 0, 1);
+    };
 
     const animate = () => {
       if (disposed) return;
       rafId = requestAnimationFrame(animate);
 
-      const elapsed = performance.now() * 0.00035;
-      const array = positionsAttr.array;
+      const elapsed = performance.now() * 0.00012;
+      const progress = getProgress();
+      const amplitude = 0.16 + progress * 0.18;
+      const driftScale = 0.2 + progress * 0.24;
+      const array = positionsAttr.array as Float32Array;
 
       for (let i = 0; i < array.length; i += 3) {
         const ox = originalPositions[i];
         const oy = originalPositions[i + 1];
         const oz = originalPositions[i + 2];
-        const wave = Math.sin(elapsed + ox * 0.65 + oz * 0.28) * 0.12;
-        const drift = Math.cos(elapsed * 1.2 + oy * 0.45) * 0.18;
+        const wave = Math.sin(elapsed + ox * 0.58 + oz * 0.2) * amplitude;
+        const drift = Math.cos(elapsed * 1.15 + oy * 0.44) * driftScale;
+        const twist = Math.sin(elapsed * 0.8 + oy * 0.15 + progress * 4) * 0.12;
 
-        array[i] = ox + drift * 0.18;
-        array[i + 1] = oy + wave * 0.46;
-        array[i + 2] = oz + Math.sin(elapsed * 0.9 + ox * 0.32) * 0.08;
+        array[i] = ox + drift * 0.16;
+        array[i + 1] = oy + wave * 0.52;
+        array[i + 2] = oz + twist + Math.sin(elapsed * 0.9 + ox * 0.32) * 0.08;
       }
 
       positionsAttr.needsUpdate = true;
-      points.rotation.y = elapsed * 0.32;
-      points.rotation.x = Math.sin(elapsed * 0.7) * 0.08;
 
+      for (let index = 0; index < linkIndices.length; index += 1) {
+        const [first, second] = linkIndices[index];
+        const offset = index * 6;
+        const a = first * 3;
+        const b = second * 3;
+
+        (linkAttr.array as Float32Array)[offset] = array[a];
+        (linkAttr.array as Float32Array)[offset + 1] = array[a + 1];
+        (linkAttr.array as Float32Array)[offset + 2] = array[a + 2];
+        (linkAttr.array as Float32Array)[offset + 3] = array[b];
+        (linkAttr.array as Float32Array)[offset + 4] = array[b + 1];
+        (linkAttr.array as Float32Array)[offset + 5] = array[b + 2];
+      }
+
+      linkAttr.needsUpdate = true;
+
+      mixColor.copy(cool).lerp(warm, progress * 0.66);
+      baseMaterial.color.copy(mixColor);
+      haloMaterial.color.copy(cool).lerp(lime, progress * 0.5);
+      linkMaterial.color.copy(cool).lerp(lime, progress * 0.7);
+      linkMaterial.opacity = 0.08 + progress * 0.14;
+      baseMaterial.opacity = 0.66 + progress * 0.14;
+      haloMaterial.opacity = 0.06 + progress * 0.06;
+
+      points.rotation.y = elapsed * (0.06 + progress * 0.08);
+      points.rotation.x = Math.sin(elapsed * 0.4) * 0.03 + progress * 0.02;
+      haloPoints.rotation.copy(points.rotation);
+      links.rotation.copy(points.rotation);
+
+      const scale = 1 + progress * 0.12;
+      points.scale.setScalar(scale);
+      haloPoints.scale.setScalar(scale * 1.02);
+      links.scale.setScalar(scale * 1.01);
+
+      camera.position.z = 12 - progress * 1.8;
       renderer.render(scene, camera);
     };
 
@@ -144,7 +240,10 @@
       cancelAnimationFrame(rafId);
       resizeObserver.disconnect();
       geometry.dispose();
-      material.dispose();
+      linkGeometry.dispose();
+      baseMaterial.dispose();
+      haloMaterial.dispose();
+      linkMaterial.dispose();
       renderer.dispose();
     };
 

@@ -553,9 +553,12 @@ Desde un diagnostico rapido hasta monitoreo continuo.
 ```
 [Badge] Puerta de entrada
 [H3] Pulso Estrategico
-[Body] Fotografia rapida de 15-25 senales relevantes para tu industria.
-Memo ejecutivo + mapa visual en 5 dias habiles.
-[Meta] Desde USD 2,500 | 5 dias
+[Body] Simulacion completa de futuros con nuestro motor SignalTwin,
+enfocada en entregarte claridad rapida. Escaneamos todas las senales
+relevantes para tu industria, corremos la simulacion dual-world,
+y te entregamos un memo ejecutivo con plan de accion a 90 dias.
+Sin dashboard — solo lo que necesitas para decidir ahora.
+[Meta] Desde USD 2,500
 [CTA link] Saber mas ->
 ```
 
@@ -564,9 +567,11 @@ Memo ejecutivo + mapa visual en 5 dias habiles.
 ```
 [Badge] Mas popular
 [H3] SignalTwin Strategy
-[Body] Simulacion completa de futuros con modelo dual-world.
-40-60 senales, escenarios alternativos, dashboard interactivo
-y workshop con tu equipo directivo.
+[Body] La experiencia completa de simulacion de futuros. Todo lo que
+incluye el Pulso, mas dashboard interactivo con tus escenarios,
+workshop presencial con tu equipo directivo, y acceso al grafo
+de conocimiento de tu industria. El entregable que transforma
+como tu organizacion habla del futuro.
 [Meta] Desde USD 12,000 | 4-5 semanas
 [CTA link] Saber mas ->
 ```
@@ -576,9 +581,10 @@ y workshop con tu equipo directivo.
 ```
 [Badge] Monitoreo continuo
 [H3] Radar Dasein
-[Body] Vigilancia estrategica permanente. Escaneo mensual,
-alertas de senales criticas, y simulacion trimestral actualizada.
-Tu radar de futuros, siempre encendido.
+[Body] Vigilancia estrategica permanente. Simulacion actualizada
+cada trimestre, escaneo mensual de senales nuevas, alertas cuando
+algo cambia. Tu radar de futuros siempre encendido, con plan de
+accion a 90 dias renovado en cada ciclo.
 [Meta] Desde USD 5,000/mes | Minimo 6 meses
 [CTA link] Saber mas ->
 ```
