@@ -567,16 +567,14 @@ section {
   background: var(--signal-blue, #4865ff);
   opacity: 0.6;
   mix-blend-mode: difference;
-  transition: width 0.3s var(--ease-out-expo),
-              height 0.3s var(--ease-out-expo),
-              opacity 0.3s ease;
-  transform: translate(-50%, -50%);
+  will-change: transform;
 }
 
 .cursor-dot.is-grow {
-  width: 48px;
-  height: 48px;
+  width: 8px;
+  height: 8px;
   opacity: 0.25;
+  scale: 6;
 }
 
 @media (pointer: coarse) {
@@ -677,8 +675,7 @@ section {
 
 /* Custom cursor spring grow */
 .cursor-dot {
-  transition: width 0.4s var(--ease-spring),
-              height 0.4s var(--ease-spring),
+  transition: scale 0.4s var(--ease-spring),
               opacity 0.3s ease;
 }
 

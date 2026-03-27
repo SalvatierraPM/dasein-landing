@@ -1,0 +1,194 @@
+<!-- Subtle sparkle particles that appear near CTA buttons on mouse proximity -->
+<canvas class="cta-sparkles" data-cta-sparkles aria-hidden="true"></canvas>
+
+<style>
+  .cta-sparkles {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 18;
+    pointer-events: none;
+  }
+
+  @media (max-width: 768px) {
+    .cta-sparkles { display: none; }
+  }
+</style>
+
+<script>
+  (() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if ('ontouchstart' in window) return;
+
+    const canvas = document.querySelector('[data-cta-sparkles]') as HTMLCanvasElement | null;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const CTA_SELECTOR = '.button-primary, .button-secondary, .cta-primary, .cta-link, .nav-cta, [data-cta]';
+    const PROXIMITY = 120; // px from CTA edge to start sparkling
+    const MAX_PARTICLES = 40;
+    const EMIT_RATE = 0.4; // particles per frame per active CTA
+
+    const dpr = Math.min(window.devicePixelRatio, 2);
+    let W = 0;
+    let H = 0;
+    let mouseX = -9999;
+    let mouseY = -9999;
+
+    // Dasein colors — soft, not saturated
+    const COLORS = [
+      [72, 101, 255, 0.6],    // signal-blue
+      [122, 104, 214, 0.5],   // horizon-violet
+      [141, 230, 255, 0.4],   // light cyan
+      [255, 184, 115, 0.35],  // warm amber
+    ];
+
+    interface Spark {
+      x: number; y: number;
+      vx: number; vy: number;
+      life: number; maxLife: number;
+      size: number;
+      color: number[];
+    }
+
+    const sparks: Spark[] = [];
+
+    function resize() {
+      W = window.innerWidth;
+      H = window.innerHeight;
+      canvas.width = W * dpr;
+      canvas.height = H * dpr;
+      ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function distToRect(mx: number, my: number, rect: DOMRect): number {
+      const cx = Math.max(rect.left, Math.min(mx, rect.right));
+      const cy = Math.max(rect.top, Math.min(my, rect.bottom));
+      return Math.sqrt((mx - cx) ** 2 + (my - cy) ** 2);
+    }
+
+    function emitNear(rect: DOMRect, proximity: number) {
+      if (sparks.length >= MAX_PARTICLES) return;
+      if (Math.random() > EMIT_RATE) return;
+
+      const color = COLORS[Math.floor(Math.random() * COLORS.length)]!;
+
+      // Spawn along the perimeter of the button with slight randomness
+      const perimeter = 2 * (rect.width + rect.height);
+      const t = Math.random() * perimeter;
+      let sx: number, sy: number;
+
+      if (t < rect.width) {
+        sx = rect.left + t; sy = rect.top;
+      } else if (t < rect.width + rect.height) {
+        sx = rect.right; sy = rect.top + (t - rect.width);
+      } else if (t < 2 * rect.width + rect.height) {
+        sx = rect.right - (t - rect.width - rect.height); sy = rect.bottom;
+      } else {
+        sx = rect.left; sy = rect.bottom - (t - 2 * rect.width - rect.height);
+      }
+
+      // Slight offset outward from button edge
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const dx = sx - cx;
+      const dy = sy - cy;
+      const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+      sx += (dx / dist) * (4 + Math.random() * 8);
+      sy += (dy / dist) * (4 + Math.random() * 8);
+
+      // Drift gently outward + upward
+      const angle = Math.atan2(sy - cy, sx - cx) + (Math.random() - 0.5) * 1.2;
+      const speed = 0.15 + Math.random() * 0.4;
+
+      sparks.push({
+        x: sx,
+        y: sy,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed - 0.1, // slight upward bias
+        life: 0,
+        maxLife: 50 + Math.random() * 40,
+        size: 1 + Math.random() * 2,
+        color,
+      });
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      ctx!.clearRect(0, 0, W, H);
+
+      // Check proximity to each CTA
+      const ctas = document.querySelectorAll(CTA_SELECTOR);
+      ctas.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        const dist = distToRect(mouseX, mouseY, rect);
+        if (dist < PROXIMITY) {
+          const intensity = 1 - dist / PROXIMITY;
+          // More sparks the closer you are
+          const extra = Math.floor(intensity * 2);
+          for (let j = 0; j <= extra; j++) {
+            emitNear(rect, dist);
+          }
+        }
+      });
+
+      // Update & draw sparks
+      for (let i = sparks.length - 1; i >= 0; i--) {
+        const s = sparks[i]!;
+        s.life++;
+        if (s.life >= s.maxLife) {
+          sparks.splice(i, 1);
+          continue;
+        }
+
+        s.x += s.vx;
+        s.y += s.vy;
+        s.vx *= 0.98;
+        s.vy *= 0.98;
+
+        const t = s.life / s.maxLife;
+        // Quick fade in, slow fade out
+        const alpha = (t < 0.15 ? t / 0.15 : 1 - Math.pow((t - 0.15) / 0.85, 1.5))
+          * s.color[3]!;
+        const sz = s.size * (1 - t * 0.3);
+
+        if (alpha < 0.01) continue;
+
+        // Soft dot
+        ctx!.beginPath();
+        ctx!.arc(s.x, s.y, sz, 0, Math.PI * 2);
+        ctx!.fillStyle = `rgba(${s.color[0]},${s.color[1]},${s.color[2]},${alpha.toFixed(3)})`;
+        ctx!.fill();
+
+        // Faint glow
+        if (alpha > 0.08) {
+          ctx!.beginPath();
+          ctx!.arc(s.x, s.y, sz * 4, 0, Math.PI * 2);
+          ctx!.fillStyle = `rgba(${s.color[0]},${s.color[1]},${s.color[2]},${(alpha * 0.08).toFixed(4)})`;
+          ctx!.fill();
+        }
+      }
+    }
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    window.addEventListener('mouseleave', () => {
+      mouseX = -9999;
+      mouseY = -9999;
+    });
+
+    const resizeObs = new ResizeObserver(resize);
+    resizeObs.observe(document.documentElement);
+    resize();
+    animate();
+
+    document.addEventListener('astro:before-preparation', () => {
+      resizeObs.disconnect();
+    }, { once: true });
+  })();
+</script>

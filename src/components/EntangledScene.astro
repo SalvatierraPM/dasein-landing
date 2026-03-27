@@ -1,0 +1,150 @@
+<div class="entangled-scene" data-entangled-scene aria-hidden="true">
+  <canvas class="entangled-scene__canvas"></canvas>
+</div>
+
+<style>
+  .entangled-scene {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .entangled-scene__canvas {
+    width: 100%;
+    height: 100%;
+  }
+</style>
+
+<script>
+  import {
+    createEntangled,
+    startRenderLoop,
+    resizeEntangled,
+    disposeEntangled,
+    domToWorld,
+  } from '../lib/entangled/entangled-engine';
+  import type { EntangledState, HotZone } from '../lib/entangled/entangled-engine';
+
+  /* ── CTA selectors that trigger particle bursts on mouse proximity ── */
+  const CTA_SELECTORS = [
+    { selector: '.button-primary, .cta-primary', radius: 180 },
+    { selector: '.button-secondary, .nav-cta', radius: 130 },
+  ];
+
+  function initAllEntangledScenes() {
+    const allScenes = document.querySelectorAll('[data-entangled-scene]');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    allScenes.forEach((sceneRoot) => {
+      if (
+        !(sceneRoot instanceof HTMLElement) ||
+        sceneRoot.dataset.entangledMounted === 'true' ||
+        reducedMotion
+      ) return;
+
+      sceneRoot.dataset.entangledMounted = 'true';
+
+      const observer = new IntersectionObserver((entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        observer.disconnect();
+
+        const canvas = sceneRoot.querySelector('canvas') as HTMLCanvasElement | null;
+        if (!canvas) return;
+
+        initEntangledScene(sceneRoot, canvas);
+      }, {
+        rootMargin: '280px 0px',
+      });
+
+      observer.observe(sceneRoot);
+    });
+  }
+
+  initAllEntangledScenes();
+
+  function initEntangledScene(root: HTMLElement, canvas: HTMLCanvasElement) {
+    let state: EntangledState;
+
+    try {
+      state = createEntangled(canvas);
+    } catch (e) {
+      return; // WebGL2/float textures not supported — degrade gracefully
+    }
+
+    let isVisible = false;
+    let loopStarted = false;
+
+    /* ── Visibility: only render when on-screen ── */
+    const visObs = new IntersectionObserver((entries) => {
+      isVisible = entries.some((e) => e.isIntersecting);
+      if (isVisible && !loopStarted) {
+        loopStarted = true;
+        startRenderLoop(state);
+      }
+    }, { rootMargin: '100px 0px' });
+    visObs.observe(root);
+
+    /* ── Resize ── */
+    const resizeObs = new ResizeObserver((entries) => {
+      const entry = entries[0];
+      if (!entry) return;
+      const { width, height } = entry.contentRect;
+      if (width > 0 && height > 0) resizeEntangled(state, width, height);
+    });
+    resizeObs.observe(root);
+
+    /* ── Mouse interaction + CTA hot zones ── */
+    const onMouseMove = (e: MouseEvent) => {
+      if (!isVisible) return;
+      const rect = canvas.getBoundingClientRect();
+      const world = domToWorld(state, e.clientX, e.clientY, rect);
+      state.mouse.x = world.x;
+      state.mouse.y = world.y;
+      state.mouse.active = true;
+
+      // Compute CTA hot zones
+      const zones: HotZone[] = CTA_SELECTORS.map((cfg) => {
+        const el = document.querySelector(cfg.selector);
+        if (!el) return { x: 0, y: 0, radius: 0, intensity: 0 };
+
+        const elRect = el.getBoundingClientRect();
+        const elCenterX = elRect.left + elRect.width / 2;
+        const elCenterY = elRect.top + elRect.height / 2;
+        const elWorld = domToWorld(state, elCenterX, elCenterY, rect);
+
+        const dx = e.clientX - elCenterX;
+        const dy = e.clientY - elCenterY;
+        const distPx = Math.sqrt(dx * dx + dy * dy);
+
+        const intensity = distPx < cfg.radius
+          ? Math.pow(1 - distPx / cfg.radius, 2) * 1.8
+          : 0;
+
+        return { x: elWorld.x, y: elWorld.y, radius: cfg.radius * 1.2, intensity };
+      });
+
+      state.hotZones = zones;
+    };
+
+    const onMouseLeave = () => {
+      state.mouse.active = false;
+      state.hotZones = [];
+    };
+
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseleave', onMouseLeave);
+
+    /* ── Cleanup on Astro navigation ── */
+    const cleanup = () => {
+      disposeEntangled(state);
+      visObs.disconnect();
+      resizeObs.disconnect();
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseleave', onMouseLeave);
+    };
+
+    document.addEventListener('astro:before-preparation', cleanup, { once: true });
+  }
+</script>

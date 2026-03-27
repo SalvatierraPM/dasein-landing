@@ -56,8 +56,7 @@ const {
       function tick() {
         dx += (mx - dx) * 0.15;
         dy += (my - dy) * 0.15;
-        dot.style.left = dx + 'px';
-        dot.style.top = dy + 'px';
+        dot.style.transform = 'translate(' + (dx - 4) + 'px,' + (dy - 4) + 'px)';
         requestAnimationFrame(tick);
       }
       tick();

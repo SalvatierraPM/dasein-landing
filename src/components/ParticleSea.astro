@@ -1,0 +1,406 @@
+<!-- Reactive particle sea — GPGPU entangled field before footer -->
+<section class="particle-sea-section" data-particle-sea-host>
+  <div class="particle-sea" data-particle-sea aria-hidden="true">
+    <canvas class="particle-sea__canvas"></canvas>
+  </div>
+  <div class="particle-sea-overlay"></div>
+</section>
+
+<style>
+  .particle-sea-section {
+    position: relative;
+    height: clamp(40vh, 50vw, 70vh);
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .particle-sea {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .particle-sea__canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* Top fade from contact dark, bottom fade out */
+  .particle-sea-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      linear-gradient(180deg,
+        var(--navy-deep, #07111f) 0%,
+        transparent 15%,
+        transparent 88%,
+        #0a0a0f 100%
+      );
+  }
+</style>
+
+<script>
+  import * as THREE from 'three';
+  import { GPUComputationRenderer } from '../lib/entangled/gpu-computation-renderer';
+  import { cnoise4, hash12 } from '../lib/entangled/glsl-noise';
+  import { PI, uvFromIndex } from '../lib/entangled/glsl-utils';
+
+  const NUM_POINTS = 120000;
+  const NUM_X = Math.ceil(Math.sqrt(NUM_POINTS));
+  const NUM_Y = NUM_X;
+
+  function initParticleSea() {
+    const root = document.querySelector('[data-particle-sea]') as HTMLElement | null;
+    if (!root || root.dataset.mounted === 'true') return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    root.dataset.mounted = 'true';
+
+    const canvas = root.querySelector('canvas') as HTMLCanvasElement;
+    if (!canvas) return;
+
+    // Lazy init on visibility
+    const initObs = new IntersectionObserver((entries) => {
+      if (!entries.some(e => e.isIntersecting)) return;
+      initObs.disconnect();
+      boot(root, canvas);
+    }, { rootMargin: '400px 0px' });
+    initObs.observe(root);
+  }
+
+  /** Sample pixel positions from text drawn on offscreen canvas */
+  function sampleTextPositions(text: string, canvasW: number, canvasH: number): Float32Array {
+    const offscreen = document.createElement('canvas');
+    offscreen.width = canvasW;
+    offscreen.height = canvasH;
+    const ctx = offscreen.getContext('2d')!;
+
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, canvasW, canvasH);
+    ctx.fillStyle = '#fff';
+    ctx.font = `bold ${Math.floor(canvasH * 0.62)}px "Space Grotesk", sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(text, canvasW / 2, canvasH / 2);
+
+    const data = ctx.getImageData(0, 0, canvasW, canvasH).data;
+    const coords: number[] = [];
+    // Sample every 2nd pixel for density control
+    for (let y = 0; y < canvasH; y += 1) {
+      for (let x = 0; x < canvasW; x += 1) {
+        if (data[(y * canvasW + x) * 4] > 128) {
+          coords.push(x, y);
+        }
+      }
+    }
+    return new Float32Array(coords);
+  }
+
+  function boot(root: HTMLElement, canvas: HTMLCanvasElement) {
+    const isMobile = window.innerWidth < 768;
+    const actualPoints = isMobile ? 40000 : NUM_POINTS;
+    const NX = Math.ceil(Math.sqrt(actualPoints));
+
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: false, antialias: false, powerPreference: 'high-performance' });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1 : 1.5));
+    renderer.setClearColor(0x0a0a0f, 1);
+    renderer.setSize(root.clientWidth, root.clientHeight);
+
+    const camera = new THREE.PerspectiveCamera(50, root.clientWidth / root.clientHeight, 0.1, 2000);
+    camera.position.z = 500;
+    camera.position.y = 40;
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0a0a0f);
+    scene.add(camera);
+
+    const world = new THREE.Object3D();
+    scene.add(world);
+
+    // Sample text "dasein" from offscreen canvas
+    const TEXT_W = 512;
+    const TEXT_H = 128;
+    const textCoords = sampleTextPositions('dasein', TEXT_W, TEXT_H);
+    const numTextPixels = textCoords.length / 2;
+
+    // Build text positions data texture (NX x NX, RGBA float)
+    const textData = new Float32Array(NX * NX * 4);
+    const SPREAD = isMobile ? 0.55 : 0.7;
+    for (let i = 0; i < NX * NX; i++) {
+      const idx = i * 4;
+      if (numTextPixels > 0 && i < actualPoints * 0.7) {
+        // Pick a random text pixel and add jitter
+        const pi = (Math.floor(Math.random() * numTextPixels)) * 2;
+        const tx = textCoords[pi];
+        const ty = textCoords[pi + 1];
+        textData[idx]     = (tx - TEXT_W / 2) * SPREAD + (Math.random() - 0.5) * 1.5;
+        textData[idx + 1] = -(ty - TEXT_H / 2) * SPREAD + (Math.random() - 0.5) * 1.5;
+        textData[idx + 2] = (Math.random() - 0.5) * 15;
+      } else {
+        // Atmosphere particles scattered around
+        textData[idx]     = (Math.random() - 0.5) * 500;
+        textData[idx + 1] = (Math.random() - 0.5) * 250;
+        textData[idx + 2] = (Math.random() - 0.5) * 250;
+      }
+      textData[idx + 3] = 1;
+    }
+    const textPosTex = new THREE.DataTexture(textData, NX, NX, THREE.RGBAFormat, THREE.FloatType);
+    textPosTex.needsUpdate = true;
+
+    // Geometry
+    const geometry = new THREE.BufferGeometry();
+    const verts: number[] = [];
+    for (let i = 0; i < actualPoints; i++) {
+      verts.push((Math.random() - 0.5) * 300, (Math.random() - 0.5) * 300, (Math.random() - 0.5) * 300);
+    }
+    geometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(verts), 3));
+
+    // Material — like original entangled but with Dasein colors
+    const vert = `
+      ${hash12} ${uvFromIndex}
+      uniform sampler2D posTarget;
+      uniform sampler2D acc;
+      uniform sampler2D vel;
+      uniform sampler2D pos;
+      uniform float time;
+      varying float alpha;
+      varying vec3 col;
+      void main() {
+        int i = gl_VertexID;
+        ivec2 size = ivec2(${NX}, ${NX});
+        vec2 uv = uvFromIndex(i, size);
+        vec4 pos = texture2D(pos, uv);
+        vec4 v = texture2D(vel, uv);
+        vec3 p = pos.xyz;
+        float n = hash12(vec2(float(i), 0.0));
+        float ps = pow(n, 2.0) * 2.2;
+        alpha = .18 + pow(n, 20.0) * .3;
+        if (n > .998) { ps *= 1.3; alpha *= 2.2; }
+        // Color: signal-blue → horizon-violet → warm based on velocity
+        vec3 c1 = vec3(0.28, 0.40, 1.0);
+        vec3 c2 = vec3(0.48, 0.41, 0.84);
+        vec3 c3 = vec3(1.0, 0.55, 0.36);
+        float s = pow(length(v.xyz) / 1.5, 4.0);
+        s = clamp(s, 0.0, 1.0);
+        col = mix(mix(c1, c2, min(s * 2.0, 1.0)), c3, max(s * 2.0 - 1.0, 0.0));
+        gl_PointSize = ps;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
+      }
+    `;
+    const frag = `
+      varying float alpha;
+      varying vec3 col;
+      void main() {
+        gl_FragColor = vec4(col.rgb, alpha);
+      }
+    `;
+    const material = new THREE.ShaderMaterial({
+      uniforms: { time: { value: 0 } },
+      vertexShader: vert,
+      fragmentShader: frag,
+      transparent: true, depthWrite: false, depthTest: false,
+      blending: THREE.AdditiveBlending,
+    });
+    world.add(new THREE.Points(geometry, material));
+
+    // GPGPU
+    const gpu = new GPUComputationRenderer(NX, NX, renderer);
+
+    // Position target: read from pre-computed text positions + subtle breathing
+    const ptShader = `
+      ${PI} ${hash12}
+      uniform float time;
+      uniform sampler2D textPositions;
+      void main() {
+        vec2 uv = gl_FragCoord.xy / resolution.xy;
+        vec4 base = texture2D(textPositions, uv);
+        float n = hash12(uv * 73.13);
+        // Subtle wave breathing — keeps text shape alive
+        float wave = sin(base.x * 0.015 + time * 0.00012 + n * 6.28) * 2.5;
+        float drift = cos(base.y * 0.02 + time * 0.0001) * 1.5;
+        vec3 pos = base.xyz;
+        pos.y += wave;
+        pos.z += drift + sin(time * 0.00008 + n * 3.14) * 3.0;
+        gl_FragColor = vec4(pos, 1.0);
+      }
+    `;
+
+    // Acceleration with mouse interaction
+    const accShader = `
+      ${PI} ${cnoise4} ${hash12}
+      uniform float time;
+      uniform float mouseX;
+      uniform float mouseY;
+      uniform bool mouseActive;
+      void main() {
+        float i = (gl_FragCoord.y * resolution.x) + gl_FragCoord.x;
+        vec2 uv = gl_FragCoord.xy / resolution.xy;
+        vec3 a = vec3(0.0);
+        vec4 p = texture2D(pos, uv);
+        vec4 tar = texture2D(posTarget, uv);
+        float t = time * 0.0001;
+        float n = hash12(uv * 0.02 + i);
+        // Turbulence — aggressive for reactivity
+        vec3 turb;
+        turb.x = cnoise(vec4(p.xyz * 0.005 + n * 35.4, t));
+        turb.y = cnoise(vec4(p.xyz * 0.006 + n * 32.3, t));
+        turb.z = cnoise(vec4(p.xyz * 0.005 + n * 43.3, t));
+        turb *= pow(cnoise(vec4(p.xyz * 0.008, time * 0.0004)), 3.0) * 3.0;
+        a += turb;
+        // Spring home — stronger to keep text legible
+        vec3 back = tar.xyz - p.xyz;
+        back *= 0.005;
+        a += back;
+        // Mouse — big reactive radius
+        if (mouseActive) {
+          vec2 mp = vec2(mouseX, mouseY);
+          float dist = length(vec2(p.x, p.y) - mp);
+          if (dist < 250.0 && dist > 0.1) {
+            vec2 dir = normalize(vec2(p.x, p.y) - mp);
+            float force = (1.0 - dist / 250.0) * 3.0;
+            float angle = atan(dir.y, dir.x) + (n - 0.5) * PI;
+            a.x += cos(angle) * force;
+            a.y += sin(angle) * force;
+            a.z += (n - 0.5) * force * 1.5;
+          }
+        }
+        gl_FragColor = vec4(a, 1.0);
+      }
+    `;
+
+    const velShader = `
+      ${PI}
+      uniform float time;
+      void main() {
+        vec2 uv = gl_FragCoord.xy / resolution.xy;
+        vec4 a = texture2D(acc, uv);
+        vec4 v = texture2D(vel, uv);
+        v += a;
+        v *= .96;
+        gl_FragColor = vec4(v.xyz, 1.0);
+      }
+    `;
+
+    const posShader = `
+      uniform float time;
+      uniform int frame;
+      void main() {
+        vec2 uv = gl_FragCoord.xy / resolution.xy;
+        vec4 p;
+        if (frame < 2) { p = texture2D(posTarget, uv); }
+        else { p = texture2D(pos, uv); p += texture2D(vel, uv); }
+        gl_FragColor = vec4(p.xyz, 1.0);
+      }
+    `;
+
+    // Initialize posTarget texture with text positions
+    const ptInitTex = gpu.createTexture();
+    const ptInitData = ptInitTex.image.data as Float32Array;
+    ptInitData.set(textData.subarray(0, ptInitData.length));
+
+    const ptVar = gpu.addVariable('posTarget', ptShader, ptInitTex);
+    const accVar = gpu.addVariable('acc', accShader, gpu.createTexture());
+    const velVar = gpu.addVariable('vel', velShader, gpu.createTexture());
+    const posVar = gpu.addVariable('pos', posShader, gpu.createTexture());
+    gpu.setVariableDependencies(ptVar, [ptVar]);
+    gpu.setVariableDependencies(accVar, [ptVar, posVar, accVar]);
+    gpu.setVariableDependencies(velVar, [accVar, velVar]);
+    gpu.setVariableDependencies(posVar, [accVar, velVar, posVar, ptVar]);
+
+    // Pass text positions texture to ptShader
+    ptVar.material.uniforms['textPositions'] = { value: textPosTex };
+
+    const err = gpu.init();
+    if (err) return;
+
+    let internalTime = 0;
+    let frame = 0;
+    let lastTime = performance.now();
+    let disposed = false;
+    let isVisible = false;
+    let mouseWorldX = 0;
+    let mouseWorldY = 0;
+    let mouseActive = false;
+
+    // Mouse
+    const onMouseMove = (e: MouseEvent) => {
+      if (!isVisible) return;
+      const rect = canvas.getBoundingClientRect();
+      mouseWorldX = (e.clientX - rect.left - rect.width / 2) * 1.5;
+      mouseWorldY = -(e.clientY - rect.top - rect.height / 2) * 1.5;
+      mouseActive = true;
+    };
+    const onMouseLeave = () => { mouseActive = false; };
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseleave', onMouseLeave);
+
+    // Visibility
+    const visObs = new IntersectionObserver((entries) => {
+      isVisible = entries.some(e => e.isIntersecting);
+    }, { rootMargin: '100px 0px' });
+    visObs.observe(root);
+
+    // Resize
+    const resizeObs = new ResizeObserver(() => {
+      const w = root.clientWidth;
+      const h = root.clientHeight;
+      if (w > 0 && h > 0) {
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+      }
+    });
+    resizeObs.observe(root);
+
+    const render = () => {
+      if (disposed) return;
+      requestAnimationFrame(render);
+      if (!isVisible) return;
+
+      const now = performance.now();
+      internalTime += now - lastTime;
+      lastTime = now;
+
+      ptVar.material.uniforms['time'] = { value: internalTime };
+      accVar.material.uniforms['time'] = { value: internalTime };
+      accVar.material.uniforms['mouseX'] = { value: mouseWorldX };
+      accVar.material.uniforms['mouseY'] = { value: mouseWorldY };
+      accVar.material.uniforms['mouseActive'] = { value: mouseActive };
+      velVar.material.uniforms['time'] = { value: internalTime };
+      posVar.material.uniforms['time'] = { value: internalTime };
+      posVar.material.uniforms['frame'] = { value: frame };
+
+      gpu.compute();
+
+      material.uniforms['time'] = { value: internalTime };
+      material.uniforms['posTarget'] = { value: gpu.getCurrentRenderTarget(ptVar).texture };
+      material.uniforms['acc'] = { value: gpu.getCurrentRenderTarget(accVar).texture };
+      material.uniforms['vel'] = { value: gpu.getCurrentRenderTarget(velVar).texture };
+      material.uniforms['pos'] = { value: gpu.getCurrentRenderTarget(posVar).texture };
+
+      // Very slow rotation — keep text readable
+      world.rotation.y = Math.sin(internalTime * 0.00003) * 0.12;
+
+      renderer.render(scene, camera);
+      frame++;
+    };
+
+    render();
+
+    document.addEventListener('astro:before-preparation', () => {
+      disposed = true;
+      visObs.disconnect();
+      resizeObs.disconnect();
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseleave', onMouseLeave);
+      gpu.dispose();
+      renderer.dispose();
+      material.dispose();
+      geometry.dispose();
+    }, { once: true });
+  }
+
+  initParticleSea();
+</script>

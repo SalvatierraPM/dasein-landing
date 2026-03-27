@@ -55,8 +55,8 @@
   function initScene(root: HTMLElement, canvas: HTMLCanvasElement, THREE: typeof import('three')) {
     const hostSection = root.closest('[data-particle-host]') || root.closest('.signaltwin-section');
     const isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
-    const particleCount = isMobile ? 1800 : 4000;
-    const linkCount = isMobile ? 80 : 200;
+    const particleCount = isMobile ? 800 : 2400;
+    const linkCount = isMobile ? 40 : 120;
 
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(particleCount * 3);
@@ -137,10 +137,17 @@
       antialias: false,
       powerPreference: 'high-performance',
     });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.8));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1 : 1.5));
 
     let rafId = 0;
     let disposed = false;
+    let isVisible = false;
+
+    /* Pause rendering when off-screen */
+    const visObs = new IntersectionObserver((entries) => {
+      isVisible = entries.some((e) => e.isIntersecting);
+    }, { rootMargin: '100px 0px' });
+    visObs.observe(root);
 
     const resize = () => {
       const width = root.clientWidth;
@@ -163,19 +170,32 @@
     const lime = new THREE.Color('#ff8c5c');
     const mixColor = new THREE.Color();
 
-    const getProgress = () => {
-      if (!(hostSection instanceof HTMLElement)) return 0;
+    /* Cache scroll progress via scroll event instead of getBoundingClientRect per frame */
+    let cachedProgress = 0;
+    const updateProgress = () => {
+      if (!(hostSection instanceof HTMLElement)) return;
       const rect = hostSection.getBoundingClientRect();
       const total = rect.height + window.innerHeight;
-      return THREE.MathUtils.clamp((window.innerHeight - rect.top) / total, 0, 1);
+      cachedProgress = THREE.MathUtils.clamp((window.innerHeight - rect.top) / total, 0, 1);
     };
+    let scrollTicking = false;
+    window.addEventListener('scroll', () => {
+      if (!scrollTicking) {
+        requestAnimationFrame(() => { updateProgress(); scrollTicking = false; });
+        scrollTicking = true;
+      }
+    }, { passive: true });
+    updateProgress();
 
     const animate = () => {
       if (disposed) return;
       rafId = requestAnimationFrame(animate);
 
+      /* Skip rendering when off-screen */
+      if (!isVisible) return;
+
       const elapsed = performance.now() * 0.00012;
-      const progress = getProgress();
+      const progress = cachedProgress;
       const amplitude = 0.16 + progress * 0.18;
       const driftScale = 0.2 + progress * 0.24;
       const array = positionsAttr.array as Float32Array;
@@ -239,6 +259,7 @@
       disposed = true;
       cancelAnimationFrame(rafId);
       resizeObserver.disconnect();
+      visObs.disconnect();
       geometry.dispose();
       linkGeometry.dispose();
       baseMaterial.dispose();

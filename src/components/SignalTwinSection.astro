@@ -34,59 +34,98 @@ const layers = [
   id="signaltwin"
   data-particle-host
 >
-  <ParticleScene />
   <div class="st-noise" aria-hidden="true"></div>
   <div class="st-vignette" aria-hidden="true"></div>
 
   <!-- Sage knot — glows on dark background -->
   <div class="st-3d-wrap" data-parallax="0.07" aria-hidden="true">
-    <img src="/3d/knot-sage.png" alt="" class="st-3d" loading="lazy" decoding="async" width="320" height="280" />
+    <img src="/3d/knot-sage.webp" alt="" class="st-3d" loading="lazy" decoding="async" width="320" height="280" />
   </div>
 
-  <div class="container st-container">
+  <!-- Scrollytelling: sticky visual + scroll-driven layers -->
+  <div class="st-scrolly" data-st-root data-active-layer="0">
 
-    <!-- Asymmetric header — kicker left, headline right -->
-    <header class="st-header" data-reveal>
-      <span class="st-kicker">04 / SignalTwin</span>
-      <div class="st-header-right">
-        <h2 class="st-title">
-          El motor de simulación detrás de la <em>recomendación.</em>
-        </h2>
-        <p class="st-lead">
-          SignalTwin convierte una lectura compleja en escenarios discutibles.
-          Modela actores, separa reacciones internas y externas, conserva memoria
-          y deja trazabilidad sobre por qué una recomendación gana fuerza frente a otra.
-        </p>
+    <!-- Sticky panel: particles + header + HUD -->
+    <div class="st-sticky">
+      <div class="st-sticky-inner">
+        <ParticleScene />
+
+        <!-- HUD top bar -->
+        <div class="st-hud">
+          <div class="st-hud-left">
+            <span class="st-hud-label">SignalTwin</span>
+            <span class="st-hud-counter" data-st-readout>01 / 04</span>
+          </div>
+          <div class="st-hud-progress">
+            <span data-st-progress></span>
+          </div>
+        </div>
+
+        <!-- Central content: headline + active layer info -->
+        <div class="st-sticky-content">
+          <span class="st-kicker">04 / SignalTwin</span>
+          <h2 class="st-title">
+            El motor de simulación detrás de la <em>recomendación.</em>
+          </h2>
+          <p class="st-lead">
+            SignalTwin convierte una lectura compleja en escenarios discutibles.
+            Modela actores, separa reacciones internas y externas, conserva memoria
+            y deja trazabilidad sobre por qué una recomendación gana fuerza frente a otra.
+          </p>
+        </div>
+
+        <!-- Active layer indicator -->
+        <div class="st-active-pill">
+          <span class="st-active-num" data-st-active-num>01</span>
+          <span class="st-active-label" data-st-active-label>Mundo abierto</span>
+        </div>
+
+        <!-- Dots navigation -->
+        <div class="st-dots" data-st-dots>
+          {layers.map((layer, index) => (
+            <button
+              class={`st-dot ${index === 0 ? 'is-active' : ''}`}
+              data-dot-index={index}
+              aria-label={`Layer ${index + 1}: ${layer.label}`}
+            >
+              <span class="st-dot-label">{layer.label}</span>
+            </button>
+          ))}
+        </div>
       </div>
-    </header>
+    </div>
 
-    <!-- Engine layers — numbered editorial rows -->
-    <div class="st-layers" data-reveal-stagger>
-      {layers.map((layer) => (
-        <article class="st-layer" data-cursor-grow>
-          <div class="st-layer-num">
-            <span>{layer.num}</span>
-          </div>
-          <div class="st-layer-label">
-            <span>{layer.label}</span>
-          </div>
-          <div class="st-layer-content">
-            <h3 class="st-layer-title">{layer.title}</h3>
-            <p class="st-layer-body">{layer.body}</p>
+    <!-- Scroll-driven layer panels -->
+    <div class="st-panels">
+      {layers.map((layer, index) => (
+        <article
+          class={`st-panel ${index === 0 ? 'is-active' : ''}`}
+          data-layer-index={index}
+        >
+          <div class="st-panel-content">
+            <div class="st-panel-num">{layer.num}</div>
+            <div class="st-panel-label">{layer.label}</div>
+            <h3 class="st-panel-title">{layer.title}</h3>
+            <p class="st-panel-body">{layer.body}</p>
           </div>
         </article>
       ))}
     </div>
+  </div>
 
-    <!-- Bottom rule with mono note -->
+  <!-- Bottom rule with mono note -->
+  <div class="container st-container">
     <div class="st-footer" data-reveal>
       <div class="st-footer-line"></div>
       <p class="st-footer-note">
         SignalTwin es infraestructura interna, no producto.
         Lo que se entrega es la recomendación con trazabilidad, no acceso al motor.
       </p>
+      <a class="st-footer-cta" data-cta href="#contacto">
+        Ver cómo aplica a mi caso
+        <span aria-hidden="true">&rarr;</span>
+      </a>
     </div>
-
   </div>
 </section>
 
@@ -97,12 +136,15 @@ const layers = [
     overflow: clip;
     isolation: isolate;
     background: #0f1a2e;
-    padding: var(--space-section) 0;
+    padding: 0;
   }
 
   .st-container {
     position: relative;
     z-index: 3;
+    padding: 0 clamp(2rem, 6vw, 5rem);
+    max-width: var(--max-w-content);
+    margin: 0 auto;
   }
 
   /* ─── Texture ─── */
@@ -129,13 +171,94 @@ const layers = [
     );
   }
 
-  /* ─── Asymmetric header ─── */
-  .st-header {
+  /* ─── Scrollytelling container ─── */
+  .st-scrolly {
+    position: relative;
     display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 2rem 3rem;
-    align-items: start;
-    margin-bottom: clamp(4rem, 5vw, 7rem);
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+    z-index: 3;
+  }
+
+  /* ─── Sticky panel (left half) ─── */
+  .st-sticky {
+    position: sticky;
+    top: 0;
+    height: fit-content;
+    align-self: start;
+  }
+
+  .st-sticky-inner {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1.6rem;
+    padding: clamp(5rem, 6vw, 7rem) clamp(2rem, 5vw, 5rem) clamp(2rem, 4vw, 4rem);
+    overflow: hidden;
+  }
+
+  /* Particles fill the sticky panel */
+  .st-sticky-inner :global(.particle-scene) {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  /* ─── HUD ─── */
+  .st-hud {
+    position: absolute;
+    top: clamp(4rem, 5vw, 6rem);
+    left: clamp(2rem, 5vw, 5rem);
+    right: clamp(2rem, 5vw, 5rem);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    z-index: 2;
+  }
+
+  .st-hud-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+
+  .st-hud-label,
+  .st-hud-counter {
+    font-family: var(--font-mono);
+    font-size: var(--text-caption, 0.72rem);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(243, 245, 248, 0.32);
+  }
+
+  .st-hud-progress {
+    flex: 1;
+    height: 2px;
+    background: rgba(243, 245, 248, 0.08);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .st-hud-progress span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    transform-origin: left center;
+    transform: scaleX(0.25);
+    background: linear-gradient(90deg, var(--signal-red, #ff5c38), #ffb873);
+    transition: transform 0.6s var(--ease-out-expo);
+  }
+
+  /* ─── Sticky content (headline) ─── */
+  .st-sticky-content {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    gap: 1.2rem;
   }
 
   .st-kicker {
@@ -144,7 +267,6 @@ const layers = [
     letter-spacing: var(--tracking-overline);
     text-transform: uppercase;
     color: rgba(243, 245, 248, 0.4);
-    padding-top: 0.65em;
     white-space: nowrap;
   }
 
@@ -159,11 +281,6 @@ const layers = [
     margin-right: 0.6rem;
   }
 
-  .st-header-right {
-    display: grid;
-    gap: 1.6rem;
-  }
-
   .st-title {
     font-family: var(--font-display);
     font-size: clamp(2rem, 1.2rem + 3vw, 3.6rem);
@@ -171,7 +288,7 @@ const layers = [
     letter-spacing: var(--tracking-display);
     font-weight: 600;
     color: var(--slate-white, #f3f5f8);
-    max-width: 24ch;
+    max-width: 20ch;
   }
 
   .st-title em {
@@ -182,40 +299,147 @@ const layers = [
   }
 
   .st-lead {
-    max-width: 48ch;
+    max-width: 38ch;
     color: rgba(243, 245, 248, 0.52);
     font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.08rem);
     line-height: 1.7;
   }
 
-  /* ─── Engine layers — numbered rows ─── */
-  .st-layers {
-    border-top: 1px solid rgba(243, 245, 248, 0.1);
+  /* ─── Active layer pill ─── */
+  .st-active-pill {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem 1.4rem;
+    border-radius: var(--radius-full, 999px);
+    background: rgba(243, 245, 248, 0.06);
+    border: 1px solid rgba(243, 245, 248, 0.08);
+    backdrop-filter: blur(12px);
+    transition: opacity 0.4s ease;
   }
 
-  .st-layer {
-    display: grid;
-    grid-template-columns: 3.5rem 10rem 1fr;
-    gap: 0 2rem;
-    align-items: start;
-    padding: clamp(2rem, 3vw, 3rem) 0;
-    border-bottom: 1px solid rgba(243, 245, 248, 0.08);
-    transition: border-color 0.3s ease;
-  }
-
-  .st-layer:hover {
-    border-bottom-color: rgba(255, 92, 56, 0.2);
-  }
-
-  .st-layer-num span {
+  .st-active-num {
     font-family: var(--font-mono);
-    font-size: var(--text-overline);
-    letter-spacing: 0.1em;
+    font-size: var(--text-caption, 0.72rem);
+    letter-spacing: 0.12em;
     color: var(--signal-red);
     font-weight: 600;
   }
 
-  .st-layer-label span {
+  .st-active-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-caption, 0.72rem);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(243, 245, 248, 0.5);
+  }
+
+  /* ─── Dots ─── */
+  .st-dots {
+    position: absolute;
+    bottom: clamp(2rem, 4vw, 3rem);
+    left: clamp(2rem, 5vw, 5rem);
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    z-index: 2;
+  }
+
+  .st-dot {
+    appearance: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.6rem;
+    border-radius: var(--radius-full, 999px);
+    background: rgba(243, 245, 248, 0.04);
+    transition: background-color 0.3s ease, transform 0.3s var(--ease-out-expo);
+  }
+
+  .st-dot::before {
+    content: '';
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: rgba(243, 245, 248, 0.16);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .st-dot.is-active {
+    background: rgba(255, 92, 56, 0.1);
+  }
+
+  .st-dot.is-active::before {
+    background: var(--signal-red, #ff5c38);
+    transform: scale(1.4);
+  }
+
+  .st-dot-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(243, 245, 248, 0.32);
+    transition: color 0.3s ease;
+  }
+
+  .st-dot.is-active .st-dot-label {
+    color: rgba(243, 245, 248, 0.6);
+  }
+
+  /* ─── Scroll panels (right half) ─── */
+  .st-panels {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .st-panel {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: clamp(3rem, 5vw, 6rem);
+    padding-left: clamp(3rem, 6vw, 8rem);
+    position: relative;
+  }
+
+  .st-panel::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 15%;
+    bottom: 15%;
+    width: 1px;
+    background: rgba(243, 245, 248, 0.06);
+  }
+
+  .st-panel-content {
+    display: grid;
+    gap: 1.2rem;
+    max-width: 32rem;
+    opacity: 0.2;
+    transform: translateY(24px);
+    transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo);
+  }
+
+  .st-panel.is-active .st-panel-content {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .st-panel-num {
+    font-family: var(--font-mono);
+    font-size: clamp(0.75rem, 0.7rem + 0.2vw, 0.85rem);
+    letter-spacing: 0.2em;
+    color: var(--signal-red);
+    font-weight: 600;
+  }
+
+  .st-panel-label {
     font-family: var(--font-mono);
     font-size: 0.72rem;
     letter-spacing: 0.08em;
@@ -223,43 +447,26 @@ const layers = [
     color: rgba(243, 245, 248, 0.36);
   }
 
-  .st-layer-content {
-    display: grid;
-    gap: 0.6rem;
-  }
-
-  .st-layer-title {
+  .st-panel-title {
     font-family: var(--font-display);
-    font-size: clamp(1.15rem, 1rem + 0.6vw, 1.5rem);
-    line-height: 1.2;
-    letter-spacing: -0.02em;
+    font-size: clamp(2rem, 1.4rem + 2.2vw, 3.4rem);
+    line-height: 0.96;
+    letter-spacing: -0.04em;
     font-weight: 600;
-    color: var(--slate-white, #e8ecf1);
-    max-width: 32ch;
+    color: var(--slate-white, #f3f5f8);
+    max-width: 20ch;
   }
 
-  .st-layer-body {
-    color: rgba(243, 245, 248, 0.46);
-    font-size: clamp(0.88rem, 0.85rem + 0.15vw, 0.96rem);
+  .st-panel-body {
+    color: rgba(243, 245, 248, 0.52);
+    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.12rem);
     line-height: 1.65;
-    max-width: 52ch;
-  }
-
-  /* Hover reveal body — opacity + transform only, no layout shift */
-  .st-layer-body {
-    opacity: 0;
-    transform: translateY(6px);
-    transition: opacity 0.4s var(--ease-out-expo), transform 0.4s var(--ease-out-expo);
-  }
-
-  .st-layer:hover .st-layer-body {
-    opacity: 1;
-    transform: translateY(0);
+    max-width: 40ch;
   }
 
   /* ─── Footer note ─── */
   .st-footer {
-    margin-top: clamp(3rem, 4vw, 5rem);
+    padding: clamp(3rem, 5vw, 6rem) 0;
     display: grid;
     gap: 1.2rem;
   }
@@ -279,38 +486,75 @@ const layers = [
     line-height: 1.7;
   }
 
-  /* ─── Mobile ─── */
+  .st-footer-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-caption);
+    letter-spacing: 0.06em;
+    color: rgba(243, 245, 248, 0.5);
+    text-decoration: none;
+    transition: color var(--dur-normal) ease, gap var(--dur-normal) var(--ease-out-expo);
+  }
+
+  .st-footer-cta:hover {
+    color: var(--slate-white);
+    gap: 1rem;
+  }
+
+  /* ─── Mobile: stack vertically ─── */
   @media (max-width: 860px) {
-    .st-header {
+    .st-scrolly {
       grid-template-columns: 1fr;
-      gap: 1.2rem;
     }
 
-    .st-layer {
-      grid-template-columns: 2.5rem 1fr;
-      gap: 0 1rem;
+    .st-sticky {
+      position: relative;
     }
 
-    .st-layer-label {
+    .st-sticky-inner {
+      height: auto;
+      min-height: 80vh;
+      padding-top: 5rem;
+      padding-bottom: 3rem;
+    }
+
+    .st-hud {
+      position: relative;
+      top: auto;
+      left: auto;
+      right: auto;
+      margin-bottom: 1rem;
+    }
+
+    .st-dots {
+      position: relative;
+      bottom: auto;
+      left: auto;
+    }
+
+    .st-panel {
+      min-height: auto;
+      padding: clamp(2rem, 4vw, 4rem) clamp(2rem, 5vw, 4rem);
+    }
+
+    .st-panel::before {
       display: none;
     }
 
-    .st-layer-content {
-      grid-column: 2;
-    }
-
-    /* On mobile show body always — no hover */
-    .st-layer-body {
-      max-height: none;
+    .st-panel-content {
       opacity: 1;
+      transform: none;
     }
   }
 
   /* ─── Reduced motion ─── */
   @media (prefers-reduced-motion: reduce) {
-    .st-layer-body {
-      max-height: none;
+    .st-panel-content {
       opacity: 1;
+      transform: none;
       transition: none;
     }
   }
@@ -350,3 +594,69 @@ const layers = [
     .st-3d-wrap { transform: none !important; }
   }
 </style>
+
+<script>
+  const stRoot = document.querySelector('[data-st-root]');
+
+  if (stRoot) {
+    const panels = Array.from(stRoot.querySelectorAll('[data-layer-index]'));
+    const dots = Array.from(stRoot.querySelectorAll('.st-dot'));
+    const meter = stRoot.querySelector('[data-st-progress]');
+    const readout = stRoot.querySelector('[data-st-readout]');
+    const activeNum = stRoot.querySelector('[data-st-active-num]');
+    const activeLabel = stRoot.querySelector('[data-st-active-label]');
+
+    const labels = [
+      'Mundo abierto',
+      'Mundo institucional',
+      'Memoria de agentes',
+      'Trazabilidad',
+    ];
+
+    const setActive = (index: number) => {
+      (stRoot as HTMLElement).dataset.activeLayer = String(index);
+      panels.forEach((panel, i) => panel.classList.toggle('is-active', i === index));
+      dots.forEach((dot, i) => dot.classList.toggle('is-active', i === index));
+
+      if (meter instanceof HTMLElement) {
+        meter.style.transform = `scaleX(${(index + 1) / panels.length})`;
+      }
+      if (readout) {
+        readout.textContent = `${String(index + 1).padStart(2, '0')} / ${String(panels.length).padStart(2, '0')}`;
+      }
+      if (activeNum) {
+        activeNum.textContent = String(index + 1).padStart(2, '0');
+      }
+      if (activeLabel) {
+        activeLabel.textContent = labels[index] ?? '';
+      }
+    };
+
+    setActive(0);
+
+    // IntersectionObserver triggers layer changes as panels scroll into view
+    const observer = new IntersectionObserver((entries) => {
+      entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)
+        .forEach((entry) => {
+          const index = Number(entry.target.getAttribute('data-layer-index'));
+          if (Number.isFinite(index)) {
+            setActive(index);
+          }
+        });
+    }, {
+      threshold: 0.4,
+      rootMargin: '-30% 0px -30% 0px',
+    });
+
+    panels.forEach((panel) => observer.observe(panel));
+
+    // Dot click navigation
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        panels[i]?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    });
+  }
+</script>

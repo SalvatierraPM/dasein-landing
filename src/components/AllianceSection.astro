@@ -1,7 +1,7 @@
 <section class="alliance-section" id="alianzas">
   <!-- Olive knot — subtle background depth -->
   <div class="alliance-3d-wrap" data-parallax="0.06" aria-hidden="true">
-    <img src="/3d/knot-olive.png" alt="" class="alliance-3d" loading="lazy" decoding="async" width="200" height="160" />
+    <img src="/3d/knot-olive.webp" alt="" class="alliance-3d" loading="lazy" decoding="async" width="200" height="160" />
   </div>
 
   <div class="container">
@@ -66,6 +66,10 @@
       <p>Where our work <span class="alliance-quote-accent">ends</span>, yours <span class="alliance-quote-accent">begins</span>.</p>
       <div class="alliance-quote-rule"></div>
     </blockquote>
+
+    <div class="alliance-cta" data-reveal>
+      <a class="button button-primary" data-cta href="#contacto">Agendemos una conversación</a>
+    </div>
 
   </div>
 </section>
@@ -417,6 +421,12 @@
   @keyframes ally-float {
     0%, 100% { transform: rotate(-18deg) translateY(0); }
     50% { transform: rotate(-15deg) translateY(-12px); }
+  }
+
+  .alliance-cta {
+    display: flex;
+    justify-content: center;
+    padding-top: clamp(2rem, 3vw, 4rem);
   }
 
   @media (max-width: 900px) { .alliance-3d-wrap { display: none; } }

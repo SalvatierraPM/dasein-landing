@@ -84,7 +84,7 @@ const steps = [
           class="method-particles"
           color="#4865ff"
           count={45}
-          opacity={0.22}
+          opacity={0.45}
           linkDistance={100}
         />
 
@@ -160,11 +160,10 @@ const steps = [
     </div>
   </div>
 
-  <!-- Bottom note -->
+  <!-- Terminal note -->
   <div class="method-bottom-note">
-    <p>
-      El método no se presenta como misterio. Se despliega como sistema visible,
-      con pasos, outputs y fricciones explícitas.
+    <p class="method-terminal" data-typewriter>
+      El método no se presenta como misterio. Se despliega como sistema visible, con pasos, outputs y fricciones explícitas.
     </p>
   </div>
 </section>
@@ -534,18 +533,39 @@ const steps = [
   }
 
 
-  /* === Bottom note === */
+  /* === Terminal note === */
   .method-bottom-note {
     max-width: var(--max-w-content);
     margin: 0 auto;
-    padding: clamp(3rem, 5vw, 6rem) clamp(2rem, 6vw, 5rem);
+    padding: clamp(4rem, 6vw, 8rem) clamp(2rem, 6vw, 5rem);
     border-top: 1px solid var(--line);
   }
 
-  .method-bottom-note p {
-    max-width: 40rem;
-    color: var(--ink-soft);
-    font-size: clamp(1.05rem, 1rem + 0.3vw, 1.2rem);
+  .method-terminal {
+    font-family: var(--font-mono);
+    font-size: clamp(0.78rem, 0.7rem + 0.2vw, 0.88rem);
+    letter-spacing: 0.03em;
+    line-height: 1.85;
+    color: var(--ink-faint);
+    max-width: 72ch;
+  }
+
+  .method-terminal::after {
+    content: '▌';
+    display: inline;
+    animation: blink-caret 0.8s steps(2) infinite;
+    color: var(--ink-faint);
+    opacity: 0.6;
+    margin-left: 1px;
+  }
+
+  .method-terminal.is-done::after {
+    display: none;
+  }
+
+  @keyframes blink-caret {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 0; }
   }
 
   /* === Mobile: stack vertically === */
@@ -665,5 +685,40 @@ const steps = [
         panels[i]?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       });
     });
+  }
+
+  // Typewriter effect with natural pacing
+  const tw = document.querySelector('[data-typewriter]');
+  if (tw instanceof HTMLElement && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const fullText = tw.textContent?.trim() ?? '';
+    tw.textContent = '';
+    let started = false;
+
+    const typeObs = new IntersectionObserver((entries) => {
+      if (started || !entries.some((e) => e.isIntersecting)) return;
+      started = true;
+      typeObs.disconnect();
+
+      let i = 0;
+      const tick = () => {
+        if (i <= fullText.length) {
+          tw.textContent = fullText.slice(0, i);
+          i++;
+          const char = fullText[i - 1];
+          // Pause at sentence boundaries
+          const delay = char === '.' ? 320 + Math.random() * 180
+            : char === ',' ? 120 + Math.random() * 80
+            : i < 4 ? 80 + Math.random() * 60  // slower start
+            : 22 + Math.random() * 28;
+          setTimeout(tick, delay);
+        } else {
+          setTimeout(() => tw.classList.add('is-done'), 1800);
+        }
+      };
+      // Initial thinking pause before typing starts
+      setTimeout(tick, 600);
+    }, { threshold: 0.3 });
+
+    typeObs.observe(tw);
   }
 </script>

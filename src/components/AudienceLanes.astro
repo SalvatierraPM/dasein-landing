@@ -33,7 +33,7 @@ const marqueeItems = ['Pilotos', 'Partners', 'Equipo', 'Investigadores', 'Alianz
 <section class="audience-section" id="audiencias">
   <!-- White torus — background atmospheric -->
   <div class="audience-3d-wrap" data-parallax="0.06" aria-hidden="true">
-    <img src="/3d/torus-white.png" alt="" class="audience-3d" loading="lazy" decoding="async" width="260" height="220" />
+    <img src="/3d/torus-white.webp" alt="" class="audience-3d" loading="lazy" decoding="async" width="260" height="220" />
   </div>
 
   <!-- Marquee strip -->
@@ -46,15 +46,16 @@ const marqueeItems = ['Pilotos', 'Partners', 'Equipo', 'Investigadores', 'Alianz
   </div>
 
   <div class="container">
-    <!-- Editorial intro: kicker left, massive headline right -->
+    <!-- Editorial intro: kicker above, headline flush-left -->
     <div class="audience-intro" data-reveal>
-      <div class="audience-intro-kicker">
-        <span class="section-kicker">01 / Qué buscamos</span>
-      </div>
+      <span class="section-kicker">01 / Qué buscamos</span>
       <h2 class="audience-headline">
         Estamos construyendo.<br />
-        <em>Buscamos a quienes<br />faltan.</em>
+        <em>Buscamos a quienes faltan.</em>
       </h2>
+      <p class="audience-lead">
+        Cuatro formas de trabajar con nosotros, según dónde estés y qué necesites.
+      </p>
     </div>
 
     <!-- Lanes -->
@@ -147,14 +148,14 @@ const marqueeItems = ['Pilotos', 'Partners', 'Equipo', 'Investigadores', 'Alianz
   /* ─── Intro ─── */
   .audience-intro {
     display: grid;
-    grid-template-columns: clamp(9rem, 12vw, 14rem) 1fr;
-    gap: clamp(2rem, 3vw, 4rem);
-    align-items: start;
-    margin-bottom: clamp(5rem, 6vw, 9rem);
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem clamp(3rem, 5vw, 6rem);
+    align-items: end;
+    margin-bottom: clamp(4rem, 5vw, 7rem);
   }
 
-  .audience-intro-kicker {
-    padding-top: 0.6rem;
+  .audience-intro .section-kicker {
+    grid-column: 1 / -1;
   }
 
   .audience-headline {
@@ -163,7 +164,6 @@ const marqueeItems = ['Pilotos', 'Partners', 'Equipo', 'Investigadores', 'Alianz
     line-height: var(--leading-display);
     letter-spacing: var(--tracking-display);
     font-weight: 600;
-    max-width: 18ch;
   }
 
   .audience-headline em {
@@ -171,6 +171,15 @@ const marqueeItems = ['Pilotos', 'Partners', 'Equipo', 'Investigadores', 'Alianz
     font-style: italic;
     font-weight: 400;
     letter-spacing: -0.02em;
+  }
+
+  .audience-lead {
+    color: var(--ink-soft);
+    font-size: clamp(1.05rem, 1rem + 0.3vw, 1.2rem);
+    line-height: var(--leading-body);
+    max-width: 28rem;
+    align-self: end;
+    padding-bottom: 0.3rem;
   }
 
   /* ─── Lanes container ─── */
@@ -182,7 +191,7 @@ const marqueeItems = ['Pilotos', 'Partners', 'Equipo', 'Investigadores', 'Alianz
   /* ─── Single lane ─── */
   .audience-lane {
     display: grid;
-    grid-template-columns: clamp(9rem, 12vw, 14rem) 1fr;
+    grid-template-columns: clamp(7rem, 10vw, 11rem) 1fr;
     gap: clamp(2rem, 3vw, 4rem);
     align-items: start;
     padding-block: clamp(2.5rem, 3.5vw, 4.5rem);
@@ -199,13 +208,13 @@ const marqueeItems = ['Pilotos', 'Partners', 'Equipo', 'Investigadores', 'Alianz
   .audience-lane-left {
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
-    padding-top: 0.35rem;
+    gap: 0.35rem;
+    padding-top: 0.2rem;
   }
 
   .audience-num {
     font-family: var(--font-mono);
-    font-size: clamp(1.6rem, 1.2rem + 1vw, 2.4rem);
+    font-size: clamp(1.4rem, 1rem + 1vw, 2rem);
     font-weight: 500;
     letter-spacing: var(--tracking-mono);
     line-height: 1;
