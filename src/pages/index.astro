@@ -74,6 +74,28 @@ import DecorativeAccents from '../components/DecorativeAccents.astro';
       revealObserver.disconnect();
       window.removeEventListener('scroll', syncNav);
     }, { once: true });
+
+    /* ── Scroll-driven parallax for 3D objects ── */
+    (() => {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const items = document.querySelectorAll<HTMLElement>('[data-parallax]');
+      if (!items.length) return;
+      let ticking = false;
+      const update = () => {
+        const y = window.scrollY;
+        items.forEach((el) => {
+          const speed = parseFloat(el.dataset.parallax || '0');
+          el.style.setProperty('--plx-y', `${-(y * speed)}px`);
+        });
+      };
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => { update(); ticking = false; });
+          ticking = true;
+        }
+      }, { passive: true });
+      update();
+    })();
   </script>
 </Layout>
 

@@ -14,12 +14,6 @@ const deliverables = [
   },
 ];
 
-const includes = [
-  'Memo ejecutivo',
-  'Mapa de actores',
-  'Señales priorizadas',
-  'Conversación de cierre',
-];
 ---
 
 <section class="deliverables-section" id="entregables">
@@ -89,23 +83,6 @@ const includes = [
       ))}
     </div>
 
-    <!-- Includes strip -->
-    <div class="includes-strip" id="includes-strip" data-reveal>
-      <div class="includes-strip__left">
-        <span class="includes-strip__label">Incluye</span>
-        <div class="includes-strip__items">
-          {includes.map((item) => (
-            <span class="includes-strip__pill">{item}</span>
-          ))}
-        </div>
-      </div>
-      <div class="includes-strip__right">
-        <p class="includes-strip__note">
-          La idea no es producir volumen. Es producir una lectura con suficiente calidad para que el equipo
-          comparta lenguaje, vea los tradeoffs y evite decidir a ciegas.
-        </p>
-      </div>
-    </div>
 
   </div>
 </section>

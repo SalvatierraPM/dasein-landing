@@ -31,6 +31,11 @@ const marqueeItems = ['Pilotos', 'Partners', 'Equipo', 'Investigadores', 'Alianz
 ---
 
 <section class="audience-section" id="audiencias">
+  <!-- White torus — background atmospheric -->
+  <div class="audience-3d-wrap" data-parallax="0.06" aria-hidden="true">
+    <img src="/3d/torus-white.png" alt="" class="audience-3d" loading="lazy" decoding="async" width="260" height="220" />
+  </div>
+
   <!-- Marquee strip -->
   <div class="audience-marquee" aria-hidden="true">
     <div class="audience-marquee-track">
@@ -364,6 +369,40 @@ const marqueeItems = ['Pilotos', 'Partners', 'Equipo', 'Investigadores', 'Alianz
     .audience-lane.is-open .audience-lane-toggle .toggle-v {
       transform: none;
     }
+  }
+
+  /* ── 3D floating accent ── */
+  .audience-3d-wrap {
+    position: absolute;
+    pointer-events: none;
+    user-select: none;
+    z-index: 1;
+    will-change: transform;
+    width: clamp(180px, 20vw, 300px);
+    top: 5%;
+    right: -3%;
+    transform: translateY(var(--plx-y, 0));
+  }
+
+  .audience-3d {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: 0.22;
+    filter: blur(1.5px) brightness(0.82) saturate(0.7);
+    animation: aud-float 12s ease-in-out infinite;
+    animation-delay: -4s;
+  }
+
+  @keyframes aud-float {
+    0%, 100% { transform: rotate(15deg) translateY(0); }
+    50% { transform: rotate(18deg) translateY(-14px); }
+  }
+
+  @media (max-width: 767px) { .audience-3d-wrap { display: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .audience-3d { animation: none !important; }
+    .audience-3d-wrap { transform: none !important; }
   }
 </style>
 
