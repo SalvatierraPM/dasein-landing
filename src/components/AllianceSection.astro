@@ -1,0 +1,91 @@
+<section class="alliances section" id="alianzas">
+  <div class="container-wide">
+    <div class="section-heading" data-reveal>
+      <div class="eyebrow">Alliance logic</div>
+      <div>
+        <h2 class="section-title">Donde termina Dasein y donde entran partners.</h2>
+        <p class="section-copy">
+          La promesa no es hacer todo. La promesa es entregar una lectura estrategica mas rigurosa
+          para que la implementacion posterior tenga mejor punto de partida.
+        </p>
+      </div>
+    </div>
+
+    <div class="alliance-grid" data-reveal-stagger>
+      <article class="alliance-card surface-card">
+        <small>Dasein hace</small>
+        <h3>Leer, estructurar, simular y traducir.</h3>
+        <ul>
+          <li>Preguntas estrategicas mejor formuladas</li>
+          <li>Escenarios comparables con evidencia visible</li>
+          <li>Recomendaciones con criterio operativo</li>
+        </ul>
+      </article>
+
+      <article class="alliance-card surface-card">
+        <small>Partners hacen</small>
+        <h3>Implementar, transformar y escalar.</h3>
+        <ul>
+          <li>Cambio organizacional y adopcion</li>
+          <li>Despliegue tecnico o de producto</li>
+          <li>Operacionalizacion posterior al mapa</li>
+        </ul>
+      </article>
+
+      <article class="alliance-card alliance-card--quote surface-card-soft">
+        <small>Working rule</small>
+        <h3>Where our work ends, yours begins.</h3>
+        <p>
+          Esa separacion mantiene la promesa honesta: Dasein no se disfraza de implementador total,
+          y los partners no entran a ciegas.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .alliance-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .alliance-card {
+    padding: 1.45rem;
+  }
+
+  .alliance-card small {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .alliance-card h3 {
+    margin: 0.8rem 0 0;
+    font-size: clamp(1.34rem, 1.08rem + 0.8vw, 1.92rem);
+    line-height: 1.08;
+    letter-spacing: -0.04em;
+  }
+
+  .alliance-card ul,
+  .alliance-card p {
+    margin: 0.85rem 0 0;
+    color: var(--ink-soft);
+  }
+
+  .alliance-card ul {
+    display: grid;
+    gap: 0.65rem;
+    padding-left: 1.1rem;
+  }
+
+  @media (min-width: 980px) {
+    .alliance-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      align-items: stretch;
+    }
+  }
+</style>

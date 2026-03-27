@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inspiration Gallery</title>
+  <style>
+    :root {
+      --bg: #0a0f17;
+      --panel: #101826;
+      --panel-2: #162133;
+      --text: #f3f5f8;
+      --muted: #8d9ab0;
+      --line: rgba(255, 255, 255, 0.08);
+      --accent: #4d8dff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      padding: 32px;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: end;
+      padding: 20px 0 24px;
+      margin-bottom: 24px;
+      background:
+        linear-gradient(180deg, rgba(10, 15, 23, 0.98) 0%, rgba(10, 15, 23, 0.94) 75%, rgba(10, 15, 23, 0) 100%);
+      backdrop-filter: blur(12px);
+    }
+
+    .header h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: -0.04em;
+    }
+
+    .header p {
+      margin: 0;
+      max-width: 720px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .meta {
+      min-width: 180px;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 14px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .meta strong {
+      color: var(--text);
+      display: block;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      margin: 0;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      border-radius: 18px;
+      overflow: hidden;
+      min-height: 260px;
+    }
+
+    .frame {
+      aspect-ratio: 0.95;
+      background:
+        radial-gradient(circle at top left, rgba(77, 141, 255, 0.18), transparent 38%),
+        radial-gradient(circle at bottom right, rgba(147, 94, 255, 0.15), transparent 42%),
+        var(--panel);
+      display: grid;
+      place-items: center;
+      border-bottom: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    .frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      background: var(--panel-2);
+    }
+
+    figcaption {
+      padding: 14px 16px 16px;
+    }
+
+    .name {
+      display: block;
+      color: var(--text);
+      font-size: 13px;
+      line-height: 1.45;
+      word-break: break-word;
+      margin-bottom: 8px;
+    }
+
+    .path {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+      word-break: break-word;
+    }
+
+    .index {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      background: rgba(77, 141, 255, 0.14);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div>
+      <h1>Signal Twin / Dasein Inspiration Branding</h1>
+      <p>
+        Galería auxiliar para revisar el set completo de referencias visuales y detectar patrones
+        de dirección de arte, composición, textura, tipografía, color y sistemas de layout.
+      </p>
+    </div>
+    <div class="meta">
+      <strong>Resumen</strong>
+      <span id="count"></span>
+    </div>
+  </header>
+
+  <main class="grid" id="grid"></main>
+
+  <script>
+    const basePath = "../SignalTwin/Info_base_DaseinForesight/Inspiration Branding/";
+    const files = [
+      "0081b2256d73945736c055fd63e7f4e4.jpg",
+      "08116148419fb4d375d57cafffdfe6f6.jpg",
+      "092ef81dcdd69a1f393e22f845d7092e.jpg",
+      "09ea1185dc60164dd66952c238242e02.jpg",
+      "0dc1292ad92c0400044da94f2284ee500c5c5ddd13818e69c77d328d88a89c5d.png",
+      "1252181202c82d1b1609c8bb372768b42707c483cb6843eedabcdf21c8ce29eb.png",
+      "15148d2e12e280a12b2526f497634f13.jpg",
+      "18a05c58cb492926f57b1815336a8caae3571ffd2be39c80d4147407f6f7958e.png",
+      "1a947426d6fb665d9a92e0ff83b3f85c.jpg",
+      "1cc512c7e840548719d51b6c7406b6d8.jpg",
+      "2026-03-26_18-22.png",
+      "2026-03-26_18-23.png",
+      "2026-03-26_18-23_1.png",
+      "2026-03-26_18-24.png",
+      "2026-03-26_18-24_1.png",
+      "2026-03-26_18-25.png",
+      "2026-03-26_18-29.png",
+      "2026-03-26_18-33.png",
+      "2026-03-26_19-21.png",
+      "2026-03-26_19-21_1.png",
+      "2026-03-26_19-21_2.png",
+      "2026-03-26_19-22.png",
+      "2026-03-26_19-22_1.png",
+      "2026-03-26_19-25.png",
+      "2026-03-26_19-26.png",
+      "2026-03-26_19-27.png",
+      "2026-03-26_19-27_1.png",
+      "294f7248985c51f672b87a93a5ac25e9.jpg",
+      "2aba75029fba57bc4af4cc11b05cefe9.jpg",
+      "2c93da98f46bef2224390a2a349cfe85.jpg",
+      "2dc098441474a0f8937bdd4465132d3b.jpg",
+      "3762dbf3fb2599484b52ad48c7a5f8dd.jpg",
+      "38ef87ada02401bd14af76ae76999119.jpg",
+      "3fc382764df6b0ab6950f8080e3e14fc.jpg",
+      "48c5fc90eefc9cc725b7ab2acb23b19a2cdc661bfb4af523bc411a2c6952ae95.png",
+      "4e1d8180263a86104f3bc3ef059b43903a442b6ac8df4bc2d939b51aa1a99926.png",
+      "4ec48e1bf68618c1204a0347cdbee42c.jpg",
+      "5cec3fe4f10de93dacddc41a3ccbe14d.jpg",
+      "6bf32bbb5a3fdc2373653dd5199c198c.jpg",
+      "6e13c47abe55242b4548f3383988ffb6d22dd46c4f96e1d1fbaa5edaa2349ab9.png",
+      "765aa671092c11712f91c1a0cfaea99be3b86ce930124ea0fd3833c1e8304818.png",
+      "7b933c62d31fe1c0f6c293da8c136f5df6d121e168667c03980b8c52e0d7d443.png",
+      "8d5b76f4f21956fc5f3bc8c4011771eb.jpg",
+      "933fd9c98c138e9c5128dd773245f3ae.jpg",
+      "961fcc6692350c6cf0af7dab33f7649b.jpg",
+      "a8031e88e5828e961311aea5fde72dc130fc393d0872051eea4eabce10572d58.png",
+      "b0a0e67cd47020c1e085486a41270deb.jpg",
+      "b49171aafcdc991f898257161b2f5b61.jpg",
+      "ba0593d6bef1f13300ccab98a06efa89.jpg",
+      "be7167b43e1e6cb3e554c6f012198b55.jpg",
+      "d6f14caca524d77cca68c52bba05a8c9.jpg",
+      "dbdedfa2192ad7dc290c68fe31041866.jpg",
+      "df78c8ea4e0ed617ddd61493e1e51170.jpg",
+      "e7620d5e09d729da19e1155070d13d7dc0d219808e4a423b849104666b3702e0.png",
+      "e867bccc42129d3cc643998510ce6dd0.jpg",
+      "e99289241d54649aabc47200264399e7.jpg",
+      "ee8f863086c1f57d1ecfa3ddc58f9f7b.jpg",
+      "f23661a3470cf310e8f730e64ba8c678.jpg",
+      "f36f16fdf8cf98e0ae9ed86470db099c.jpg",
+      "f43d9adde61c5775467e688b0d22751d.jpg",
+      "f58c0265efa881aadb1fe534c0289a8d1b795fe06a7cfaa42f32dce75994d92b.png",
+      "f8bab34e396de4d4fd30393ff6504761.jpg",
+      "fb4a6079772233c9880c6bb0543cade09d292e8066e190fc54dc0f2cf84bf520.png",
+      "fe5b4b4ab9a6416981158565f7e4b20af12615996a0f0d4269c38cc407b6acc2.png",
+      "videoframe_10845.png",
+    ];
+
+    const grid = document.getElementById("grid");
+    const count = document.getElementById("count");
+    count.textContent = `${files.length} referencias`;
+
+    files.forEach((file, index) => {
+      const card = document.createElement("figure");
+      card.className = "card";
+      card.innerHTML = `
+        <div class="frame">
+          <img src="${basePath}${file}" alt="${file}" />
+        </div>
+        <figcaption>
+          <span class="index">${String(index + 1).padStart(2, "0")}</span>
+          <strong class="name">${file}</strong>
+          <span class="path">${basePath}${file}</span>
+        </figcaption>
+      `;
+      grid.appendChild(card);
+    });
+  </script>
+</body>
+</html>

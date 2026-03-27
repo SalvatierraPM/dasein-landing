@@ -1,0 +1,107 @@
+---
+const deliverables = [
+  {
+    title: 'Dossier de escenarios',
+    body: 'La pieza central: senales, actores, escenarios plausibles, implicancias y recomendaciones en un formato que se puede discutir.',
+  },
+  {
+    title: 'Trail de evidencia',
+    body: 'Cada decision queda conectada a fuentes, supuestos y tensiones visibles. La auditabilidad no se agrega al final.',
+  },
+  {
+    title: 'Plan a 90 dias',
+    body: 'El trabajo termina con un mapa de accion: que monitorear, que preparar y que decisiones conviene secuenciar ahora.',
+  },
+];
+---
+
+<section class="deliverables-section" id="entregables">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div class="section-index">05 / Outputs</div>
+      <div>
+        <h2 class="section-title">La credibilidad entra por lo que se entrega, no por la promesa.</h2>
+        <p class="section-copy">
+          Dasein no termina en una lectura elegante. Termina en piezas que un equipo directivo puede
+          usar para discutir escenarios, monitorear senales y ordenar decisiones concretas.
+        </p>
+      </div>
+    </div>
+
+    <div class="deliverables-grid" data-reveal-stagger>
+      {deliverables.map((item) => (
+        <article class="deliverable-card panel">
+          <h3>{item.title}</h3>
+          <p>{item.body}</p>
+        </article>
+      ))}
+    </div>
+
+    <div class="deliverable-strip panel" data-reveal>
+      <div>
+        <small>Incluye</small>
+        <strong>Memo ejecutivo, mapa de actores, senales priorizadas y conversacion de cierre.</strong>
+      </div>
+      <p>
+        La idea no es producir volumen. Es producir una lectura con suficiente calidad para que el equipo
+        comparta lenguaje, vea los tradeoffs y evite decidir a ciegas.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .deliverables-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .deliverable-card,
+  .deliverable-strip {
+    padding: clamp(1.45rem, 2vw, 1.8rem);
+  }
+
+  .deliverable-card h3 {
+    margin-bottom: 0.8rem;
+    font-size: 1.08rem;
+    line-height: 1.15;
+  }
+
+  .deliverable-card p,
+  .deliverable-strip p {
+    color: var(--ink-soft);
+  }
+
+  .deliverable-strip {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .deliverable-strip small {
+    display: inline-block;
+    margin-bottom: 0.65rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-overline);
+    letter-spacing: var(--tracking-overline);
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .deliverable-strip strong {
+    display: block;
+    font-size: 1.12rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  @media (max-width: 900px) {
+    .deliverables-grid,
+    .deliverable-strip {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

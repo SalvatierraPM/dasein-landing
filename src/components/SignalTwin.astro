@@ -1,0 +1,147 @@
+---
+import ParticleScene from './ParticleScene.astro';
+
+const engineCards = [
+  {
+    label: 'Open signal world',
+    title: 'Reaccion publica, mercado y entorno expandido.',
+    body: 'Senales, opinion publica, presion mediatica y efectos reputacionales cuando una decision sale al mundo.',
+  },
+  {
+    label: 'Institutional world',
+    title: 'Reguladores, directorios, sindicatos y actores con veto.',
+    body: 'La capa donde importa la gobernanza, la secuencia politica y la forma en que cada actor interpreta el riesgo.',
+  },
+  {
+    label: 'Agent memory',
+    title: 'Agentes con postura, friccion y memoria.',
+    body: 'No reaccionan una vez y desaparecen. Acumulan trayectorias, negocian y cambian segun la informacion disponible.',
+  },
+  {
+    label: 'Audit trail',
+    title: 'Cada escenario deja una logica revisable.',
+    body: 'No se entrega una intuicion elegante; se entrega una estructura argumental para discutir de donde sale cada recomendacion.',
+  },
+];
+---
+
+<section class="signaltwin-section section-dark" id="signaltwin">
+  <ParticleScene />
+
+  <div class="container signaltwin-grid">
+    <div class="signaltwin-copy" data-reveal>
+      <p class="eyebrow">04 / SignalTwin theater</p>
+      <h2 class="signaltwin-title">La capa oscura no vende software. Expone el cuarto de maquinas.</h2>
+      <p class="signaltwin-body">
+        SignalTwin es la pieza que convierte una lectura compleja en simulacion legible. Modela actores,
+        separa mundos de reaccion, conserva memoria y permite discutir escenarios como estructuras, no como opinion.
+      </p>
+      <div class="pill-list">
+        <span>Agentes situados</span>
+        <span>Dos mundos</span>
+        <span>Memoria</span>
+        <span>Trazabilidad</span>
+      </div>
+    </div>
+
+    <div class="engine-grid" data-reveal-stagger>
+      {engineCards.map((card) => (
+        <article class="engine-card panel-dark">
+          <small>{card.label}</small>
+          <h3>{card.title}</h3>
+          <p>{card.body}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .signaltwin-section {
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .signaltwin-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at top right, rgba(72, 101, 255, 0.2), transparent 24%),
+      radial-gradient(circle at bottom left, rgba(122, 104, 214, 0.18), transparent 28%);
+    z-index: 0;
+  }
+
+  .signaltwin-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .signaltwin-copy {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+  }
+
+  .signaltwin-title {
+    max-width: 12ch;
+    font-family: var(--font-display);
+    font-size: var(--text-h1);
+    line-height: 0.98;
+    letter-spacing: var(--tracking-display);
+    font-weight: 600;
+  }
+
+  .signaltwin-body {
+    max-width: 34rem;
+    color: rgba(243, 245, 248, 0.78);
+  }
+
+  .signaltwin-copy .pill-list span {
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(243, 245, 248, 0.76);
+  }
+
+  .engine-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .engine-card {
+    display: grid;
+    gap: 0.8rem;
+    min-height: 100%;
+    padding: clamp(1.35rem, 2vw, 1.7rem);
+  }
+
+  .engine-card small {
+    font-family: var(--font-mono);
+    font-size: var(--text-overline);
+    letter-spacing: var(--tracking-overline);
+    text-transform: uppercase;
+    color: rgba(243, 245, 248, 0.5);
+  }
+
+  .engine-card h3 {
+    font-size: 1.1rem;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .engine-card p {
+    color: rgba(243, 245, 248, 0.72);
+    font-size: 0.96rem;
+  }
+
+  @media (max-width: 960px) {
+    .signaltwin-grid,
+    .engine-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entangled - Test Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            background: #0a0a0f;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .info {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .launch-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        button {
+            background: rgba(100, 100, 150, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: rgba(150, 150, 200, 0.4);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .features {
+            background: rgba(20, 20, 30, 0.6);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .features h2 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: rgba(100, 200, 255, 0.9);
+        }
+
+        .features ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .features li {
+            padding: 8px 0;
+            font-size: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .features li:last-child {
+            border-bottom: none;
+        }
+
+        .features li::before {
+            content: '→ ';
+            color: rgba(100, 200, 255, 0.6);
+            margin-right: 8px;
+        }
+
+        code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 11px;
+            color: rgba(255, 200, 100, 0.9);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Entangled - Quantum Particle Visualization</h1>
+        <div class="info">
+            Recreation of Bjørn Staal's generative art piece exploring quantum entanglement through synchronized particle systems.
+            <br>Original: <a href="https://www.nonfigurativ.com/projects/entangled" style="color: rgba(100, 200, 255, 0.9);">nonfigurativ.com/projects/entangled</a>
+        </div>
+
+        <div class="launch-buttons">
+            <button onclick="window.open('entangled-threejs.html', '_blank', 'width=800,height=800')" style="background: rgba(100, 200, 100, 0.3); border-color: rgba(100, 255, 100, 0.4);">
+                Launch Three.js Version (RECOMMENDED - 50K particles)
+            </button>
+            <button onclick="window.open('index.html', '_blank', 'width=800,height=800')">
+                Launch WebGL2 Version (Educational - 12K particles)
+            </button>
+        </div>
+
+        <div class="features">
+            <h2>Physics System</h2>
+            <ul>
+                <li><strong>Spring-Mass Network:</strong> Each particle tethered to home position with LFO-modulated springs</li>
+                <li><strong>Curl Noise Fields:</strong> 3D organic flow for wave-like motion</li>
+                <li><strong>LFO Modulation:</strong> Breathing rhythm at ~2.5 second cycles (heartbeat-like)</li>
+                <li><strong>Stochastic Coupling:</strong> 10% probability impulses for entanglement synchronization</li>
+                <li><strong>Particle Count:</strong> 12,000 particles in Fibonacci sphere distribution</li>
+            </ul>
+        </div>
+
+        <div class="features">
+            <h2>Visual Effects</h2>
+            <ul>
+                <li><strong>Intrinsic Glow:</strong> Exponential falloff <code>exp(-12 * d²)</code> in shader (no post-processing)</li>
+                <li><strong>Energy Colors:</strong> Cyan (#00faff) when stable → Gold (#ffb873) when energized</li>
+                <li><strong>Depth Fog:</strong> Subtle violet atmospheric tinting</li>
+                <li><strong>Additive Blending:</strong> Particles blend with <code>GL_SRC_ALPHA, GL_ONE</code></li>
+            </ul>
+        </div>
+
+        <div class="features">
+            <h2>Interaction Controls</h2>
+            <ul>
+                <li><strong>Mouse Drag:</strong> Rotate the particle cloud view</li>
+                <li><strong>Mouse Hover:</strong> Inject turbulent energy (creates warm color bursts)</li>
+                <li><strong>Scroll Wheel:</strong> Adjust camera distance (zoom in/out)</li>
+                <li><strong>Pairing:</strong> Opens synchronized partner window with asymmetric coupling</li>
+            </ul>
+        </div>
+
+        <div class="features">
+            <h2>Technical Implementation</h2>
+            <ul>
+                <li><strong>WebGL 2.0:</strong> Hardware-accelerated GPU rendering</li>
+                <li><strong>GLSL Shaders:</strong> Custom vertex/fragment shaders with noise functions</li>
+                <li><strong>Zero Dependencies:</strong> Pure JavaScript and WebGL</li>
+                <li><strong>Performance:</strong> 60 FPS target with 12K particles</li>
+            </ul>
+        </div>
+
+        <div class="info" style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+            <strong>Note:</strong> For best experience, open the main window and then the paired window side-by-side.
+            The paired window will show synchronized particle motion with phase-shifted coupling, demonstrating the
+            "quantum entanglement" effect where changes in one system influence the other non-linearly.
+        </div>
+    </div>
+
+    <script>
+        let mainWindow = null;
+        let pairWindow = null;
+
+        function openPair() {
+            if (!mainWindow || mainWindow.closed) {
+                alert('Please launch the main window first!');
+                return;
+            }
+
+            const width = 800;
+            const height = 800;
+            const left = window.screenX + 850;
+            const top = window.screenY;
+
+            pairWindow = window.open(
+                'pair.html',
+                'entangled-pair',
+                `width=${width},height=${height},left=${left},top=${top}`
+            );
+        }
+
+        // Track main window
+        const buttons = document.querySelectorAll('button');
+        buttons[0].addEventListener('click', () => {
+            setTimeout(() => {
+                const width = 800;
+                const height = 800;
+                const left = window.screenX;
+                const top = window.screenY;
+
+                mainWindow = window.open(
+                    'index.html',
+                    'entangled-main',
+                    `width=${width},height=${height},left=${left},top=${top}`
+                );
+            }, 0);
+        });
+    </script>
+</body>
+</html>

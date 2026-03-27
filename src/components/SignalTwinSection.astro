@@ -1,0 +1,189 @@
+---
+import ParticleScene from './ParticleScene.astro';
+
+const lanes = [
+  {
+    label: 'Open signal world',
+    text: 'La esfera donde reaccion publica, medios, competidores y ruido de mercado cambian rapido la temperatura del caso.',
+  },
+  {
+    label: 'Institutional world',
+    text: 'La capa donde regulacion, gobernanza, directorio y procesos internos ralentizan o redirigen el movimiento.',
+  },
+  {
+    label: 'Evidence trail',
+    text: 'Cada escenario necesita una cadena argumental visible: fuentes, supuestos, relaciones y thresholds.',
+  },
+];
+
+const chamberCards = [
+  {
+    title: 'Agentes con memoria',
+    body: 'No solo reaccionan; recuerdan, cargan contexto y alteran rondas futuras.',
+  },
+  {
+    title: 'Rondas comparables',
+    body: 'Cada corrida devuelve una estructura legible para contrastar escenarios y no perderse en anecdotas.',
+  },
+  {
+    title: 'Scenario delta',
+    body: 'La diferencia entre mundos importa tanto como el escenario dominante.',
+  },
+  {
+    title: 'Auditabilidad',
+    body: 'El valor no esta en impresionar. Esta en poder reconstruir por que la simulacion sugiere una accion.',
+  },
+];
+---
+
+<section class="signal section" id="signaltwin">
+  <ParticleScene />
+
+  <div class="container-wide signal-shell">
+    <div class="section-heading signal-heading" data-reveal>
+      <div class="eyebrow signal-eyebrow">SignalTwin theater</div>
+      <div>
+        <h2 class="section-title">La camara oscura donde las tensiones se vuelven visibles.</h2>
+        <p class="section-copy">
+          Cuando entra SignalTwin, la pregunta deja de ser que podria pasar en abstracto y
+          pasa a ser que ocurre cuando actores con incentivos reales interactuan en mundos paralelos.
+        </p>
+      </div>
+    </div>
+
+    <div class="signal-grid">
+      <div class="signal-story" data-reveal-stagger>
+        {lanes.map((lane) => (
+          <article class="signal-lane surface-card-dark">
+            <small>{lane.label}</small>
+            <p>{lane.text}</p>
+          </article>
+        ))}
+      </div>
+
+      <article class="signal-panel surface-card-dark" data-reveal>
+        <small>Dual-world engine</small>
+        <h3>Lo que cambia cuando la simulacion tiene memoria y friccion.</h3>
+        <p>
+          El bloque oscuro no vende un software. Explica el motor intelectual que permite
+          pasar de senales dispersas a escenarios comparables y decisiones mejor fundadas.
+        </p>
+
+        <div class="signal-cards">
+          {chamberCards.map((card) => (
+            <div class="signal-card">
+              <strong>{card.title}</strong>
+              <span>{card.body}</span>
+            </div>
+          ))}
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .signal {
+    overflow: hidden;
+    color: var(--slate-white);
+    background: var(--gradient-chamber);
+  }
+
+  .signal::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background:
+      linear-gradient(90deg, rgba(10, 22, 40, 0.92), rgba(10, 22, 40, 0.42)),
+      linear-gradient(180deg, rgba(8, 17, 31, 0.15), rgba(8, 17, 31, 0.65));
+  }
+
+  .signal-shell {
+    position: relative;
+    z-index: 1;
+  }
+
+  .signal-heading :global(.section-copy),
+  .signal-heading :global(.section-title) {
+    color: var(--slate-white);
+  }
+
+  .signal-eyebrow {
+    color: rgba(247, 243, 236, 0.62);
+  }
+
+  .signal-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .signal-story {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .signal-lane,
+  .signal-panel {
+    position: relative;
+    overflow: hidden;
+    padding: 1.45rem;
+    background: rgba(10, 22, 40, 0.58);
+  }
+
+  .signal-lane small,
+  .signal-panel small {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(247, 243, 236, 0.58);
+  }
+
+  .signal-lane p,
+  .signal-panel p {
+    margin: 0.7rem 0 0;
+    color: rgba(247, 243, 236, 0.76);
+  }
+
+  .signal-panel h3 {
+    margin: 0.9rem 0 0;
+    font-size: clamp(1.6rem, 1.2rem + 1.1vw, 2.2rem);
+    line-height: 1.04;
+    letter-spacing: -0.04em;
+    max-width: 12ch;
+  }
+
+  .signal-cards {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+  }
+
+  .signal-card {
+    display: grid;
+    gap: 0.4rem;
+    padding: 1rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .signal-card strong {
+    font-size: 1rem;
+    letter-spacing: -0.03em;
+  }
+
+  .signal-card span {
+    color: rgba(247, 243, 236, 0.7);
+    font-size: var(--text-sm);
+  }
+
+  @media (min-width: 980px) {
+    .signal-grid {
+      grid-template-columns: minmax(0, 0.95fr) minmax(340px, 1.05fr);
+      align-items: start;
+    }
+  }
+</style>

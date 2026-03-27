@@ -1,0 +1,119 @@
+<section class="founder section" id="sobre">
+  <div class="container-wide">
+    <div class="section-heading" data-reveal>
+      <div class="eyebrow">Founder proof</div>
+      <div>
+        <h2 class="section-title">Dasein nace de implementar IA donde el error tiene costo real.</h2>
+      </div>
+    </div>
+
+    <div class="founder-grid">
+      <article class="founder-copy surface-card" data-reveal>
+        <p>
+          Soy Pablo Moraga. Trabajo en la interseccion entre inteligencia artificial, sistemas
+          y toma de decisiones. No vengo del mundo tradicional de la consultoria; vengo de
+          implementar agentes de IA en entornos reales, donde un error impacta operaciones,
+          ventas y clientes.
+        </p>
+        <p>
+          Ese contexto me obligo a pensar la tecnologia como un sistema vivo, no como una promesa.
+          Dasein Foresight nace desde ahi: una forma de leer actores, incentivos, fricciones y
+          horizontes para decidir mejor bajo incertidumbre.
+        </p>
+
+        <div class="link-cluster">
+          <a class="link-chip" href="https://github.com/SalvatierraPM" target="_blank" rel="noreferrer">GitHub</a>
+          <a class="link-chip" href="https://substack.com/@pavlogalgo" target="_blank" rel="noreferrer">Substack</a>
+        </div>
+      </article>
+
+      <div class="founder-side" data-reveal-stagger>
+        <article class="founder-card surface-card-soft">
+          <small>Implementacion real de IA</small>
+          <p>Agentes y sistemas desplegados donde el error pega en la operacion, no en una demo.</p>
+        </article>
+
+        <article class="founder-card surface-card-soft">
+          <small>Modelamiento de sistemas complejos</small>
+          <p>Actores, incentivos, fricciones y dependencias convertidos en estructura legible.</p>
+        </article>
+
+        <article class="founder-card surface-card-soft">
+          <small>Decision bajo incertidumbre</small>
+          <p>IA como herramienta de exploracion y contraste, nunca como reemplazo del criterio.</p>
+        </article>
+
+        <article class="founder-contrast surface-card">
+          <small>Entre dos extremos</small>
+          <h3>Ni foresight bonito pero inutil, ni analisis tecnico ciego al contexto humano.</h3>
+          <p>
+            El trabajo esta justo al medio: traducir tendencias en decisiones accionables,
+            simular escenarios con logica operativa y mantener trazabilidad sobre lo que sostiene cada lectura.
+          </p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .founder-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .founder-copy,
+  .founder-card,
+  .founder-contrast {
+    padding: 1.45rem;
+  }
+
+  .founder-copy p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: clamp(1.02rem, 0.96rem + 0.22vw, 1.16rem);
+  }
+
+  .founder-copy p + p {
+    margin-top: 1rem;
+  }
+
+  .founder-copy .link-cluster {
+    margin-top: 1.4rem;
+  }
+
+  .founder-side {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .founder-card small,
+  .founder-contrast small {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .founder-card p,
+  .founder-contrast p {
+    margin: 0.7rem 0 0;
+    color: var(--ink-soft);
+  }
+
+  .founder-contrast h3 {
+    margin: 0.8rem 0 0;
+    font-size: clamp(1.34rem, 1.1rem + 0.7vw, 1.95rem);
+    line-height: 1.08;
+    letter-spacing: -0.04em;
+  }
+
+  @media (min-width: 980px) {
+    .founder-grid {
+      grid-template-columns: minmax(0, 1.06fr) minmax(320px, 0.94fr);
+      align-items: start;
+    }
+  }
+</style>

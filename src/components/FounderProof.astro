@@ -1,0 +1,191 @@
+---
+const proofCells = [
+  {
+    title: 'Implementacion real de IA',
+    body: 'No desde la promesa, sino desde entornos donde una mala decision pega en operaciones, ventas y clientes.',
+  },
+  {
+    title: 'Modelamiento de sistemas complejos',
+    body: 'Actores, incentivos, fricciones, relaciones y restricciones antes de cualquier recomendacion.',
+  },
+  {
+    title: 'Decision bajo incertidumbre',
+    body: 'Estructuras para decidir mejor cuando no hay certezas y lo que se juega es relevante.',
+  },
+];
+---
+
+<section class="founder-section" id="sobre">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div class="section-index">03 / Founder proof</div>
+      <div>
+        <h2 class="section-title">Dasein nace de implementar IA donde el error tiene costo real.</h2>
+        <p class="section-copy">
+          Esta seccion no funciona como biografia. Funciona como prueba de origen: por que existe este
+          enfoque, desde que experiencia aparece y por que su criterio no viene de la consultoria ornamental.
+        </p>
+      </div>
+    </div>
+
+    <div class="founder-grid">
+      <aside class="founder-card panel" data-reveal>
+        <span class="founder-role">Pablo Moraga</span>
+        <strong>Founder / Dasein Foresight</strong>
+        <p>
+          Trabajo en la interseccion entre inteligencia artificial, sistemas y toma de decisiones.
+        </p>
+        <div class="founder-links">
+          <a href="https://github.com/SalvatierraPM" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="https://substack.com/@pavlogalgo" target="_blank" rel="noreferrer">Substack</a>
+        </div>
+      </aside>
+
+      <div class="founder-story" data-reveal>
+        <p>
+          Soy Pablo Moraga. No vengo del mundo tradicional de la consultoria. Vengo de implementar
+          agentes de IA en entornos reales, donde los errores no son teoricos y las decisiones cambian
+          operaciones, ventas y clientes.
+        </p>
+        <p>
+          Ese contexto me obligo a pensar la tecnologia como un sistema vivo: actores, incentivos,
+          fricciones, restricciones y efectos de segundo orden antes de cualquier promesa.
+        </p>
+        <p>
+          Dasein Foresight nace desde ahi. No como un ejercicio academico de futuros posibles,
+          sino como una herramienta para tomar mejores decisiones hoy cuando la incertidumbre ya
+          afecta el negocio, la institucion o el proyecto.
+        </p>
+      </div>
+    </div>
+
+    <div class="proof-grid" data-reveal-stagger>
+      {proofCells.map((cell) => (
+        <article class="proof-card panel">
+          <h3>{cell.title}</h3>
+          <p>{cell.body}</p>
+        </article>
+      ))}
+    </div>
+
+    <div class="difference-grid">
+      <article class="difference-card panel" data-reveal>
+        <small>Que me diferencia</small>
+        <h3>La mayoria del foresight cae en dos extremos.</h3>
+        <p>
+          Demasiado abstracto para ser util, o demasiado tecnico para ver el contexto humano.
+          El enfoque de Dasein trabaja al medio: traduce tendencias en decisiones accionables,
+          simula escenarios con logica operativa y usa IA como herramienta de exploracion, no
+          como reemplazo del criterio.
+        </p>
+      </article>
+      <article class="difference-card panel" data-reveal>
+        <small>Por que importa</small>
+        <h3>Implementar tecnologia sin lectura sistemica ya es una apuesta riesgosa.</h3>
+        <p>
+          Dasein existe para reducir ese riesgo. No promete control absoluto; construye estructuras
+          que permiten decidir mejor bajo incertidumbre.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .founder-grid {
+    display: grid;
+    grid-template-columns: minmax(240px, 300px) minmax(0, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .founder-card,
+  .founder-story,
+  .proof-card,
+  .difference-card {
+    padding: clamp(1.4rem, 2vw, 1.8rem);
+  }
+
+  .founder-card {
+    display: grid;
+    gap: 0.7rem;
+    align-content: start;
+  }
+
+  .founder-role {
+    font-family: var(--font-mono);
+    font-size: var(--text-overline);
+    letter-spacing: var(--tracking-overline);
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .founder-card strong,
+  .founder-story p:first-child,
+  .difference-card h3,
+  .proof-card h3 {
+    color: var(--ink);
+  }
+
+  .founder-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    padding-top: 0.5rem;
+  }
+
+  .founder-links a {
+    color: var(--ink-soft);
+    border-bottom: 1px solid rgba(17, 17, 17, 0.16);
+  }
+
+  .founder-story {
+    display: grid;
+    gap: 1rem;
+    font-size: 1.04rem;
+    color: var(--ink-soft);
+  }
+
+  .proof-grid,
+  .difference-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .difference-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .proof-card h3,
+  .difference-card h3 {
+    margin-bottom: 0.7rem;
+    font-size: 1.05rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  .proof-card p,
+  .difference-card p {
+    color: var(--ink-soft);
+  }
+
+  .difference-card small {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-overline);
+    letter-spacing: var(--tracking-overline);
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  @media (max-width: 900px) {
+    .founder-grid,
+    .proof-grid,
+    .difference-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

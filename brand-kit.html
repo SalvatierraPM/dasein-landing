@@ -1,0 +1,2105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dasein - Brand Kit Editorial Lab</title>
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --paper: #f5efe5;
+      --paper-soft: #fbf7f1;
+      --bone: #e7ddd0;
+      --mist: #dce6f5;
+      --metal: #c6cbd4;
+      --ink: #111111;
+      --ink-soft: #4e4a43;
+      --ink-faint: #8f877a;
+      --navy: #0a1628;
+      --navy-soft: #132238;
+      --blue: #4865ff;
+      --blue-soft: rgba(72, 101, 255, 0.14);
+      --red: #ff5c38;
+      --red-soft: rgba(255, 92, 56, 0.14);
+      --lavender: #d9d4ff;
+      --line: rgba(17, 17, 17, 0.1);
+      --line-light: rgba(255, 255, 255, 0.12);
+      --shadow-xl: 0 32px 90px rgba(15, 18, 24, 0.14);
+      --shadow-md: 0 18px 48px rgba(15, 18, 24, 0.08);
+      --radius-xl: 34px;
+      --radius-lg: 26px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      --max: 1320px;
+      --font-display: "Switzer", "Helvetica Neue", Arial, sans-serif;
+      --font-sans: "Switzer", "Helvetica Neue", Arial, sans-serif;
+      --font-editorial: "Instrument Serif", Georgia, serif;
+      --font-mono: "Azeret Mono", "JetBrains Mono", monospace;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      color-scheme: light;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(220, 230, 245, 0.8), transparent 28%),
+        radial-gradient(circle at top right, rgba(255, 92, 56, 0.08), transparent 20%),
+        linear-gradient(180deg, #f8f4ed 0%, var(--paper) 50%, #f6f0e6 100%);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page-shell {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-shell::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.32;
+      background-image:
+        linear-gradient(rgba(17, 17, 17, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(17, 17, 17, 0.045) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), transparent 82%);
+    }
+
+    .wrap {
+      width: min(var(--max), calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(18px);
+      background: rgba(248, 244, 237, 0.82);
+      border-bottom: 1px solid rgba(17, 17, 17, 0.08);
+    }
+
+    .site-nav .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 18px 0;
+    }
+
+    .brand-lockup {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .brand-lockup strong {
+      font-size: 0.92rem;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-lockup span {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--ink-faint);
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 20px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      transition: color 180ms var(--ease);
+    }
+
+    .nav-links a:hover {
+      color: var(--ink);
+    }
+
+    section {
+      padding: 84px 0;
+      position: relative;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 28px;
+      align-items: start;
+      margin-bottom: 38px;
+    }
+
+    .section-index {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+
+    .section-title {
+      margin: 0 0 14px;
+      font-family: var(--font-display);
+      font-size: clamp(2.3rem, 4vw, 4.8rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      font-weight: 500;
+    }
+
+    .section-copy {
+      max-width: 760px;
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 1.02rem;
+      line-height: 1.75;
+    }
+
+    .hero {
+      padding-top: 54px;
+      padding-bottom: 108px;
+    }
+
+    .hero-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(340px, 0.9fr);
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .hero-copy,
+    .hero-aside {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: rgba(251, 247, 241, 0.82);
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-copy {
+      padding: 34px 34px 40px;
+    }
+
+    .hero-copy::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top right, rgba(72, 101, 255, 0.12), transparent 34%),
+        radial-gradient(circle at 20% 25%, rgba(255, 92, 56, 0.08), transparent 20%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 42px;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .hero h1 {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: clamp(4.3rem, 8vw, 8.4rem);
+      line-height: 0.9;
+      letter-spacing: -0.06em;
+      font-weight: 500;
+      max-width: 11ch;
+    }
+
+    .hero h1 .accent {
+      color: var(--red);
+    }
+
+    .hero-lead {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      margin: 28px 0 0;
+      font-size: 1.06rem;
+      line-height: 1.8;
+      color: var(--ink-soft);
+    }
+
+    .hero-meta {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .hero-meta div {
+      padding: 14px 16px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.45);
+    }
+
+    .hero-meta strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--ink-faint);
+    }
+
+    .hero-meta span {
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .hero-aside {
+      padding: 24px;
+      background:
+        linear-gradient(180deg, rgba(220, 230, 245, 0.72), rgba(251, 247, 241, 0.84)),
+        var(--paper-soft);
+    }
+
+    .hero-aside .stamp {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 82px;
+      height: 82px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      font-family: var(--font-mono);
+      font-size: 0.84rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 28px;
+      background: rgba(255, 255, 255, 0.48);
+    }
+
+    .hero-aside h2 {
+      margin: 0 0 14px;
+      font-size: 1.75rem;
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-aside p {
+      margin: 0;
+      color: var(--ink-soft);
+      line-height: 1.7;
+    }
+
+    .hero-checks {
+      display: grid;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .hero-checks div {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+    }
+
+    .hero-checks strong {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--red);
+    }
+
+    .hero-checks span {
+      color: var(--ink-soft);
+      line-height: 1.65;
+      font-size: 0.96rem;
+    }
+
+    .quote-band {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 24px;
+      align-items: start;
+      padding: 28px 34px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: rgba(255, 255, 255, 0.42);
+      box-shadow: var(--shadow-md);
+    }
+
+    .quote-band .kicker {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+
+    .quote-band p {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: clamp(1.9rem, 3vw, 3.2rem);
+      line-height: 1.05;
+      letter-spacing: -0.05em;
+      max-width: 16ch;
+    }
+
+    .quote-band em {
+      color: var(--blue);
+      font-family: var(--font-editorial);
+      font-style: italic;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .story-card,
+    .list-card,
+    .reference-card,
+    .service-card,
+    .persona-cell {
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.5);
+      box-shadow: var(--shadow-md);
+    }
+
+    .story-card.wide {
+      grid-column: span 2;
+    }
+
+    .story-card small,
+    .list-card small,
+    .reference-card small,
+    .service-card small,
+    .manifesto-block small {
+      display: inline-block;
+      margin-bottom: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+
+    .story-card h3,
+    .list-card h3,
+    .reference-card h3,
+    .service-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.24rem;
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+    }
+
+    .story-card p,
+    .list-card p,
+    .reference-card p,
+    .service-card p,
+    .manifesto-block p {
+      margin: 0;
+      color: var(--ink-soft);
+      line-height: 1.72;
+      font-size: 0.96rem;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .pill-list span {
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(17, 17, 17, 0.05);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .split-grid,
+    .voice-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .list-card ul,
+    .persona-cell ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--ink-soft);
+      line-height: 1.8;
+      font-size: 0.95rem;
+    }
+
+    .matrix {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .matrix-row {
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+    }
+
+    .matrix-row strong {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--red);
+    }
+
+    .matrix-row span {
+      color: var(--ink-soft);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    .persona-table {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .persona-cell strong {
+      display: block;
+      margin-bottom: 12px;
+      font-size: 0.86rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .manifesto-block {
+      margin-top: 18px;
+      padding: 26px 28px;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(circle at top right, rgba(72, 101, 255, 0.12), transparent 28%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.64), rgba(255, 255, 255, 0.42));
+      box-shadow: var(--shadow-md);
+    }
+
+    .manifesto-block p {
+      max-width: 34ch;
+      font-size: clamp(1.35rem, 2vw, 2rem);
+      line-height: 1.14;
+      letter-spacing: -0.04em;
+    }
+
+    .manifesto-block em {
+      font-family: var(--font-editorial);
+      color: var(--red);
+      font-style: italic;
+    }
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .gallery-card {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.56);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-md);
+    }
+
+    .gallery-card img {
+      width: 100%;
+      aspect-ratio: 0.95;
+      object-fit: cover;
+      background: var(--bone);
+    }
+
+    .gallery-card figcaption {
+      padding: 16px 16px 18px;
+    }
+
+    .gallery-card strong {
+      display: block;
+      font-size: 0.94rem;
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+    }
+
+    .gallery-card p {
+      margin: 0;
+      color: var(--ink-soft);
+      line-height: 1.6;
+      font-size: 0.9rem;
+    }
+
+    .gallery-card .ref {
+      display: inline-block;
+      margin-top: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.67rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+
+    .rank-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .rank-row {
+      display: grid;
+      grid-template-columns: 90px minmax(0, 1fr) minmax(260px, 340px);
+      gap: 18px;
+      align-items: start;
+      padding: 22px 24px;
+      background: rgba(255, 255, 255, 0.48);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+    }
+
+    .rank-row .rank {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      line-height: 0.85;
+      letter-spacing: -0.08em;
+    }
+
+    .rank-row h3 {
+      margin: 0 0 8px;
+      font-size: 1.25rem;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+
+    .rank-row p,
+    .rank-row ul {
+      margin: 0;
+      color: var(--ink-soft);
+      line-height: 1.7;
+      font-size: 0.96rem;
+    }
+
+    .rank-row ul {
+      padding-left: 16px;
+    }
+
+    .rank-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .rank-tags span {
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(17, 17, 17, 0.05);
+      color: var(--ink-soft);
+    }
+
+    .kit-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+    }
+
+    .panel {
+      padding: 26px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.48);
+      box-shadow: var(--shadow-md);
+    }
+
+    .panel h3 {
+      margin: 0 0 14px;
+      font-size: 1.3rem;
+      letter-spacing: -0.03em;
+    }
+
+    .panel p {
+      margin: 0;
+      color: var(--ink-soft);
+      line-height: 1.75;
+    }
+
+    .palette {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .swatch {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.52);
+    }
+
+    .swatch .tone {
+      height: 92px;
+    }
+
+    .swatch .meta {
+      padding: 12px;
+    }
+
+    .swatch strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.86rem;
+    }
+
+    .swatch span {
+      display: block;
+      color: var(--ink-faint);
+      font-family: var(--font-mono);
+      font-size: 0.67rem;
+      letter-spacing: 0.08em;
+      line-height: 1.5;
+    }
+
+    .type-specimen {
+      display: grid;
+      gap: 18px;
+    }
+
+    .type-card {
+      padding: 22px 24px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.46);
+    }
+
+    .type-card small {
+      display: inline-block;
+      margin-bottom: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.67rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+
+    .display-line {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4vw, 4.5rem);
+      line-height: 0.94;
+      letter-spacing: -0.06em;
+      max-width: 11ch;
+    }
+
+    .sans-line {
+      font-size: clamp(1.28rem, 2vw, 1.9rem);
+      line-height: 1.18;
+      letter-spacing: -0.03em;
+      max-width: 20ch;
+    }
+
+    .mono-line {
+      font-family: var(--font-mono);
+      font-size: 0.86rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      line-height: 1.7;
+    }
+
+    .dual-mode {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .mode-card {
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      min-height: 260px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mode-card.light {
+      background:
+        radial-gradient(circle at top right, rgba(72, 101, 255, 0.16), transparent 26%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.66), rgba(255, 255, 255, 0.34));
+      border: 1px solid var(--line);
+    }
+
+    .mode-card.dark {
+      background:
+        radial-gradient(circle at center, rgba(255, 255, 255, 0.09), transparent 32%),
+        linear-gradient(180deg, #101318, #0a1628 72%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #f4f0e8;
+    }
+
+    .mode-card h4 {
+      margin: 0 0 8px;
+      font-size: 1.22rem;
+      letter-spacing: -0.03em;
+    }
+
+    .mode-card p {
+      margin: 0;
+      line-height: 1.72;
+      color: inherit;
+      opacity: 0.82;
+    }
+
+    .mode-card .dots {
+      position: absolute;
+      right: -24px;
+      bottom: -18px;
+      width: 220px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, rgba(255, 255, 255, 0.65) 1px, transparent 1.9px);
+      background-size: 12px 12px;
+      opacity: 0.36;
+      transform: rotate(18deg);
+      mask-image: radial-gradient(circle at center, black 56%, transparent 78%);
+    }
+
+    .artifact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .artifact-card {
+      padding: 22px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.48);
+      box-shadow: var(--shadow-md);
+    }
+
+    .artifact-card strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .artifact-card p {
+      margin: 0;
+      color: var(--ink-soft);
+      line-height: 1.72;
+      font-size: 0.95rem;
+    }
+
+    .service-grid,
+    .reference-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .reference-links {
+      display: grid;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .reference-links a {
+      width: fit-content;
+      font-size: 0.84rem;
+      color: var(--ink-soft);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.22em;
+    }
+
+    .reference-links a:hover {
+      color: var(--ink);
+    }
+
+    .typography-note {
+      margin-top: 18px;
+      padding: 20px 22px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.44);
+      box-shadow: var(--shadow-md);
+    }
+
+    .typography-note strong {
+      display: block;
+      margin-bottom: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+
+    .typography-note p {
+      margin: 0;
+      color: var(--ink-soft);
+      line-height: 1.75;
+    }
+
+    .component-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .component-row {
+      display: grid;
+      grid-template-columns: 140px minmax(0, 220px) 1fr;
+      gap: 18px;
+      padding: 18px 20px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.48);
+    }
+
+    .component-row .status {
+      display: inline-flex;
+      width: fit-content;
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .status.keep {
+      color: var(--blue);
+      background: var(--blue-soft);
+    }
+
+    .status.adapt {
+      color: var(--red);
+      background: var(--red-soft);
+    }
+
+    .status.drop {
+      color: var(--ink-soft);
+      background: rgba(17, 17, 17, 0.06);
+    }
+
+    .component-row h4 {
+      margin: 0;
+      font-size: 1rem;
+      letter-spacing: -0.03em;
+    }
+
+    .component-row p {
+      margin: 0;
+      color: var(--ink-soft);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    .blueprint {
+      display: grid;
+      gap: 12px;
+    }
+
+    .blueprint-step {
+      display: grid;
+      grid-template-columns: 82px 1fr 260px;
+      gap: 18px;
+      align-items: start;
+      padding: 20px 22px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.46);
+      box-shadow: var(--shadow-md);
+    }
+
+    .blueprint-step .num {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      letter-spacing: -0.08em;
+      line-height: 0.9;
+    }
+
+    .blueprint-step h4 {
+      margin: 0 0 7px;
+      font-size: 1.08rem;
+      letter-spacing: -0.03em;
+    }
+
+    .blueprint-step p,
+    .blueprint-step span {
+      margin: 0;
+      color: var(--ink-soft);
+      line-height: 1.72;
+      font-size: 0.95rem;
+    }
+
+    .blueprint-step span {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .audience-card {
+      padding: 22px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.48);
+      box-shadow: var(--shadow-md);
+      min-height: 220px;
+    }
+
+    .audience-card strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 1rem;
+      letter-spacing: -0.03em;
+    }
+
+    .audience-card p {
+      margin: 0;
+      color: var(--ink-soft);
+      line-height: 1.72;
+      font-size: 0.94rem;
+    }
+
+    .notes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .note-box {
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-md);
+      background: rgba(255, 255, 255, 0.46);
+    }
+
+    .note-box strong {
+      display: block;
+      margin-bottom: 12px;
+      font-size: 0.88rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .note-box ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--ink-soft);
+      line-height: 1.8;
+    }
+
+    .footer-band {
+      margin-top: 24px;
+      padding: 28px 30px;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(135deg, rgba(17, 17, 17, 0.96), rgba(10, 22, 40, 0.96));
+      color: #f4f0e8;
+      box-shadow: 0 28px 64px rgba(15, 18, 24, 0.24);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .footer-band::after {
+      content: "";
+      position: absolute;
+      inset: auto -40px -60px auto;
+      width: 280px;
+      aspect-ratio: 1;
+      background:
+        radial-gradient(circle, rgba(255, 255, 255, 0.8) 1px, transparent 1.8px);
+      background-size: 12px 12px;
+      opacity: 0.16;
+      mask-image: radial-gradient(circle at center, black 54%, transparent 78%);
+      transform: rotate(14deg);
+    }
+
+    .footer-band strong {
+      display: inline-block;
+      margin-bottom: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(244, 240, 232, 0.72);
+    }
+
+    .footer-band p {
+      position: relative;
+      z-index: 1;
+      max-width: 980px;
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.6vw, 4rem);
+      line-height: 0.98;
+      letter-spacing: -0.06em;
+    }
+
+    @media (max-width: 1180px) {
+      .gallery-grid,
+      .palette,
+      .artifact-grid,
+      .audience-grid,
+      .story-grid,
+      .service-grid,
+      .reference-grid,
+      .persona-table {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero-panel,
+      .kit-grid,
+      .notes,
+      .split-grid,
+      .voice-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .blueprint-step {
+        grid-template-columns: 82px 1fr;
+      }
+
+      .blueprint-step span {
+        grid-column: 2;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .section-head,
+      .quote-band,
+      .rank-row,
+      .component-row,
+      .blueprint-step {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-meta {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-grid,
+      .palette,
+      .artifact-grid,
+      .audience-grid,
+      .dual-mode,
+      .notes,
+      .story-grid,
+      .service-grid,
+      .reference-grid,
+      .persona-table {
+        grid-template-columns: 1fr;
+      }
+
+      .wrap {
+        width: min(var(--max), calc(100% - 28px));
+      }
+
+      section {
+        padding: 62px 0;
+      }
+
+      .hero h1 {
+        font-size: clamp(3.4rem, 14vw, 5.4rem);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <nav class="site-nav">
+      <div class="wrap">
+        <div class="brand-lockup">
+          <strong>Dasein Foresight</strong>
+          <span>Brand kit / editorial lab / v2</span>
+        </div>
+        <div class="nav-links">
+          <a href="#core">Narrativa</a>
+          <a href="#ranking">Ranking</a>
+          <a href="#system">Sistema</a>
+          <a href="#voice">Voz</a>
+          <a href="#references">Referencias</a>
+          <a href="#components">Componentes</a>
+          <a href="#blueprint">Landing</a>
+          <a href="#audiences">Audiencias</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="wrap">
+      <section class="hero" id="top">
+        <div class="hero-panel">
+          <div class="hero-copy">
+            <div class="eyebrow">Nueva directriz de diseno</div>
+            <h1>Prospectiva <span class="accent">editorial</span> con rigor de laboratorio.</h1>
+            <p class="hero-lead">
+              La pagina no debe verse como una startup de IA ni como una consultora solemne.
+              Debe sentirse como un dossier premium: papel hueso, tipografia con autoridad,
+              objetos tactiles, composicion de revista y una capa oscura solo cuando entra
+              SignalTwin como motor de simulacion.
+            </p>
+            <div class="hero-meta">
+              <div>
+                <strong>Tesis</strong>
+                <span>Editorial systems + material still life + strategic theater.</span>
+              </div>
+              <div>
+                <strong>Punto medio</strong>
+                <span>Menos revista de moda pura, menos SaaS oscuro generico.</span>
+              </div>
+              <div>
+                <strong>Resultado</strong>
+                <span>Una marca boutique, inteligente, auditable y memoriosa.</span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="hero-aside">
+            <div class="stamp">DZN v2</div>
+            <h2>La marca debe parecer una research maison.</h2>
+            <p>
+              El gesto dominante no es la tecnologia en si, sino la capacidad de ordenar,
+              encuadrar y volver tangible una decision compleja. Lo visual tiene que transmitir
+              criterio, tactilidad y control de composicion.
+            </p>
+            <div class="hero-checks">
+              <div>
+                <strong>Keep</strong>
+                <span>La gravedad tipografica, el tono intelectual y la promesa de auditabilidad.</span>
+              </div>
+              <div>
+                <strong>Bend</strong>
+                <span>La base full dark. Debe pasar a ser un modo teatral, no el tono dominante.</span>
+              </div>
+              <div>
+                <strong>Drop</strong>
+                <span>La estetica startup/AI de particulas y widgets como cara principal de la marca.</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section>
+        <div class="quote-band">
+          <div class="kicker">Directriz</div>
+          <p>Dasein debe sentirse como <em>un instrumento de navegacion estrategica</em>, no como un producto que solo quiere vender IA.</p>
+        </div>
+      </section>
+
+      <section id="core">
+        <div class="section-head">
+          <div class="section-index">01 / ADN narrativo</div>
+          <div>
+            <h2 class="section-title">La marca necesita tesis, no solo tratamiento visual.</h2>
+            <p class="section-copy">
+              Tome la identidad narrativa que me resumiste de la version 3.0 del brandbook y la
+              traduje a un sistema util para la landing. El cambio clave es este: Dasein deja de ser
+              solo una consultora sofisticada y pasa a ser una firma LATAM que convierte incertidumbre
+              en criterio auditable.
+            </p>
+          </div>
+        </div>
+
+        <div class="story-grid">
+          <article class="story-card">
+            <small>Vision</small>
+            <h3>Transformar la relacion de organizaciones LATAM con la incertidumbre.</h3>
+            <p>Pasar de reaccionar tarde y decidir por intuicion a trabajar con escenarios vivos, comparables y discutibles.</p>
+          </article>
+
+          <article class="story-card">
+            <small>Mision</small>
+            <h3>Convertir senales complejas en decisiones accionables.</h3>
+            <p>Que: prospectiva estrategica. Para quien: lideres, instituciones y equipos con apuestas importantes. Como: research, ontologia, simulacion y traduccion ejecutiva. Para que: actuar con mas claridad hoy.</p>
+          </article>
+
+          <article class="story-card">
+            <small>Promesa</small>
+            <h3>Ayudamos a tomar decisiones importantes antes de que la realidad las vuelva obvias.</h3>
+            <p>Esta frase ya no es solo copy. Tiene que ordenar hero, CTA, caso y narrativa comercial.</p>
+          </article>
+
+          <article class="story-card">
+            <small>Positioning</small>
+            <h3>Prospectiva premium, no futurologia ni software self-serve.</h3>
+            <p>Para organizaciones que deciden bajo incertidumbre, Dasein ofrece claridad estrategica auditable; a diferencia del foresight ornamental, muestra de donde sale cada escenario y que hacer despues.</p>
+          </article>
+
+          <article class="story-card wide">
+            <small>Brand Story</small>
+            <h3>Heidegger entra como estructura mental, no como pose cultural.</h3>
+            <p>La intuicion de “estar en el mundo” se vuelve metodo: partir desde el contexto real, pedir data al cliente, modelar relaciones, simular tensiones humanas y traducir todo eso en un dossier conversable. La marca gana cuando esa profundidad se siente situada y no academica.</p>
+          </article>
+
+          <article class="story-card wide">
+            <small>Metafora de marca</small>
+            <h3>Un instrumento de navegacion para decisiones complejas.</h3>
+            <p>No un oraculo. No un dashboard vacio. Un aparato de lectura, simulacion y criterio.</p>
+            <div class="pill-list">
+              <span>Sabio + Explorador</span>
+              <span>Rigor sin pose</span>
+              <span>LATAM first</span>
+              <span>Auditable by design</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="split-grid">
+          <article class="list-card">
+            <small>Valores</small>
+            <h3>La capa etica tambien define la estetica.</h3>
+            <ul>
+              <li>Rigor antes que espectaculo.</li>
+              <li>Claridad como respeto por quien decide.</li>
+              <li>Accion como norte, no como post-data.</li>
+              <li>Honestidad frente a la incertidumbre.</li>
+              <li>Compromiso con problemas y organizaciones de America Latina.</li>
+            </ul>
+          </article>
+
+          <article class="list-card">
+            <small>Personalidad</small>
+            <h3>La marca es analitica, elegante y poco acartonada.</h3>
+            <div class="persona-table">
+              <div class="persona-cell">
+                <strong>Es</strong>
+                <ul>
+                  <li>Situada</li>
+                  <li>Inteligente</li>
+                  <li>Sobria</li>
+                  <li>Culturalmente despierta</li>
+                  <li>Directa</li>
+                </ul>
+              </div>
+              <div class="persona-cell">
+                <strong>No es</strong>
+                <ul>
+                  <li>Corporativa generica</li>
+                  <li>Sci-fi ornamental</li>
+                  <li>Vendedora de humo</li>
+                  <li>Academica hermetica</li>
+                  <li>Agencia creativa sin espina analitica</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="manifesto-block">
+          <small>Manifiesto condensado</small>
+          <p>No hacemos futurologia ni decks ornamentales. Leemos el presente con disciplina, modelamos tensiones reales y convertimos complejidad en escenarios con consecuencias. <em>Simular futuros</em> aca significa pensar mejor antes de actuar.</p>
+        </div>
+      </section>
+
+      <section id="ranking">
+        <div class="section-head">
+          <div class="section-index">02 / Ranking visual</div>
+          <div>
+            <h2 class="section-title">Patrones que de verdad marcan tu gusto.</h2>
+            <p class="section-copy">
+              El moodboard no apunta en una sola direccion. Hay referencias valiosas y otras que
+              se van a un universo demasiado "prompt gallery". El ranking de abajo condensa lo
+              que conviene absorber como sistema de marca.
+            </p>
+          </div>
+        </div>
+
+        <div class="gallery-grid">
+          <figure class="gallery-card">
+            <img src="../SignalTwin/Info_base_DaseinForesight/Inspiration Branding/08116148419fb4d375d57cafffdfe6f6.jpg" alt="unlock editorial" />
+            <figcaption>
+              <strong>Editorial whitespace</strong>
+              <p>Composicion tipo landing-poster: aire, escala tipografica y jerarquia minima.</p>
+              <span class="ref">081161...</span>
+            </figcaption>
+          </figure>
+
+          <figure class="gallery-card">
+            <img src="../SignalTwin/Info_base_DaseinForesight/Inspiration Branding/1252181202c82d1b1609c8bb372768b42707c483cb6843eedabcdf21c8ce29eb.png" alt="typographic stack reference" />
+            <figcaption>
+              <strong>Grotesk scale systems</strong>
+              <p>Tipografia inmensa, seleccion focal y tono casi suizo. Mucha influencia para el hero y los section headers.</p>
+              <span class="ref">125218...</span>
+            </figcaption>
+          </figure>
+
+          <figure class="gallery-card">
+            <img src="../SignalTwin/Info_base_DaseinForesight/Inspiration Branding/961fcc6692350c6cf0af7dab33f7649b.jpg" alt="portfolio editorial system" />
+            <figcaption>
+              <strong>Magazine system</strong>
+              <p>Grillas de revista, puntos rojos, spreads sobrios y ritmo de publicacion premium.</p>
+              <span class="ref">961fcc...</span>
+            </figcaption>
+          </figure>
+
+          <figure class="gallery-card">
+            <img src="../SignalTwin/Info_base_DaseinForesight/Inspiration Branding/f58c0265efa881aadb1fe534c0289a8d1b795fe06a7cfaa42f32dce75994d92b.png" alt="worldquant foundry" />
+            <figcaption>
+              <strong>Dark strategic theater</strong>
+              <p>El negro, el punto y la tension entran cuando aparece el motor, no en toda la pagina.</p>
+              <span class="ref">f58c02...</span>
+            </figcaption>
+          </figure>
+
+          <figure class="gallery-card">
+            <img src="../SignalTwin/Info_base_DaseinForesight/Inspiration Branding/0081b2256d73945736c055fd63e7f4e4.jpg" alt="glass morphism object" />
+            <figcaption>
+              <strong>Tactile abstraction</strong>
+              <p>El objeto funciona cuando es silencioso y material. Sirve mas como atmosfera que como gimmick UI.</p>
+              <span class="ref">0081b2...</span>
+            </figcaption>
+          </figure>
+
+          <figure class="gallery-card">
+            <img src="../SignalTwin/Info_base_DaseinForesight/Inspiration Branding/4e1d8180263a86104f3bc3ef059b43903a442b6ac8df4bc2d939b51aa1a99926.png" alt="serif and grotesk mix" />
+            <figcaption>
+              <strong>Serif as accent</strong>
+              <p>La serif vive mejor como contraste puntual. La voz principal sigue siendo sans, precisa y editorial.</p>
+              <span class="ref">4e1d81...</span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="rank-list" style="margin-top: 20px;">
+          <article class="rank-row">
+            <div class="rank">01</div>
+            <div>
+              <h3>Editorial systems sobre fondo hueso</h3>
+              <p>
+                Este es el patron mas consistente y el mas potente para Dasein: composicion de
+                revista, jerarquia tipografica quirurgica, captions pequenos, mucho aire y pocos
+                elementos por frame. Es el puente perfecto entre boutique strategy, criterio cultural y servicio premium.
+              </p>
+            </div>
+            <div class="rank-tags">
+              <span>Warm paper</span>
+              <span>Poster layout</span>
+              <span>Grotesk display</span>
+              <span>Museum labels</span>
+            </div>
+          </article>
+
+          <article class="rank-row">
+            <div class="rank">02</div>
+            <div>
+              <h3>Objetos tactiles como soporte de abstraccion</h3>
+              <p>
+                No robots, no cerebros, no city renders. Lo que funciona son materiales abstractos:
+                vidrio, foam, porcelana, metal satinado, superficies iridiscentes. Sirven para hablar
+                de complejidad sin caer en iconografia AI obvia.
+              </p>
+            </div>
+            <div class="rank-tags">
+              <span>Glass</span>
+              <span>Foam</span>
+              <span>Porcelain</span>
+              <span>Soft shadow</span>
+            </div>
+          </article>
+
+          <article class="rank-row">
+            <div class="rank">03</div>
+            <div>
+              <h3>Color como puntuacion, no como bano de marca</h3>
+              <p>
+                Tus referencias ganan cuando el color entra en dosis precisas: un rojo coral, un azul
+                polvo, un lavanda muy tenue. El exceso de degradado o la saturacion permanente le
+                quitan elegancia.
+              </p>
+            </div>
+            <div class="rank-tags">
+              <span>Cobalt</span>
+              <span>Coral</span>
+              <span>Powder blue</span>
+              <span>Controlled accents</span>
+            </div>
+          </article>
+
+          <article class="rank-row">
+            <div class="rank">04</div>
+            <div>
+              <h3>Modo oscuro solo para la maquinaria SignalTwin</h3>
+              <p>
+                La referencia WorldQuant Foundry sigue siendo util, pero acotada. Debe vivir en el
+                momento donde explicamos simulacion, grafo, rondas y auditabilidad. Como contraste
+                escenico funciona; como tono absoluto, hoy queda demasiado esperado.
+              </p>
+            </div>
+            <div class="rank-tags">
+              <span>Strategic theater</span>
+              <span>Dot fields</span>
+              <span>Black chamber</span>
+              <span>High contrast</span>
+            </div>
+          </article>
+
+          <article class="rank-row">
+            <div class="rank">05</div>
+            <div>
+              <h3>Lo que hay que filtrar</h3>
+              <ul>
+                <li>Galerias de prompts y mosaicos demasiado "Midjourney showcase".</li>
+                <li>Objetos furry o juguetones como lenguaje dominante.</li>
+                <li>Glassmorphism puro de SaaS y tarjetas flotando sin contenido.</li>
+                <li>El UI presentado como producto self-serve cuando en realidad vendemos servicio premium.</li>
+              </ul>
+            </div>
+            <div class="rank-tags">
+              <span>Avoid promptcore</span>
+              <span>Avoid mascot energy</span>
+              <span>Avoid generic SaaS</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="system">
+        <div class="section-head">
+          <div class="section-index">03 / Sistema visual</div>
+          <div>
+            <h2 class="section-title">Swiss editorial arriba. Simulation theater abajo.</h2>
+            <p class="section-copy">
+              La marca funciona mejor como sistema dual: superficie clara para posicionamiento,
+              metodo y confianza; camara oscura para los modulos de simulacion, grafo, rondas y
+              evidencia. Asi la tecnologia se siente infraestructura, no disfraz.
+            </p>
+          </div>
+        </div>
+
+        <div class="kit-grid">
+          <div class="panel">
+            <h3>Paleta propuesta</h3>
+            <p>
+              La pagina principal debe respirar desde un blanco hueso con acentos controlados.
+              El azul profundo y el coral funcionan como signos, no como bano cromatico total.
+              El navy queda reservado para el "engine room" de SignalTwin.
+            </p>
+
+            <div class="palette">
+              <div class="swatch">
+                <div class="tone" style="background:#f5efe5;"></div>
+                <div class="meta"><strong>Paper</strong><span>#F5EFE5</span><span>Base editorial</span></div>
+              </div>
+              <div class="swatch">
+                <div class="tone" style="background:#fbf7f1;"></div>
+                <div class="meta"><strong>Soft Paper</strong><span>#FBF7F1</span><span>Cards + spreads</span></div>
+              </div>
+              <div class="swatch">
+                <div class="tone" style="background:#111111;"></div>
+                <div class="meta"><strong>Ink</strong><span>#111111</span><span>Display + body</span></div>
+              </div>
+              <div class="swatch">
+                <div class="tone" style="background:#4865ff;"></div>
+                <div class="meta"><strong>Cobalt</strong><span>#4865FF</span><span>Signal + links</span></div>
+              </div>
+              <div class="swatch">
+                <div class="tone" style="background:#ff5c38;"></div>
+                <div class="meta"><strong>Coral</strong><span>#FF5C38</span><span>Punctuation + CTA</span></div>
+              </div>
+              <div class="swatch">
+                <div class="tone" style="background:#0a1628;"></div>
+                <div class="meta"><strong>Navy Chamber</strong><span>#0A1628</span><span>SignalTwin sections</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="type-specimen">
+            <div class="type-card">
+              <small>Display grotesk</small>
+              <div class="display-line">Decisiones importantes antes de que la realidad las vuelva obvias.</div>
+            </div>
+            <div class="type-card">
+              <small>Editorial accent</small>
+              <div class="sans-line" style="font-family: var(--font-editorial); font-size: clamp(1.8rem, 3vw, 2.7rem); line-height: 1.06;">Simular futuros no es adivinar: es componer contexto con criterio.</div>
+            </div>
+            <div class="type-card">
+              <small>Operational Sans</small>
+              <div class="sans-line">Research, ontology, graph, agents, rounds, evidence, report, 90-day plan.</div>
+            </div>
+            <div class="type-card">
+              <small>Mono Layer</small>
+              <div class="mono-line">pilot lanes / audit trail / stakeholder graph / round 01 / scenario delta / signal memory</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dual-mode">
+          <div class="mode-card light">
+            <h4>Modo 1 - Editorial surface</h4>
+            <p>
+              Hero, posicionamiento, audiencias, metodo, caso resumido y CTA. Fondos claros,
+              aire de revista, objetos quietos, tipografia que manda.
+            </p>
+          </div>
+
+          <div class="mode-card dark">
+            <div class="dots"></div>
+            <h4>Modo 2 - SignalTwin theater</h4>
+            <p>
+              Grafo, perfiles de agentes, rondas, relaciones, trazabilidad y conversacion con el
+              reporte. Aqui si aparecen puntos, grids oscuros, data glow controlado y tension.
+            </p>
+          </div>
+        </div>
+
+        <div class="typography-note">
+          <strong>Decision tipografica</strong>
+          <p>Las referencias mas fuertes no piden una serif dominante. Piden una grotesk europea de display. Para este kit use <em style="font-family: var(--font-display); font-style: normal;">Switzer</em> como proxy abierto entre Neue Haas Grotesk Display y Roc Grotesk; <em style="font-family: var(--font-mono); font-style: normal;">Azeret Mono</em> para metadata y evidencia; <em style="font-family: var(--font-editorial);">Instrument Serif</em> solo como acento editorial. La serif deja de liderar y pasa a subrayar.</p>
+        </div>
+      </section>
+
+      <section id="voice">
+        <div class="section-head">
+          <div class="section-index">04 / Voz y oferta</div>
+          <div>
+            <h2 class="section-title">La voz tiene que sonar tan precisa como el sistema visual.</h2>
+            <p class="section-copy">
+              El brandbook nuevo ya te da mas que tono bonito. Te da marco de posicionamiento,
+              reglas de lenguaje y una oferta inicial. La home deberia traducir eso en confianza comercial.
+            </p>
+          </div>
+        </div>
+
+        <div class="voice-grid">
+          <article class="panel">
+            <h3>Tono rector</h3>
+            <p>Clarity over sophistication. Confidence without arrogance. Future as something concrete, not sci-fi. Every block should imply the next move.</p>
+            <div class="matrix">
+              <div class="matrix-row">
+                <strong>Principio</strong>
+                <span>Explicar sin bajar la densidad. Se puede ser intelectualmente serio sin sonar ceremonial.</span>
+              </div>
+              <div class="matrix-row">
+                <strong>Vocabulario</strong>
+                <span>Prospectiva estrategica, simulacion de escenarios, senales debiles, decision informada, rigor metodologico.</span>
+              </div>
+              <div class="matrix-row">
+                <strong>Evitar</strong>
+                <span>Futurologia, prediccion, disrupcion vacia, IA magica, dashboard milagroso, metodologia revolucionaria.</span>
+              </div>
+              <div class="matrix-row">
+                <strong>CTA</strong>
+                <span>Agenda una conversacion, explora tus escenarios, conversemos sobre tu decision, where our work ends yours begins.</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <h3>Arquetipo y percepcion</h3>
+            <p>Sabio + Explorador. La mezcla correcta es criterio visible, curiosidad disciplinada y una relacion honesta con lo que todavia no se sabe.</p>
+            <div class="persona-table">
+              <div class="persona-cell">
+                <strong>Debe sentirse</strong>
+                <ul>
+                  <li>Boutique</li>
+                  <li>Auditivo y conversable</li>
+                  <li>Regional sin folclor</li>
+                  <li>Elegante sin lujo vacio</li>
+                </ul>
+              </div>
+              <div class="persona-cell">
+                <strong>No debe sentirse</strong>
+                <ul>
+                  <li>Consultora con corbata</li>
+                  <li>Startup hype</li>
+                  <li>Dashboard productizado</li>
+                  <li>Academia encriptada</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="service-grid">
+          <article class="service-card">
+            <small>Oferta 01</small>
+            <h3>Discovery / formulacion</h3>
+            <p>Sirve cuando la pregunta aun no esta bien delimitada. Ordena problema, insumos y criterio de lectura antes de simular.</p>
+          </article>
+
+          <article class="service-card">
+            <small>Oferta 02</small>
+            <h3>Dossier de escenarios</h3>
+            <p>Entregable central con senales, ontologia, escenarios plausibles, implicancias y recomendaciones con trazabilidad argumental.</p>
+          </article>
+
+          <article class="service-card">
+            <small>Oferta 03</small>
+            <h3>Taller + plan a 90 dias</h3>
+            <p>La conversacion final no cierra en insight. Baja a decisiones, responsables, riesgos a monitorear y una agenda concreta.</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <div class="section-index">05 / Material language</div>
+          <div>
+            <h2 class="section-title">Materiales, composicion y movimiento.</h2>
+            <p class="section-copy">
+              Esta capa define como se ve la marca incluso antes de entrar al copy. Es el lenguaje
+              que hace que Dasein se sienta "revista de decisiones complejas" y no "site de features".
+            </p>
+          </div>
+        </div>
+
+        <div class="artifact-grid">
+          <div class="artifact-card">
+            <strong>Materiales</strong>
+            <p>
+              Vidrio, porcelana, metal satinado, foam azul, superficies perladas. Todo abstracto,
+              fotografiable, sin personajes, sin oficinas y sin iconos tech literales.
+            </p>
+          </div>
+          <div class="artifact-card">
+            <strong>Composicion</strong>
+            <p>
+              Una sola idea dominante por bloque. Mucho aire. Titulares grandes. Captions pequenos.
+              Uso de reglas finas, offsets, recortes y spreads tipo publishing system.
+            </p>
+          </div>
+          <div class="artifact-card">
+            <strong>Motion</strong>
+            <p>
+              Transiciones lentas y ceremoniales. Relevos de opacidad, deslizamientos minimos,
+              orbitar sutil en el modo oscuro. Nada de micro-interacciones juguetonas.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="references">
+        <div class="section-head">
+          <div class="section-index">06 / Atlas de referencias</div>
+          <div>
+            <h2 class="section-title">Referencias completas, no solo screenshots sueltos.</h2>
+            <p class="section-copy">
+              Para que el criterio quede trazable, deje separadas las referencias que vale la pena
+              tomar en serio. Donde habia fuente oficial, la use. Donde no, apoye la lectura con
+              paginas de premios o case studies.
+            </p>
+          </div>
+        </div>
+
+        <div class="reference-grid">
+          <article class="reference-card">
+            <small>Dark chamber</small>
+            <h3>WorldQuant Foundry</h3>
+            <p>Referencia valida para el momento SignalTwin: contraste extremo, masas tipograficas, campo de puntos y tono de venture lab. No para toda la landing.</p>
+            <div class="pill-list">
+              <span>Roc Grotesk</span>
+              <span>Azeret Mono</span>
+              <span>Dot field</span>
+              <span>Black theater</span>
+            </div>
+            <div class="reference-links">
+              <a href="https://www.worldquantfoundry.com/" target="_blank" rel="noreferrer">Sitio oficial</a>
+              <a href="https://www.awwwards.com/sites/worldquant-foundry" target="_blank" rel="noreferrer">Awwwards nomination</a>
+            </div>
+          </article>
+
+          <article class="reference-card">
+            <small>Editorial minimal</small>
+            <h3>tacto inc.</h3>
+            <p>Referencia fuerte para whitespace, page rhythm y grotesk de display. El premio externo incluso lo describe por su clean layout y strong typography.</p>
+            <div class="pill-list">
+              <span>Neue Haas Grotesk Display</span>
+              <span>Minimal color</span>
+              <span>Clean layout</span>
+              <span>Strong typography</span>
+            </div>
+            <div class="reference-links">
+              <a href="https://tacto-inc.com/" target="_blank" rel="noreferrer">Sitio oficial</a>
+              <a href="https://www.awwwards.com/sites/tacto-inc" target="_blank" rel="noreferrer">Awwwards honorable mention</a>
+              <a href="https://competition.adesignaward.com/ada-winner-design.php?ID=158294" target="_blank" rel="noreferrer">A' Design Award</a>
+            </div>
+          </article>
+
+          <article class="reference-card">
+            <small>Biblioteca interna</small>
+            <h3>Tu moodboard util</h3>
+            <p>Las laminas con listas tipograficas masivas, spreads con punto rojo y objetos de vidrio funcionan como una biblioteca propia de ritmo, tactilidad y jerarquia.</p>
+            <div class="pill-list">
+              <span>125218...</span>
+              <span>961fcc...</span>
+              <span>0081b2...</span>
+              <span>4e1d81...</span>
+            </div>
+            <div class="reference-links">
+              <a href="./inspiration-gallery.html" target="_blank" rel="noreferrer">Galeria local completa</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="split-grid">
+          <article class="list-card">
+            <small>Huella tipografica real</small>
+            <h3>Lo que efectivamente usan las referencias mas fuertes.</h3>
+            <ul>
+              <li>WorldQuant Foundry carga Roc Grotesk y Azeret Mono.</li>
+              <li>tacto inc. usa Neue Haas Grotesk Display como voz principal.</li>
+              <li>La familia general del moodboard es grotesk de alto control, no serif dominante.</li>
+            </ul>
+          </article>
+
+          <article class="list-card">
+            <small>Stack recomendado</small>
+            <h3>Tipografia de trabajo para este kit.</h3>
+            <ul>
+              <li>Switzer para display y body.</li>
+              <li>Azeret Mono para labels, evidencias y metadata.</li>
+              <li>Instrument Serif solo en citas, memos y acentos puntuales.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="components">
+        <div class="section-head">
+          <div class="section-index">07 / Componentes actuales</div>
+          <div>
+            <h2 class="section-title">Que rescatar, que adaptar y que no deberia liderar.</h2>
+            <p class="section-copy">
+              El repo actual ya tiene estructura y algunos recursos utiles. Lo importante es moverlos
+              a otro rol dentro de la pagina. No todo debe desaparecer; si debe cambiar el orden de
+              protagonismo.
+            </p>
+          </div>
+        </div>
+
+        <div class="component-list">
+          <div class="component-row">
+            <div><span class="status adapt">Adaptar</span></div>
+            <div><h4>ParticleScene.astro</h4></div>
+            <p>Sirve, pero solo en el momento SignalTwin. No deberia cubrir todo el home. Pasarlo a fondo teatral del bloque de simulacion.</p>
+          </div>
+
+          <div class="component-row">
+            <div><span class="status drop">Replantear</span></div>
+            <div><h4>Hero.astro</h4></div>
+            <p>Hoy parte desde una retorica tech. El hero nuevo debe abrir con posicionamiento editorial, no con UI ni con CTAs de producto.</p>
+          </div>
+
+          <div class="component-row">
+            <div><span class="status keep">Mantener</span></div>
+            <div><h4>Timeline.astro</h4></div>
+            <p>La idea de secuencia es correcta. Conviene mutarla a "metodo" o "prueba de proceso" con look de spread editorial y menos feeling dashboard.</p>
+          </div>
+
+          <div class="component-row">
+            <div><span class="status adapt">Adaptar</span></div>
+            <div><h4>ScenarioEngine.astro</h4></div>
+            <p>El contenido es util como demostracion, pero no deberia vivir arriba. Moverlo mas abajo o convertirlo en teaser de metodologia / appendix interactivo.</p>
+          </div>
+
+          <div class="component-row">
+            <div><span class="status drop">Replantear</span></div>
+            <div><h4>Contact.astro</h4></div>
+            <p>El cierre final tiene que sentirse como invitacion de partnership premium. Menos bloque funcional, mas spread editorial con autoridad.</p>
+          </div>
+
+          <div class="component-row">
+            <div><span class="status adapt">Adaptar</span></div>
+            <div><h4>tokens.css / global.css</h4></div>
+            <p>El sistema actual es totalmente dark. Hay que convertirlo en dual-mode: editorial paper + dark chamber, manteniendo el navy para el engine.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="blueprint">
+        <div class="section-head">
+          <div class="section-index">08 / Arquitectura landing</div>
+          <div>
+            <h2 class="section-title">Secciones sugeridas para la pagina.</h2>
+            <p class="section-copy">
+              La pagina debe atraer pilotos, colaboradores, co-founders y partners sin parecer
+              un "marketplace de servicios". La secuencia tiene que mostrar oficio, metodo y una
+              experiencia de trabajo mas rigurosa que el foresight tradicional.
+            </p>
+          </div>
+        </div>
+
+        <div class="blueprint">
+          <article class="blueprint-step">
+            <div class="num">01</div>
+            <div>
+              <h4>Hero / positioning</h4>
+              <p>Promesa corta y memoriosa. Dasein como research maison para decisiones complejas. Nada de feature dump.</p>
+            </div>
+            <span>White editorial opener</span>
+          </article>
+
+          <article class="blueprint-step">
+            <div class="num">02</div>
+            <div>
+              <h4>For whom</h4>
+              <p>Bloque con lanes para pilotos, co-founders, colaboradores, partners e innovation labs. Cada audiencia con una razon concreta para entrar.</p>
+            </div>
+            <span>Audience matrix</span>
+          </article>
+
+          <article class="blueprint-step">
+            <div class="num">03</div>
+            <div>
+              <h4>Metodo Dasein</h4>
+              <p>Research general, pedido de data al cliente, ontologia, grafo relacional, perfiles de agentes, definicion de rondas y simulacion.</p>
+            </div>
+            <span>Method strip / editorial timeline</span>
+          </article>
+
+          <article class="blueprint-step">
+            <div class="num">04</div>
+            <div>
+              <h4>SignalTwin theater</h4>
+              <p>Bloque oscuro donde se entiende el motor: agentes, relaciones, dos mundos, memoria, auditoria, conversacion con reporte y con rondas.</p>
+            </div>
+            <span>Dark chamber / graph + round logic</span>
+          </article>
+
+          <article class="blueprint-step">
+            <div class="num">05</div>
+            <div>
+              <h4>Deliverables</h4>
+              <p>Reporte auditable, lectura de progreso, trazabilidad de evidencia y plan a 90 dias. Diferenciarlo de un foresight que solo entrega una foto.</p>
+            </div>
+            <span>Output credibility</span>
+          </article>
+
+          <article class="blueprint-step">
+            <div class="num">06</div>
+            <div>
+              <h4>Proof / case</h4>
+              <p>Un caso comprimido, no una tesis. Mostrar senales, ontologia, simulacion, hallazgo y accion recomendada en una narrativa corta.</p>
+            </div>
+            <span>Case spread</span>
+          </article>
+
+          <article class="blueprint-step">
+            <div class="num">07</div>
+            <div>
+              <h4>Collaboration model</h4>
+              <p>Explicar donde termina Dasein y donde entran partners. Esto ayuda a captar implementadores sin prometer ejecucion propia.</p>
+            </div>
+            <span>Alliance logic</span>
+          </article>
+
+          <article class="blueprint-step">
+            <div class="num">08</div>
+            <div>
+              <h4>CTA final</h4>
+              <p>Cierre editorial con una sola accion: agenda una conversacion. Nada de formulario largo ni menu de opciones.</p>
+            </div>
+            <span>Quiet but confident close</span>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <div class="section-index">09 / Metodo visible</div>
+          <div>
+            <h2 class="section-title">La metodologia debe verse como proceso, no como slogan.</h2>
+            <p class="section-copy">
+              Tu producto es intelectualmente mas interesante que la mayoria de los sitios de
+              consultoria. Por eso la pagina tiene que hacer visible la secuencia real de trabajo.
+            </p>
+          </div>
+        </div>
+
+        <div class="artifact-grid">
+          <div class="artifact-card">
+            <strong>Research general</strong>
+            <p>Contextualizacion inicial, lectura del entorno y delimitacion de la pregunta estrategica.</p>
+          </div>
+          <div class="artifact-card">
+            <strong>Data del cliente</strong>
+            <p>Documentos, supuestos, restricciones, sensibilidad politica y material de base para no trabajar en abstracto.</p>
+          </div>
+          <div class="artifact-card">
+            <strong>Ontologia</strong>
+            <p>Definicion de actores, conceptos, conflictos, intereses y relaciones con una taxonomia legible.</p>
+          </div>
+          <div class="artifact-card">
+            <strong>Graph build</strong>
+            <p>Visualizacion relacional que convierte el problema en una estructura navegable y auditable.</p>
+          </div>
+          <div class="artifact-card">
+            <strong>Agent design</strong>
+            <p>Perfiles, posturas, memoria, relaciones y cantidad de rondas/agentes segun el caso.</p>
+          </div>
+          <div class="artifact-card">
+            <strong>Simulation + 90-day plan</strong>
+            <p>Ejecucion, hallazgos, reporte auditable, conversacion con resultados y propuesta de accion a 90 dias.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="audiences">
+        <div class="section-head">
+          <div class="section-index">10 / Audiencias</div>
+          <div>
+            <h2 class="section-title">A quien tiene que convocar la landing.</h2>
+            <p class="section-copy">
+              El sitio no deberia cerrar demasiado rapido el tipo de visita. Conviene mostrar
+              aperturas claras para cada colaborador potencial sin convertir la home en un menu corporativo.
+            </p>
+          </div>
+        </div>
+
+        <div class="audience-grid">
+          <div class="audience-card">
+            <strong>Pilots</strong>
+            <p>Organizaciones con decisiones politicas, regulatorias o tecnologicas donde una mala lectura del entorno sale cara.</p>
+          </div>
+          <div class="audience-card">
+            <strong>Co-founders</strong>
+            <p>Personas que quieren construir junto a ti la forma comercial, metodologica o tecnologica de Dasein.</p>
+          </div>
+          <div class="audience-card">
+            <strong>Collaborators</strong>
+            <p>Research, foresight, product, computational social science y perfiles capaces de elevar la entrega.</p>
+          </div>
+          <div class="audience-card">
+            <strong>Partners</strong>
+            <p>Firmas o equipos de implementacion, cambio, IA o transformacion que puedan entrar despues del mapa estrategico.</p>
+          </div>
+          <div class="audience-card">
+            <strong>Innovation labs</strong>
+            <p>Universidades, laboratorios y programas de experimentacion que necesitan una metodologia auditable y viva.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <div class="section-index">11 / Guardrails</div>
+          <div>
+            <h2 class="section-title">Lo que deberia quedar fijado antes de diseñar la pagina final.</h2>
+            <p class="section-copy">
+              Estas decisiones evitan que el proyecto vuelva a caer en el terreno gris entre
+              consultoria tradicional y startup de IA generica.
+            </p>
+          </div>
+        </div>
+
+        <div class="notes">
+          <div class="note-box">
+            <strong>Do</strong>
+            <ul>
+              <li>Usar fondos claros como base y negro/navy como escena de maquina.</li>
+              <li>Usar una grotesk tipo Swiss editorial como voz principal y dejar la serif solo como acento.</li>
+              <li>Mostrar el metodo como una cadena concreta, no solo una lista de verbos.</li>
+              <li>Usar objetos abstractos con tactilidad fotografica o render muy sobrio.</li>
+              <li>Hacer que el reporte y la auditabilidad se sientan premium.</li>
+            </ul>
+          </div>
+
+          <div class="note-box">
+            <strong>Do not</strong>
+            <ul>
+              <li>No abrir con sliders, widgets o particulas como acto principal.</li>
+              <li>No usar demasiados gradientes morados o glassmorphism de libreria.</li>
+              <li>No presentar SignalTwin como SaaS self-serve si la oferta principal es servicio.</li>
+              <li>No usar stock photos ni iconografia AI obvia.</li>
+              <li>No llenar la home de argumentos cuando una composicion fuerte puede decir mas.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-band">
+          <strong>Veredicto</strong>
+          <p>Dasein tiene que verse como la interseccion entre una revista de criterio, un laboratorio de simulacion y un dossier ejecutivo auditable.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

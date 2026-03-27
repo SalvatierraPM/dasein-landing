@@ -1,0 +1,86 @@
+<section class="alliance-section" id="alianzas">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div class="section-index">07 / Alliances</div>
+      <div>
+        <h2 class="section-title">Dasein no compite con implementadores. Les deja un mapa mejor.</h2>
+        <p class="section-copy">
+          El modelo de colaboracion esta pensado para que el trabajo estrategico llegue hasta donde agrega
+          mas valor: lectura del sistema, escenarios, criterio y decision. La implementacion puede entrar despues.
+        </p>
+      </div>
+    </div>
+
+    <div class="alliance-grid" data-reveal-stagger>
+      <article class="alliance-card panel">
+        <small>Dasein hace</small>
+        <h3>Lectura, modelamiento y simulacion.</h3>
+        <p>Pregunta estrategica, senales, actores, escenarios, tensiones y recomendaciones con trazabilidad.</p>
+      </article>
+
+      <article class="alliance-card panel">
+        <small>Partner implementa</small>
+        <h3>Cambio, despliegue y operacion.</h3>
+        <p>Transformacion, producto, automatizacion, change management o ejecucion institucional segun el caso.</p>
+      </article>
+
+      <article class="alliance-card panel">
+        <small>Cliente decide</small>
+        <h3>La organizacion conserva criterio y secuencia.</h3>
+        <p>El objetivo es que el equipo tome decisiones con mas claridad, no que delegue la lectura del riesgo.</p>
+      </article>
+    </div>
+
+    <blockquote class="alliance-quote panel" data-reveal>
+      Where our work ends, yours begins.
+    </blockquote>
+  </div>
+</section>
+
+<style>
+  .alliance-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .alliance-card,
+  .alliance-quote {
+    padding: clamp(1.45rem, 2vw, 1.8rem);
+  }
+
+  .alliance-card small {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-overline);
+    letter-spacing: var(--tracking-overline);
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .alliance-card h3 {
+    margin-bottom: 0.75rem;
+    font-size: 1.08rem;
+    line-height: 1.16;
+  }
+
+  .alliance-card p {
+    color: var(--ink-soft);
+  }
+
+  .alliance-quote {
+    font-family: var(--font-editorial);
+    font-size: clamp(1.8rem, 2.8vw, 3.1rem);
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+    text-align: center;
+  }
+
+  @media (max-width: 900px) {
+    .alliance-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
