@@ -1,0 +1,141 @@
+<!-- CTA Eyes: injects tracking eyes into all CTA buttons -->
+<style is:global>
+  .btn-eye {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background: var(--slate-white, #ede7dc);
+    border: 1.5px solid rgba(17, 17, 17, 0.1);
+    position: relative;
+    flex-shrink: 0;
+    pointer-events: none;
+    animation: cta-blink 4.5s ease-in-out infinite;
+  }
+
+  .btn-eye:nth-of-type(2) {
+    animation-delay: 0.07s;
+  }
+
+  .btn-pupil {
+    width: 0.38rem;
+    height: 0.38rem;
+    border-radius: 50%;
+    background: var(--ink, #111);
+    position: absolute;
+  }
+
+  /* Dark sections: invert eye colors */
+  .section-dark .btn-eye,
+  .cta-section .btn-eye {
+    background: rgba(15, 22, 40, 0.7);
+    border-color: rgba(237, 231, 220, 0.15);
+  }
+
+  .section-dark .btn-pupil,
+  .cta-section .btn-pupil {
+    background: var(--slate-white, #ede7dc);
+  }
+
+  @keyframes cta-blink {
+    0%, 94%, 100% { transform: scaleY(1); }
+    97% { transform: scaleY(0.08); }
+  }
+
+  @media (pointer: coarse) {
+    .btn-eye { display: none !important; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn-eye { animation: none; }
+  }
+</style>
+
+<script>
+  (() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+
+    const CTA_SELECTOR = '.button-primary, .cta-primary, [data-cta]';
+    const MAX_OFFSET = 3.2;
+
+    let mx = -9999;
+    let my = -9999;
+    let rafId = 0;
+    const allPupils: HTMLElement[] = [];
+
+    function injectEyes() {
+      const ctas = document.querySelectorAll<HTMLElement>(CTA_SELECTOR);
+
+      ctas.forEach((btn) => {
+        // Skip nav, dots, already injected
+        if (btn.closest('.site-nav') || btn.closest('.method-dots') || btn.querySelector('.btn-eye')) return;
+
+        const eye1 = document.createElement('span');
+        eye1.className = 'btn-eye';
+        eye1.innerHTML = '<span class="btn-pupil"></span>';
+
+        const eye2 = document.createElement('span');
+        eye2.className = 'btn-eye';
+        eye2.innerHTML = '<span class="btn-pupil"></span>';
+
+        // Insert eyes before the text
+        btn.prepend(eye2);
+        btn.prepend(eye1);
+
+        allPupils.push(
+          eye1.querySelector('.btn-pupil') as HTMLElement,
+          eye2.querySelector('.btn-pupil') as HTMLElement,
+        );
+      });
+    }
+
+    function onMove(e: MouseEvent) {
+      mx = e.clientX;
+      my = e.clientY;
+    }
+
+    function tick() {
+      rafId = requestAnimationFrame(tick);
+
+      for (const pupil of allPupils) {
+        const eye = pupil.parentElement;
+        if (!eye) continue;
+
+        const rect = eye.getBoundingClientRect();
+        // Skip if off-screen
+        if (rect.bottom < -50 || rect.top > window.innerHeight + 50) continue;
+
+        const ecx = rect.left + rect.width / 2;
+        const ecy = rect.top + rect.height / 2;
+        const dx = mx - ecx;
+        const dy = my - ecy;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 1) continue;
+
+        const nx = (dx / dist) * Math.min(MAX_OFFSET, dist * 0.018);
+        const ny = (dy / dist) * Math.min(MAX_OFFSET, dist * 0.018);
+
+        pupil.style.transform = `translate(${nx.toFixed(1)}px, ${ny.toFixed(1)}px)`;
+      }
+    }
+
+    // Init
+    requestAnimationFrame(() => {
+      injectEyes();
+      if (allPupils.length) {
+        window.addEventListener('mousemove', onMove, { passive: true });
+        tick();
+      }
+    });
+
+    // Cleanup
+    document.addEventListener('astro:before-preparation', () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener('mousemove', onMove);
+    }, { once: true });
+  })();
+</script>

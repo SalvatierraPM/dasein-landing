@@ -1,0 +1,196 @@
+<!-- Magnetic CTA: buttons follow cursor within their section, snap back angrily when leaving -->
+<script>
+  (() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if ('ontouchstart' in window) return;
+
+    const SELECTOR = '.button-primary, .cta-primary, [data-cta]';
+    const MAX_PULL = 160;       // max px the button drifts toward cursor
+    const SPRING = 0.045;       // follow smoothness (lower = smoother, more floaty)
+    const ANGRY_DURATION = 700; // ms for the snap-back tantrum
+
+    interface MagneticState {
+      el: HTMLElement;
+      section: HTMLElement;
+      originX: number;
+      originY: number;
+      currentX: number;
+      currentY: number;
+      targetX: number;
+      targetY: number;
+      isAngry: boolean;
+      angryStart: number;
+    }
+
+    const states: MagneticState[] = [];
+    let mouseX = 0;
+    let mouseY = 0;
+    let rafId = 0;
+
+    const init = () => {
+      const buttons = document.querySelectorAll<HTMLElement>(SELECTOR);
+
+      buttons.forEach((el) => {
+        // Skip nav buttons (too small / not CTA)
+        if (el.closest('.site-nav') || el.closest('.method-dots') || el.closest('.hero-shell')) return;
+        // Need a parent section to scope the effect
+        const section = el.closest('section') || el.closest('.section-shell');
+        if (!section) return;
+
+        el.style.willChange = 'transform';
+        el.style.transition = 'none';
+
+        states.push({
+          el,
+          section: section as HTMLElement,
+          originX: 0,
+          originY: 0,
+          currentX: 0,
+          currentY: 0,
+          targetX: 0,
+          targetY: 0,
+          isAngry: false,
+          angryStart: 0,
+        });
+      });
+
+      if (!states.length) return;
+
+      window.addEventListener('mousemove', onMouseMove, { passive: true });
+      window.addEventListener('scroll', onScroll, { passive: true });
+      tick();
+    };
+
+    const onMouseMove = (e: MouseEvent) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    };
+
+    const onScroll = () => {
+      // Recalc origins on scroll since positions shift
+    };
+
+    const tick = () => {
+      rafId = requestAnimationFrame(tick);
+      const now = performance.now();
+
+      for (const state of states) {
+        const rect = state.el.getBoundingClientRect();
+        // Button center (without current transform applied)
+        const cx = rect.left + rect.width / 2 - state.currentX;
+        const cy = rect.top + rect.height / 2 - state.currentY;
+
+        // Is mouse inside the button's section?
+        const sectionRect = state.section.getBoundingClientRect();
+        const inSection = (
+          mouseY >= sectionRect.top &&
+          mouseY <= sectionRect.bottom &&
+          mouseX >= sectionRect.left &&
+          mouseX <= sectionRect.right
+        );
+
+        if (inSection) {
+          const dx = mouseX - cx;
+          const dy = mouseY - cy;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          // Section-wide pull: follows mouse anywhere in the section
+          // Force scales with distance — closer = stronger, but never zero
+          const sectionDiag = Math.sqrt(
+            sectionRect.width * sectionRect.width +
+            sectionRect.height * sectionRect.height
+          );
+          // Normalize distance relative to section size, invert so closer = stronger
+          const normalDist = Math.min(dist / (sectionDiag * 0.5), 1);
+          const force = (1 - normalDist * 0.6); // never drops below 0.4
+
+          if (dist > 1) {
+            state.targetX = (dx / dist) * MAX_PULL * force;
+            state.targetY = (dy / dist) * MAX_PULL * force;
+          }
+
+          // If was angry, calm down
+          if (state.isAngry) {
+            state.isAngry = false;
+          }
+        } else if (state.currentX !== 0 || state.currentY !== 0) {
+          // Left the section — trigger angry snap-back
+          if (!state.isAngry) {
+            state.isAngry = true;
+            state.angryStart = now;
+          }
+          state.targetX = 0;
+          state.targetY = 0;
+        }
+
+        // Animate
+        if (state.isAngry) {
+          const elapsed = now - state.angryStart;
+          const t = Math.min(elapsed / ANGRY_DURATION, 1);
+
+          // Angry spring: overshoot past origin, oscillate violently, then settle
+          // Damped sine wave with high initial amplitude
+          const decay = 3.8;
+          const freq = 18;
+          const envelope = Math.exp(-decay * t) * Math.sin(freq * t);
+
+          // Store the starting position for the angry animation
+          if (t < 0.01) {
+            state.originX = state.currentX;
+            state.originY = state.currentY;
+          }
+
+          // Snap back with violent overshoot — bounces past center
+          const progress = 1 - Math.exp(-6 * t); // fast approach to zero
+          state.currentX = state.originX * (1 - progress) + envelope * state.originX * 0.8;
+          state.currentY = state.originY * (1 - progress) + envelope * state.originY * 0.8;
+
+          if (t >= 1) {
+            state.currentX = 0;
+            state.currentY = 0;
+            state.isAngry = false;
+          }
+        } else {
+          // Smooth spring follow
+          state.currentX += (state.targetX - state.currentX) * SPRING;
+          state.currentY += (state.targetY - state.currentY) * SPRING;
+
+          // Snap to zero if close enough
+          if (Math.abs(state.currentX) < 0.1 && Math.abs(state.currentY) < 0.1 &&
+              state.targetX === 0 && state.targetY === 0) {
+            state.currentX = 0;
+            state.currentY = 0;
+          }
+        }
+
+        // Apply transform
+        if (state.currentX !== 0 || state.currentY !== 0) {
+          state.el.style.transform = `translate(${state.currentX.toFixed(1)}px, ${state.currentY.toFixed(1)}px)`;
+        } else {
+          state.el.style.transform = '';
+        }
+      }
+    };
+
+    // Init after DOM ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      // Small delay to let other scripts set up
+      requestAnimationFrame(init);
+    }
+
+    // Cleanup on Astro navigation
+    document.addEventListener('astro:before-preparation', () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('scroll', onScroll);
+      states.forEach((s) => {
+        s.el.style.willChange = '';
+        s.el.style.transform = '';
+        s.el.style.transition = '';
+      });
+      states.length = 0;
+    }, { once: true });
+  })();
+</script>

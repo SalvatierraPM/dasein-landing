@@ -1,0 +1,427 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const assetGroups = [
+  {
+    title: 'Light Surfaces',
+    tone: 'light',
+    items: [
+      {
+        name: 'Logo horizontal',
+        file: '/brand/dasein-logo-horizontal.svg',
+        use: 'Headers, propuestas y documentos.',
+      },
+      {
+        name: 'Logo stacked',
+        file: '/brand/dasein-logo-stacked.svg',
+        use: 'Portadas, avatars y usos cuadrados.',
+      },
+      {
+        name: 'Wordmark',
+        file: '/brand/dasein-wordmark.svg',
+        use: 'Co-branding o firma secundaria.',
+      },
+      {
+        name: 'Mark',
+        file: '/brand/dasein-mark.svg',
+        use: 'Favicon, sello e iconografía de marca.',
+      },
+    ],
+  },
+  {
+    title: 'Dark Surfaces',
+    tone: 'dark',
+    items: [
+      {
+        name: 'Logo horizontal reversed',
+        file: '/brand/dasein-logo-horizontal-reversed.svg',
+        use: 'Secciones navy, decks oscuros y video.',
+      },
+      {
+        name: 'Logo stacked reversed',
+        file: '/brand/dasein-logo-stacked-reversed.svg',
+        use: 'Cover slides y visuales sociales.',
+      },
+      {
+        name: 'Wordmark reversed',
+        file: '/brand/dasein-wordmark-reversed.svg',
+        use: 'Firmas sobre fondos profundos.',
+      },
+      {
+        name: 'Mark reversed',
+        file: '/brand/dasein-mark-reversed.svg',
+        use: 'Micro-usos sobre navy y superficies tech.',
+      },
+    ],
+  },
+];
+
+const palette = [
+  { name: 'Paper', hex: '#F5EFE5', text: '#111111' },
+  { name: 'Paper Soft', hex: '#FBF7F1', text: '#111111' },
+  { name: 'Bone', hex: '#E7DDD0', text: '#111111' },
+  { name: 'Mist', hex: '#DCE6F5', text: '#111111' },
+  { name: 'Metal', hex: '#C6CBD4', text: '#111111' },
+  { name: 'Navy', hex: '#0A1628', text: '#F3F5F8' },
+  { name: 'Signal Blue', hex: '#4865FF', text: '#F3F5F8' },
+  { name: 'Signal Red', hex: '#FF5C38', text: '#111111' },
+];
+
+const principles = [
+  {
+    title: 'Símbolo',
+    copy: 'El gesto orgánico del mood board se mantuvo, pero se limpió para que funcione como marca editorial y no como render decorativo.',
+  },
+  {
+    title: 'Wordmark',
+    copy: 'Switzer aporta autoridad contemporánea; Azeret Mono deja la firma “Foresight” en un registro más analítico y técnico.',
+  },
+  {
+    title: 'Jerarquía',
+    copy: 'El logo vive en neutros. Los colores signal siguen reservados a la interfaz, la narrativa y los momentos de decisión.',
+  },
+];
+---
+
+<Layout
+  title="Dasein Foresight — Brand System"
+  description="Sistema base de marca para Dasein Foresight: símbolo, lockups, versiones light/dark y guía breve de uso."
+>
+  <main class="brand-page">
+    <section class="brand-hero">
+      <div class="container brand-hero-inner">
+        <p class="section-kicker">Brand System / V1</p>
+        <h1 class="brand-title">Símbolo orgánico, criterio editorial y señal táctica.</h1>
+        <p class="brand-copy">
+          La propuesta rescata la silueta del mood board, pero la traduce al sistema real del sitio:
+          <code>paper</code>, profundidad <code>navy</code>, palabra sobria y un eje visual que sugiere trazabilidad.
+        </p>
+      </div>
+    </section>
+
+    <section class="brand-principles">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-index">01</span>
+          <div>
+            <h2 class="section-title">Base conceptual</h2>
+            <p class="section-copy">
+              No es una marca de laboratorio futurista ni una firma corporativa genérica.
+              Tiene que sentirse estratégica, sobria y un poco atmosférica.
+            </p>
+          </div>
+        </div>
+
+        <div class="principles-grid" data-reveal-stagger>
+          {principles.map((item) => (
+            <article class="editorial-card principle-card">
+              <span class="principle-index">{item.title}</span>
+              <p>{item.copy}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {assetGroups.map((group, groupIndex) => (
+      <section class:list={['asset-section', group.tone === 'dark' && 'asset-section--dark']}>
+        <div class="container">
+          <div class="section-head">
+            <span class="section-index">{String(groupIndex + 2).padStart(2, '0')}</span>
+            <div>
+              <h2 class="section-title">{group.title}</h2>
+              <p class="section-copy">
+                Variantes listas para usar en piezas editoriales, decks, perfiles y contextos digitales.
+              </p>
+            </div>
+          </div>
+
+          <div class="asset-grid">
+            {group.items.map((item) => (
+              <article class:list={['asset-card', group.tone === 'dark' ? 'asset-card--dark' : 'editorial-card']}>
+                <div class="asset-preview">
+                  <img src={item.file} alt={item.name} loading="lazy" />
+                </div>
+                <div class="asset-meta">
+                  <div>
+                    <h3>{item.name}</h3>
+                    <p>{item.use}</p>
+                  </div>
+                  <a href={item.file} class="asset-link" download>Descargar SVG</a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    ))}
+
+    <section class="palette-section">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-index">04</span>
+          <div>
+            <h2 class="section-title">Palette y uso</h2>
+            <p class="section-copy">
+              El logo se sostiene casi completo con neutros. Los acentos siguen perteneciendo al relato del producto y la interfaz.
+            </p>
+          </div>
+        </div>
+
+        <div class="palette-grid">
+          {palette.map((color) => (
+            <article class="palette-card" style={`--swatch:${color.hex}; --swatch-text:${color.text};`}>
+              <div class="palette-swatch">
+                <span>{color.name}</span>
+              </div>
+              <div class="palette-meta">
+                <code>{color.hex}</code>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div class="usage-grid">
+          <article class="editorial-card usage-card">
+            <span class="usage-label">Do</span>
+            <p>Usa la versión horizontal como firma principal y reserva el mark para micro-formatos.</p>
+          </article>
+          <article class="editorial-card usage-card">
+            <span class="usage-label">Do</span>
+            <p>Usa los archivos reversed sobre <code>navy</code>, fotografía oscura y fondos con partículas.</p>
+          </article>
+          <article class="editorial-card usage-card">
+            <span class="usage-label">Don’t</span>
+            <p>No metas los acentos <code>signal</code> dentro del logo; funcionan mejor como capa narrativa alrededor de la marca.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .brand-page {
+    padding-bottom: var(--space-5xl);
+  }
+
+  .brand-hero {
+    padding: calc(var(--hero-space) * 0.92) 0 calc(var(--space-section) * 0.65);
+  }
+
+  .brand-hero-inner {
+    display: grid;
+    gap: 1.5rem;
+    max-width: 52rem;
+  }
+
+  .brand-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 2rem + 4.2vw, 6rem);
+    line-height: 0.94;
+    letter-spacing: var(--tracking-display);
+    font-weight: 600;
+    max-width: 11ch;
+  }
+
+  .brand-copy {
+    max-width: 42rem;
+    color: var(--ink-soft);
+    font-size: clamp(1.05rem, 0.98rem + 0.35vw, 1.18rem);
+  }
+
+  .brand-copy code,
+  .usage-card code {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+    padding: 0.18rem 0.35rem;
+    border-radius: 999px;
+    background: rgba(17, 17, 17, 0.05);
+  }
+
+  .brand-principles,
+  .asset-section,
+  .palette-section {
+    padding-top: calc(var(--space-section) * 0.58);
+    padding-bottom: calc(var(--space-section) * 0.58);
+  }
+
+  .asset-section--dark {
+    background: var(--gradient-dark);
+    color: var(--slate-white);
+  }
+
+  .asset-section--dark .section-title,
+  .asset-section--dark .section-copy,
+  .asset-section--dark .section-index {
+    color: inherit;
+  }
+
+  .asset-section--dark .section-copy,
+  .asset-section--dark .section-index {
+    color: rgba(243, 245, 248, 0.72);
+  }
+
+  .principles-grid,
+  .asset-grid,
+  .palette-grid,
+  .usage-grid {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .principles-grid,
+  .usage-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .asset-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .palette-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-bottom: 1.25rem;
+  }
+
+  .principle-card,
+  .usage-card,
+  .asset-card {
+    padding: 1.4rem;
+  }
+
+  .principle-card,
+  .usage-card {
+    display: grid;
+    gap: 0.8rem;
+    min-height: 12rem;
+  }
+
+  .principle-index,
+  .usage-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-caption);
+    letter-spacing: var(--tracking-overline);
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .usage-label {
+    color: var(--signal-red);
+  }
+
+  .asset-card {
+    border-radius: var(--radius-xl);
+    border: 1px solid rgba(17, 17, 17, 0.08);
+    display: grid;
+    gap: 1rem;
+  }
+
+  .asset-card--dark {
+    background:
+      radial-gradient(circle at 12% 12%, rgba(72, 101, 255, 0.14), transparent 28%),
+      linear-gradient(180deg, rgba(19, 34, 56, 0.96), rgba(7, 17, 31, 0.98));
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .asset-preview {
+    min-height: 16rem;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    border-radius: calc(var(--radius-xl) - 0.5rem);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 250, 244, 0.62)),
+      var(--paper-raised);
+  }
+
+  .asset-card--dark .asset-preview {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .asset-preview img {
+    width: min(100%, 28rem);
+    height: auto;
+  }
+
+  .asset-meta {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .asset-meta h3 {
+    font-family: var(--font-display);
+    font-size: clamp(1.15rem, 1rem + 0.5vw, 1.45rem);
+    line-height: 1.05;
+    margin-bottom: 0.45rem;
+  }
+
+  .asset-meta p {
+    max-width: 24rem;
+    color: var(--ink-soft);
+    font-size: var(--text-sm);
+  }
+
+  .asset-card--dark .asset-meta p {
+    color: rgba(243, 245, 248, 0.72);
+  }
+
+  .asset-link {
+    white-space: nowrap;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--ink);
+    border-bottom: 1px solid rgba(17, 17, 17, 0.18);
+  }
+
+  .asset-card--dark .asset-link {
+    color: var(--slate-white);
+    border-bottom-color: rgba(243, 245, 248, 0.3);
+  }
+
+  .palette-card {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid rgba(17, 17, 17, 0.08);
+    background: rgba(255, 255, 255, 0.6);
+  }
+
+  .palette-swatch {
+    min-height: 8rem;
+    background: var(--swatch);
+    color: var(--swatch-text);
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-caption);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .palette-meta {
+    padding: 0.9rem 1rem 1rem;
+  }
+
+  .palette-meta code {
+    font-family: var(--font-mono);
+    font-size: var(--text-caption);
+  }
+
+  @media (max-width: 980px) {
+    .principles-grid,
+    .usage-grid,
+    .palette-grid,
+    .asset-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .asset-meta {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+</style>

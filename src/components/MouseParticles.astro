@@ -27,9 +27,9 @@
     if (!ctx) return;
 
     const CTA_SELECTOR = '.button-primary, .button-secondary, .cta-primary, .cta-link, .nav-cta, [data-cta]';
-    const PROXIMITY = 120; // px from CTA edge to start sparkling
-    const MAX_PARTICLES = 40;
-    const EMIT_RATE = 0.4; // particles per frame per active CTA
+    const PROXIMITY = 160; // px from CTA edge to start sparkling
+    const MAX_PARTICLES = 80;
+    const EMIT_RATE = 0.7; // particles per frame per active CTA
 
     const dpr = Math.min(window.devicePixelRatio, 2);
     let W = 0;
@@ -126,8 +126,8 @@
         const dist = distToRect(mouseX, mouseY, rect);
         if (dist < PROXIMITY) {
           const intensity = 1 - dist / PROXIMITY;
-          // More sparks the closer you are
-          const extra = Math.floor(intensity * 2);
+          // More sparks the closer you are — burst when touching
+          const extra = Math.floor(intensity * 4);
           for (let j = 0; j <= extra; j++) {
             emitNear(rect, dist);
           }

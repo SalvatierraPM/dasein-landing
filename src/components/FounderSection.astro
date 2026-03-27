@@ -24,11 +24,16 @@ const proofCells = [
       <h2 class="founder-title">Dasein nace de implementar IA donde el error tiene costo real.</h2>
     </header>
 
-    <!-- Editorial spread — pull quote + narrative -->
+    <!-- Editorial spread — portrait + narrative -->
     <div class="editorial-spread">
-      <blockquote class="pull-quote" data-reveal>
-        <p>No vengo del mundo tradicional de la consultoría.</p>
-      </blockquote>
+      <figure class="founder-portrait" data-reveal>
+        <img
+          src="/founder/pablo-moraga.jpg"
+          alt="Pablo Moraga"
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
 
       <div class="narrative" data-reveal>
         <div class="narrative-inner">
@@ -47,6 +52,15 @@ const proofCells = [
             posibles, sino como una herramienta para tomar mejores decisiones hoy cuando
             la complejidad ya afecta el negocio, la institución o el proyecto.
           </p>
+        </div>
+
+        <div class="founder-mark" aria-hidden="true">
+          <img
+            src="/brand/dasein-mark-tight.png"
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
         </div>
       </div>
     </div>
@@ -134,33 +148,50 @@ const proofCells = [
   }
 
   /* ------------------------------------------------
-     EDITORIAL SPREAD — pull quote + narrative
+     EDITORIAL SPREAD — portrait + narrative
   ------------------------------------------------ */
   .editorial-spread {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    grid-template-columns: minmax(16rem, 0.82fr) minmax(20rem, 1fr);
+    gap: clamp(3rem, 4vw, 5rem);
     margin-bottom: clamp(4rem, 3rem + 4vw, 8rem);
+    align-items: start;
   }
 
-  .pull-quote {
-    display: flex;
-    align-items: flex-start;
+  .founder-portrait {
+    position: relative;
+    margin: 0;
+    width: min(100%, 23rem);
   }
 
-  .pull-quote p {
-    font-family: var(--font-editorial);
-    font-style: italic;
-    font-size: clamp(1.8rem, 1.2rem + 1.5vw, 2.8rem);
-    line-height: 1.25;
-    color: var(--ink);
-    letter-spacing: -0.01em;
-    max-width: 18ch;
+  .founder-portrait::after {
+    content: '';
+    position: absolute;
+    inset: auto 8% -1.5rem 8%;
+    height: 3rem;
+    background: radial-gradient(circle, rgba(116, 90, 58, 0.16), transparent 72%);
+    filter: blur(16px);
+    z-index: 0;
+  }
+
+  .founder-portrait img {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    aspect-ratio: 4 / 4.7;
+    object-fit: cover;
+    object-position: center 18%;
+    border-radius: 1.75rem;
+    border: 1px solid rgba(17, 17, 17, 0.08);
+    box-shadow:
+      0 24px 60px rgba(17, 17, 17, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
   }
 
   .narrative {
-    display: flex;
-    align-items: flex-start;
+    display: grid;
+    align-content: start;
+    gap: clamp(2rem, 2vw, 2.75rem);
   }
 
   .narrative-inner {
@@ -178,6 +209,18 @@ const proofCells = [
 
   .narrative-inner p:first-child {
     color: var(--ink);
+  }
+
+  .founder-mark {
+    margin-left: auto;
+    margin-top: 1rem;
+  }
+
+  .founder-mark img {
+    width: clamp(3.5rem, 4vw, 5rem);
+    height: auto;
+    opacity: 0.5;
+    filter: saturate(0.9);
   }
 
   /* ------------------------------------------------
@@ -358,8 +401,12 @@ const proofCells = [
       gap: 2.5rem;
     }
 
-    .pull-quote p {
-      max-width: none;
+    .founder-portrait {
+      max-width: min(100%, 24rem);
+    }
+
+    .founder-mark {
+      margin-left: 0;
     }
 
     .byline {

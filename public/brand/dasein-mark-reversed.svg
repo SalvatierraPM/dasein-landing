@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 132" fill="none">
+  <defs>
+    <clipPath id="dasein-r-shell-clip">
+      <path d="M79 14C96 11 113 17 124 28C133 37 137 50 136 63C136 67 135 71 133 75C140 82 143 92 140 102C136 113 126 121 115 126C101 132 85 131 77 119C74 115 72 111 71 107C68 112 65 117 60 120C48 128 32 126 21 117C10 108 6 93 8 79C10 65 17 52 27 42C39 29 55 19 72 15C74 15 77 14 79 14Z" />
+    </clipPath>
+    <linearGradient id="dasein-r-shell-base" x1="27" y1="18" x2="123" y2="118" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF9F0" />
+      <stop offset="0.55" stop-color="#F2E7D8" />
+      <stop offset="1" stop-color="#DFD2C1" />
+    </linearGradient>
+    <linearGradient id="dasein-r-shell-cool" x1="88" y1="18" x2="132" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF" />
+      <stop offset="0.52" stop-color="#E7EDF7" />
+      <stop offset="1" stop-color="#C5CFDF" />
+    </linearGradient>
+    <linearGradient id="dasein-r-core" x1="61" y1="45" x2="100" y2="105" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#E0E9F4" />
+      <stop offset="0.56" stop-color="#BAC6D8" />
+      <stop offset="1" stop-color="#8EA0BD" />
+    </linearGradient>
+    <radialGradient id="dasein-r-haze" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(72 61) rotate(29) scale(38 28)">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.24" />
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="dasein-r-highlight" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(58 36) rotate(157) scale(38 22)">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.68" />
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="dasein-r-warm-wash" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(57 58) rotate(40) scale(36 26)">
+      <stop offset="0" stop-color="#C79E5B" stop-opacity="0.24" />
+      <stop offset="1" stop-color="#C79E5B" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="dasein-r-cool-wash" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(114 79) rotate(-28) scale(24 20)">
+      <stop offset="0" stop-color="#8EA0BE" stop-opacity="0.32" />
+      <stop offset="1" stop-color="#8EA0BE" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="dasein-r-cut" x1="80.5" y1="18" x2="80.5" y2="114" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FBF7F1" stop-opacity="0.18" />
+      <stop offset="0.5" stop-color="#FBF7F1" stop-opacity="0.34" />
+      <stop offset="1" stop-color="#FBF7F1" stop-opacity="0.18" />
+    </linearGradient>
+    <filter id="dasein-r-blur" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="7.5" />
+    </filter>
+  </defs>
+
+  <path
+    d="M79 14C96 11 113 17 124 28C133 37 137 50 136 63C136 67 135 71 133 75C140 82 143 92 140 102C136 113 126 121 115 126C101 132 85 131 77 119C74 115 72 111 71 107C68 112 65 117 60 120C48 128 32 126 21 117C10 108 6 93 8 79C10 65 17 52 27 42C39 29 55 19 72 15C74 15 77 14 79 14Z"
+    fill="url(#dasein-r-shell-base)"
+  />
+  <g clip-path="url(#dasein-r-shell-clip)">
+    <path
+        d="M80 18C93 16 104 19 112 25C119 31 124 40 126 49C128 61 125 73 120 82C114 92 104 100 92 101C82 81 79 50 80 18Z"
+      fill="url(#dasein-r-shell-cool)"
+      opacity="0.97"
+    />
+    <path
+      d="M28 42C34 33 45 25 58 21C69 18 81 20 91 25C77 24 66 27 56 33C47 38 37 42 28 42Z"
+      fill="url(#dasein-r-highlight)"
+      opacity="0.84"
+    />
+    <ellipse
+      cx="59"
+      cy="58"
+      rx="38"
+      ry="28"
+      fill="url(#dasein-r-warm-wash)"
+      filter="url(#dasein-r-blur)"
+      opacity="0.78"
+    />
+    <ellipse
+      cx="73"
+      cy="63"
+      rx="37"
+      ry="27"
+      fill="url(#dasein-r-haze)"
+      filter="url(#dasein-r-blur)"
+      opacity="0.7"
+    />
+    <ellipse
+      cx="114"
+      cy="79"
+      rx="20"
+      ry="17"
+      fill="url(#dasein-r-cool-wash)"
+      filter="url(#dasein-r-blur)"
+      opacity="0.78"
+    />
+    <path
+        d="M72 48C66 54 62 63 62 73C62 84 66 94 73 102C81 100 88 95 94 88C100 80 103 70 101 61C98 53 93 47 86 45C81 44 76 45 72 48Z"
+      fill="url(#dasein-r-core)"
+    />
+  </g>
+  <path
+    d="M80.5 19.5V114"
+    stroke="url(#dasein-r-cut)"
+    stroke-width="1.8"
+    stroke-linecap="round"
+  />
+</svg>

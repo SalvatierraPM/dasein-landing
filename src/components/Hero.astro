@@ -1,5 +1,6 @@
 ---
 import ParticleScene from './ParticleScene.astro';
+import ParticleNetwork from './ParticleNetwork.astro';
 
 const proofPoints = [
   {
@@ -43,6 +44,15 @@ const stripLoop = [...strips, ...strips, ...strips];
 ---
 
 <section class="section-shell hero-shell" id="hero">
+  <!-- Subtle particle network for depth -->
+  <ParticleNetwork
+    class="hero-particles"
+    color="#8899aa"
+    count={35}
+    opacity={0.32}
+    linkDistance={120}
+  />
+
   <!-- Coral torus — top right atmospheric accent -->
   <div class="hero-3d-wrap" data-parallax="0.08" aria-hidden="true">
     <img src="/3d/torus-coral.webp" alt="" class="hero-3d" loading="eager" width="340" height="280" />
@@ -71,7 +81,7 @@ const stripLoop = [...strips, ...strips, ...strips];
       </p>
 
       <div class="button-row hero-actions" data-hero-actions>
-        <a class="button button-primary" href="#contacto">Agenda una conversación</a>
+        <a class="button button-primary" href="https://calendly.com/salvatierra-pablom/30min" target="_blank" rel="noreferrer">Agenda una conversación</a>
         <a class="button button-secondary" href="#metodo">Ver el método</a>
       </div>
     </div>
@@ -130,6 +140,15 @@ const stripLoop = [...strips, ...strips, ...strips];
     padding-bottom: 1.5rem;
     position: relative;
     overflow: visible;
+  }
+
+  .hero-particles {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 0%, transparent 100%);
   }
 
   .hero-stack {
@@ -472,8 +491,8 @@ const stripLoop = [...strips, ...strips, ...strips];
     width: 100%;
     height: auto;
     display: block;
-    opacity: 0.35;
-    filter: blur(1px) saturate(1.3);
+    opacity: 0.45;
+    filter: saturate(1.3);
     animation: hero-float 14s ease-in-out infinite;
   }
 
@@ -603,4 +622,6 @@ const stripLoop = [...strips, ...strips, ...strips];
 
     update();
   }
+
+
 </script>

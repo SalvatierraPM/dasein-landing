@@ -63,13 +63,18 @@
     <!-- Monumental quote -->
     <blockquote class="alliance-quote" data-reveal>
       <div class="alliance-quote-rule"></div>
-      <p>Where our work <span class="alliance-quote-accent">ends</span>, yours <span class="alliance-quote-accent">begins</span>.</p>
+      <p>
+        <span class="alliance-quote-line">
+          <span class="alliance-quote-part alliance-quote-part--display">Where our work</span>
+          <span class="alliance-quote-part alliance-quote-part--editorial alliance-quote-accent">ends,</span>
+        </span>
+        <span class="alliance-quote-line alliance-quote-line--secondary">
+          <span class="alliance-quote-part alliance-quote-part--display">yours</span>
+          <span class="alliance-quote-part alliance-quote-part--editorial alliance-quote-accent">begins.</span>
+        </span>
+      </p>
       <div class="alliance-quote-rule"></div>
     </blockquote>
-
-    <div class="alliance-cta" data-reveal>
-      <a class="button button-primary" data-cta href="#contacto">Agendemos una conversación</a>
-    </div>
 
   </div>
 </section>
@@ -184,9 +189,10 @@
     margin-bottom: clamp(0.75rem, 1vw, 1.25rem);
     font-family: var(--font-mono);
     font-size: var(--text-overline);
+    font-weight: 600;
     letter-spacing: var(--tracking-overline);
     text-transform: uppercase;
-    color: var(--ink-faint);
+    color: var(--signal-red);
   }
 
   .alliance-col-title {
@@ -219,14 +225,25 @@
     flex: 1;
     height: 1px;
     background: linear-gradient(90deg, var(--signal-blue), var(--signal-red));
-    opacity: 0.18;
+    opacity: 0.28;
     transform-origin: left center;
   }
 
   .alliance-connector-arrow {
     flex-shrink: 0;
-    color: var(--ink-faint);
-    opacity: 0.4;
+    width: 2.35rem;
+    height: 2.35rem;
+    padding: 0.6rem;
+    border-radius: 999px;
+    color: var(--ink);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 248, 239, 0.64)),
+      var(--paper-raised);
+    border: 1px solid rgba(17, 17, 17, 0.12);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.82),
+      0 10px 22px rgba(17, 17, 17, 0.05);
+    opacity: 1;
   }
 
   /* Animate connector line draw-in */
@@ -296,16 +313,45 @@
     margin: 0;
     max-width: 54rem;
     margin-inline: auto;
+    padding-block: clamp(2rem, 3vw, 4rem);
   }
 
   .alliance-quote p {
-    font-family: var(--font-editorial);
-    font-style: italic;
-    font-size: clamp(2.8rem, 2rem + 3vw, 5rem);
-    line-height: 1.05;
-    letter-spacing: -0.03em;
+    display: grid;
+    justify-items: center;
+    gap: 0.12em;
+    font-size: clamp(3rem, 2rem + 3.5vw, 5.4rem);
+    line-height: 1.08;
     color: var(--ink-faint);
-    padding-block: clamp(2rem, 3vw, 3.5rem);
+    padding-block: clamp(2.5rem, 4vw, 4.5rem);
+  }
+
+  .alliance-quote-line {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: baseline;
+    gap: 0.18em;
+  }
+
+  .alliance-quote-line--secondary {
+    gap: 0.18em;
+  }
+
+  .alliance-quote-part--display {
+    font-family: var(--font-display);
+    font-size: 1em;
+    font-weight: 500;
+    font-style: normal;
+    letter-spacing: -0.04em;
+  }
+
+  .alliance-quote-part--editorial {
+    font-family: var(--font-editorial);
+    font-size: 1.1em;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.02em;
   }
 
   .alliance-quote-accent {
@@ -391,7 +437,7 @@
     [data-reveal-stagger] > *:nth-child(5) { transition-delay: 0.4s !important; }
 
     .alliance-quote p {
-      font-size: clamp(2rem, 1.5rem + 3vw, 3.5rem);
+      font-size: clamp(2.2rem, 1.5rem + 3vw, 3.5rem);
     }
   }
 
@@ -412,8 +458,8 @@
     width: 100%;
     height: auto;
     display: block;
-    opacity: 0.28;
-    filter: blur(1px) brightness(0.72) saturate(1.3);
+    opacity: 0.38;
+    filter: brightness(0.72) saturate(1.3);
     animation: ally-float 15s ease-in-out infinite;
     animation-delay: -5s;
   }
@@ -421,12 +467,6 @@
   @keyframes ally-float {
     0%, 100% { transform: rotate(-18deg) translateY(0); }
     50% { transform: rotate(-15deg) translateY(-12px); }
-  }
-
-  .alliance-cta {
-    display: flex;
-    justify-content: center;
-    padding-top: clamp(2rem, 3vw, 4rem);
   }
 
   @media (max-width: 900px) { .alliance-3d-wrap { display: none; } }

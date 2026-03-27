@@ -32,16 +32,16 @@ const steps = [
   },
   {
     number: '05',
-    title: 'Diseño de actores',
-    body: 'Diseñamos perfiles, posturas, memoria y cantidad de rondas según el nivel de complejidad que realmente exige la decisión.',
-    output: 'Simulación con actores plausibles',
-    short: 'Actores',
+    title: 'Simulación multiagente',
+    body: 'Modelamos entre 15 y 60 agentes con memoria, incentivos y fricciones del caso. Corren rondas de interacción para explorar comportamientos plausibles antes de decidir.',
+    output: 'Escenarios con trazabilidad argumental',
+    short: 'Simulación',
   },
   {
     number: '06',
-    title: 'Simulación y plan a 90 días',
-    body: 'Ejecutamos escenarios, identificamos señales y traducimos hallazgos en una recomendación con trazabilidad y prioridad de acción.',
-    output: 'Memo ejecutivo y plan inmediato',
+    title: 'Plan a 90 días + workshop',
+    body: 'Sintetizamos hallazgos en un memo ejecutivo con recomendaciones priorizadas y un roadmap a 90 días. Cerramos con un workshop para validar supuestos y alinear al equipo.',
+    output: 'Memo, roadmap y sesión ejecutiva',
     short: 'Plan',
   },
 ];
@@ -53,12 +53,12 @@ const steps = [
     <div class="method-intro-inner">
       <p class="section-kicker">Método Dasein / prueba de proceso</p>
       <h2 class="method-headline">
-        La metodología se ve<br />como secuencia,<br />
-        <em>no como slogan.</em>
+        Seis pasos para<br />convertir complejidad<br />
+        <em>en decisión.</em>
       </h2>
       <p class="method-lead">
-        El valor no está en decir que se usa IA. Está en mostrar cómo se estructura
-        una decisión compleja antes de escalarla.
+        De la pregunta estratégica al plan a 90 días.
+        Cada paso deja un artefacto revisable, no una intuición.
       </p>
     </div>
   </div>
@@ -91,30 +91,135 @@ const steps = [
         <!-- Big cube -->
         <div class="method-cube-viewport" aria-hidden="true">
           <div class="method-cube">
-            <div class="method-face method-face--front">
-              <strong>{steps[0].number}</strong>
-              <span>{steps[0].short}</span>
+
+            <!-- Face 01: Delimitar — pregunta estratégica -->
+            <div class="method-face method-face--front" data-face="0">
+              <span class="face-kicker">Pregunta estratégica</span>
+              <div class="face-visual face-question">
+                <span class="face-q-line" style="--d:0">¿Cómo podría impactar</span>
+                <span class="face-q-line" style="--d:1">la IA generativa en</span>
+                <span class="face-q-line" style="--d:2">nuestro modelo de atención</span>
+                <span class="face-q-line" style="--d:3">en 24 meses?</span>
+              </div>
+              <span class="face-data">Horizonte explorado, no predicho</span>
             </div>
-            <div class="method-face method-face--right">
-              <strong>{steps[1].number}</strong>
-              <span>{steps[1].short}</span>
+
+            <!-- Face 02: Insumos — carga de restricciones -->
+            <div class="method-face method-face--right" data-face="1">
+              <span class="face-kicker">Insumos cargados</span>
+              <div class="face-visual face-inputs">
+                <div class="face-input-row" style="--d:0"><span class="face-input-icon">◇</span> Pregunta de decisión<span class="face-check">✓</span></div>
+                <div class="face-input-row" style="--d:1"><span class="face-input-icon">◇</span> Restricciones y tensiones<span class="face-check">✓</span></div>
+                <div class="face-input-row" style="--d:2"><span class="face-input-icon">◇</span> Mapa de stakeholders<span class="face-check">✓</span></div>
+                <div class="face-input-row" style="--d:3"><span class="face-input-icon">◇</span> Datos de contexto<span class="face-check">✓</span></div>
+                <div class="face-input-row" style="--d:4"><span class="face-input-icon">◇</span> Supuestos y horizonte<span class="face-check">✓</span></div>
+                <div class="face-input-row" style="--d:5"><span class="face-input-icon">◇</span> Marco regulatorio<span class="face-check">✓</span></div>
+              </div>
+              <span class="face-data">6 / 6 insumos del caso</span>
             </div>
-            <div class="method-face method-face--back">
-              <strong>{steps[2].number}</strong>
-              <span>{steps[2].short}</span>
+
+            <!-- Face 03: Ontología — dendrograma -->
+            <div class="method-face method-face--back" data-face="2">
+              <span class="face-kicker">Ontología</span>
+              <div class="face-visual face-tree">
+                <svg viewBox="0 0 200 140" fill="none" class="face-dendro">
+                  <!-- trunk -->
+                  <line x1="100" y1="130" x2="100" y2="90" stroke="currentColor" stroke-width="1.5" class="dendro-line" style="--d:0"/>
+                  <!-- level 1 -->
+                  <line x1="100" y1="90" x2="50" y2="60" stroke="currentColor" stroke-width="1.5" class="dendro-line" style="--d:1"/>
+                  <line x1="100" y1="90" x2="150" y2="60" stroke="currentColor" stroke-width="1.5" class="dendro-line" style="--d:1"/>
+                  <!-- level 2 left -->
+                  <line x1="50" y1="60" x2="25" y2="32" stroke="currentColor" stroke-width="1.5" class="dendro-line" style="--d:2"/>
+                  <line x1="50" y1="60" x2="70" y2="32" stroke="currentColor" stroke-width="1.5" class="dendro-line" style="--d:2"/>
+                  <!-- level 2 right -->
+                  <line x1="150" y1="60" x2="130" y2="32" stroke="currentColor" stroke-width="1.5" class="dendro-line" style="--d:3"/>
+                  <line x1="150" y1="60" x2="175" y2="32" stroke="currentColor" stroke-width="1.5" class="dendro-line" style="--d:3"/>
+                  <!-- nodes -->
+                  <circle cx="100" cy="130" r="3" fill="var(--signal-red)" class="dendro-node" style="--d:0"/>
+                  <circle cx="50" cy="60" r="3" fill="currentColor" class="dendro-node" style="--d:1"/>
+                  <circle cx="150" cy="60" r="3" fill="currentColor" class="dendro-node" style="--d:1"/>
+                  <circle cx="25" cy="32" r="3" fill="currentColor" class="dendro-node" style="--d:2"/>
+                  <circle cx="70" cy="32" r="3" fill="currentColor" class="dendro-node" style="--d:2"/>
+                  <circle cx="130" cy="32" r="3" fill="currentColor" class="dendro-node" style="--d:3"/>
+                  <circle cx="175" cy="32" r="3" fill="currentColor" class="dendro-node" style="--d:3"/>
+                  <!-- labels -->
+                  <text x="100" y="126" text-anchor="middle" class="dendro-label" style="--d:0">Caso</text>
+                  <text x="50" y="56" text-anchor="middle" class="dendro-label" style="--d:1">Actores</text>
+                  <text x="150" y="56" text-anchor="middle" class="dendro-label" style="--d:1">Conceptos</text>
+                  <text x="25" y="28" text-anchor="middle" class="dendro-label" style="--d:2">Incentivos</text>
+                  <text x="70" y="28" text-anchor="middle" class="dendro-label" style="--d:2">Fricciones</text>
+                  <text x="130" y="28" text-anchor="middle" class="dendro-label" style="--d:3">Señales</text>
+                  <text x="175" y="28" text-anchor="middle" class="dendro-label" style="--d:3">Relaciones</text>
+                </svg>
+              </div>
+              <span class="face-data">7 categorías / 4 niveles</span>
             </div>
-            <div class="method-face method-face--left">
-              <strong>{steps[3].number}</strong>
-              <span>{steps[3].short}</span>
+
+            <!-- Face 04: GraphRAG — red de nodos -->
+            <div class="method-face method-face--left" data-face="3">
+              <span class="face-kicker">Cartografía / GraphRAG</span>
+              <div class="face-visual face-graph">
+                <svg viewBox="0 0 200 140" fill="none" class="face-network">
+                  <!-- edges -->
+                  <line x1="40" y1="70" x2="100" y2="30" stroke="currentColor" stroke-width="1" class="graph-edge" style="--d:0"/>
+                  <line x1="100" y1="30" x2="160" y2="50" stroke="currentColor" stroke-width="1" class="graph-edge" style="--d:1"/>
+                  <line x1="160" y1="50" x2="140" y2="110" stroke="currentColor" stroke-width="1" class="graph-edge" style="--d:2"/>
+                  <line x1="140" y1="110" x2="60" y2="110" stroke="currentColor" stroke-width="1" class="graph-edge" style="--d:3"/>
+                  <line x1="60" y1="110" x2="40" y2="70" stroke="currentColor" stroke-width="1" class="graph-edge" style="--d:4"/>
+                  <line x1="40" y1="70" x2="160" y2="50" stroke="currentColor" stroke-width="1" class="graph-edge" style="--d:2"/>
+                  <line x1="100" y1="30" x2="140" y2="110" stroke="currentColor" stroke-width="1" class="graph-edge" style="--d:3"/>
+                  <line x1="100" y1="30" x2="60" y2="110" stroke="currentColor" stroke-width="1" class="graph-edge" style="--d:4"/>
+                  <line x1="40" y1="70" x2="140" y2="110" stroke="currentColor" stroke-width="1" class="graph-edge" style="--d:5"/>
+                  <line x1="100" y1="70" x2="100" y2="30" stroke="currentColor" stroke-width="1" class="graph-edge" style="--d:3"/>
+                  <line x1="100" y1="70" x2="40" y2="70" stroke="currentColor" stroke-width="1" class="graph-edge" style="--d:4"/>
+                  <line x1="100" y1="70" x2="160" y2="50" stroke="currentColor" stroke-width="1" class="graph-edge" style="--d:5"/>
+                  <!-- nodes -->
+                  <circle cx="40" cy="70" r="5" fill="var(--signal-blue, #4865ff)" class="graph-node" style="--d:0"/>
+                  <circle cx="100" cy="30" r="6" fill="var(--signal-red, #c44)" class="graph-node" style="--d:0"/>
+                  <circle cx="160" cy="50" r="5" fill="var(--signal-blue, #4865ff)" class="graph-node" style="--d:1"/>
+                  <circle cx="140" cy="110" r="4" fill="currentColor" class="graph-node" style="--d:2"/>
+                  <circle cx="60" cy="110" r="4" fill="currentColor" class="graph-node" style="--d:2"/>
+                  <circle cx="100" cy="70" r="4.5" fill="var(--signal-blue, #4865ff)" class="graph-node" style="--d:3"/>
+                </svg>
+              </div>
+              <span class="face-data">6 entidades / 12 relaciones</span>
             </div>
-            <div class="method-face method-face--top">
-              <strong>{steps[4].number}</strong>
-              <span>{steps[4].short}</span>
+
+            <!-- Face 05: Simulación — agentes + rondas -->
+            <div class="method-face method-face--top" data-face="4">
+              <span class="face-kicker">Simulación multiagente</span>
+              <div class="face-visual face-sim-combined">
+                <div class="face-agent-grid face-agent-grid--compact">
+                  {Array.from({ length: 18 }).map((_, i) => (
+                    <span class="face-agent-dot" style={`--d:${i}`}></span>
+                  ))}
+                </div>
+                <div class="face-sim-rounds-compact">
+                  <div class="face-sim-round" style="--d:0"><span class="face-sim-label">R01</span><span class="face-sim-bar"><span class="face-sim-fill" style="--fill:1"></span></span></div>
+                  <div class="face-sim-round" style="--d:1"><span class="face-sim-label">R02</span><span class="face-sim-bar"><span class="face-sim-fill" style="--fill:1"></span></span></div>
+                  <div class="face-sim-round" style="--d:2"><span class="face-sim-label">R03</span><span class="face-sim-bar"><span class="face-sim-fill" style="--fill:0.6"></span></span></div>
+                </div>
+                <div class="face-agent-stats">
+                  <span class="face-agent-range">15 – 60</span>
+                  <span class="face-agent-unit">agentes</span>
+                </div>
+              </div>
+              <span class="face-data">Memoria · incentivos · rondas de 2d</span>
             </div>
-            <div class="method-face method-face--bottom">
-              <strong>{steps[5].number}</strong>
-              <span>{steps[5].short}</span>
+
+            <!-- Face 06: Plan + Workshop — entregable -->
+            <div class="method-face method-face--bottom" data-face="5">
+              <span class="face-kicker">Entregable</span>
+              <div class="face-visual face-plan">
+                <div class="face-plan-item" style="--d:0"><span class="face-plan-icon">◈</span><span class="face-plan-label">Memo ejecutivo</span></div>
+                <div class="face-plan-item" style="--d:1"><span class="face-plan-icon">◈</span><span class="face-plan-label">Plan a 90 días</span></div>
+                <div class="face-plan-item" style="--d:2"><span class="face-plan-icon">◈</span><span class="face-plan-label">Workshop ejecutivo</span></div>
+                <div class="face-plan-divider" style="--d:3"></div>
+                <div class="face-plan-meta" style="--d:3">Recomendaciones priorizadas con trazabilidad</div>
+              </div>
+              <span class="face-data">Criterio para decidir, no predicción</span>
             </div>
+
           </div>
         </div>
 
@@ -339,19 +444,414 @@ const steps = [
     text-align: center;
   }
 
-  .method-face strong {
-    font-family: var(--font-mono);
-    font-size: var(--text-overline);
-    letter-spacing: 0.2em;
-    color: var(--signal-red);
+  /* === Face content layout === */
+  .method-face {
+    grid-template-rows: auto 1fr auto;
+    align-items: stretch;
+    justify-items: center;
+    padding: clamp(1rem, 2vw, 1.5rem);
+    overflow: hidden;
   }
 
-  .method-face span {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 1.2rem + 1.5vw, 2.8rem);
-    line-height: 0.9;
-    letter-spacing: -0.05em;
+  .face-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint, #888);
+    justify-self: start;
+  }
+
+  .face-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .face-data {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint, #888);
+    justify-self: center;
+    text-align: center;
+  }
+
+  /* --- Face 01: Question --- */
+  .face-question {
+    align-items: flex-start;
+    gap: 0;
+    padding: 0 0.3rem;
+  }
+
+  .face-q-line {
+    font-family: var(--font-mono);
+    font-size: clamp(0.7rem, 0.5rem + 0.5vw, 0.85rem);
+    line-height: 1.55;
+    letter-spacing: 0.01em;
+    color: var(--ink, #111);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.4s ease calc(var(--d) * 120ms + 200ms),
+                transform 0.5s var(--ease-out-expo) calc(var(--d) * 120ms + 200ms);
+  }
+
+  .method-face.is-active-face .face-q-line {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* --- Face 02: Inputs --- */
+  .face-inputs {
+    align-items: stretch;
+    gap: 0.25rem;
+    padding: 0 0.3rem;
+  }
+
+  .face-input-row {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: clamp(0.6rem, 0.45rem + 0.4vw, 0.72rem);
+    letter-spacing: 0.04em;
+    color: var(--ink, #111);
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: opacity 0.35s ease calc(var(--d) * 100ms + 200ms),
+                transform 0.45s var(--ease-out-expo) calc(var(--d) * 100ms + 200ms);
+  }
+
+  .method-face.is-active-face .face-input-row {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .face-input-icon {
+    color: var(--signal-blue, #4865ff);
+    font-size: 0.65rem;
+    flex-shrink: 0;
+  }
+
+  .face-check {
+    margin-left: auto;
+    color: var(--signal-blue, #4865ff);
     font-weight: 600;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.3s ease calc(var(--d) * 100ms + 500ms),
+                transform 0.4s var(--ease-out-expo) calc(var(--d) * 100ms + 500ms);
+  }
+
+  .method-face.is-active-face .face-check {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* --- Face 03: Dendro --- */
+  .face-tree {
+    padding: 0;
+  }
+
+  .face-dendro {
+    width: 100%;
+    height: auto;
+    max-height: 70%;
+    color: var(--ink, #111);
+  }
+
+  .dendro-line {
+    stroke-dasharray: 80;
+    stroke-dashoffset: 80;
+    opacity: 0.3;
+    transition: stroke-dashoffset 0.6s var(--ease-out-expo) calc(var(--d) * 180ms + 200ms),
+                opacity 0.4s ease calc(var(--d) * 180ms + 200ms);
+  }
+
+  .method-face.is-active-face .dendro-line {
+    stroke-dashoffset: 0;
+    opacity: 0.4;
+  }
+
+  .dendro-node {
+    opacity: 0;
+    transform-origin: center;
+    transition: opacity 0.35s ease calc(var(--d) * 180ms + 300ms);
+  }
+
+  .method-face.is-active-face .dendro-node {
+    opacity: 1;
+  }
+
+  .dendro-label {
+    font-family: var(--font-mono);
+    font-size: 7px;
+    letter-spacing: 0.06em;
+    fill: var(--ink-faint, #888);
+    opacity: 0;
+    transition: opacity 0.3s ease calc(var(--d) * 180ms + 400ms);
+  }
+
+  .method-face.is-active-face .dendro-label {
+    opacity: 1;
+  }
+
+  /* --- Face 04: Graph --- */
+  .face-graph {
+    padding: 0;
+  }
+
+  .face-network {
+    width: 100%;
+    height: auto;
+    max-height: 70%;
+    color: var(--ink, #111);
+  }
+
+  .graph-edge {
+    stroke-dasharray: 200;
+    stroke-dashoffset: 200;
+    opacity: 0.2;
+    transition: stroke-dashoffset 0.7s var(--ease-out-expo) calc(var(--d) * 80ms + 200ms),
+                opacity 0.4s ease calc(var(--d) * 80ms + 200ms);
+  }
+
+  .method-face.is-active-face .graph-edge {
+    stroke-dashoffset: 0;
+    opacity: 0.25;
+  }
+
+  .graph-node {
+    opacity: 0;
+    transition: opacity 0.4s ease calc(var(--d) * 100ms + 200ms);
+  }
+
+  .method-face.is-active-face .graph-node {
+    opacity: 1;
+  }
+
+  @keyframes node-pulse {
+    0%, 100% { r: var(--r, 5); }
+    50% { r: calc(var(--r, 5) + 1.5); }
+  }
+
+  .method-face.is-active-face .graph-node {
+    animation: node-pulse 2.4s ease-in-out infinite;
+    animation-delay: calc(var(--d) * 300ms);
+  }
+
+  /* --- Face 05: Agents --- */
+  .face-agents {
+    gap: 0.6rem;
+  }
+
+  .face-agent-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.35rem;
+    width: 70%;
+  }
+
+  .face-agent-dot {
+    width: clamp(0.5rem, 0.8vw, 0.7rem);
+    height: clamp(0.5rem, 0.8vw, 0.7rem);
+    border-radius: 50%;
+    background: var(--signal-blue, #4865ff);
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity 0.25s ease calc(var(--d) * 40ms + 200ms),
+                transform 0.35s var(--ease-out-expo) calc(var(--d) * 40ms + 200ms);
+  }
+
+  .method-face.is-active-face .face-agent-dot {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+
+  .face-agent-stats {
+    display: flex;
+    align-items: baseline;
+    gap: 0.3rem;
+  }
+
+  .face-agent-range {
+    font-family: var(--font-mono);
+    font-size: clamp(1.4rem, 1rem + 1vw, 2rem);
+    font-weight: 600;
+    color: var(--ink, #111);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .face-agent-unit {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint, #888);
+  }
+
+  /* --- Face 06: Simulation --- */
+  .face-sim {
+    align-items: stretch;
+    gap: 0.35rem;
+    padding: 0 0.3rem;
+  }
+
+  .face-sim-round {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 0.4rem;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.35s ease calc(var(--d) * 120ms + 200ms),
+                transform 0.45s var(--ease-out-expo) calc(var(--d) * 120ms + 200ms);
+  }
+
+  .face-sim-round.is-future {
+    opacity: 0 !important;
+  }
+
+  .method-face.is-active-face .face-sim-round:not(.is-future) {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .method-face.is-active-face .face-sim-round.is-future {
+    opacity: 0.25 !important;
+    transform: translateY(0);
+  }
+
+  .face-sim-label {
+    font-family: var(--font-mono);
+    font-size: clamp(0.55rem, 0.4rem + 0.3vw, 0.65rem);
+    letter-spacing: 0.06em;
+    color: var(--ink, #111);
+    white-space: nowrap;
+  }
+
+  .face-sim-bar {
+    height: 3px;
+    background: rgba(17, 17, 17, 0.08);
+    border-radius: 2px;
+    overflow: hidden;
+    min-width: 2rem;
+  }
+
+  .face-sim-fill {
+    display: block;
+    height: 100%;
+    background: var(--signal-blue, #4865ff);
+    border-radius: 2px;
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 0.8s var(--ease-out-expo) calc(var(--d) * 150ms + 400ms);
+  }
+
+  .method-face.is-active-face .face-sim-fill {
+    transform: scaleX(var(--fill));
+  }
+
+  .face-sim-time {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint, #888);
+    min-width: 1.2rem;
+    text-align: right;
+  }
+
+  /* --- Face 05 combined: agents + rounds --- */
+  .face-sim-combined {
+    gap: 0.4rem;
+  }
+
+  .face-agent-grid--compact {
+    grid-template-columns: repeat(6, 1fr);
+    width: 60%;
+    gap: 0.3rem;
+  }
+
+  .face-sim-rounds-compact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    width: 70%;
+  }
+
+  .face-sim-rounds-compact .face-sim-round {
+    grid-template-columns: auto 1fr;
+    gap: 0.35rem;
+  }
+
+  /* --- Face 06: Plan --- */
+  .face-plan {
+    align-items: stretch;
+    gap: 0.35rem;
+    padding: 0 0.5rem;
+  }
+
+  .face-plan-item {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-mono);
+    font-size: clamp(0.6rem, 0.45rem + 0.4vw, 0.75rem);
+    letter-spacing: 0.04em;
+    color: var(--ink, #111);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.35s ease calc(var(--d) * 120ms + 200ms),
+                transform 0.45s var(--ease-out-expo) calc(var(--d) * 120ms + 200ms);
+  }
+
+  .method-face.is-active-face .face-plan-item {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .face-plan-icon {
+    color: var(--signal-red, #c44);
+    font-size: 0.7rem;
+    flex-shrink: 0;
+  }
+
+  .face-plan-label {
+    font-weight: 500;
+  }
+
+  .face-plan-divider {
+    height: 1px;
+    background: rgba(17, 17, 17, 0.1);
+    margin: 0.15rem 0;
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: opacity 0.3s ease calc(var(--d) * 120ms + 200ms),
+                transform 0.5s var(--ease-out-expo) calc(var(--d) * 120ms + 200ms);
+  }
+
+  .method-face.is-active-face .face-plan-divider {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  .face-plan-meta {
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint, #888);
+    line-height: 1.5;
+    opacity: 0;
+    transition: opacity 0.4s ease calc(var(--d) * 120ms + 300ms);
+  }
+
+  .method-face.is-active-face .face-plan-meta {
+    opacity: 1;
   }
 
   .method-face--front  { transform: translateZ(calc(var(--cube-size) / 2)); }
@@ -636,14 +1136,39 @@ const steps = [
       'Base situada y no teórica',
       'Taxonomía útil para el caso',
       'Mapa navegable del sistema',
-      'Simulación con actores plausibles',
-      'Memo ejecutivo y plan inmediato',
+      'Escenarios con trazabilidad argumental',
+      'Memo, roadmap y sesión ejecutiva',
     ];
+
+    const faces = Array.from(methodRoot.querySelectorAll('[data-face]'));
+    let prevFaceIndex = -1;
+
+    const animateCounter = (el, target, duration = 800) => {
+      const start = performance.now();
+      const from = 0;
+      const tick = (now) => {
+        const t = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - t, 3);
+        el.textContent = String(Math.round(from + (target - from) * eased));
+        if (t < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
 
     const setActive = (index) => {
       methodRoot.dataset.activeStep = String(index);
       panels.forEach((panel, i) => panel.classList.toggle('is-active', i === index));
       dots.forEach((dot, i) => dot.classList.toggle('is-active', i === index));
+
+      // Activate face animations
+      if (index !== prevFaceIndex) {
+        faces.forEach((face) => {
+          const fi = Number(face.dataset.face);
+          face.classList.toggle('is-active-face', fi === index);
+        });
+
+        prevFaceIndex = index;
+      }
 
       if (meter instanceof HTMLElement) {
         meter.style.transform = `scaleX(${(index + 1) / panels.length})`;
@@ -660,6 +1185,10 @@ const steps = [
     };
 
     setActive(0);
+
+    // Activate first face immediately
+    const firstFace = methodRoot.querySelector('[data-face="0"]');
+    if (firstFace) firstFace.classList.add('is-active-face');
 
     // IntersectionObserver triggers cube rotation as panels scroll into view
     const observer = new IntersectionObserver((entries) => {
