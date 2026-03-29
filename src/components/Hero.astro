@@ -379,6 +379,12 @@ const stripLoop = [...strips, ...strips, ...strips];
     border-color: rgba(255, 255, 255, 0.06);
   }
 
+  .hero-disclosure-tag::before {
+    content: '◇';
+    color: var(--signal-blue);
+    opacity: 0.5;
+  }
+
   .hero-disclosure-title {
     font-family: var(--font-display);
     font-size: clamp(1.8rem, 1rem + 2vw, 2.8rem);

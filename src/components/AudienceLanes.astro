@@ -324,14 +324,14 @@ const marqueeItems = ['Pilotos', 'Partners', 'Equipo', 'Investigadores', 'Alianz
   }
 
   .audience-details li::before {
-    content: '';
+    content: '※';
     position: absolute;
     left: 0;
-    top: 0.55em;
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: var(--signal-blue);
+    top: 0;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--signal-blue);
+    opacity: 0.6;
   }
 
   /* ─── Responsive ─── */

@@ -30,7 +30,7 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
             <span class="contact-cta-copy">
               <span class="contact-cta-label">Sesión inicial</span>
               <span class="contact-cta-title">Agenda una conversación</span>
-              <span class="contact-cta-meta">30 min · remota · Calendly</span>
+              <span class="contact-cta-meta">30 min ◇ remota ◇ Calendly</span>
             </span>
             <span class="contact-cta-arrow">&rarr;</span>
           </a>
@@ -177,6 +177,13 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: rgba(243, 245, 248, 0.38);
+  }
+
+  .contact-cta-label::before {
+    content: '◈';
+    color: var(--signal-red);
+    opacity: 0.4;
+    margin-right: 0.3rem;
   }
 
   .contact-cta-title {

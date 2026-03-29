@@ -121,11 +121,11 @@ section {
 
 .section-kicker::before,
 .tag::before {
-  content: '';
-  width: 1.4rem;
-  height: 1px;
-  background: currentColor;
-  opacity: 0.55;
+  content: '→';
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  color: var(--signal-red);
+  opacity: 0.6;
 }
 
 .section-head {
@@ -286,6 +286,13 @@ section {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-weight: 500;
+}
+
+.pill-list span::before {
+  content: '/';
+  color: var(--signal-red);
+  opacity: 0.6;
+  margin-right: 0.2rem;
 }
 
 .section-dark {
