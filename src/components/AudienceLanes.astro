@@ -48,7 +48,7 @@ const marqueeItems = ['Pilotos', 'Partners', 'Equipo', 'Investigadores', 'Alianz
   <div class="container">
     <!-- Editorial intro: kicker above, headline flush-left -->
     <div class="audience-intro" data-reveal>
-      <span class="section-kicker">01 / Qué buscamos</span>
+      <span class="section-kicker">01 / Para quién</span>
       <h2 class="audience-headline">
         Estamos construyendo.<br />
         <em>Buscamos a quienes faltan.</em>
@@ -315,8 +315,10 @@ const marqueeItems = ['Pilotos', 'Partners', 'Equipo', 'Investigadores', 'Alianz
   }
 
   .audience-details li {
+    font-family: var(--font-mono);
     color: var(--ink-faint);
-    font-size: var(--text-sm);
+    font-size: 0.76rem;
+    letter-spacing: 0.02em;
     padding-left: 1.2rem;
     position: relative;
   }
@@ -360,6 +362,73 @@ const marqueeItems = ['Pilotos', 'Partners', 'Equipo', 'Investigadores', 'Alianz
 
     .audience-lane-toggle {
       top: 0.25rem;
+    }
+  }
+
+  /* ─── Mobile editorial ─── */
+  @media (max-width: 860px) {
+    .audience-intro {
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+      text-align: center;
+    }
+
+    .audience-intro .section-kicker {
+      justify-content: center;
+    }
+
+    .audience-headline {
+      text-align: center;
+    }
+
+    .audience-lead {
+      text-align: center;
+      max-width: 100%;
+      margin-inline: auto;
+    }
+
+    .audience-marquee-item {
+      font-size: 0.62rem;
+    }
+
+    .audience-marquee {
+      margin-bottom: clamp(2.5rem, 4vw, 4rem);
+    }
+
+    .audience-lane {
+      grid-template-columns: 1fr;
+      gap: 0.8rem;
+      padding-block: clamp(2rem, 3vw, 3rem);
+    }
+
+    .audience-lane-left {
+      flex-direction: row;
+      align-items: baseline;
+      gap: 0.8rem;
+    }
+
+    .audience-num {
+      font-size: clamp(1.2rem, 1rem + 0.5vw, 1.5rem);
+    }
+
+    /* Always open on mobile — no accordion needed */
+    .audience-lane-body {
+      grid-template-rows: 1fr;
+      opacity: 1;
+      margin-top: clamp(0.8rem, 1vw, 1.2rem);
+    }
+
+    .audience-lane-toggle {
+      display: none;
+    }
+
+    .audience-lane-title {
+      padding-right: 0;
+      font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2.2rem);
+    }
+
+    .audience-3d-wrap {
+      display: none;
     }
   }
 

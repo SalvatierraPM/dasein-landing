@@ -137,7 +137,12 @@ const scenarios = [
     align-items: center;
   }
 
-  .driver-head span,
+  .driver-head span {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.02em;
+  }
+
   .driver-head output {
     font-size: 0.95rem;
   }
@@ -317,8 +322,10 @@ const scenarios = [
     border-radius: var(--radius-pill);
     background: rgba(18, 17, 15, 0.05);
     padding: 0.45rem 0.65rem;
-    font-size: var(--text-caption);
-    letter-spacing: 0.04em;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     color: var(--ink-soft);
   }
 

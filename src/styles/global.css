@@ -181,6 +181,8 @@ section {
 }
 
 .button-primary {
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
   color: var(--slate-white);
   background: var(--navy);
   box-shadow: var(--shadow-md);
@@ -192,6 +194,8 @@ section {
 }
 
 .button-secondary {
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
   color: var(--ink);
   background: rgba(255, 255, 255, 0.62);
   border-color: rgba(17, 17, 17, 0.12);
@@ -206,6 +210,9 @@ section {
   min-height: auto;
   padding: 0;
   border-radius: 0;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
   color: var(--ink-soft);
   border-bottom: 1px solid rgba(17, 17, 17, 0.2);
 }
@@ -274,7 +281,8 @@ section {
   border-radius: var(--radius-full);
   background: rgba(17, 17, 17, 0.05);
   color: var(--ink-soft);
-  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-weight: 500;
@@ -551,6 +559,52 @@ section {
 @media (max-width: 860px) {
   .section-head {
     grid-template-columns: 1fr;
+  }
+
+  :root {
+    --space-section: clamp(5rem, 4rem + 5vw, 8rem);
+    --section-space: var(--space-section);
+  }
+
+  .container {
+    padding: 0 clamp(1.25rem, 4vw, 2rem);
+  }
+
+  .container-wide,
+  .container-text,
+  .container-full {
+    padding: 0 clamp(1.25rem, 4vw, 2rem);
+  }
+
+  /* Hide custom cursor on mobile */
+  .cursor-dot {
+    display: none !important;
+  }
+
+  /* Disable spring hover effects on mobile — touch devices don't hover */
+  .editorial-card:hover,
+  .panel:hover {
+    transform: none;
+  }
+
+  .marquee-item:hover {
+    transform: none;
+  }
+
+  .nav-links a:hover {
+    transform: none;
+  }
+
+  .pill-list span:hover {
+    transform: none;
+  }
+
+  .section-kicker:hover::before {
+    transform: none;
+  }
+
+  .button-primary:hover {
+    transform: none;
   }
 }
 

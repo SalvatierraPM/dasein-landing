@@ -2,15 +2,15 @@
 const deliverables = [
   {
     title: 'Dossier de escenarios',
-    body: 'La pieza central: señales, actores, escenarios plausibles, implicancias y recomendaciones en un formato que se puede discutir.',
+    body: 'Entre 40 y 80 páginas con señales procesadas, mapa de actores, escenarios narrados, implicancias cruzadas y recomendaciones priorizadas. Formato ejecutivo: se lee en 20 minutos, se discute en una sesión.',
   },
   {
     title: 'Trail de evidencia',
-    body: 'Cada decisión queda conectada a fuentes, supuestos y tensiones visibles. La auditabilidad no se agrega al final.',
+    body: 'Cada recomendación apunta a la señal que la originó, el supuesto que la sostiene y la tensión que la condiciona. Si cambia un dato, se sabe qué conclusión revisar.',
   },
   {
     title: 'Plan a 90 días + workshop',
-    body: 'El trabajo termina con un mapa de acción priorizado y un workshop ejecutivo para traducir escenarios en decisiones concretas.',
+    body: 'Roadmap con hitos, métricas de monitoreo y señales de alerta temprana. El workshop no es una presentación: es una sesión de trabajo donde el equipo toma decisiones sobre los escenarios.',
   },
 ];
 
@@ -33,7 +33,7 @@ const deliverables = [
     <!-- Section header — asymmetric 2-col -->
     <header class="deliverables-header" data-reveal>
       <div class="deliverables-header__kicker">
-        <span class="section-index">05 / Entregables</span>
+        <span class="section-index">04 / Entregables</span>
       </div>
       <div class="deliverables-header__title">
         <h2>La credibilidad entra por lo que se entrega, <em>no por la promesa.</em></h2>
@@ -537,6 +537,58 @@ const deliverables = [
     .deliverable-chapter__toggle svg {
       width: 16px;
       height: 16px;
+    }
+  }
+
+  /* ── Mobile editorial ── */
+  @media (max-width: 860px) {
+    .deliverables-header {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .deliverable-chapter {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .deliverable-chapter__title {
+      font-size: clamp(1.4rem, 1.1rem + 1vw, 2rem);
+      padding-top: 0.1em;
+    }
+
+    .deliverable-chapter__number {
+      font-size: clamp(0.8rem, 0.75rem + 0.2vw, 0.9rem);
+    }
+
+    .deliverable-chapter__watermark {
+      font-size: clamp(2.5rem, 2rem + 2vw, 3.5rem);
+    }
+
+    /* Ensure good touch targets */
+    .deliverable-chapter {
+      padding-block: clamp(2rem, 3vw, 3.5rem);
+      min-height: 3.5rem;
+    }
+
+    .deliverable-chapter__toggle {
+      width: 2.75rem;
+      height: 2.75rem;
+      min-width: 44px;
+      min-height: 44px;
+    }
+
+    .deliverable-chapter__right {
+      padding-left: 0;
+    }
+
+    .includes-strip {
+      grid-template-columns: 1fr;
+    }
+
+    .deliv-cta-row .button {
+      width: 100%;
+      text-align: center;
     }
   }
 

@@ -29,9 +29,9 @@ import BrandLogo from '../components/BrandLogo.astro';
       </a>
 
       <div class="nav-links">
-        <a href="#audiencias">Audiencias</a>
+        <a href="#audiencias">Para quién</a>
         <a href="#metodo">Método</a>
-        <a href="#sobre">Sobre</a>
+        <a href="#sobre">Origen</a>
         <a href="#contacto" class="nav-cta">Agenda</a>
       </div>
     </div>
@@ -151,7 +151,8 @@ import BrandLogo from '../components/BrandLogo.astro';
   }
 
   .nav-links a {
-    font-size: 0.78rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
     font-weight: 500;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -186,6 +187,10 @@ import BrandLogo from '../components/BrandLogo.astro';
     .nav-links {
       width: 100%;
       justify-content: space-between;
+    }
+
+    .nav-links .nav-cta {
+      display: none;
     }
   }
 </style>

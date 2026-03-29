@@ -51,7 +51,7 @@ const steps = [
   <!-- Section intro - full width -->
   <div class="method-intro">
     <div class="method-intro-inner">
-      <p class="section-kicker">Método Dasein / prueba de proceso</p>
+      <p class="section-kicker">02 / Método</p>
       <h2 class="method-headline">
         Seis pasos para<br />convertir complejidad<br />
         <em>en decisión.</em>
@@ -263,6 +263,24 @@ const steps = [
         </article>
       ))}
     </div>
+  </div>
+
+  <!-- Mobile-only: clean vertical step list (hidden on desktop) -->
+  <div class="method-mobile-steps container">
+    {steps.map((step) => (
+      <article class="m-step" data-reveal>
+        <div class="m-step-head">
+          <span class="m-step-num">{step.number}</span>
+          <span class="m-step-short">{step.short}</span>
+        </div>
+        <h3 class="m-step-title">{step.title}</h3>
+        <p class="m-step-body">{step.body}</p>
+        <div class="m-step-output">
+          <span class="m-step-output-label">Output</span>
+          <span class="m-step-output-value">{step.output}</span>
+        </div>
+      </article>
+    ))}
   </div>
 
   <!-- Terminal note -->
@@ -1068,54 +1086,94 @@ const steps = [
     50% { opacity: 0; }
   }
 
-  /* === Mobile: stack vertically === */
+  /* === Mobile step list — hidden on desktop === */
+  .method-mobile-steps {
+    display: none;
+  }
+
   @media (max-width: 860px) {
+    /* Hide the entire scrollytelling (cube + scroll panels) */
     .method-scrolly {
-      grid-template-columns: 1fr;
-    }
-
-    .method-sticky {
-      position: relative;
-    }
-
-    .method-sticky-inner {
-      height: auto;
-      min-height: 70vh;
-      padding-top: 4rem;
-      padding-bottom: 3rem;
-    }
-
-    .method-hud {
-      position: relative;
-      top: auto;
-      left: auto;
-      right: auto;
-      margin-bottom: 1rem;
-    }
-
-    .method-dots {
-      position: relative;
-      bottom: auto;
-      left: auto;
-      transform: none;
-    }
-
-    .method-panel {
-      min-height: auto;
-      padding: clamp(2rem, 4vw, 4rem) clamp(2rem, 5vw, 4rem);
-    }
-
-    .method-panel::before {
       display: none;
     }
 
-    .method-panel-content {
-      opacity: 1;
-      transform: none;
+    /* Show the mobile step list */
+    .method-mobile-steps {
+      display: grid;
+      gap: 0;
     }
 
-    .method-cube {
-      --cube-size: clamp(13rem, 50vw, 18rem);
+    .m-step {
+      padding: clamp(2rem, 4vw, 3rem) 0;
+      border-top: 1px solid var(--line);
+      display: grid;
+      gap: 1rem;
+    }
+
+    .m-step:last-child {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .m-step-head {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .m-step-num {
+      font-family: var(--font-mono);
+      font-size: clamp(1.6rem, 1.2rem + 1vw, 2rem);
+      font-weight: 500;
+      letter-spacing: var(--tracking-mono);
+      color: var(--signal-red);
+      line-height: 1;
+    }
+
+    .m-step-short {
+      font-family: var(--font-mono);
+      font-size: var(--text-overline);
+      letter-spacing: var(--tracking-overline);
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+
+    .m-step-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.2rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      font-weight: 600;
+    }
+
+    .m-step-body {
+      font-size: var(--text-body);
+      line-height: var(--leading-body);
+      color: var(--ink-soft);
+    }
+
+    .m-step-output {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .m-step-output-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-overline);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      flex-shrink: 0;
+    }
+
+    .m-step-output-value {
+      font-family: var(--font-mono);
+      font-size: var(--text-caption);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
     }
   }
 </style>

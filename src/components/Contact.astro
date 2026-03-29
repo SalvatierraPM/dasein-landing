@@ -6,39 +6,52 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
 
 <section class="contact-section section-dark" id="contacto">
   <div class="container">
-
-    <div class="contact-grid" data-reveal>
-      <!-- Left: editorial headline -->
-      <div class="contact-left">
+    <div class="contact-spread" data-reveal>
+      <div class="contact-head">
         <span class="section-kicker contact-kicker">Próximo paso</span>
         <h2 class="contact-headline">
-          Hablemos<br />del <em>caso.</em>
+          <span>Hablemos</span>
+          <span class="contact-headline-row">
+            <span class="contact-headline-prep">del</span> <em>caso.</em>
+          </span>
         </h2>
       </div>
 
-      <!-- Right: body + action -->
-      <div class="contact-right">
+      <div class="contact-aside">
         <p class="contact-body">
           Una conversación breve basta para entender si el caso necesita
           un pulso estratégico, una simulación completa o una colaboración
           posterior con partners.
         </p>
 
-        <a class="contact-cta" href={calendlyUrl} target="_blank" rel="noreferrer">
-          Agenda una conversación
-          <span class="contact-cta-arrow">&rarr;</span>
-        </a>
+        <div class="contact-cta-block">
+          <span class="contact-cta-index" aria-hidden="true">01</span>
+          <a class="contact-cta" href={calendlyUrl} target="_blank" rel="noreferrer">
+            <span class="contact-cta-copy">
+              <span class="contact-cta-label">Sesión inicial</span>
+              <span class="contact-cta-title">Agenda una conversación</span>
+              <span class="contact-cta-meta">30 min · remota · Calendly</span>
+            </span>
+            <span class="contact-cta-arrow">&rarr;</span>
+          </a>
+        </div>
 
-        <div class="contact-channels">
-          <a href="mailto:salvatierra.pablom@gmail.com">salvatierra.pablom@gmail.com</a>
-          <span class="contact-sep">·</span>
-          <a href="https://wa.me/56939056565" target="_blank" rel="noreferrer">+56 9 3905 6565</a>
-          <span class="contact-sep">·</span>
-          <span>Santiago, Chile</span>
+        <div class="contact-ledger" aria-label="Información de contacto">
+          <div class="contact-ledger-item">
+            <span class="contact-ledger-label">Email</span>
+            <a href="mailto:salvatierra.pablom@gmail.com">salvatierra.pablom@gmail.com</a>
+          </div>
+          <div class="contact-ledger-item">
+            <span class="contact-ledger-label">Teléfono</span>
+            <a href="https://wa.me/56939056565" target="_blank" rel="noreferrer">+56 9 3905 6565</a>
+          </div>
+          <div class="contact-ledger-item">
+            <span class="contact-ledger-label">Base</span>
+            <span>Santiago, Chile</span>
+          </div>
         </div>
       </div>
     </div>
-
   </div>
 
   <!-- Minimal footer -->
@@ -51,7 +64,7 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
         <a href="https://github.com/SalvatierraPM" target="_blank" rel="noreferrer">GitHub</a>
         <a href="https://substack.com/@pavlogalgo" target="_blank" rel="noreferrer">Substack</a>
       </nav>
-      <span class="contact-footer-copy">&copy; 2025</span>
+      <span class="contact-footer-copy">&copy; 2026</span>
     </div>
   </footer>
 </section>
@@ -62,17 +75,16 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
     padding-bottom: 0;
   }
 
-  /* ─── Asymmetric editorial grid ─── */
-  .contact-grid {
+  .contact-spread {
     display: grid;
-    grid-template-columns: 1.3fr 1fr;
+    grid-template-columns: minmax(0, 1.2fr) minmax(20rem, 0.8fr);
     gap: clamp(4rem, 6vw, 8rem);
     align-items: start;
   }
 
-  .contact-left {
+  .contact-head {
     display: grid;
-    gap: 1.8rem;
+    gap: clamp(1.5rem, 2vw, 2.3rem);
   }
 
   .contact-kicker {
@@ -81,11 +93,19 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
 
   .contact-headline {
     font-family: var(--font-display);
-    font-size: clamp(5rem, 2.5rem + 9vw, 11rem);
+    font-size: clamp(3.9rem, 2rem + 6vw, 7rem);
     font-weight: 600;
-    line-height: 0.85;
-    letter-spacing: -0.05em;
+    line-height: 0.92;
+    letter-spacing: -0.055em;
     color: var(--slate-white);
+    display: grid;
+    max-width: 8ch;
+  }
+
+  .contact-headline-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.04em;
   }
 
   .contact-headline em {
@@ -95,46 +115,96 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
     color: var(--signal-red);
   }
 
-  .contact-right {
+  .contact-headline-prep {
+    font-family: var(--font-mono);
+    font-size: 0.45em;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: rgba(243, 245, 248, 0.4);
+    align-self: center;
+  }
+
+  .contact-aside {
     display: grid;
-    gap: clamp(2.5rem, 3.5vw, 4rem);
-    padding-top: clamp(1.5rem, 3vw, 5rem);
+    gap: clamp(2rem, 2.6vw, 3.2rem);
+    padding-top: clamp(1rem, 2vw, 3rem);
   }
 
   .contact-body {
-    color: rgba(243, 245, 248, 0.52);
-    font-size: clamp(1.05rem, 1rem + 0.3vw, 1.2rem);
-    line-height: 1.72;
-    max-width: 34ch;
+    color: rgba(243, 245, 248, 0.58);
+    font-size: clamp(1rem, 0.96rem + 0.24vw, 1.12rem);
+    line-height: 1.82;
+    max-width: 30ch;
   }
 
-  /* ─── CTA: editorial underline style ─── */
+  .contact-cta-block {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: clamp(1rem, 1.6vw, 1.6rem);
+    align-items: start;
+    padding-top: clamp(1.25rem, 1vw, 1.6rem);
+    border-top: 1px solid rgba(243, 245, 248, 0.16);
+  }
+
+  .contact-cta-index {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(243, 245, 248, 0.3);
+    padding-top: 0.55rem;
+  }
+
   .contact-cta {
-    display: inline-flex;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1rem;
     align-items: center;
-    gap: 0.85rem;
-    font-family: var(--font-display);
-    font-size: clamp(1.5rem, 1.1rem + 1vw, 2.2rem);
-    font-weight: 500;
-    letter-spacing: -0.02em;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid rgba(243, 245, 248, 0.14);
     color: var(--slate-white);
     text-decoration: none;
-    padding-bottom: 0.6rem;
-    border-bottom: 1px solid rgba(243, 245, 248, 0.2);
-    width: fit-content;
-    transition: border-color 0.4s ease;
   }
 
-  .contact-cta:hover {
-    border-color: var(--signal-red);
+  .contact-cta-copy {
+    display: grid;
+    gap: 0.65rem;
+  }
+
+  .contact-cta-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(243, 245, 248, 0.38);
+  }
+
+  .contact-cta-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 1.2rem + 1.2vw, 2.6rem);
+    line-height: 1.05;
+    letter-spacing: var(--tracking-heading);
+    color: var(--slate-white);
+  }
+
+  .contact-cta-meta {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(243, 245, 248, 0.36);
   }
 
   .contact-cta-arrow {
-    transition: transform 0.4s var(--ease-out-expo);
+    align-self: center;
+    font-size: clamp(1.8rem, 1.2rem + 0.8vw, 2.3rem);
+    color: rgba(243, 245, 248, 0.78);
+    transition: transform 0.4s var(--ease-out-expo), color 0.4s ease;
   }
 
   .contact-cta:hover .contact-cta-arrow {
-    transform: translateX(4px);
+    transform: translateX(5px);
+    color: var(--signal-red);
   }
 
   .contact-cta:focus-visible {
@@ -142,30 +212,41 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
     outline-offset: 6px;
   }
 
-  /* ─── Channels: inline, subdued ─── */
-  .contact-channels {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.5rem;
+  .contact-ledger {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    padding-top: 0.2rem;
+  }
+
+  .contact-ledger-item {
+    display: grid;
+    grid-template-columns: minmax(4.75rem, auto) 1fr;
+    align-items: start;
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(243, 245, 248, 0.08);
+  }
+
+  .contact-ledger-label {
     font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.03em;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
     color: rgba(243, 245, 248, 0.36);
   }
 
-  .contact-channels a {
+  .contact-ledger-item a,
+  .contact-ledger-item span:last-child {
+    font-size: clamp(0.9rem, 0.86rem + 0.12vw, 0.98rem);
+    line-height: 1.55;
     color: rgba(243, 245, 248, 0.48);
     text-decoration: none;
     transition: color 0.3s ease;
   }
 
-  .contact-channels a:hover {
+  .contact-ledger-item a:hover {
     color: var(--slate-white);
-  }
-
-  .contact-sep {
-    opacity: 0.3;
   }
 
   /* ─── Footer ─── */
@@ -193,7 +274,9 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
   }
 
   .contact-footer-links a {
-    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
     color: rgba(243, 245, 248, 0.36);
     text-decoration: none;
     transition: color var(--dur-fast) ease;
@@ -212,40 +295,67 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
 
   /* ─── Mobile ─── */
   @media (max-width: 860px) {
-    .contact-grid {
+    .contact-section {
+      padding-top: clamp(6rem, 5rem + 6vw, 12rem);
+    }
+
+    .contact-spread {
       grid-template-columns: 1fr;
       gap: clamp(2rem, 4vw, 3rem);
     }
 
     .contact-headline {
-      font-size: clamp(3.2rem, 2rem + 6vw, 5.5rem);
+      font-size: clamp(2.9rem, 1.95rem + 5vw, 4.9rem);
+      max-width: none;
     }
 
-    .contact-right {
+    .contact-aside {
       padding-top: 0;
     }
 
-    .contact-channels {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.4rem;
+    .contact-body {
+      max-width: 100%;
     }
 
-    .contact-sep {
-      display: none;
+    .contact-cta-block {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+
+    .contact-cta-index {
+      padding-top: 0;
+    }
+
+    .contact-cta {
+      width: 100%;
+    }
+
+    .contact-ledger {
+      grid-template-columns: 1fr;
+      gap: 0.8rem;
+    }
+
+    .contact-ledger-item {
+      grid-template-columns: 1fr;
+      gap: 0.45rem;
     }
 
     .contact-footer-inner {
       flex-direction: column;
-      align-items: flex-start;
-      gap: 0.8rem;
+      align-items: center;
+      gap: 1rem;
+      text-align: center;
+    }
+
+    .contact-footer-links {
+      justify-content: center;
     }
   }
 
   /* ─── Reduced motion ─── */
   @media (prefers-reduced-motion: reduce) {
-    .contact-cta,
-    .contact-channels a {
+    .contact-cta-arrow,
+    .contact-ledger-item a {
       transition: none;
     }
   }

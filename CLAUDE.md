@@ -8,7 +8,7 @@ Landing page for Dasein Foresight, a strategic foresight consulting firm. Early 
 
 Read `references/dasein-brandbook.md` for the full brand system. Quick reference:
 - Colors: Deep Navy #0A1628, Signal Blue #3B82F6, Horizon Violet #7C3AED, Foresight Teal #14B8A6, Slate White #E8ECF1
-- Fonts: Space Grotesk (headers), JetBrains Mono (data), Instrument Serif (editorial quotes)
+- Fonts: Satoshi (headers), JetBrains Mono (data), Instrument Serif (editorial quotes)
 - Tone: Confident consulting, not startup hype. McKinsey meets Stripe.
 - See `brand-kit.html` for interactive reference
 
@@ -53,7 +53,7 @@ Read `references/design-inspiration.md` for curated sources.
 ## Design Rules (NON-NEGOTIABLE)
 
 1. Dark mode only. Deep Navy #0A1628 base.
-2. Typography IS the design. Headlines 5-7rem, Space Grotesk, -0.035em tracking.
+2. Typography IS the design. Headlines 5-7rem, Satoshi, -0.035em tracking.
 3. Whitespace is aggressive. 10-14rem between sections.
 4. 1px borders, surface backgrounds. No shadows. No border-radius > 6px.
 5. Single accent: Signal Blue. No gradients on buttons.

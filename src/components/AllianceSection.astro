@@ -8,7 +8,7 @@
 
     <!-- Asymmetric header -->
     <div class="alliance-head" data-reveal>
-      <span class="alliance-kicker">06 / Alianzas</span>
+      <span class="alliance-kicker">05 / Alianzas</span>
       <h2 class="alliance-title">Dasein no compite con implementadores.<br>Les deja un mapa mejor.</h2>
     </div>
 
@@ -65,12 +65,12 @@
       <div class="alliance-quote-rule"></div>
       <p>
         <span class="alliance-quote-line">
-          <span class="alliance-quote-part alliance-quote-part--display">Where our work</span>
-          <span class="alliance-quote-part alliance-quote-part--editorial alliance-quote-accent">ends,</span>
+          <span class="alliance-quote-part alliance-quote-part--display">Donde termina</span>
+          <span class="alliance-quote-part alliance-quote-part--editorial alliance-quote-accent">nuestro trabajo,</span>
         </span>
         <span class="alliance-quote-line alliance-quote-line--secondary">
-          <span class="alliance-quote-part alliance-quote-part--display">yours</span>
-          <span class="alliance-quote-part alliance-quote-part--editorial alliance-quote-accent">begins.</span>
+          <span class="alliance-quote-part alliance-quote-part--display">empieza</span>
+          <span class="alliance-quote-part alliance-quote-part--editorial alliance-quote-accent">el tuyo.</span>
         </span>
       </p>
       <div class="alliance-quote-rule"></div>
@@ -438,6 +438,40 @@
 
     .alliance-quote p {
       font-size: clamp(2.2rem, 1.5rem + 3vw, 3.5rem);
+    }
+  }
+
+  /* ── Mobile editorial refinements ── */
+  @media (max-width: 860px) {
+    .alliance-quote {
+      text-align: center;
+      max-width: 100%;
+    }
+
+    .alliance-quote p {
+      font-size: clamp(1.8rem, 1.5rem + 2vw, 2.8rem);
+      padding-block: clamp(1.5rem, 3vw, 3rem);
+    }
+
+    .alliance-title {
+      font-size: clamp(1.6rem, 1.2rem + 1.8vw, 2.6rem);
+    }
+
+    .alliance-lede {
+      text-align: center;
+      margin-inline: auto;
+    }
+
+    .alliance-head {
+      text-align: center;
+    }
+
+    .alliance-head .alliance-kicker {
+      text-align: center;
+    }
+
+    .alliance-3d-wrap {
+      display: none;
     }
   }
 

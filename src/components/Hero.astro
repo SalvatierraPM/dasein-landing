@@ -68,7 +68,7 @@ const stripLoop = [...strips, ...strips, ...strips];
         </div>
         <div class="hero-line hero-line--2">
           <span class="hero-word hero-word--accent" data-word><em>antes</em></span>
-          <span class="hero-word" data-word>de</span>
+          <span class="hero-word hero-word--mono" data-word>de</span>
         </div>
         <div class="hero-line hero-line--3">
           <span class="hero-word hero-word--strike" data-word data-strike>reaccionar.</span>
@@ -76,8 +76,8 @@ const stripLoop = [...strips, ...strips, ...strips];
       </div>
 
       <p class="hero-body" data-hero-body>
-        Leemos señales, modelamos sistemas y simulamos escenarios
-        para que decidas con criterio, no con urgencia.
+        Consultora de prospectiva estratégica. Exploramos futuros plausibles
+        para que tu organización decida antes de que la realidad lo haga por ella.
       </p>
 
       <div class="button-row hero-actions" data-hero-actions>
@@ -128,7 +128,7 @@ const stripLoop = [...strips, ...strips, ...strips];
       </div>
 
       <p class="hero-disclosure-note" data-reveal>
-        Señales, actores, fricciones y escenarios que luego pasan por SignalTwin.
+        Señales, actores, fricciones y escenarios que luego pasan por simulación.
       </p>
     </div>
   </section>
@@ -203,6 +203,15 @@ const stripLoop = [...strips, ...strips, ...strips];
     font-style: italic;
     font-weight: 400;
     color: var(--signal-red);
+  }
+
+  .hero-word--mono {
+    font-family: var(--font-mono);
+    font-size: 0.55em;
+    letter-spacing: 0.04em;
+    font-weight: 400;
+    color: var(--ink-faint);
+    align-self: center;
   }
 
   .hero-word--strike {
@@ -505,6 +514,82 @@ const stripLoop = [...strips, ...strips, ...strips];
   @media (prefers-reduced-motion: reduce) {
     .hero-3d { animation: none !important; }
     .hero-3d-wrap { transform: none !important; }
+  }
+
+  /* ── Mobile editorial layout ── */
+  @media (max-width: 860px) {
+    .hero-shell {
+      padding-top: clamp(4rem, 3rem + 5vw, 6rem);
+    }
+
+    .hero-particles {
+      display: none;
+    }
+
+    .hero-3d-wrap {
+      display: none;
+    }
+
+    .hero-title-stage {
+      font-size: clamp(2.8rem, 2rem + 4vw, 4rem);
+    }
+
+    .hero-kicker {
+      justify-content: center;
+    }
+
+    .hero-stack {
+      text-align: center;
+    }
+
+    .hero-copy {
+      justify-items: center;
+      max-width: 100%;
+    }
+
+    .hero-body {
+      max-width: 90%;
+      text-align: center;
+    }
+
+    .hero-actions {
+      flex-direction: column;
+      width: 100%;
+      max-width: 90%;
+    }
+
+    .hero-actions .button {
+      width: 100%;
+      text-align: center;
+    }
+
+    .hero-strip .marquee-item {
+      font-size: 0.65rem;
+      padding: 0.55rem 0.75rem;
+    }
+
+    .hero-strip-wrap {
+      margin-top: 0.6rem;
+    }
+
+    /* Disclosure: keep scroll-driven but with smaller sizing */
+    .hero-carousel {
+      --reel-height: clamp(14rem, 12rem + 8vw, 20rem);
+    }
+
+    .hero-carousel-word {
+      font-size: clamp(2.4rem, 1.5rem + 3.5vw, 4rem);
+      --word-h: clamp(3rem, 2.5rem + 2vw, 4rem);
+    }
+
+    .hero-disclosure-title {
+      font-size: clamp(1.4rem, 1rem + 1.5vw, 2rem);
+    }
+
+    .hero-disclosure-note {
+      margin-top: 1.2rem;
+      max-width: 90%;
+    }
   }
 
 </style>

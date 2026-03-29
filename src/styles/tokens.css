@@ -43,8 +43,8 @@
   --gradient-divider: linear-gradient(90deg, rgba(17, 17, 17, 0), rgba(17, 17, 17, 0.16), rgba(17, 17, 17, 0));
   --paper-raised: linear-gradient(180deg, rgba(255, 252, 247, 0.94) 0%, rgba(255, 248, 239, 0.88) 100%);
 
-  --font-display: 'Switzer', 'Helvetica Neue', Arial, sans-serif;
-  --font-body: 'Switzer', 'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'Azeret Mono', 'JetBrains Mono', monospace;
   --font-editorial: 'Instrument Serif', Georgia, serif;
 
