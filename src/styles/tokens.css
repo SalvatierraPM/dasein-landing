@@ -44,7 +44,7 @@
   --paper-raised: linear-gradient(180deg, rgba(255, 252, 247, 0.94) 0%, rgba(255, 248, 239, 0.88) 100%);
 
   --font-display: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
-  --font-body: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'Azeret Mono', 'JetBrains Mono', monospace;
   --font-editorial: 'Instrument Serif', Georgia, serif;
 
@@ -58,11 +58,11 @@
   --text-caption: clamp(0.75rem, 0.73rem + 0.1vw, 0.8125rem);
   --text-overline: clamp(0.7rem, 0.67rem + 0.1vw, 0.78rem);
 
-  --leading-display: 0.94;
-  --leading-heading: 1.15;
-  --leading-body: 1.7;
-  --tracking-display: -0.055em;
-  --tracking-heading: -0.02em;
+  --leading-display: 0.92;
+  --leading-heading: 1.1;
+  --leading-body: 1.6;
+  --tracking-display: -0.04em;
+  --tracking-heading: -0.025em;
   --tracking-overline: 0.18em;
   --tracking-mono: -0.02em;
 

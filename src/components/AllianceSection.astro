@@ -63,14 +63,17 @@
     <!-- Monumental quote -->
     <blockquote class="alliance-quote" data-reveal>
       <div class="alliance-quote-rule"></div>
-      <p>
+      <p class="alliance-quote-body">
         <span class="alliance-quote-line">
-          <span class="alliance-quote-part alliance-quote-part--display">Donde termina</span>
-          <span class="alliance-quote-part alliance-quote-part--editorial alliance-quote-accent">nuestro trabajo,</span>
+          <span class="aq-mono">Donde</span>
+          <span class="aq-display">termina</span>
         </span>
-        <span class="alliance-quote-line alliance-quote-line--secondary">
-          <span class="alliance-quote-part alliance-quote-part--display">empieza</span>
-          <span class="alliance-quote-part alliance-quote-part--editorial alliance-quote-accent">el tuyo.</span>
+        <span class="alliance-quote-line">
+          <span class="aq-editorial">nuestro trabajo,</span>
+        </span>
+        <span class="alliance-quote-line">
+          <span class="aq-display">empieza</span>
+          <span class="aq-editorial">el tuyo.</span>
         </span>
       </p>
       <div class="alliance-quote-rule"></div>
@@ -311,19 +314,16 @@
     text-align: center;
     padding: 0;
     margin: 0;
-    max-width: 54rem;
+    max-width: 60rem;
     margin-inline: auto;
     padding-block: clamp(2rem, 3vw, 4rem);
   }
 
-  .alliance-quote p {
+  .alliance-quote-body {
     display: grid;
     justify-items: center;
-    gap: 0.12em;
-    font-size: clamp(3rem, 2rem + 3.5vw, 5.4rem);
-    line-height: 1.08;
-    color: var(--ink-faint);
-    padding-block: clamp(2.5rem, 4vw, 4.5rem);
+    gap: 0;
+    padding-block: clamp(3rem, 5vw, 5.5rem);
   }
 
   .alliance-quote-line {
@@ -331,30 +331,39 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: baseline;
-    gap: 0.18em;
+    gap: 0.22em;
+    line-height: 1.1;
   }
 
-  .alliance-quote-line--secondary {
-    gap: 0.18em;
-  }
-
-  .alliance-quote-part--display {
-    font-family: var(--font-display);
-    font-size: 1em;
+  /* Mono — small connector words */
+  .aq-mono {
+    font-family: var(--font-mono);
+    font-size: clamp(0.85rem, 0.7rem + 0.5vw, 1.1rem);
     font-weight: 500;
-    font-style: normal;
-    letter-spacing: -0.04em;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    align-self: center;
+    margin-right: 0.15em;
   }
 
-  .alliance-quote-part--editorial {
+  /* Display — strong action verbs */
+  .aq-display {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 1.8rem + 3.5vw, 5.2rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    opacity: 0.25;
+  }
+
+  /* Editorial — the human parts, warm */
+  .aq-editorial {
     font-family: var(--font-editorial);
-    font-size: 1.1em;
+    font-size: clamp(3.2rem, 2rem + 4vw, 6rem);
     font-style: italic;
     font-weight: 400;
     letter-spacing: -0.02em;
-  }
-
-  .alliance-quote-accent {
     color: var(--signal-red);
   }
 
@@ -436,8 +445,16 @@
     [data-reveal-stagger] > *:nth-child(4) { transition-delay: 0.3s !important; }
     [data-reveal-stagger] > *:nth-child(5) { transition-delay: 0.4s !important; }
 
-    .alliance-quote p {
-      font-size: clamp(2.2rem, 1.5rem + 3vw, 3.5rem);
+    .aq-display {
+      font-size: clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
+    }
+
+    .aq-editorial {
+      font-size: clamp(2.2rem, 1.6rem + 2.8vw, 3.8rem);
+    }
+
+    .aq-mono {
+      font-size: clamp(0.7rem, 0.6rem + 0.4vw, 0.9rem);
     }
   }
 
@@ -448,9 +465,16 @@
       max-width: 100%;
     }
 
-    .alliance-quote p {
-      font-size: clamp(1.8rem, 1.5rem + 2vw, 2.8rem);
+    .alliance-quote-body {
       padding-block: clamp(1.5rem, 3vw, 3rem);
+    }
+
+    .aq-display {
+      font-size: clamp(1.6rem, 1.2rem + 2vw, 2.4rem);
+    }
+
+    .aq-editorial {
+      font-size: clamp(1.8rem, 1.4rem + 2.2vw, 2.8rem);
     }
 
     .alliance-title {

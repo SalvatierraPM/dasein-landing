@@ -142,7 +142,7 @@ section {
   font-size: var(--text-h1);
   line-height: 0.98;
   letter-spacing: var(--tracking-display);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .section-copy {
@@ -394,12 +394,11 @@ section {
 }
 
 .marquee-item::before {
-  content: '';
-  width: 0.42rem;
-  height: 0.42rem;
-  border-radius: 50%;
-  background: var(--signal-blue);
-  box-shadow: 0 0 0 4px rgba(72, 101, 255, 0.12);
+  content: '※';
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--signal-blue);
+  opacity: 0.5;
 }
 
 .scanlines,
