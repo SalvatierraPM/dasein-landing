@@ -1,3 +1,7 @@
+---
+import TextSplitter from './TextSplitter.astro';
+---
+
 <section class="alliance-section" id="alianzas">
   <!-- Olive knot — subtle background depth -->
   <div class="alliance-3d-wrap" data-parallax="0.06" aria-hidden="true">
@@ -8,14 +12,18 @@
 
     <!-- Asymmetric header -->
     <div class="alliance-head" data-reveal>
-      <span class="alliance-kicker">07 / Alianzas</span>
-      <h2 class="alliance-title">Dasein no compite con implementadores.<br>Les deja un mapa mejor.</h2>
+      <span class="alliance-kicker">05 / Alianzas</span>
+      <h2 class="alliance-title" data-line-reveal><span>Dasein no compite con implementadores.</span><br><span>Les deja un mapa mejor.</span></h2>
     </div>
 
-    <p class="alliance-lede" data-reveal>
-      El modelo de colaboración está pensado para que el trabajo estratégico llegue hasta donde agrega
-      más valor: lectura del sistema, escenarios, criterio y decisión. La implementación puede entrar después.
-    </p>
+    <div class="alliance-lede">
+      <TextSplitter
+        text="El modelo de colaboración está pensado para que el trabajo estratégico llegue hasta donde agrega más valor: lectura del sistema, escenarios, criterio y decisión."
+        tag="p"
+        animation="blur"
+        stagger={10}
+      />
+    </div>
 
     <!-- Handoff flow -->
     <div class="alliance-flow" data-reveal-stagger>

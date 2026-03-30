@@ -298,6 +298,20 @@ section {
 .section-dark {
   color: var(--slate-white);
   background: var(--gradient-dark);
+  --section-presence: 0;
+}
+
+/* Smooth edge blend on dark sections */
+.section-dark::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(180deg, transparent, rgba(15, 26, 46, calc(0.95 * var(--section-presence, 0))));
+  pointer-events: none;
+  z-index: 1;
 }
 
 .section-dark .eyebrow,
@@ -372,6 +386,7 @@ section {
   position: relative;
   overflow: hidden;
   mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
+  contain: layout style;
 }
 
 .marquee-track {
@@ -379,6 +394,10 @@ section {
   width: max-content;
   gap: 0.75rem;
   animation: marquee-scroll 26s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .marquee:hover .marquee-track {
@@ -561,6 +580,48 @@ section {
 .js [data-reveal-stagger].revealed > *:nth-child(4) { transition-delay: 0.24s; }
 .js [data-reveal-stagger].revealed > *:nth-child(5) { transition-delay: 0.32s; }
 .js [data-reveal-stagger].revealed > *:nth-child(6) { transition-delay: 0.4s; }
+
+/* === Line reveal: headlines slide up from clip-path mask === */
+.js [data-line-reveal] {
+  overflow: hidden;
+}
+
+.js [data-line-reveal] > * {
+  transform: translateY(105%);
+  transition: transform 0.9s var(--ease-out-expo);
+}
+
+.js [data-line-reveal].revealed > * {
+  transform: translateY(0);
+}
+
+.js [data-line-reveal].revealed > *:nth-child(2) { transition-delay: 0.08s; }
+.js [data-line-reveal].revealed > *:nth-child(3) { transition-delay: 0.16s; }
+
+/* === Scale-in: elements grow from 0.92 to 1 === */
+.js [data-scale-in] {
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+}
+
+.js [data-scale-in].revealed {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* === Lenis overrides === */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
 
 @media (max-width: 860px) {
   .section-head {

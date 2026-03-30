@@ -1,4 +1,6 @@
 ---
+import TextSplitter from './TextSplitter.astro';
+
 const services = [
   {
     num: '01',
@@ -43,12 +45,17 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
       <div class="services-header__kicker">
         <span class="section-index">01 / Servicios</span>
       </div>
-      <div class="services-header__title">
+      <div class="services-header__title" data-line-reveal>
         <h2>Dos formatos según la profundidad <em>que necesites.</em></h2>
-        <p class="services-header__copy">
-          Cada servicio deja artefactos revisables. No vendemos horas de consultoría:
-          vendemos piezas que un equipo puede usar para decidir.
-        </p>
+        <div class="services-header__copy">
+          <TextSplitter
+            text="Cada servicio deja artefactos revisables. No vendemos horas de consultoría: vendemos piezas que un equipo puede usar para decidir."
+            tag="p"
+            animation="blur"
+            stagger={12}
+            delay={300}
+          />
+        </div>
       </div>
     </header>
 
@@ -88,7 +95,7 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
     </div>
 
     <!-- Radar Estratégico — partnership model -->
-    <div class="partner-block" data-reveal>
+    <div class="partner-block" data-scale-in>
       <div class="partner-block__inner">
         <span class="service-card__ghost" aria-hidden="true">◇</span>
         <div class="partner-block__content">
@@ -190,20 +197,31 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
     overflow: hidden;
   }
 
-  /* Scroll-driven entrance: perspective tilt that settles */
+  /* Scroll-driven entrance: clip-path wipe + tilt */
   .js .service-card {
     opacity: 0;
-    transform: perspective(800px) rotateX(4deg) translateY(32px);
-    transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+    clip-path: inset(0 100% 0 0);
+    transform: translateX(-24px);
+    transition: opacity 0.9s var(--ease-out-expo),
+                clip-path 0.9s var(--ease-out-expo),
+                transform 0.9s var(--ease-out-expo);
   }
 
   .js .service-card.is-scrolled-in {
     opacity: 1;
-    transform: perspective(800px) rotateX(0deg) translateY(0);
+    clip-path: inset(0 0 0 0);
+    transform: translateX(0);
   }
 
   .js .service-card:nth-child(2) {
-    transition-delay: 0.15s;
+    transition-delay: 0.2s;
+    clip-path: inset(0 0 0 100%);
+    transform: translateX(24px);
+  }
+
+  .js .service-card:nth-child(2).is-scrolled-in {
+    clip-path: inset(0 0 0 0);
+    transform: translateX(0);
   }
 
   .service-card__ghost {

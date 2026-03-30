@@ -13,21 +13,9 @@ const audienceCards = [
     title: 'Firmas que implementan mejor cuando el mapa ya existe.',
     body: 'Consultoras de cambio, IA, producto o transformación digital que quieran recibir un mapa estratégico listo para ejecutar. Dasein modela, el partner despliega.',
   },
-  {
-    label: 'Equipo',
-    num: '03',
-    title: 'Perfiles que quieran construir esto juntos.',
-    body: 'Prospectiva, research, computational social science, product design y AI engineering. Buscamos profundidad metodológica y ganas de operar en la intersección.',
-  },
-  {
-    label: 'Investigadores',
-    num: '04',
-    title: 'Académicos que necesiten una plataforma de simulación auditable.',
-    body: 'Universidades, laboratorios y programas que exploran escenarios, política pública o transformación institucional con acceso a SignalTwin.',
-  },
 ];
 
-const marqueeItems = ['Pilotos', 'Partners', 'Equipo', 'Investigadores', 'Alianzas', 'Colaboradores'];
+const marqueeItems = ['Pilotos', 'Partners', 'Alianzas'];
 ---
 
 <section class="audience-section" id="audiencias">
@@ -48,20 +36,21 @@ const marqueeItems = ['Pilotos', 'Partners', 'Equipo', 'Investigadores', 'Alianz
   <div class="container">
     <!-- Editorial intro: kicker above, headline flush-left -->
     <div class="audience-intro" data-reveal>
-      <span class="section-kicker">06 / Para quién</span>
+      <span class="section-kicker">04 / Para quién</span>
       <h2 class="audience-headline">
-        Estamos construyendo.<br />
-        <em>Buscamos a quienes faltan.</em>
+        Para quienes ya no pueden<br />
+        <em>improvisar.</em>
       </h2>
       <p class="audience-lead">
-        Cuatro formas de trabajar con nosotros, según dónde estés y qué necesites.
+        Un caso piloto para validar el enfoque con tu realidad, o una alianza estratégica
+        para complementar lo que tu firma ya hace bien.
       </p>
     </div>
 
     <!-- Lanes -->
     <div class="audience-lanes" data-reveal-stagger>
       {audienceCards.map((card, i) => (
-        <article class="audience-lane" data-reveal data-cursor-grow>
+        <article class="audience-lane" role="button" tabindex="0" data-reveal data-cursor-grow>
           <div class="audience-lane-left">
             <span class="audience-num">{card.num}</span>
             <span class="audience-label">{card.label}</span>
@@ -528,13 +517,23 @@ const marqueeItems = ['Pilotos', 'Partners', 'Equipo', 'Investigadores', 'Alianz
   const lanes = document.querySelectorAll('.audience-lane');
   const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
+  const toggleLane = (lane: Element) => {
+    const wasOpen = lane.classList.contains('is-open');
+    lanes.forEach((l) => l.classList.remove('is-open'));
+    if (!wasOpen) lane.classList.add('is-open');
+  };
+
   lanes.forEach((lane) => {
+    // Keyboard: Enter/Space to toggle
+    lane.addEventListener('keydown', (e) => {
+      if ((e as KeyboardEvent).key === 'Enter' || (e as KeyboardEvent).key === ' ') {
+        e.preventDefault();
+        toggleLane(lane);
+      }
+    });
+
     if (isTouchDevice) {
-      lane.addEventListener('click', () => {
-        const wasOpen = lane.classList.contains('is-open');
-        lanes.forEach((l) => l.classList.remove('is-open'));
-        if (!wasOpen) lane.classList.add('is-open');
-      });
+      lane.addEventListener('click', () => toggleLane(lane));
     } else {
       lane.addEventListener('mouseenter', () => {
         lanes.forEach((l) => l.classList.remove('is-open'));

@@ -1,6 +1,7 @@
 ---
 import ParticleScene from './ParticleScene.astro';
 import ParticleNetwork from './ParticleNetwork.astro';
+import Aurora from './Aurora.astro';
 
 const proofPoints = [
   {
@@ -44,6 +45,15 @@ const stripLoop = [...strips, ...strips, ...strips];
 ---
 
 <section class="section-shell hero-shell" id="hero">
+  <!-- Aurora gradient atmosphere -->
+  <Aurora
+    class="hero-aurora"
+    colorA="rgba(72, 101, 255, 0.14)"
+    colorB="rgba(255, 92, 56, 0.08)"
+    colorC="rgba(122, 104, 214, 0.08)"
+    speed={0.8}
+  />
+
   <!-- Subtle particle network for depth -->
   <ParticleNetwork
     class="hero-particles"
@@ -140,6 +150,11 @@ const stripLoop = [...strips, ...strips, ...strips];
     padding-bottom: 1.5rem;
     position: relative;
     overflow: visible;
+  }
+
+  .hero-aurora {
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, black 0%, transparent 100%);
+    opacity: 0.85;
   }
 
   .hero-particles {
@@ -315,6 +330,9 @@ const stripLoop = [...strips, ...strips, ...strips];
 
   .hero-strip-wrap {
     margin-top: 1.1rem;
+    isolation: isolate;
+    transform: translateZ(0);
+    contain: layout style;
   }
 
   .hero-strip {
@@ -661,8 +679,10 @@ const stripLoop = [...strips, ...strips, ...strips];
     const wordEl = words[0] as HTMLElement;
     const carousel = document.querySelector('.hero-carousel') as HTMLElement;
 
-    // Set wrapper height to give enough scroll room for all words
-    wrapper.style.setProperty('--lexicon-scroll-height', `${wordCount * 55}vh`);
+    // Shorter scroll distance on mobile
+    const isMobile = window.innerWidth < 860;
+    const scrollMultiplier = isMobile ? 35 : 55;
+    wrapper.style.setProperty('--lexicon-scroll-height', `${wordCount * scrollMultiplier}vh`);
 
     let prevActive = -1;
 
@@ -701,7 +721,7 @@ const stripLoop = [...strips, ...strips, ...strips];
     };
 
     let ticking = false;
-    window.addEventListener('scroll', () => {
+    const onCarouselScroll = () => {
       if (!ticking) {
         requestAnimationFrame(() => {
           update();
@@ -709,10 +729,14 @@ const stripLoop = [...strips, ...strips, ...strips];
         });
         ticking = true;
       }
-    }, { passive: true });
+    };
+    window.addEventListener('scroll', onCarouselScroll, { passive: true });
 
     update();
+
+    // Cleanup on Astro navigation
+    document.addEventListener('astro:before-preparation', () => {
+      window.removeEventListener('scroll', onCarouselScroll);
+    }, { once: true });
   }
-
-
 </script>

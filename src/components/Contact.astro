@@ -1,15 +1,23 @@
 ---
 import BrandLogo from './BrandLogo.astro';
+import Aurora from './Aurora.astro';
 
 const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
 ---
 
 <section class="contact-section section-dark" id="contacto">
+  <Aurora
+    class="contact-aurora"
+    colorA="rgba(72, 101, 255, 0.12)"
+    colorB="rgba(255, 92, 56, 0.06)"
+    colorC="rgba(122, 104, 214, 0.08)"
+    speed={0.6}
+  />
   <div class="container">
     <div class="contact-spread" data-reveal>
       <div class="contact-head">
         <span class="section-kicker contact-kicker">Próximo paso</span>
-        <h2 class="contact-headline">
+        <h2 class="contact-headline" data-line-reveal>
           <span>Hablemos</span>
           <span class="contact-headline-row">
             <span class="contact-headline-prep">del</span> <em>caso.</em>
@@ -73,6 +81,13 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
   .contact-section {
     padding-top: clamp(10rem, 8rem + 10vw, 20rem);
     padding-bottom: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-aurora {
+    opacity: 0.6;
+    mask-image: radial-gradient(ellipse 70% 60% at 30% 40%, black 0%, transparent 100%);
   }
 
   .contact-spread {

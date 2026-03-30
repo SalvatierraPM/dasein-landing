@@ -12,7 +12,7 @@
 **Dolor:** Implementación de IA en contextos regulados (CMF, Ley de Datos Personales), riesgo reputacional, presión competitiva de fintechs
 **Trigger de compra:** Nueva regulación próxima, competidor lanzó producto IA, directorio exige plan de IA
 **Servicio natural:** Simulación Estratégica (decisiones complejas con múltiples stakeholders)
-**Ticket promedio:** USD 12,000-25,000
+**Ticket promedio:** USD 18,000-35,000
 **Ciclo de venta:** 4-8 semanas
 **Caso demo:** BancoEstado (análisis público)
 
@@ -38,7 +38,7 @@
 **Dolor:** Impacto de IA generativa en modelos educativos, integridad académica, rediseño curricular, competencia de plataformas online
 **Trigger de compra:** Incidente de plagio con IA, presión del Mineduc, pérdida de matrícula
 **Servicio natural:** Lectura de Campo (diagnóstico rápido) → Simulación Estratégica (rediseño)
-**Ticket promedio:** USD 2,500-15,000
+**Ticket promedio:** USD 4,500-18,000
 **Ciclo de venta:** 8-16 semanas (burocracia institucional)
 **Caso demo:** Pendiente
 
@@ -51,7 +51,7 @@
 **Dolor:** Diseño de política pública bajo incertidumbre, adopción tecnológica en gobierno, presión ciudadana
 **Trigger de compra:** Cambio de gobierno, nueva agenda digital, crisis de legitimidad institucional
 **Servicio natural:** Lectura de Campo (por presupuesto) → Simulación Estratégica (si hay fondos de innovación)
-**Ticket promedio:** USD 2,500-12,000
+**Ticket promedio:** USD 4,500-18,000
 **Ciclo de venta:** 12-24 semanas (licitación o compra directa si < umbral)
 **Caso demo:** Pendiente (adaptar BancoEstado como referencia de institución pública)
 

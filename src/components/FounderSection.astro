@@ -20,8 +20,8 @@ const proofCells = [
 
     <!-- Section header — asymmetric kicker + massive title -->
     <header class="founder-header" data-reveal>
-      <span class="section-kicker">05 / Origen</span>
-      <h2 class="founder-title">Dasein nace de operar donde las decisiones tienen consecuencias reales.</h2>
+      <span class="section-kicker">03 / Origen</span>
+      <h2 class="founder-title" data-line-reveal><span>Dasein nace de operar donde las decisiones</span> <span>tienen consecuencias reales.</span></h2>
     </header>
 
     <!-- Editorial spread — portrait + narrative -->
@@ -30,6 +30,8 @@ const proofCells = [
         <img
           src="/founder/pablo-moraga.jpg"
           alt="Pablo Moraga"
+          width="460"
+          height="541"
           loading="lazy"
           decoding="async"
         />
@@ -523,51 +525,61 @@ const proofCells = [
     }
   }
 
-  /* === Narrative paragraphs: sequential scroll reveal === */
+  /* === Narrative: scroll-linked continuous opacity (Apple-style) === */
   .js [data-narrative-p] {
-    opacity: 0;
-    transform: translateY(20px);
-    filter: blur(2px);
-    transition: opacity 0.8s var(--ease-out-expo),
-                transform 0.8s var(--ease-out-expo),
-                filter 0.6s var(--ease-out-expo);
-  }
-
-  .js [data-narrative-p].is-narrative-visible {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
+    opacity: 0.12;
+    filter: blur(1.5px);
+    transition: filter 0.15s ease;
   }
 
   @media (prefers-reduced-motion: reduce) {
     .js [data-narrative-p] {
       opacity: 1;
-      transform: none;
       filter: none;
-      transition: none;
     }
   }
 </style>
 
 <script>
-  /* === Narrative: per-paragraph scroll reveal === */
+  /* === Narrative: continuous scroll-linked opacity === */
+  /* Each paragraph brightens proportionally as it crosses the viewport center.
+     Inspired by Apple's product pages — text goes from ghost → full as you read. */
   (() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    const paragraphs = document.querySelectorAll('[data-narrative-p]');
+    const paragraphs = document.querySelectorAll<HTMLElement>('[data-narrative-p]');
     if (!paragraphs.length) return;
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        const el = entry.target as HTMLElement;
-        const idx = Array.from(paragraphs).indexOf(el);
-        el.style.transitionDelay = `${idx * 200}ms`;
-        el.classList.add('is-narrative-visible');
-        observer.unobserve(el);
-      });
-    }, { threshold: 0.4, rootMargin: '0px 0px -10% 0px' });
+    let ticking = false;
 
-    paragraphs.forEach((p) => observer.observe(p));
+    const update = () => {
+      const vh = window.innerHeight;
+      const center = vh * 0.55; // sweet spot slightly below center
+
+      paragraphs.forEach((p) => {
+        const rect = p.getBoundingClientRect();
+        const pCenter = rect.top + rect.height / 2;
+
+        // Distance from viewport center, normalized to 0–1
+        const dist = Math.abs(pCenter - center) / (vh * 0.5);
+        // Clamp: 1 = at center (full), 0 = far away (dim)
+        const progress = Math.max(0, Math.min(1, 1 - dist));
+        // Map to opacity range: 0.12 → 1
+        const opacity = 0.12 + progress * 0.88;
+        const blur = (1 - progress) * 1.5;
+
+        p.style.opacity = String(opacity);
+        p.style.filter = blur > 0.1 ? `blur(${blur}px)` : 'none';
+      });
+    };
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => { update(); ticking = false; });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    update();
   })();
 </script>

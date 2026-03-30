@@ -6,6 +6,7 @@ import Timeline from '../components/Timeline.astro';
 import FounderSection from '../components/FounderSection.astro';
 import DeliverablesSection from '../components/DeliverablesSection.astro';
 import AllianceSection from '../components/AllianceSection.astro';
+import JoinSection from '../components/JoinSection.astro';
 import Contact from '../components/Contact.astro';
 import DecorativeAccents from '../components/DecorativeAccents.astro';
 import MouseParticles from '../components/MouseParticles.astro';
@@ -45,6 +46,7 @@ import BrandLogo from '../components/BrandLogo.astro';
     <FounderSection />
     <AudienceLanes />
     <AllianceSection />
+    <JoinSection />
     <Contact />
     <MagneticCTA />
     <CTAEyes />
@@ -69,7 +71,7 @@ import BrandLogo from '../components/BrandLogo.astro';
       });
     }, { threshold: 0.18, rootMargin: '0px 0px -12% 0px' });
 
-    document.querySelectorAll('[data-reveal], [data-reveal-stagger]').forEach((element) => {
+    document.querySelectorAll('[data-reveal], [data-reveal-stagger], [data-line-reveal], [data-scale-in]').forEach((element) => {
       revealObserver.observe(element);
     });
 
@@ -102,6 +104,87 @@ import BrandLogo from '../components/BrandLogo.astro';
       }, { passive: true });
       update();
     })();
+
+    /* ── Section color transitions ── */
+    /* Sections with class .section-dark get a smooth crossfade overlay
+       that activates as they enter the viewport. Avoids hard cuts. */
+    (() => {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      const darkSections = document.querySelectorAll<HTMLElement>('.section-dark, .hero-disclosure-shell');
+      if (!darkSections.length) return;
+
+      let ticking = false;
+      const update = () => {
+        const vh = window.innerHeight;
+        darkSections.forEach((section) => {
+          const rect = section.getBoundingClientRect();
+          // How much of the section is in view (0 to 1)
+          const visible = Math.max(0, Math.min(1,
+            (vh - rect.top) / (vh * 0.3)
+          ));
+          section.style.setProperty('--section-presence', String(visible));
+        });
+      };
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => { update(); ticking = false; });
+          ticking = true;
+        }
+      }, { passive: true });
+      update();
+    })();
+
+    /* ── Text scramble on section kickers ── */
+    /* When a kicker enters viewport, its text briefly scrambles then resolves.
+       Terminal/hacker aesthetic that fits the mono font. */
+    (() => {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789/·—';
+      const kickers = document.querySelectorAll<HTMLElement>('.section-kicker, .section-index');
+
+      const scramble = (el: HTMLElement) => {
+        const original = el.textContent || '';
+        const len = original.length;
+        let frame = 0;
+        const totalFrames = 18;
+
+        const tick = () => {
+          let result = '';
+          for (let i = 0; i < len; i++) {
+            if (original[i] === ' ' || original[i] === '/') {
+              result += original[i];
+            } else if (frame > totalFrames * (i / len) + 4) {
+              result += original[i]; // resolved
+            } else {
+              result += chars[Math.floor(Math.random() * chars.length)];
+            }
+          }
+          el.textContent = result;
+          frame++;
+          if (frame < totalFrames + 8) {
+            requestAnimationFrame(tick);
+          } else {
+            el.textContent = original;
+          }
+        };
+        requestAnimationFrame(tick);
+      };
+
+      const kickerObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          scramble(entry.target as HTMLElement);
+          kickerObserver.unobserve(entry.target);
+        });
+      }, { threshold: 0.5 });
+
+      kickers.forEach((k) => kickerObserver.observe(k));
+    })();
+
+    /* Marquees run at fixed CSS speed — no scroll reactivity */
   </script>
 </Layout>
 
@@ -189,7 +272,9 @@ import BrandLogo from '../components/BrandLogo.astro';
     }
 
     .nav-links .nav-cta {
-      display: none;
+      display: inline-flex;
+      padding: 0.6rem 0.85rem;
+      font-size: 0.65rem;
     }
   }
 </style>

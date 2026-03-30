@@ -18,7 +18,7 @@
 
 ### 1. Lectura de Campo
 **Posición:** Puerta de entrada
-**Precio:** Desde USD 2,500
+**Precio:** Desde USD 4,500
 **Plazo:** 5 días
 
 **Incluye:**
@@ -38,7 +38,7 @@
 
 ### 2. Simulación Estratégica
 **Posición:** Core (más popular)
-**Precio:** Desde USD 12,000
+**Precio:** Desde USD 18,000
 **Plazo:** 4-5 semanas
 
 **Incluye:**
@@ -60,8 +60,8 @@
 
 ### 3. Radar Estratégico
 **Posición:** Monitoreo continuo
-**Precio:** Desde USD 5,000/mes
-**Plazo:** Mínimo 6 meses
+**Precio:** Desde USD 7,500/mes
+**Plazo:** Mínimo 3 meses
 
 **Incluye:**
 - Escaneo mensual de señales nuevas
@@ -82,9 +82,9 @@
 
 | Servicio | Inversión | Plazo | Modelo |
 |----------|-----------|-------|--------|
-| Lectura de Campo | Desde USD 2,500 | 5 días | Proyecto único |
-| Simulación Estratégica | Desde USD 12,000 | 4-5 semanas | Proyecto único |
-| Radar Estratégico | Desde USD 5,000/mes | Min. 6 meses | Retainer mensual |
+| Lectura de Campo | Desde USD 4,500 | 5 días | Proyecto único |
+| Simulación Estratégica | Desde USD 18,000 | 4-5 semanas | Proyecto único |
+| Radar Estratégico | Desde USD 7,500/mes | Min. 3 meses | Retainer mensual |
 
 **Notas:**
 - Precios "desde" — escalan según complejidad del caso y número de stakeholders

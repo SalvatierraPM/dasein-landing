@@ -1,0 +1,222 @@
+---
+const joinCards = [
+  {
+    num: '01',
+    label: 'Equipo',
+    title: 'Perfiles que quieran construir esto juntos.',
+    body: 'Prospectiva, research, computational social science, product design y AI engineering. Buscamos profundidad metodológica y ganas de operar en la intersección.',
+    tags: ['Prospectiva', 'Research', 'Comp. Social Science', 'Product Design', 'AI Engineering'],
+  },
+  {
+    num: '02',
+    label: 'Investigadores',
+    title: 'Académicos que necesiten una plataforma de simulación auditable.',
+    body: 'Universidades, laboratorios y programas que exploran escenarios, política pública o transformación institucional con acceso a SignalTwin.',
+    tags: ['Universidades', 'Laboratorios', 'Política pública', 'Simulación'],
+  },
+];
+
+const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
+---
+
+<section class="join-section" id="equipo">
+  <div class="container">
+    <header class="join-header" data-reveal>
+      <span class="section-kicker">06 / Únete</span>
+      <div class="join-header__title">
+        <h2>Esto se construye<br /><em>con quienes faltan.</em></h2>
+        <p class="join-header__lead">
+          Buscamos profundidad metodológica y hambre de operar donde la complejidad
+          es el material de trabajo, no el obstáculo.
+        </p>
+      </div>
+    </header>
+
+    <div class="join-grid" data-reveal-stagger>
+      {joinCards.map((card) => (
+        <article class="join-card" data-reveal>
+          <div class="join-card__head">
+            <span class="join-card__num">{card.num}</span>
+            <span class="join-card__label">{card.label}</span>
+          </div>
+          <h3 class="join-card__title">{card.title}</h3>
+          <p class="join-card__body">{card.body}</p>
+          <div class="pill-list join-card__tags">
+            {card.tags.map((tag) => (
+              <span>{tag}</span>
+            ))}
+          </div>
+          <a class="button button-secondary join-card__cta" href={calendlyUrl} target="_blank" rel="noreferrer">
+            Conversemos <span aria-hidden="true">&rarr;</span>
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .join-section {
+    padding-block: var(--space-section);
+  }
+
+  .join-header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: clamp(2rem, 4vw, 5rem);
+    align-items: start;
+    margin-bottom: clamp(4rem, 5vw, 7rem);
+  }
+
+  .join-header .section-kicker {
+    padding-top: 0.3em;
+  }
+
+  .join-header__title h2 {
+    font-family: var(--font-display);
+    font-size: var(--text-h1);
+    font-weight: 700;
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-heading);
+    color: var(--ink);
+    max-width: 22ch;
+  }
+
+  .join-header__title h2 em {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .join-header__lead {
+    margin-top: 1.25rem;
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    color: var(--ink-soft);
+    max-width: 48ch;
+  }
+
+  .join-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .join-card {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1rem, 1.5vw, 1.5rem);
+    padding: clamp(2.5rem, 3.5vw, 4rem);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .join-card:first-child {
+    border-right: 1px solid var(--line);
+  }
+
+  .join-card__head {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .join-card__num {
+    font-family: var(--font-mono);
+    font-size: clamp(1.4rem, 1rem + 1vw, 2rem);
+    font-weight: 500;
+    letter-spacing: var(--tracking-mono);
+    line-height: 1;
+    color: var(--signal-red);
+  }
+
+  .join-card__label {
+    font-family: var(--font-mono);
+    font-size: var(--text-overline);
+    letter-spacing: var(--tracking-overline);
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    padding: 0.25rem 0.6rem;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+  }
+
+  .join-card__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 1.2rem + 1.5vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: var(--tracking-heading);
+    color: var(--ink);
+    max-width: 22ch;
+  }
+
+  .join-card__body {
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    color: var(--ink-soft);
+    max-width: 44ch;
+  }
+
+  .join-card__tags {
+    margin-top: auto;
+    padding-top: clamp(1rem, 1.5vw, 1.5rem);
+    border-top: 1px solid var(--line);
+  }
+
+  .join-card__cta {
+    align-self: flex-start;
+    margin-top: 0.5rem;
+  }
+
+  /* Entrance animation */
+  [data-reveal-stagger] .join-card {
+    transform: translateY(24px) scale(0.97);
+    opacity: 0;
+    transition: transform 0.6s var(--ease-out-expo), opacity 0.5s var(--ease-out-expo);
+  }
+
+  [data-reveal-stagger].revealed .join-card {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+
+  [data-reveal-stagger].revealed .join-card:nth-child(2) {
+    transition-delay: 0.12s;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .join-header {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .join-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .join-card:first-child {
+      border-right: none;
+    }
+
+    .join-card {
+      padding: clamp(2rem, 3vw, 3rem) 0;
+    }
+
+    .join-card__cta {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal-stagger] .join-card {
+      transform: none;
+      opacity: 1;
+      transition: none;
+    }
+  }
+</style>

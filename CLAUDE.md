@@ -66,9 +66,9 @@ docs/ops/
 Three services, three depth levels:
 | Service | Position | Investment |
 |---------|----------|------------|
-| **Lectura de Campo** | Entry door | From USD 2,500 / 5 days |
-| **Simulación Estratégica** | Core (most popular) | From USD 12,000 / 4-5 weeks |
-| **Radar Estratégico** | Continuous monitoring | From USD 5,000/month / min 6 months |
+| **Lectura de Campo** | Entry door | From USD 4,500 / 7 days |
+| **Simulación Estratégica** | Core (most popular) | From USD 18,000 / 5-6 weeks |
+| **Radar Estratégico** | Continuous monitoring | From USD 7,500/month / min 3 months |
 
 ### Rules
 - `.claude/rules/design-quality.md` — Anti-vibecode policy with banned patterns and required qualities

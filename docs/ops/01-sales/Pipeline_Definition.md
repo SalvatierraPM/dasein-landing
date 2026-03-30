@@ -47,11 +47,11 @@
 | Servicio de interés | Select | Lectura de Campo / Simulación Estratégica / Radar |
 | Dolor principal | Texto largo | Implementación de IA sin claridad regulatoria |
 | Urgencia (1-10) | Número | 7 |
-| Presupuesto estimado | Número (USD) | 12,000 |
+| Presupuesto estimado | Número (USD) | 18,000 |
 | Decision-maker identificado | Sí/No | Sí |
 | Etapa del pipeline | Select | 1-6 (ver arriba) |
 | Probabilidad de cierre (%) | Número | 40% |
-| Monto estimado (USD) | Número | 12,000 |
+| Monto estimado (USD) | Número | 18,000 |
 | Último contacto | Fecha | 2026-03-29 |
 | Próximo paso | Texto | Enviar propuesta |
 | Fecha próximo paso | Fecha | 2026-04-02 |

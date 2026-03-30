@@ -28,9 +28,19 @@ const {
 
   <title>{title}</title>
 
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://dasein.cl/">
   <meta property="og:title" content={title}>
   <meta property="og:description" content={description}>
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://dasein.cl/">
+  <meta property="og:image" content="https://dasein.cl/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content={title}>
+  <meta name="twitter:description" content={description}>
+  <meta name="twitter:image" content="https://dasein.cl/og-image.png">
 
   <script is:inline>
     const root = document.documentElement;
@@ -39,10 +49,65 @@ const {
       root.classList.add('motion-ok');
     }
   </script>
+  <noscript>
+    <style>
+      [data-reveal], [data-reveal-stagger] > * {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+      }
+      .hero-word, .hero-body, .hero-actions, .hero-kicker {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .hero-word--strike::after { transform: scaleX(1) !important; }
+      .hero-word--strike { color: var(--ink-faint) !important; }
+      [data-narrative-p] {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+      }
+    </style>
+  </noscript>
 </head>
 <body class="grain">
   <div class="cursor-dot" aria-hidden="true"></div>
   <slot />
+
+  <!-- Lenis smooth scroll -->
+  <script>
+    import Lenis from 'lenis';
+
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        orientation: 'vertical',
+        gestureOrientation: 'vertical',
+        smoothWheel: true,
+        touchMultiplier: 1.5,
+      });
+
+      function raf(time: number) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+
+      // Expose for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener('click', (e) => {
+          const href = (anchor as HTMLAnchorElement).getAttribute('href');
+          if (!href || href === '#') return;
+          const target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            lenis.scrollTo(target, { offset: -80 });
+          }
+        });
+      });
+    }
+  </script>
 
   <script is:inline>
     (() => {

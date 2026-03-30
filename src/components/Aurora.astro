@@ -1,0 +1,119 @@
+---
+/**
+ * Aurora — Animated gradient blobs background.
+ * Ported from ReactBits style. Pure CSS + minimal JS.
+ * Usage: <Aurora class="my-class" />
+ */
+interface Props {
+  class?: string;
+  colorA?: string;
+  colorB?: string;
+  colorC?: string;
+  speed?: number;
+}
+
+const {
+  class: className = '',
+  colorA = 'rgba(72, 101, 255, 0.18)',
+  colorB = 'rgba(255, 92, 56, 0.12)',
+  colorC = 'rgba(122, 104, 214, 0.10)',
+  speed = 1,
+} = Astro.props;
+---
+
+<div
+  class={`aurora ${className}`}
+  aria-hidden="true"
+  style={`--aurora-a: ${colorA}; --aurora-b: ${colorB}; --aurora-c: ${colorC}; --aurora-speed: ${speed};`}
+>
+  <div class="aurora-blob aurora-blob--a"></div>
+  <div class="aurora-blob aurora-blob--b"></div>
+  <div class="aurora-blob aurora-blob--c"></div>
+</div>
+
+<style>
+  .aurora {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+    mix-blend-mode: normal;
+  }
+
+  .aurora-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0;
+    will-change: transform, opacity;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
+
+  .aurora-blob--a {
+    width: clamp(300px, 40vw, 600px);
+    height: clamp(300px, 40vw, 600px);
+    background: var(--aurora-a);
+    top: -10%;
+    left: 10%;
+    animation:
+      aurora-drift-a calc(14s / var(--aurora-speed)) ease-in-out infinite alternate,
+      aurora-fade 2s ease-out forwards;
+  }
+
+  .aurora-blob--b {
+    width: clamp(250px, 35vw, 500px);
+    height: clamp(250px, 35vw, 500px);
+    background: var(--aurora-b);
+    top: 20%;
+    right: 5%;
+    animation:
+      aurora-drift-b calc(18s / var(--aurora-speed)) ease-in-out infinite alternate,
+      aurora-fade 2s ease-out 0.4s forwards;
+  }
+
+  .aurora-blob--c {
+    width: clamp(200px, 30vw, 450px);
+    height: clamp(200px, 30vw, 450px);
+    background: var(--aurora-c);
+    bottom: 10%;
+    left: 30%;
+    animation:
+      aurora-drift-c calc(16s / var(--aurora-speed)) ease-in-out infinite alternate,
+      aurora-fade 2s ease-out 0.8s forwards;
+  }
+
+  @keyframes aurora-drift-a {
+    0%   { transform: translate(0, 0) scale(1); }
+    33%  { transform: translate(8vw, 6vh) scale(1.12); }
+    66%  { transform: translate(-4vw, 12vh) scale(0.95); }
+    100% { transform: translate(6vw, -4vh) scale(1.08); }
+  }
+
+  @keyframes aurora-drift-b {
+    0%   { transform: translate(0, 0) scale(1); }
+    33%  { transform: translate(-10vw, 8vh) scale(1.1); }
+    66%  { transform: translate(6vw, -6vh) scale(0.92); }
+    100% { transform: translate(-8vw, 10vh) scale(1.05); }
+  }
+
+  @keyframes aurora-drift-c {
+    0%   { transform: translate(0, 0) scale(1); }
+    33%  { transform: translate(12vw, -8vh) scale(1.08); }
+    66%  { transform: translate(-6vw, 4vh) scale(1.15); }
+    100% { transform: translate(4vw, 8vh) scale(0.98); }
+  }
+
+  @keyframes aurora-fade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .aurora-blob {
+      animation: aurora-fade 1s ease-out forwards !important;
+    }
+  }
+</style>
