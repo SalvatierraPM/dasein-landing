@@ -35,18 +35,18 @@ const proofCells = [
         />
       </figure>
 
-      <div class="narrative" data-reveal>
+      <div class="narrative" data-narrative-scroll>
         <div class="narrative-inner">
-          <p>
+          <p data-narrative-p>
             Soy Pablo Moraga. Vengo de operar tecnología en entornos donde los errores
             no son teóricos y las decisiones cambian operaciones, mercados y personas.
           </p>
-          <p>
+          <p data-narrative-p>
             Esa experiencia me enseñó que antes de cualquier implementación hace falta
             leer el sistema: actores, incentivos, fricciones, restricciones y efectos
             de segundo orden que ningún dashboard muestra.
           </p>
-          <p>
+          <p data-narrative-p>
             Dasein Foresight nace desde ahí. No como un ejercicio académico de futuros
             posibles, sino como una herramienta de prospectiva para tomar mejores
             decisiones hoy — en cualquier industria donde la complejidad ya superó
@@ -522,4 +522,52 @@ const proofCells = [
       transition: none;
     }
   }
+
+  /* === Narrative paragraphs: sequential scroll reveal === */
+  .js [data-narrative-p] {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(2px);
+    transition: opacity 0.8s var(--ease-out-expo),
+                transform 0.8s var(--ease-out-expo),
+                filter 0.6s var(--ease-out-expo);
+  }
+
+  .js [data-narrative-p].is-narrative-visible {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .js [data-narrative-p] {
+      opacity: 1;
+      transform: none;
+      filter: none;
+      transition: none;
+    }
+  }
 </style>
+
+<script>
+  /* === Narrative: per-paragraph scroll reveal === */
+  (() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const paragraphs = document.querySelectorAll('[data-narrative-p]');
+    if (!paragraphs.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target as HTMLElement;
+        const idx = Array.from(paragraphs).indexOf(el);
+        el.style.transitionDelay = `${idx * 200}ms`;
+        el.classList.add('is-narrative-visible');
+        observer.unobserve(el);
+      });
+    }, { threshold: 0.4, rootMargin: '0px 0px -10% 0px' });
+
+    paragraphs.forEach((p) => observer.observe(p));
+  })();
+</script>

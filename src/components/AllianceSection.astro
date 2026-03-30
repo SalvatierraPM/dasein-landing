@@ -61,7 +61,7 @@
     </div>
 
     <!-- Monumental quote -->
-    <blockquote class="alliance-quote" data-reveal>
+    <blockquote class="alliance-quote" data-quote-reveal>
       <div class="alliance-quote-rule"></div>
       <p class="alliance-quote-body">
         <span class="alliance-quote-line">
@@ -544,4 +544,70 @@
     .alliance-3d { animation: none !important; }
     .alliance-3d-wrap { transform: none !important; }
   }
+
+  /* === Quote word-by-word reveal === */
+  .js [data-quote-reveal] .aq-mono,
+  .js [data-quote-reveal] .aq-display,
+  .js [data-quote-reveal] .aq-editorial {
+    opacity: 0;
+    transform: translateY(24px) scale(0.94);
+    filter: blur(4px);
+    transition: opacity 0.7s var(--ease-out-expo),
+                transform 0.7s var(--ease-out-expo),
+                filter 0.5s var(--ease-out-expo);
+  }
+
+  .js [data-quote-reveal].is-quote-visible .aq-mono,
+  .js [data-quote-reveal].is-quote-visible .aq-display,
+  .js [data-quote-reveal].is-quote-visible .aq-editorial {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .js [data-quote-reveal] .aq-mono,
+    .js [data-quote-reveal] .aq-display,
+    .js [data-quote-reveal] .aq-editorial {
+      opacity: 1;
+      transform: none;
+      filter: none;
+      transition: none;
+    }
+  }
 </style>
+
+<script>
+  /* === Alliance quote: staggered word reveal === */
+  (() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const quote = document.querySelector('[data-quote-reveal]');
+    if (!quote) return;
+
+    const words = quote.querySelectorAll<HTMLElement>('.aq-mono, .aq-display, .aq-editorial');
+    const rules = quote.querySelectorAll<HTMLElement>('.alliance-quote-rule');
+
+    const quoteObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        quote.classList.add('is-quote-visible');
+
+        // Stagger each word
+        words.forEach((word, i) => {
+          word.style.transitionDelay = `${i * 180}ms`;
+        });
+
+        // Rules animate after words
+        const rulesDelay = words.length * 180 + 200;
+        rules.forEach((rule, i) => {
+          rule.style.transitionDelay = `${i === 0 ? 0 : rulesDelay}ms`;
+        });
+
+        quoteObserver.unobserve(quote);
+      });
+    }, { threshold: 0.3 });
+
+    quoteObserver.observe(quote);
+  })();
+</script>

@@ -76,7 +76,7 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
 
           <div class="service-card__footer">
             <div class="service-card__meta">
-              <span class="service-card__investment">{svc.investment}</span>
+              <span class="service-card__investment" data-count-target={svc.investment}>{svc.investment}</span>
               <span class="service-card__duration">{svc.duration}</span>
             </div>
             <a class="button button-primary service-card__cta" href={calendlyUrl} target="_blank" rel="noreferrer">
@@ -188,6 +188,22 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
     border-bottom: 1px solid var(--line);
     position: relative;
     overflow: hidden;
+  }
+
+  /* Scroll-driven entrance: perspective tilt that settles */
+  .js .service-card {
+    opacity: 0;
+    transform: perspective(800px) rotateX(4deg) translateY(32px);
+    transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+  }
+
+  .js .service-card.is-scrolled-in {
+    opacity: 1;
+    transform: perspective(800px) rotateX(0deg) translateY(0);
+  }
+
+  .js .service-card:nth-child(2) {
+    transition-delay: 0.15s;
   }
 
   .service-card__ghost {
@@ -521,4 +537,62 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
       transition: none;
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .js .service-card {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
 </style>
+
+<script>
+  /* === Service cards: scroll-driven entrance + counter === */
+  (() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    // Card entrance with perspective tilt
+    const cards = document.querySelectorAll('.service-card');
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-scrolled-in');
+          cardObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2, rootMargin: '0px 0px -8% 0px' });
+
+    cards.forEach((card) => cardObserver.observe(card));
+
+    // Counter animation on investment numbers
+    const counters = document.querySelectorAll<HTMLElement>('[data-count-target]');
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target as HTMLElement;
+        const raw = el.dataset.countTarget || '';
+        // Extract number: "Desde USD 4,500" → 4500
+        const match = raw.match(/([\d,]+)/);
+        if (!match) return;
+        const target = parseInt(match[1].replace(/,/g, ''), 10);
+        const prefix = raw.slice(0, raw.indexOf(match[1]));
+        const suffix = raw.slice(raw.indexOf(match[1]) + match[1].length);
+        const duration = 1200;
+        const start = performance.now();
+
+        const tick = (now: number) => {
+          const t = Math.min((now - start) / duration, 1);
+          const ease = 1 - Math.pow(1 - t, 4); // ease-out-quart
+          const current = Math.round(target * ease);
+          el.textContent = prefix + current.toLocaleString('en-US') + suffix;
+          if (t < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+        counterObserver.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+
+    counters.forEach((c) => counterObserver.observe(c));
+  })();
+</script>

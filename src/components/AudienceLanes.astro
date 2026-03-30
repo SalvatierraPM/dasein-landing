@@ -219,6 +219,17 @@ const marqueeItems = ['Pilotos', 'Partners', 'Equipo', 'Investigadores', 'Alianz
     letter-spacing: var(--tracking-mono);
     line-height: 1;
     color: var(--signal-red);
+    transition: transform 0.6s var(--ease-spring), opacity 0.5s ease;
+  }
+
+  .js .audience-lane:not(.revealed) .audience-num {
+    opacity: 0;
+    transform: scale(1.4);
+  }
+
+  .js .audience-lane.revealed .audience-num {
+    opacity: 1;
+    transform: scale(1);
   }
 
   .audience-label {
