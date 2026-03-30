@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dasein Foresight — Carpeta Operativa</title>
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Azeret+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy: #0A1628;
+      --surface: #111D2E;
+      --slate: #ede7dc;
+      --muted: #8899AA;
+      --blue: #4865ff;
+      --violet: #7a68d6;
+      --teal: #2f9e90;
+      --danger: #EF4444;
+      --amber: #F59E0B;
+    }
+
+    body {
+      background: var(--navy);
+      color: var(--slate);
+      font-family: 'Space Grotesk', sans-serif;
+      line-height: 1.6;
+      padding: 3rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      margin-bottom: 4rem;
+      border-bottom: 1px solid rgba(59,130,246,0.15);
+      padding-bottom: 2rem;
+    }
+
+    .overline {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2rem, 1.5rem + 3vw, 3.5rem);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 0.75rem;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 600px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .folder {
+      background: var(--surface);
+      border: 1px solid rgba(59,130,246,0.1);
+      border-radius: 6px;
+      padding: 1.75rem;
+      transition: border-color 0.3s;
+    }
+
+    .folder:hover {
+      border-color: rgba(59,130,246,0.3);
+    }
+
+    .folder-id {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--blue);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .folder h2 {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 700;
+      font-size: 1.35rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .doc-list {
+      list-style: none;
+    }
+
+    .doc-list li {
+      margin-bottom: 0.6rem;
+    }
+
+    .doc-list a {
+      color: var(--slate);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0;
+      border-bottom: 1px solid rgba(136,153,170,0.1);
+      transition: color 0.2s;
+    }
+
+    .doc-list a:hover {
+      color: var(--blue);
+    }
+
+    .doc-list .icon {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--muted);
+      width: 1.5rem;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .doc-list .format {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      margin-left: auto;
+      padding: 0.15rem 0.4rem;
+      border: 1px solid rgba(136,153,170,0.2);
+      border-radius: 3px;
+    }
+
+    .pending {
+      color: var(--amber) !important;
+      font-style: italic;
+    }
+
+    .pending .icon { color: var(--amber); }
+
+    section.decisions {
+      margin-top: 2rem;
+      padding: 2rem;
+      background: rgba(245,158,11,0.06);
+      border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 6px;
+    }
+
+    section.decisions h2 {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--amber);
+      margin-bottom: 1rem;
+    }
+
+    .decision-list {
+      list-style: none;
+    }
+
+    .decision-list li {
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(245,158,11,0.1);
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .decision-list .tag {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--amber);
+      padding: 0.15rem 0.5rem;
+      border: 1px solid rgba(245,158,11,0.3);
+      border-radius: 3px;
+      flex-shrink: 0;
+      height: fit-content;
+      margin-top: 0.15rem;
+    }
+
+    footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(59,130,246,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer .brand {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    footer .meta {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
+    @media print {
+      body { background: #fff; color: #111; padding: 1.5cm; }
+      .folder { border-color: #ddd; background: #fafafa; }
+      .doc-list a { color: #111; }
+      .overline, .folder-id { color: #4865ff; }
+      section.decisions { background: #fffbeb; border-color: #f59e0b; }
+    }
+
+    @media (max-width: 768px) {
+      .grid { grid-template-columns: 1fr; }
+      body { padding: 1.5rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="overline">▸ Carpeta Operativa</div>
+  <h1>Dasein Foresight</h1>
+  <p class="subtitle">Estructura mínima para vender como consultora real. Basada en mentoría Paperclip, 2026-03-29.</p>
+</header>
+
+<div class="grid">
+
+  <div class="folder">
+    <div class="folder-id">00 ◆ Master</div>
+    <h2>Fuente de verdad</h2>
+    <ul class="doc-list">
+      <li><a href="00-master/Dasein_Master_Offer.html"><span class="icon">◈</span> Master Offer <span class="format">html</span></a></li>
+      <li><a href="00-master/Dasein_ICPs.html"><span class="icon">◈</span> ICPs Operativos <span class="format">html</span></a></li>
+    </ul>
+  </div>
+
+  <div class="folder">
+    <div class="folder-id">01 ◆ Sales</div>
+    <h2>Pipeline y tracking</h2>
+    <ul class="doc-list">
+      <li><a href="01-sales/Pipeline_Definition.html"><span class="icon">◈</span> Pipeline + Lead Tracker <span class="format">html</span></a></li>
+      <li class="pending"><span class="icon">※</span> Lead Tracker (setup) <span class="format">pendiente</span></li>
+    </ul>
+  </div>
+
+  <div class="folder">
+    <div class="folder-id">02 ◆ Discovery</div>
+    <h2>Calificación de leads</h2>
+    <ul class="doc-list">
+      <li><a href="02-discovery/Discovery_Call_Template.html"><span class="icon">◈</span> Discovery Call Template <span class="format">html</span></a></li>
+      <li><a href="02-discovery/Lead_Qualification_Score.html"><span class="icon">◈</span> Lead Qualification Score <span class="format">html</span></a></li>
+    </ul>
+  </div>
+
+  <div class="folder">
+    <div class="folder-id">03 ◆ Proposals</div>
+    <h2>Materiales comerciales</h2>
+    <ul class="doc-list">
+      <li><a href="../assets/proposal-template.html"><span class="icon">◈</span> Proposal Template <span class="format">html</span></a></li>
+      <li><a href="../assets/one-pager.html"><span class="icon">◈</span> One-Pager Institucional <span class="format">html</span></a></li>
+      <li><a href="../assets/deck-comercial.html"><span class="icon">◈</span> Deck Comercial (9 slides) <span class="format">html</span></a></li>
+    </ul>
+  </div>
+
+  <div class="folder">
+    <div class="folder-id">04 ◆ Legal</div>
+    <h2>Contratos y pagos</h2>
+    <ul class="doc-list">
+      <li><a href="../assets/nda-template.html"><span class="icon">◈</span> NDA Template <span class="format">html</span></a></li>
+      <li><a href="../assets/sow-template.html"><span class="icon">◈</span> SOW Template <span class="format">html</span></a></li>
+      <li><a href="04-legal/MSA_Service_Agreement.html"><span class="icon">◈</span> Contrato Marco (MSA) <span class="format">html</span></a></li>
+      <li><a href="04-legal/Invoice_and_Payment_Policy.html"><span class="icon">※</span> Política de Pagos <span class="format">html</span></a></li>
+    </ul>
+  </div>
+
+  <div class="folder">
+    <div class="folder-id">05 ◆ Delivery</div>
+    <h2>Ejecución de proyectos</h2>
+    <ul class="doc-list">
+      <li><a href="05-delivery/Client_Onboarding_Checklist.html"><span class="icon">◈</span> Onboarding Checklist <span class="format">html</span></a></li>
+      <li><a href="05-delivery/Kickoff_Agenda.html"><span class="icon">◈</span> Kickoff Agenda <span class="format">html</span></a></li>
+      <li><a href="05-delivery/Weekly_Update_Template.html"><span class="icon">◈</span> Weekly Update <span class="format">html</span></a></li>
+      <li><a href="05-delivery/Final_Delivery_Template.html"><span class="icon">◈</span> Entregable Final <span class="format">html</span></a></li>
+    </ul>
+  </div>
+
+  <div class="folder">
+    <div class="folder-id">06 ◆ Cases</div>
+    <h2>Casos de estudio</h2>
+    <ul class="doc-list">
+      <li><a href="06-cases/Case_Study_Template.html"><span class="icon">◈</span> Case Study Template <span class="format">html</span></a></li>
+    </ul>
+  </div>
+
+</div>
+
+<section class="decisions">
+  <h2>※ Decisiones pendientes CEO</h2>
+  <ul class="decision-list">
+    <li><span class="tag">LEGAL</span> Facturación: ¿USD o CLP? ¿Contribuyente IVA?</li>
+    <li><span class="tag">LEGAL</span> Atraso en pagos: ¿cobrar interés? ¿derivar a cobranza?</li>
+    <li><span class="tag">LEGAL</span> Pausa de proyecto: ¿30 o 60 días para considerar terminado?</li>
+    <li><span class="tag">LEGAL</span> Reembolsos: ¿política de devolución pre-inicio?</li>
+    <li><span class="tag">VENTAS</span> Descuentos piloto: ¿ofrecer a primeros clientes? ¿cuánto?</li>
+    <li><span class="tag">VENTAS</span> Lead Tracker: ¿Google Sheets, Notion o Airtable?</li>
+    <li><span class="tag">CONTENT</span> Caso 2 para deck: ¿litio/geopolítica u otro?</li>
+    <li><span class="tag">LEGAL</span> MSA: revisión legal antes de usar con clientes</li>
+  </ul>
+</section>
+
+<footer>
+  <span class="brand">Dasein Foresight</span>
+  <span class="meta">Carpeta operativa ◇ 2026-03-29 ◇ Mentoría Paperclip</span>
+</footer>
+
+</body>
+</html>

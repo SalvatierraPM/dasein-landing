@@ -34,7 +34,7 @@ Raw design values without semantic meaning.
   /* Colors */
   --color-gray-50: #F9FAFB;
   --color-gray-900: #111827;
-  --color-blue-500: #3B82F6;
+  --color-blue-500: #4865ff;
   --color-blue-600: #2563EB;
 
   /* Spacing (4px base) */

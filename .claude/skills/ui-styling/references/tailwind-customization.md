@@ -377,7 +377,7 @@ const config: Config = {
         },
         brand: {
           50: '#f0f9ff',
-          500: '#3b82f6',
+          500: '#4865ff',
           900: '#1e3a8a',
         },
       },

@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dasein Foresight — ICPs (Ideal Customer Profiles)</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Azeret+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --navy: #0A1628;
+      --surface: #111D2E;
+      --text: #ede7dc;
+      --muted: #8899AA;
+      --signal-blue: #4865ff;
+      --teal: #2f9e90;
+      --violet: #7a68d6;
+      --red: #EF4444;
+    }
+
+    body {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      background: var(--navy);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 4rem 2rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      border-bottom: 1px solid var(--muted);
+      padding-bottom: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .overline {
+      font-size: 0.875rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 900;
+      font-size: 3.5rem;
+      letter-spacing: -0.035em;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .tagline {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: var(--muted);
+    }
+
+    .icp-card {
+      background: var(--surface);
+      border: 1px solid var(--muted);
+      border-left-width: 4px;
+      border-radius: 6px;
+      padding: 2.5rem;
+      margin-bottom: 2.5rem;
+      page-break-inside: avoid;
+    }
+
+    .icp-card.banca {
+      border-left-color: var(--signal-blue);
+    }
+
+    .icp-card.mineria {
+      border-left-color: var(--teal);
+    }
+
+    .icp-card.educacion {
+      border-left-color: var(--violet);
+    }
+
+    .icp-card.publico {
+      border-left-color: var(--muted);
+    }
+
+    .icp-title {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 900;
+      font-size: 2rem;
+      letter-spacing: -0.025em;
+      margin-bottom: 2rem;
+    }
+
+    .icp-card.banca .icp-title {
+      color: var(--signal-blue);
+    }
+
+    .icp-card.mineria .icp-title {
+      color: var(--teal);
+    }
+
+    .icp-card.educacion .icp-title {
+      color: var(--violet);
+    }
+
+    .icp-card.publico .icp-title {
+      color: var(--muted);
+    }
+
+    .icp-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .icp-field {
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 4px;
+      padding: 1rem;
+    }
+
+    .icp-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .icp-value {
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .icp-value.highlight {
+      font-family: 'Azeret Mono', monospace;
+      font-weight: 500;
+      font-size: 1.1rem;
+    }
+
+    .icp-card.banca .icp-value.highlight {
+      color: var(--signal-blue);
+    }
+
+    .icp-card.mineria .icp-value.highlight {
+      color: var(--teal);
+    }
+
+    .icp-card.educacion .icp-value.highlight {
+      color: var(--violet);
+    }
+
+    .icp-card.publico .icp-value.highlight {
+      color: var(--muted);
+    }
+
+    .descarte-section {
+      background: rgba(239, 68, 68, 0.05);
+      border: 2px solid var(--red);
+      border-radius: 6px;
+      padding: 2.5rem;
+      margin-top: 3rem;
+      page-break-inside: avoid;
+    }
+
+    .descarte-title {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 700;
+      font-size: 2rem;
+      color: var(--red);
+      margin-bottom: 1.5rem;
+    }
+
+    .descarte-intro {
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      font-size: 1.05rem;
+    }
+
+    .descarte-list {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .descarte-list li {
+      padding-left: 2rem;
+      position: relative;
+      font-size: 0.95rem;
+    }
+
+    .descarte-list li::before {
+      content: "✕";
+      position: absolute;
+      left: 0.5rem;
+      color: var(--red);
+      font-weight: bold;
+      font-size: 1.25rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--muted);
+      margin-top: 4rem;
+      padding-top: 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.875rem;
+    }
+
+    @media print {
+      body {
+        background: white;
+        color: #0A1628;
+        padding: 2cm;
+      }
+
+      :root {
+        --navy: #0A1628;
+        --surface: #F8F9FA;
+        --text: #0A1628;
+        --muted: #64748B;
+        --signal-blue: #4865ff;
+        --teal: #2f9e90;
+        --violet: #7a68d6;
+        --red: #EF4444;
+      }
+
+      .icp-card {
+        page-break-inside: avoid;
+      }
+
+      .descarte-section {
+        page-break-inside: avoid;
+      }
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      .icp-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .icp-title {
+        font-size: 1.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="overline">PERFILES DE CLIENTE IDEAL</div>
+      <h1>Dasein Foresight — ICPs</h1>
+      <p class="tagline">Perfiles de cliente ideal para venta operativa. Versión resumida para uso comercial.</p>
+    </header>
+
+    <div class="icp-card banca">
+      <div class="icp-title">ICP 1: Banca y Servicios Financieros</div>
+      <div class="icp-grid">
+        <div class="icp-field">
+          <div class="icp-label">Cargo Target</div>
+          <div class="icp-value">VP/Director de Innovación, Gerente de Riesgo, Gerente de Estrategia, CDO</div>
+        </div>
+        <div class="icp-field">
+          <div class="icp-label">Tamaño</div>
+          <div class="icp-value">Bancos grandes y medianos, cajas de compensación, aseguradoras</div>
+        </div>
+        <div class="icp-field">
+          <div class="icp-label">Dolor</div>
+          <div class="icp-value">Implementación de IA en contextos regulados (CMF, Ley de Datos Personales), riesgo reputacional, presión competitiva de fintechs</div>
+        </div>
+        <div class="icp-field">
+          <div class="icp-label">Trigger de Compra</div>
+          <div class="icp-value">Nueva regulación próxima, competidor lanzó producto IA, directorio exige plan de IA</div>
+        </div>
+        <div class="icp-field">
+          <div class="icp-label">Servicio Natural</div>
+          <div class="icp-value">Simulación Estratégica (decisiones complejas con múltiples stakeholders)</div>
+        </div>
+        <div class="icp-field">
+          <div class="icp-label">Ticket Promedio</div>
+          <div class="icp-value highlight">USD 12,000-25,000</div>
+        </div>
+        <div class="icp-field">
+          <div class="icp-label">Ciclo de Venta</div>
+          <div class="icp-value highlight">4-8 semanas</div>
+        </div>
+        <div class="icp-field">
+          <div class="icp-label">Caso Demo</div>
+          <div class="icp-value">BancoEstado (análisis público)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="icp-card mineria">
+      <div class="icp-title">ICP 2: Minería y Energía</div>
+      <div class="icp-grid">
+        <div class="icp-field">
+          <div class="icp-label">Cargo Target</div>
+          <div class="icp-value">VP Estrategia, Director de Sostenibilidad, Gerente de Asuntos Corporativos</div>
+        </div>
+        <div class="icp-field">
+          <div class="icp-label">Tamaño</div>
+          <div class="icp-value">Grandes mineras, empresas de energía renovable, utilities</div>
+        </div>
+        <div class="icp-field">
+          <div class="icp-label">Dolor</div>
+          <div class="icp-value">Transición energética, geopolítica de litio/cobre, regulación ambiental, licencia social</div>
+        </div>
+        <div class="icp-field">
+          <div class="icp-label">Trigger de Compra</div>
+          <div class="icp-value">Cambio regulatorio ambiental, conflicto comunitario, presión ESG de inversionistas</div>
+        </div>
+        <div class="icp-field">
+          <div class="icp-label">Servicio Natural</div>
+          <div class="icp-value">Simulación Estratégica o Radar Estratégico (monitoreo continuo de señales geopolíticas)</div>
+        </div>
+        <div class="icp-field">
+          <div class="icp-label">Ticket Promedio</div>
+          <div class="icp-value highlight">USD 15,000-60,000/año</div>
+        </div>
+        <div class="icp-field">
+          <div class="icp-label">Ciclo de Venta</div>
+          <div class="icp-value highlight">6-12 semanas</div>
+        </div>
+        <div class="icp-field">
+          <div class="icp-label">Caso Demo</div>
+          <div class="icp-value">Litio/geopolítica (en desarrollo)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="icp-card educacion">
+      <div class="icp-title">ICP 3: Educación Superior</div>
+      <div class="icp-grid">
+        <div class="icp-field">
+          <div class="icp-label">Cargo Target</div>
+          <div class="icp-value">Vicerrector Académico, Director de Innovación Educativa, Decano</div>
+        </div>
+        <div class="icp-field">
+          <div class="icp-label">Tamaño</div>
+          <div class="icp-value">Universidades Tier 1 y 2, centros de investigación</div>
+        </div>
+        <div class="icp-field">
+          <div class="icp-label">Dolor</div>
+          <div class="icp-value">Impacto de IA generativa en modelos educativos, integridad académica, rediseño curricular, competencia de plataformas online</div>
+        </div>
+        <div class="icp-field">
+          <div class="icp-label">Trigger de Compra</div>
+          <div class="icp-value">Incidente de plagio con IA, presión del Mineduc, pérdida de matrícula</div>
+        </div>
+        <div class="icp-field">
+          <div class="icp-label">Servicio Natural</div>
+          <div class="icp-value">Lectura de Campo (diagnóstico rápido) → Simulación Estratégica (rediseño)</div>
+        </div>
+        <div class="icp-field">
+          <div class="icp-label">Ticket Promedio</div>
+          <div class="icp-value highlight">USD 2,500-15,000</div>
+        </div>
+        <div class="icp-field">
+          <div class="icp-label">Ciclo de Venta</div>
+          <div class="icp-value highlight">8-16 semanas</div>
+        </div>
+        <div class="icp-field">
+          <div class="icp-label">Caso Demo</div>
+          <div class="icp-value">Pendiente</div>
+        </div>
+      </div>
+      <div style="margin-top: 1rem; padding: 0.75rem; background: rgba(124, 58, 237, 0.1); border-radius: 4px; font-size: 0.875rem; color: var(--muted);">
+        <strong>Nota:</strong> Ciclo largo por burocracia institucional
+      </div>
+    </div>
+
+    <div class="icp-card publico">
+      <div class="icp-title">ICP 4: Sector Público</div>
+      <div class="icp-grid">
+        <div class="icp-field">
+          <div class="icp-label">Cargo Target</div>
+          <div class="icp-value">Jefe de Innovación, Director de Planificación, Asesor de Gabinete</div>
+        </div>
+        <div class="icp-field">
+          <div class="icp-label">Tamaño</div>
+          <div class="icp-value">Ministerios, servicios públicos, municipalidades grandes, empresas del Estado</div>
+        </div>
+        <div class="icp-field">
+          <div class="icp-label">Dolor</div>
+          <div class="icp-value">Diseño de política pública bajo incertidumbre, adopción tecnológica en gobierno, presión ciudadana</div>
+        </div>
+        <div class="icp-field">
+          <div class="icp-label">Trigger de Compra</div>
+          <div class="icp-value">Cambio de gobierno, nueva agenda digital, crisis de legitimidad institucional</div>
+        </div>
+        <div class="icp-field">
+          <div class="icp-label">Servicio Natural</div>
+          <div class="icp-value">Lectura de Campo (por presupuesto) → Simulación Estratégica (si hay fondos de innovación)</div>
+        </div>
+        <div class="icp-field">
+          <div class="icp-label">Ticket Promedio</div>
+          <div class="icp-value highlight">USD 2,500-12,000</div>
+        </div>
+        <div class="icp-field">
+          <div class="icp-label">Ciclo de Venta</div>
+          <div class="icp-value highlight">12-24 semanas</div>
+        </div>
+        <div class="icp-field">
+          <div class="icp-label">Caso Demo</div>
+          <div class="icp-value">Pendiente (adaptar BancoEstado como referencia de institución pública)</div>
+        </div>
+      </div>
+      <div style="margin-top: 1rem; padding: 0.75rem; background: rgba(136, 153, 170, 0.1); border-radius: 4px; font-size: 0.875rem; color: var(--muted);">
+        <strong>Nota:</strong> Ciclo muy largo por licitación o compra directa si está bajo umbral
+      </div>
+    </div>
+
+    <div class="descarte-section">
+      <div class="descarte-title">Criterios de Descarte Rápido</div>
+      <p class="descarte-intro">NO perseguir leads que:</p>
+      <ul class="descarte-list">
+        <li>Solo quieren "una presentación de tendencias" sin decisión al frente</li>
+        <li>Buscan implementación técnica directa (referir a partner)</li>
+        <li>No tienen presupuesto confirmado ni proceso de compra claro</li>
+        <li>Son startups tempranas o pymes &lt; 50 personas</li>
+        <li>Quieren "ver la herramienta" (no vendemos software)</li>
+        <li>Necesitan resultado en &lt; 3 días (no tenemos servicio express)</li>
+      </ul>
+    </div>
+
+    <footer>
+      <p><strong>Perfiles de cliente ideal — Uso comercial</strong></p>
+      <p>Dasein Foresight © 2026</p>
+    </footer>
+  </div>
+</body>
+</html>

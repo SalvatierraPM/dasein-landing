@@ -23,7 +23,7 @@ Semantic Colors (4)
 ├── Success - #22C55E (green)
 ├── Warning - #F59E0B (amber)
 ├── Error - #EF4444 (red)
-└── Info - #3B82F6 (blue)
+└── Info - #4865ff (blue)
 ```
 
 ## Color Documentation Format
@@ -40,7 +40,7 @@ Semantic Colors (4)
 :root {
   /* Primary */
   --color-primary: #2563EB;
-  --color-primary-light: #3B82F6;
+  --color-primary-light: #4865ff;
   --color-primary-dark: #1D4ED8;
 
   /* Secondary */
@@ -63,7 +63,7 @@ colors: {
     DEFAULT: '#2563EB',
     50: '#EFF6FF',
     100: '#DBEAFE',
-    500: '#3B82F6',
+    500: '#4865ff',
     600: '#2563EB',
     700: '#1D4ED8',
   }
@@ -164,7 +164,7 @@ Text: #111827
 ```
 Primary: #F97316 (Orange)
 Secondary: #EC4899 (Pink)
-Accent: #14B8A6 (Teal)
+Accent: #2f9e90 (Teal)
 Background: #FFFFFF
 Text: #1F2937
 ```

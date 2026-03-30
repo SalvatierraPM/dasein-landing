@@ -12,6 +12,7 @@ const services = [
     ],
     investment: 'Desde USD 2,500',
     duration: '5 días',
+    ghost: '→',
   },
   {
     num: '02',
@@ -27,6 +28,7 @@ const services = [
     ],
     investment: 'Desde USD 12,000',
     duration: '4–5 semanas',
+    ghost: '◈',
   },
 ];
 
@@ -54,6 +56,7 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
     <div class="services-grid" data-reveal-stagger>
       {services.map((svc) => (
         <article class="service-card" data-reveal>
+          <span class="service-card__ghost" aria-hidden="true">{svc.ghost}</span>
           <div class="service-card__head">
             <span class="service-card__num">{svc.num}</span>
             <span class="service-card__tag">{svc.tag}</span>
@@ -87,6 +90,7 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
     <!-- Partner CTA -->
     <div class="partner-block" data-reveal>
       <div class="partner-block__inner">
+        <span class="service-card__ghost" aria-hidden="true">◇</span>
         <div class="partner-block__content">
           <span class="service-card__num">03</span>
           <h3 class="partner-block__title">¿Implementás estrategia, transformación o IA?</h3>
@@ -182,6 +186,22 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
     padding: clamp(2.5rem, 3.5vw, 4rem);
     border-bottom: 1px solid var(--line);
     position: relative;
+    overflow: hidden;
+  }
+
+  .service-card__ghost {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    font-family: var(--font-mono);
+    font-size: clamp(5rem, 4rem + 4vw, 9rem);
+    font-weight: 600;
+    line-height: 1;
+    color: var(--ink);
+    opacity: 0.035;
+    user-select: none;
+    pointer-events: none;
+    z-index: 0;
   }
 
   .service-card:first-child {
@@ -348,6 +368,8 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
     border: 1px solid var(--line);
     border-radius: 4px;
     background: rgba(17, 17, 17, 0.02);
+    position: relative;
+    overflow: hidden;
   }
 
   .partner-block__content {

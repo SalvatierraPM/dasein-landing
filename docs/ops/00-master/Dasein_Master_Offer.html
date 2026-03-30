@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dasein Foresight — Oferta Oficial</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Azeret+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --navy: #0A1628;
+      --surface: #111D2E;
+      --text: #ede7dc;
+      --muted: #8899AA;
+      --signal-blue: #4865ff;
+      --red: #EF4444;
+    }
+
+    body {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      background: var(--navy);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 4rem 2rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      border-bottom: 1px solid var(--muted);
+      padding-bottom: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .overline {
+      font-size: 0.875rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 900;
+      font-size: 3.5rem;
+      letter-spacing: -0.035em;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .tagline {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .meta {
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    h2 {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 700;
+      font-size: 2rem;
+      letter-spacing: -0.02em;
+      margin: 4rem 0 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--muted);
+    }
+
+    h3 {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: -0.015em;
+      margin: 2rem 0 1rem;
+      color: var(--text);
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0 4rem;
+    }
+
+    .service-card {
+      background: var(--surface);
+      border: 1px solid var(--muted);
+      border-radius: 6px;
+      padding: 2rem;
+      transition: all 150ms ease;
+    }
+
+    .service-card.highlight {
+      border-color: var(--signal-blue);
+      border-width: 2px;
+      position: relative;
+    }
+
+    .service-card.highlight::before {
+      content: "MÁS POPULAR";
+      position: absolute;
+      top: -12px;
+      left: 1.5rem;
+      background: var(--signal-blue);
+      color: var(--navy);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      padding: 0.25rem 0.75rem;
+      border-radius: 3px;
+    }
+
+    .service-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .service-title {
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .service-position {
+      font-size: 0.875rem;
+      color: var(--signal-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .service-pricing {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 2rem;
+      color: var(--signal-blue);
+      margin: 1rem 0;
+    }
+
+    .service-timing {
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .service-section {
+      margin: 1.5rem 0;
+    }
+
+    .service-section h4 {
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .service-section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .service-section li {
+      padding-left: 1.5rem;
+      margin-bottom: 0.5rem;
+      position: relative;
+      font-size: 0.95rem;
+    }
+
+    .service-section li::before {
+      content: "•";
+      position: absolute;
+      left: 0.5rem;
+      color: var(--signal-blue);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+      background: var(--surface);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    thead {
+      background: rgba(59, 130, 246, 0.1);
+    }
+
+    th {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 600;
+      text-align: left;
+      padding: 1rem 1.5rem;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--signal-blue);
+      border-bottom: 1px solid var(--muted);
+    }
+
+    td {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid rgba(136, 153, 170, 0.2);
+      font-size: 0.95rem;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .price {
+      font-family: 'Azeret Mono', monospace;
+      font-weight: 500;
+      color: var(--signal-blue);
+    }
+
+    .notes {
+      background: var(--surface);
+      border-left: 3px solid var(--signal-blue);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .notes p {
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    .notes strong {
+      color: var(--signal-blue);
+    }
+
+    .sector-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .sector-item {
+      background: var(--surface);
+      border: 1px solid var(--muted);
+      border-radius: 6px;
+      padding: 1.5rem;
+      position: relative;
+    }
+
+    .sector-number {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 3rem;
+      color: rgba(59, 130, 246, 0.2);
+      position: absolute;
+      top: 0.5rem;
+      right: 1rem;
+      font-weight: 500;
+    }
+
+    .sector-name {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: var(--signal-blue);
+    }
+
+    .sector-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .alliance-box {
+      background: var(--surface);
+      border: 1px solid var(--muted);
+      border-radius: 6px;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+
+    .alliance-quote {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 1.5rem;
+      color: var(--signal-blue);
+      margin-bottom: 1.5rem;
+    }
+
+    .alliance-list {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .alliance-list li {
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .alliance-list li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--signal-blue);
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(124, 58, 237, 0.1));
+      border: 1px solid var(--signal-blue);
+      border-radius: 6px;
+      padding: 2.5rem;
+      margin: 3rem 0;
+      text-align: center;
+    }
+
+    .cta-primary {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 700;
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+      color: var(--signal-blue);
+    }
+
+    .cta-secondary {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-info {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      font-size: 1rem;
+    }
+
+    .contact-info a {
+      color: var(--signal-blue);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 150ms ease;
+    }
+
+    .contact-info a:hover {
+      border-bottom-color: var(--signal-blue);
+    }
+
+    .not-section {
+      background: rgba(239, 68, 68, 0.05);
+      border: 1px solid var(--red);
+      border-radius: 6px;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+
+    .not-section h2 {
+      border: none;
+      margin-top: 0;
+      padding-top: 0;
+      color: var(--red);
+    }
+
+    .not-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .not-list li {
+      padding-left: 1.5rem;
+      margin-bottom: 0.75rem;
+      position: relative;
+    }
+
+    .not-list li::before {
+      content: "✕";
+      position: absolute;
+      left: 0;
+      color: var(--red);
+      font-weight: bold;
+    }
+
+    footer {
+      border-top: 1px solid var(--muted);
+      margin-top: 6rem;
+      padding-top: 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.875rem;
+    }
+
+    @media print {
+      body {
+        background: white;
+        color: #0A1628;
+        padding: 2cm;
+      }
+
+      :root {
+        --navy: #0A1628;
+        --surface: #F8F9FA;
+        --text: #0A1628;
+        --muted: #64748B;
+        --signal-blue: #4865ff;
+        --red: #EF4444;
+      }
+
+      .service-card {
+        page-break-inside: avoid;
+      }
+
+      table {
+        page-break-inside: avoid;
+      }
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      .service-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="overline">OFERTA OFICIAL</div>
+      <h1>Dasein Foresight</h1>
+      <p class="tagline">Simulamos futuros para que decidas mejor hoy</p>
+      <p class="meta">Documento maestro. Fuente de verdad para pricing, servicios y mensaje comercial.<br>Última actualización: 2026-03-29</p>
+    </header>
+
+    <section>
+      <h2>Identidad</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+        <div>
+          <strong style="color: var(--signal-blue);">Nombre oficial:</strong><br>
+          Dasein Foresight
+        </div>
+        <div>
+          <strong style="color: var(--signal-blue);">Tagline:</strong><br>
+          Simulamos futuros para que decidas mejor hoy
+        </div>
+        <div>
+          <strong style="color: var(--signal-blue);">Descripción corta:</strong><br>
+          Consultora de prospectiva estratégica potenciada por IA
+        </div>
+      </div>
+      <div style="margin-top: 1.5rem;">
+        <strong style="color: var(--signal-blue);">Descripción larga:</strong><br>
+        <p style="margin-top: 0.5rem;">Dasein Foresight ayuda a organizaciones a tomar decisiones importantes bajo incertidumbre. Combinamos metodología rigurosa de escenarios con un motor propio de simulación por IA (SignalTwin) para escanear señales, modelar stakeholders, simular futuros alternativos y entregar recomendaciones accionables. No vendemos predicciones ni software — vendemos claridad estratégica.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Servicios Oficiales</h2>
+      <div class="service-grid">
+        <div class="service-card">
+          <div class="service-header">
+            <div class="service-position">Puerta de entrada</div>
+            <h3 class="service-title">Lectura de Campo</h3>
+          </div>
+          <div class="service-pricing">Desde USD 2,500</div>
+          <div class="service-timing">Plazo: 5 días</div>
+
+          <div class="service-section">
+            <h4>Incluye</h4>
+            <ul>
+              <li>Escaneo de 15-25 señales (regulatorias, tecnológicas, competitivas, sociales)</li>
+              <li>Memo ejecutivo con análisis</li>
+              <li>Mapa de stakeholders relevantes</li>
+              <li>Signposts con umbrales concretos de acción</li>
+              <li>Plan de acción a 90 días</li>
+            </ul>
+          </div>
+
+          <div class="service-section">
+            <h4>No incluye</h4>
+            <ul style="color: var(--muted);">
+              <li>Dashboard interactivo</li>
+              <li>Workshop con equipo directivo</li>
+              <li>Simulación dual-world</li>
+              <li>Implementación de recomendaciones</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="service-card highlight">
+          <div class="service-header">
+            <div class="service-position">Core (más popular)</div>
+            <h3 class="service-title">Simulación Estratégica</h3>
+          </div>
+          <div class="service-pricing">Desde USD 12,000</div>
+          <div class="service-timing">Plazo: 4-5 semanas</div>
+
+          <div class="service-section">
+            <h4>Incluye</h4>
+            <ul>
+              <li>Todo lo de Lectura de Campo</li>
+              <li>Simulación dual-world completa con motor SignalTwin</li>
+              <li>Escenarios plausibles con análisis de robustez</li>
+              <li>Dashboard interactivo con escenarios</li>
+              <li>Workshop presencial con equipo directivo</li>
+              <li>Acceso al grafo de conocimiento de la industria</li>
+              <li>Análisis de coaliciones y capacidad de bloqueo</li>
+            </ul>
+          </div>
+
+          <div class="service-section">
+            <h4>No incluye</h4>
+            <ul style="color: var(--muted);">
+              <li>Monitoreo continuo post-proyecto</li>
+              <li>Implementación de recomendaciones</li>
+              <li>Desarrollo de software</li>
+              <li>Formación del equipo del cliente</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-header">
+            <div class="service-position">Monitoreo continuo</div>
+            <h3 class="service-title">Radar Estratégico</h3>
+          </div>
+          <div class="service-pricing">Desde USD 5,000/mes</div>
+          <div class="service-timing">Plazo: Mínimo 6 meses</div>
+
+          <div class="service-section">
+            <h4>Incluye</h4>
+            <ul>
+              <li>Escaneo mensual de señales nuevas</li>
+              <li>Alertas de señales críticas (umbrales predefinidos)</li>
+              <li>Simulación trimestral actualizada</li>
+              <li>Plan de acción a 90 días renovado en cada ciclo</li>
+              <li>Acceso continuo al dashboard de escenarios</li>
+              <li>Informe mensual de estado de signposts</li>
+            </ul>
+          </div>
+
+          <div class="service-section">
+            <h4>No incluye</h4>
+            <ul style="color: var(--muted);">
+              <li>Implementación de recomendaciones</li>
+              <li>Workshops adicionales (se cotizan aparte)</li>
+              <li>Consultoría operativa o de transformación</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Pricing</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Servicio</th>
+            <th>Inversión</th>
+            <th>Plazo</th>
+            <th>Modelo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Lectura de Campo</td>
+            <td class="price">Desde USD 2,500</td>
+            <td>5 días</td>
+            <td>Proyecto único</td>
+          </tr>
+          <tr>
+            <td>Simulación Estratégica</td>
+            <td class="price">Desde USD 12,000</td>
+            <td>4-5 semanas</td>
+            <td>Proyecto único</td>
+          </tr>
+          <tr>
+            <td>Radar Estratégico</td>
+            <td class="price">Desde USD 5,000/mes</td>
+            <td>Min. 6 meses</td>
+            <td>Retainer mensual</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="notes">
+        <p><strong>Notas:</strong></p>
+        <p>• Precios "desde" — escalan según complejidad del caso y número de stakeholders</p>
+        <p>• Moneda: USD. Pago en CLP al tipo de cambio del día de facturación</p>
+        <p>• Forma de pago estándar: 50% al inicio, 50% contra entrega</p>
+        <p>• Validez de cotizaciones: 30 días</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Sectores Foco</h2>
+      <div class="sector-grid">
+        <div class="sector-item">
+          <div class="sector-number">1</div>
+          <div class="sector-name">Banca y servicios financieros</div>
+          <div class="sector-desc">Implementación de IA, regulación, riesgo reputacional</div>
+        </div>
+        <div class="sector-item">
+          <div class="sector-number">2</div>
+          <div class="sector-name">Minería y energía</div>
+          <div class="sector-desc">Transición energética, geopolítica de recursos, regulación ambiental</div>
+        </div>
+        <div class="sector-item">
+          <div class="sector-number">3</div>
+          <div class="sector-name">Educación superior</div>
+          <div class="sector-desc">Impacto de IA en modelos educativos, adopción tecnológica</div>
+        </div>
+        <div class="sector-item">
+          <div class="sector-number">4</div>
+          <div class="sector-name">Sector público</div>
+          <div class="sector-desc">Política pública, innovación institucional, transformación digital estatal</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Modelo de Alianzas</h2>
+      <div class="alliance-box">
+        <div class="alliance-quote">"Donde termina nuestro trabajo, empieza el tuyo."</div>
+        <p style="margin-bottom: 1.5rem;">Dasein entrega el mapa estratégico → el partner implementa la transformación. Modelo de referral con:</p>
+        <ul class="alliance-list">
+          <li>Consultoras de cambio organizacional</li>
+          <li>Implementadores de IA</li>
+          <li>Think tanks y centros de innovación</li>
+          <li>Firmas de transformación digital</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="cta-box">
+        <div class="cta-primary">Agenda una conversación exploratoria de 30 minutos</div>
+        <div class="cta-secondary">El futuro no espera. Hablemos del tuyo.</div>
+        <div class="contact-info">
+          <div><strong>Email:</strong> <a href="mailto:info@daseinforesight.com">info@daseinforesight.com</a></div>
+          <div><strong>Web:</strong> <a href="https://daseinforesight.com" target="_blank">daseinforesight.com</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="not-section">
+      <h2>Qué NO somos</h2>
+      <ul class="not-list">
+        <li>No vendemos software ni licencias SaaS</li>
+        <li>No vendemos predicciones</li>
+        <li>No vendemos dashboards vacíos</li>
+        <li>No vendemos decks cosméticos sin criterio</li>
+        <li>No vendemos transformación digital genérica</li>
+        <li>No implementamos — eso es para nuestros partners</li>
+      </ul>
+    </section>
+
+    <footer>
+      <p><strong>Documento maestro — Fuente de verdad</strong></p>
+      <p>Dasein Foresight © 2026</p>
+    </footer>
+  </div>
+</body>
+</html>

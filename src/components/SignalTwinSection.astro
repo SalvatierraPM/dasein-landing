@@ -7,24 +7,28 @@ const layers = [
     label: 'Mundo abierto',
     title: 'Mercado, opinión pública y entorno expandido.',
     body: 'Señales, opinión pública, presión mediática y efectos reputacionales cuando una decisión sale al mundo.',
+    ghost: '◆',
   },
   {
     num: '02',
     label: 'Mundo institucional',
     title: 'Reguladores, directorios, sindicatos y actores con veto.',
     body: 'La capa donde importa la gobernanza, la secuencia política y la forma en que cada actor interpreta el riesgo.',
+    ghost: '※',
   },
   {
     num: '03',
     label: 'Memoria de agentes',
     title: 'Agentes con postura, fricción y memoria.',
     body: 'No reaccionan una vez y desaparecen. Acumulan trayectorias, negocian y cambian según la información disponible.',
+    ghost: '◈',
   },
   {
     num: '04',
     label: 'Trazabilidad',
     title: 'Cada escenario deja una lógica revisable.',
     body: 'No se entrega una intuición elegante; se entrega una estructura argumental para discutir de dónde sale cada recomendación.',
+    ghost: '▸',
   },
 ];
 ---
@@ -103,6 +107,7 @@ const layers = [
           data-layer-index={index}
         >
           <div class="st-panel-content">
+            <span class="st-panel-ghost" aria-hidden="true">{layer.ghost}</span>
             <div class="st-panel-num">{layer.num}</div>
             <div class="st-panel-label">{layer.label}</div>
             <h3 class="st-panel-title">{layer.title}</h3>
@@ -424,6 +429,23 @@ const layers = [
     opacity: 0.2;
     transform: translateY(24px);
     transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .st-panel-ghost {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    font-family: var(--font-mono);
+    font-size: clamp(5rem, 4rem + 4vw, 9rem);
+    font-weight: 600;
+    line-height: 1;
+    color: var(--slate-white, #f3f5f8);
+    opacity: 0.04;
+    user-select: none;
+    pointer-events: none;
+    z-index: 0;
   }
 
   .st-panel.is-active .st-panel-content {

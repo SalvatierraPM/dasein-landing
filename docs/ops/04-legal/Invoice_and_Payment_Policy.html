@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Política de Facturación y Pagos — Dasein Foresight</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Azeret+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --navy: #0A1628;
+      --blue: #4865ff;
+      --amber: #F59E0B;
+      --text-screen: #ede7dc;
+      --text-print: #1a1a1a;
+      --surface: #111D2E;
+    }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11pt;
+      line-height: 1.65;
+      background: var(--navy);
+      color: var(--text-screen);
+      padding: 3rem 2rem;
+    }
+
+    .document {
+      max-width: 210mm;
+      margin: 0 auto;
+      background: white;
+      color: var(--text-print);
+      padding: 2.5cm;
+      border-radius: 6px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    h1 {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 2rem;
+      font-weight: 900;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.025em;
+      color: var(--navy);
+    }
+
+    .subtitle {
+      font-size: 0.875rem;
+      color: #666;
+      font-weight: 400;
+      margin-bottom: 0.25rem;
+    }
+
+    .meta {
+      font-size: 0.8rem;
+      color: #999;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    h2 {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--navy);
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    strong {
+      font-weight: 600;
+    }
+
+    .decision {
+      color: var(--amber);
+      font-weight: 600;
+      background: rgba(245, 158, 11, 0.08);
+      padding: 0.125rem 0.375rem;
+      border-radius: 3px;
+      border-left: 3px solid var(--amber);
+      padding-left: 0.5rem;
+      display: inline-block;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.95rem;
+    }
+
+    thead {
+      background: var(--surface);
+      color: white;
+    }
+
+    th {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 700;
+      text-align: left;
+      padding: 0.875rem 1rem;
+      font-size: 0.875rem;
+    }
+
+    td {
+      padding: 0.875rem 1rem;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    tbody tr:hover {
+      background: #f9f9f9;
+    }
+
+    .note {
+      margin-top: 3rem;
+      padding: 1.25rem;
+      background: rgba(245, 158, 11, 0.06);
+      border-left: 4px solid var(--amber);
+      border-radius: 3px;
+    }
+
+    .note p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #333;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #e5e5e5;
+      margin: 2rem 0;
+    }
+
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+
+      .document {
+        max-width: none;
+        box-shadow: none;
+        border-radius: 0;
+        padding: 2.5cm;
+      }
+
+      .decision {
+        border-left: 3px solid var(--amber);
+        background: none;
+      }
+
+      thead {
+        background: var(--navy);
+      }
+
+      .note {
+        background: #f5f5f5;
+        border-left: 4px solid var(--amber);
+      }
+    }
+
+    @page {
+      size: A4;
+      margin: 2.5cm;
+    }
+  </style>
+</head>
+<body>
+  <div class="document">
+    <h1>Política de Facturación y Pagos — Dasein Foresight</h1>
+    <p class="subtitle">Documento interno. Define las reglas de cobro para todos los proyectos.</p>
+    <p class="meta">Última actualización: 2026-03-29</p>
+
+    <hr>
+
+    <h2>Moneda de cobro</h2>
+    <ul>
+      <li><strong>Cotización:</strong> USD (dólares estadounidenses)</li>
+      <li><strong>Facturación:</strong> <span class="decision">[DECISIÓN CEO: ¿Facturas en USD o en CLP? Si CLP, ¿tipo de cambio del día de facturación o del día de cotización?]</span></li>
+      <li><strong>Pago aceptado:</strong> Transferencia bancaria</li>
+    </ul>
+
+    <h2>Impuestos</h2>
+    <ul>
+      <li><span class="decision">[DECISIÓN CEO: ¿Dasein Foresight es contribuyente de IVA? Si es SpA con inicio de actividades, sí]</span></li>
+      <li>Si aplica IVA: los precios publicados son netos + 19% IVA</li>
+      <li>Clientes extranjeros: exentos de IVA (exportación de servicios)</li>
+    </ul>
+
+    <h2>Forma de pago estándar</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Servicio</th>
+          <th>Estructura de pago</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Lectura de Campo</td>
+          <td>100% al inicio (proyecto corto, 5 días)</td>
+        </tr>
+        <tr>
+          <td>Simulación Estratégica</td>
+          <td>50% al inicio + 50% contra entrega final</td>
+        </tr>
+        <tr>
+          <td>Radar Estratégico</td>
+          <td>Pago mensual anticipado (día 1 de cada mes)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Anticipo requerido</h2>
+    <ul>
+      <li><strong>Mínimo:</strong> 50% del valor total antes de iniciar el trabajo</li>
+      <li><strong>Excepción Lectura de Campo:</strong> 100% por anticipado (por el plazo corto)</li>
+      <li>El trabajo NO comienza hasta recibir el anticipo</li>
+    </ul>
+
+    <h2>Plazos de pago</h2>
+    <ul>
+      <li><strong>Plazo de pago de factura:</strong> 15 días corridos desde emisión</li>
+      <li><strong>Facturación:</strong> Al inicio del proyecto y contra entrega (según estructura arriba)</li>
+    </ul>
+
+    <h2>Atraso en pagos</h2>
+    <ul>
+      <li><strong>15 días de atraso:</strong> Recordatorio formal por email</li>
+      <li><strong>30 días de atraso:</strong> Suspensión de servicios hasta regularización. Se notifica por escrito.</li>
+      <li><strong>60 días de atraso:</strong> <span class="decision">[DECISIÓN CEO: ¿Se cobra interés? ¿Se termina el contrato? ¿Se deriva a cobranza?]</span></li>
+      <li>La suspensión por atraso no modifica los plazos del proyecto — si el cliente retoma después de suspensión, se reprograma.</li>
+    </ul>
+
+    <h2>Pausa del proyecto por el cliente</h2>
+    <ul>
+      <li>Si el cliente solicita pausa: el trabajo pendiente se congela, pero el pago ya realizado no se devuelve.</li>
+      <li>Si la pausa supera <span class="decision">[DECISIÓN CEO: ¿30 días? ¿60 días?]</span>, el proyecto se considera terminado. Para retomar, se cotiza nuevamente.</li>
+    </ul>
+
+    <h2>Reembolsos</h2>
+    <ul>
+      <li><span class="decision">[DECISIÓN CEO: ¿Hay política de reembolso? Recomendación: NO hay reembolso una vez iniciado el trabajo. Si se cancela antes del inicio, se devuelve el 100% menos un cargo administrativo de USD 250.]</span></li>
+    </ul>
+
+    <h2>Descuentos</h2>
+    <ul>
+      <li><strong>Piloto / primer caso:</strong> <span class="decision">[DECISIÓN CEO: ¿Se ofrece descuento a primeros clientes? ¿Cuánto?]</span></li>
+      <li><strong>Pago anticipado total:</strong> 5% de descuento si se paga el 100% antes de iniciar</li>
+      <li><strong>Contrato anual (Radar):</strong> <span class="decision">[DECISIÓN CEO: ¿Descuento por compromiso de 12 meses?]</span></li>
+    </ul>
+
+    <h2>Gastos adicionales</h2>
+    <ul>
+      <li>Viajes fuera de Santiago se cotizan aparte (pasajes + alojamiento + viáticos)</li>
+      <li>Workshops presenciales en oficinas del cliente: sin costo adicional en Santiago</li>
+      <li>Workshops fuera de Santiago: gastos de viaje adicionales</li>
+    </ul>
+
+    <hr>
+
+    <div class="note">
+      <p><strong>NOTA:</strong> Este documento requiere decisiones del CEO marcadas con <strong>[DECISIÓN CEO: ...]</strong> antes de ser operativo.</p>
+    </div>
+  </div>
+</body>
+</html>

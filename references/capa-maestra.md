@@ -11,26 +11,26 @@ La consultora todavía no tiene nombre definitivo, slogan cerrado ni empresa con
 
 ---
 
-## 1. Decisiones provisionales de posicionamiento
+## 1. Decisiones de posicionamiento (RESUELTAS)
 
-### 1.1 Nombre de trabajo
-**Signal Twin**
+### 1.1 Nombre definitivo
+**Dasein Foresight**
 
-### 1.2 Alternativa de nombre en exploración
-**Dasein**
+- Uso formal: “Dasein Foresight”
+- Uso informal: “Dasein”
+- Prohibido: “DaseinAI”, “Dasein AI Foresight”, “DASEIN”, “DF”
 
-### 1.3 Recomendación actual
-Usar **Signal Twin** como nombre operativo del proyecto y de la consultora en esta etapa.
+### 1.2 SignalTwin
+**SignalTwin** es el nombre del motor interno de simulación dual-world. No es el nombre de la consultora ni de ningún servicio externo. Es la infraestructura que habilita el servicio.
 
-#### Motivos
-- describe mejor el tipo de trabajo que se hace;
-- tiene una relación más directa con señales, simulación, lectura de entorno y futuros posibles;
-- es más legible para clientes institucionales, empresas, universidades y centros de innovación;
-- permite escalar más fácilmente a una herramienta interna o plataforma en el futuro si eso ocurriera;
-- evita que la marca dependa demasiado de una referencia filosófica que muchos clientes no van a entender.
+### 1.3 Arquitectura comercial (congelada)
+Tres servicios, tres niveles de profundidad:
 
-#### Observación sobre “Dasein”
-“Dasein” tiene fuerza cultural e intelectual, pero hoy funciona mejor como inspiración conceptual que como marca principal. Puede vivir como referencia estética o filosófica del proyecto, pero no parece la mejor opción comercial para partir.
+| Servicio | Posición | Inversión |
+|----------|----------|-----------|
+| **Lectura de Campo** | Puerta de entrada | Desde USD 2,500 |
+| **Simulación Estratégica** | Core (más popular) | Desde USD 12,000 |
+| **Radar Estratégico** | Monitoreo continuo | Desde USD 5,000/mes |
 
 ---
 
@@ -42,7 +42,7 @@ Consultora de foresight estratégico apoyada en un sistema interno de inteligenc
 ### 2.2 Definición extendida
 Esta consultora existe para ayudar a organizaciones que deben tomar decisiones relevantes sin contar con toda la información necesaria, sin claridad sobre los futuros posibles y sin una forma robusta de anticipar consecuencias.
 
-A diferencia de una consultora tradicional que solo entrega opinión experta, tendencias genéricas o un informe bonito, Signal Twin busca combinar:
+A diferencia de una consultora tradicional que solo entrega opinión experta, tendencias genéricas o un informe bonito, Dasein Foresight busca combinar:
 
 - lectura de señales,
 - análisis estructurado,
@@ -112,7 +112,7 @@ Las organizaciones deben tomar decisiones importantes sin suficiente claridad so
 
 ## 5. Tipo de trabajo que hace
 
-Signal Twin trabaja en la intersección de cinco cosas:
+Dasein Foresight trabaja en la intersección de cinco cosas:
 
 1. **lectura de señales y tendencias**  
 2. **foresight estratégico**  
@@ -128,46 +128,55 @@ No es solo research. No es solo estrategia. No es solo análisis de tecnología.
 
 En esta etapa conviene partir con una oferta corta y clara. No diez servicios raros. Tres bastan.
 
-### Servicio 1 — Análisis Prospectivo para Decisiones Estratégicas
-**Objetivo:** evaluar una decisión relevante bajo distintos futuros plausibles.
+### Servicio 1 — Lectura de Campo
+**Objetivo:** escanear señales relevantes y entregar claridad rápida para una decisión estratégica.
 
 **Ejemplos de preguntas cliente:**
-- ¿Debemos reemplazar parte de nuestro sistema de soporte por IA?
+- ¿Qué señales regulatorias, tecnológicas y competitivas debemos monitorear?
 - ¿Cómo podría impactar la IA generativa en nuestro modelo de atención durante los próximos 24 meses?
-- ¿Qué escenarios debemos considerar antes de lanzar esta política, programa o sistema?
+- ¿Qué actores y dinámicas debemos mapear antes de tomar esta decisión?
 
 **Entregables típicos:**
-- marco del problema;
-- síntesis de señales relevantes;
-- escenarios plausibles;
-- riesgos y oportunidades por escenario;
-- recomendaciones;
-- roadmap de preparación.
+- escaneo de 15-25 señales;
+- memo ejecutivo;
+- mapa de stakeholders;
+- signposts con umbrales concretos;
+- plan de acción a 90 días.
 
-### Servicio 2 — Informe de Señales y Escenarios para Innovación Pública o Institucional
-**Objetivo:** ayudar a instituciones, universidades, fundaciones o actores públicos a anticipar cambios relevantes en su entorno.
+**Plazo:** 5 días | **Inversión:** Desde USD 2,500
+
+### Servicio 2 — Simulación Estratégica
+**Objetivo:** evaluar una decisión relevante bajo distintos futuros plausibles mediante simulación dual-world completa.
 
 **Ejemplos de uso:**
-- nuevas tecnologías y su impacto en educación;
-- cambios culturales o regulatorios;
-- futuros posibles de adopción digital;
-- diseño de respuestas institucionales frente a incertidumbre.
+- ¿Debemos implementar IA en atención al cliente? ¿Qué escenarios enfrentamos?
+- ¿Qué opciones estratégicas resisten mejor la incertidumbre regulatoria?
+- ¿Cómo reaccionarán los stakeholders ante cada alternativa?
 
 **Entregables típicos:**
-- mapa de señales;
-- escenarios institucionales;
-- implicancias estratégicas;
-- lineamientos de acción.
+- simulación completa dual-world;
+- escenarios plausibles con análisis de robustez;
+- dashboard interactivo;
+- workshop con equipo directivo;
+- acceso al grafo de conocimiento de la industria.
 
-### Servicio 3 — Taller Estratégico de Escenarios + Roadmap
-**Objetivo:** co-interpretar resultados con el cliente y transformar la lectura prospectiva en una agenda de acción.
+**Plazo:** 4-5 semanas | **Inversión:** Desde USD 12,000
+
+### Servicio 3 — Radar Estratégico
+**Objetivo:** monitoreo continuo del entorno estratégico con alertas y simulación actualizada.
+
+**Ejemplos de uso:**
+- vigilancia de señales regulatorias, tecnológicas y competitivas;
+- detección temprana de cambios en dinámicas de stakeholders;
+- actualización trimestral de escenarios y recomendaciones.
 
 **Entregables típicos:**
-- workshop facilitado;
-- matriz de decisiones;
-- priorización;
-- roadmap de preparación;
-- definiciones de próximos pasos.
+- escaneo mensual de señales nuevas;
+- alertas de señales críticas;
+- simulación trimestral actualizada;
+- plan de acción a 90 días renovado en cada ciclo.
+
+**Plazo:** Continuo (mínimo 6 meses) | **Inversión:** Desde USD 5,000/mes
 
 ---
 
@@ -327,22 +336,21 @@ Traducir tendencias difusas en una estrategia concreta con acciones priorizadas.
 
 ## 13. Ticket y modelo comercial inicial
 
-### 13.1 Ticket mínimo orientativo
-**CLP 5.000.000** como piso referencial para proyectos relevantes.
+### 13.1 Arquitectura de precios (vigente)
 
-Esto debe entenderse como hipótesis inicial, no como precio definitivo.
+| Servicio | Inversión | Plazo |
+|----------|-----------|-------|
+| **Lectura de Campo** | Desde USD 2,500 | 5 días |
+| **Simulación Estratégica** | Desde USD 12,000 | 4-5 semanas |
+| **Radar Estratégico** | Desde USD 5,000/mes | Mínimo 6 meses |
 
-### 13.2 Recomendación operativa
-Conviene estructurar la oferta en dos capas:
+Precios "desde" — escalan según complejidad del caso y número de stakeholders.
 
-#### Opción A — Discovery pagado
-Sirve cuando el problema está mal formulado o el cliente no tiene los insumos claros.
+### 13.2 Modelo de entrada
+La **Lectura de Campo** funciona como discovery pagado: permite al cliente obtener valor inmediato (memo + signposts) y a nosotros validar el caso antes de proponer una Simulación Estratégica completa.
 
-#### Opción B — Proyecto completo
-Incluye formulación, análisis, escenarios, recomendaciones y roadmap.
-
-### 13.3 Recomendación actual
-Sí conviene considerar **Discovery pagado** como producto real, aunque no sea el foco principal. No porque el cliente lo pida siempre, sino porque muchas veces el cliente no va a llegar con la pregunta bien formulada.
+### 13.3 Modelo de alianzas
+"Donde termina nuestro trabajo, empieza el tuyo." Dasein entrega el mapa estratégico → el partner implementa la transformación. Modelo de referral con consultoras de cambio, implementadores de IA, y think tanks.
 
 ---
 
@@ -356,7 +364,7 @@ Aunque todavía no existan casos idénticos de foresight, sí existen activos qu
 - capacidad de traducir tecnología a operación;
 - experiencia coordinando integraciones, flujos y decisiones complejas;
 - proyecto Moltbook como prueba de capacidad analítica, técnica y conceptual;
-- construcción de Signal Twin como sistema interno de análisis prospectivo.
+- construcción de SignalTwin como sistema interno de análisis prospectivo.
 
 ### 14.2 Cómo deben usarse
 No como prueba de que “ya se hizo exactamente esto”, sino como evidencia de tres cosas:
@@ -419,10 +427,10 @@ No significa infalibilidad. Significa trazabilidad argumental.
 ## 18. Posicionamiento resumido
 
 ### Versión corta
-Signal Twin es una consultora de foresight estratégico que ayuda a organizaciones a tomar decisiones bajo incertidumbre mediante escenarios plausibles, recomendaciones accionables y un sistema interno de IA que hace el análisis más robusto y trazable.
+Dasein Foresight es una consultora de prospectiva estratégica que ayuda a organizaciones a tomar decisiones bajo incertidumbre mediante escenarios plausibles, recomendaciones accionables y un sistema interno de IA (SignalTwin) que hace el análisis más robusto y trazable.
 
 ### Versión media
-Signal Twin ayuda a instituciones y organizaciones a pensar decisiones complejas antes de ejecutarlas. A partir de señales, contexto e insumos del cliente, construye escenarios plausibles, interpreta implicancias estratégicas y propone roadmaps de acción. Su diferencial está en combinar criterio humano con un sistema interno de inteligencia artificial que permite estructurar mejor la información y producir análisis más auditables.
+Dasein Foresight ayuda a instituciones y organizaciones a pensar decisiones complejas antes de ejecutarlas. A partir de señales, contexto e insumos del cliente, construye escenarios plausibles, interpreta implicancias estratégicas y propone roadmaps de acción. Su diferencial está en combinar criterio humano con un sistema interno de inteligencia artificial que permite estructurar mejor la información y producir análisis más auditables.
 
 ---
 
@@ -438,15 +446,15 @@ Signal Twin ayuda a instituciones y organizaciones a pensar decisiones complejas
 
 ---
 
-## 20. Próximos documentos que deben derivarse de esta capa
+## 20. Documentos derivados de esta capa
 
 ### Comerciales
 - manifiesto breve / about
-- one-pager
-- deck comercial
+- ~~one-pager~~ → **HECHO** `docs/assets/one-pager.html`
+- ~~deck comercial~~ → **HECHO** `docs/assets/deck-comercial.html`
 - brochure de servicios
 - ficha por servicio
-- propuesta comercial base
+- ~~propuesta comercial base~~ → **HECHO** `docs/assets/proposal-template.html`
 - FAQ comercial
 
 ### Operativos
@@ -463,7 +471,8 @@ Signal Twin ayuda a instituciones y organizaciones a pensar decisiones complejas
 ### Legales / administrativos
 - propuesta con condiciones
 - contrato base
-- NDA
+- ~~NDA~~ → **HECHO** `docs/assets/nda-template.html`
+- ~~SOW~~ → **HECHO** `docs/assets/sow-template.html`
 - política de pagos
 - política de propiedad intelectual
 

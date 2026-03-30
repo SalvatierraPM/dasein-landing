@@ -8,6 +8,7 @@ const steps = [
     body: 'Delimitamos la pregunta estratégica, el contexto y los frentes donde una mala lectura puede disparar costos innecesarios.',
     output: 'Pregunta afinada y entorno legible',
     short: 'Exploración',
+    ghost: '→',
   },
   {
     number: '02',
@@ -15,6 +16,7 @@ const steps = [
     body: 'Pedimos restricciones, tensiones políticas, supuestos y material de base para no modelar en abstracto.',
     output: 'Base situada y no teórica',
     short: 'Insumos',
+    ghost: '◇',
   },
   {
     number: '03',
@@ -22,6 +24,7 @@ const steps = [
     body: 'Definimos actores, conceptos, incentivos, fricciones y relaciones para convertir el problema en una estructura discutible.',
     output: 'Taxonomía útil para el caso',
     short: 'Marco',
+    ghost: '※',
   },
   {
     number: '04',
@@ -29,6 +32,7 @@ const steps = [
     body: 'Visualizamos relaciones, conflictos y puntos de presión para que el sistema deje de ser una intuición dispersa.',
     output: 'Mapa navegable del sistema',
     short: 'Mapa',
+    ghost: '◆',
   },
   {
     number: '05',
@@ -36,6 +40,7 @@ const steps = [
     body: 'Modelamos entre 15 y 60 agentes con memoria, incentivos y fricciones del caso. Corren rondas de interacción para explorar comportamientos plausibles antes de decidir.',
     output: 'Escenarios con trazabilidad argumental',
     short: 'Simulación',
+    ghost: '◈',
   },
   {
     number: '06',
@@ -43,6 +48,7 @@ const steps = [
     body: 'Sintetizamos hallazgos en un memo ejecutivo con recomendaciones priorizadas y un roadmap a 90 días. Cerramos con un workshop para validar supuestos y alinear al equipo.',
     output: 'Memo, roadmap y sesión ejecutiva',
     short: 'Plan',
+    ghost: '▸',
   },
 ];
 ---
@@ -252,6 +258,7 @@ const steps = [
           data-step-index={index}
         >
           <div class="method-panel-content">
+            <span class="method-panel-ghost" aria-hidden="true">{step.ghost}</span>
             <div class="method-panel-num">{step.number}</div>
             <h3 class="method-panel-title">{step.title}</h3>
             <p class="method-panel-body">{step.body}</p>
@@ -269,6 +276,7 @@ const steps = [
   <div class="method-mobile-steps container">
     {steps.map((step) => (
       <article class="m-step" data-reveal>
+        <span class="m-step-ghost" aria-hidden="true">{step.ghost}</span>
         <div class="m-step-head">
           <span class="m-step-num">{step.number}</span>
           <span class="m-step-short">{step.short}</span>
@@ -996,6 +1004,23 @@ const steps = [
     opacity: 0.35;
     transform: translateY(20px);
     transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .method-panel-ghost {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    font-family: var(--font-mono);
+    font-size: clamp(5rem, 4rem + 4vw, 9rem);
+    font-weight: 600;
+    line-height: 1;
+    color: var(--ink);
+    opacity: 0.035;
+    user-select: none;
+    pointer-events: none;
+    z-index: 0;
   }
 
   .method-panel.is-active .method-panel-content {
@@ -1121,6 +1146,23 @@ const steps = [
       border-top: 1px solid var(--line);
       display: grid;
       gap: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .m-step-ghost {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: clamp(4rem, 3rem + 3vw, 7rem);
+      font-weight: 600;
+      line-height: 1;
+      color: var(--ink);
+      opacity: 0.035;
+      user-select: none;
+      pointer-events: none;
+      z-index: 0;
     }
 
     .m-step:last-child {

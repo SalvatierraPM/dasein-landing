@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lead Qualification Score — Dasein Foresight</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Azeret+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #0A1628;
+      --surface: #111D2E;
+      --text: #ede7dc;
+      --muted: #8899AA;
+      --accent: #4865ff;
+      --border: rgba(136, 153, 170, 0.2);
+      --green: #10B981;
+      --amber: #F59E0B;
+      --red: #EF4444;
+    }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 3rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 700;
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 700;
+      font-size: 1.75rem;
+      margin: 3rem 0 1.5rem 0;
+      letter-spacing: -0.015em;
+    }
+
+    .subtitle {
+      font-size: 1.125rem;
+      color: var(--muted);
+      margin-bottom: 3rem;
+      font-weight: 500;
+    }
+
+    .scoring-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2.5rem;
+      margin: 2rem 0;
+    }
+
+    .criteria-row {
+      display: grid;
+      grid-template-columns: 40px 200px 1fr 80px;
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+    }
+
+    .criteria-row:last-child {
+      border-bottom: none;
+    }
+
+    .criteria-number {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .criteria-name {
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: flex-start;
+    }
+
+    .radio-option {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .radio-option input[type="radio"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      accent-color: var(--accent);
+    }
+
+    .radio-option label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .score-display {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 1.25rem;
+      font-weight: 600;
+      text-align: center;
+      color: var(--accent);
+    }
+
+    .total-score {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem;
+      margin-top: 2rem;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+    }
+
+    .total-label {
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: 'Satoshi', sans-serif;
+    }
+
+    .total-value {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .result-box {
+      padding: 2rem;
+      margin: 2rem 0;
+      border-radius: 6px;
+      border: 2px solid;
+      display: none;
+      animation: fadeIn 0.3s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .result-box.active {
+      display: block;
+    }
+
+    .result-green {
+      background: rgba(16, 185, 129, 0.1);
+      border-color: var(--green);
+    }
+
+    .result-blue {
+      background: rgba(59, 130, 246, 0.1);
+      border-color: var(--accent);
+    }
+
+    .result-amber {
+      background: rgba(245, 158, 11, 0.1);
+      border-color: var(--amber);
+    }
+
+    .result-red {
+      background: rgba(239, 68, 68, 0.1);
+      border-color: var(--red);
+    }
+
+    .result-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .result-green .result-title { color: var(--green); }
+    .result-blue .result-title { color: var(--accent); }
+    .result-amber .result-title { color: var(--amber); }
+    .result-red .result-title { color: var(--red); }
+
+    .actions-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .actions-table thead {
+      background: rgba(59, 130, 246, 0.1);
+    }
+
+    .actions-table th {
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border);
+      color: var(--accent);
+    }
+
+    .actions-table td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .actions-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .example-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+
+    .example-header {
+      font-weight: 700;
+      font-size: 1.125rem;
+      margin-bottom: 1.5rem;
+      color: var(--accent);
+    }
+
+    .example-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .example-table th {
+      padding: 0.75rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.875rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .example-table td {
+      padding: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .example-table tbody tr:last-child td {
+      border-bottom: none;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    @media print {
+      body {
+        background: white;
+        color: #0A1628;
+        padding: 1cm;
+      }
+
+      :root {
+        --bg: white;
+        --surface: white;
+        --text: #0A1628;
+        --muted: #555;
+        --accent: #4865ff;
+        --border: #ddd;
+      }
+
+      h1, h2 {
+        color: #0A1628;
+      }
+
+      .scoring-card {
+        background: white;
+      }
+
+      .result-box {
+        display: none !important;
+      }
+
+      .example-section {
+        background: white;
+      }
+
+      input[type="radio"] {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Lead Qualification Score</h1>
+  <p class="subtitle">Tabla de scoring para calificar leads después de discovery call.<br>
+  Si un lead no supera 20/35, no lo persigues activamente.</p>
+
+  <h2>Criterios de Scoring</h2>
+  <div class="scoring-card">
+    <div class="criteria-row" style="font-weight: 600; color: var(--muted); font-size: 0.875rem; padding: 0.75rem 0;">
+      <div>#</div>
+      <div>Criterio</div>
+      <div>Calificación</div>
+      <div>Score</div>
+    </div>
+
+    <div class="criteria-row">
+      <div class="criteria-number">1</div>
+      <div class="criteria-name">Fit industria</div>
+      <div class="radio-group">
+        <div class="radio-option">
+          <input type="radio" name="criteria1" value="1" id="c1-1" onchange="calculateTotal()">
+          <label for="c1-1">1<br><small style="font-size: 0.7rem;">Fuera de foco</small></label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="criteria1" value="3" id="c1-3" onchange="calculateTotal()">
+          <label for="c1-3">3<br><small style="font-size: 0.7rem;">Adyacente</small></label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="criteria1" value="5" id="c1-5" onchange="calculateTotal()">
+          <label for="c1-5">5<br><small style="font-size: 0.7rem;">Core</small></label>
+        </div>
+      </div>
+      <div class="score-display" id="score1">—</div>
+    </div>
+
+    <div class="criteria-row">
+      <div class="criteria-number">2</div>
+      <div class="criteria-name">Dolor claro</div>
+      <div class="radio-group">
+        <div class="radio-option">
+          <input type="radio" name="criteria2" value="1" id="c2-1" onchange="calculateTotal()">
+          <label for="c2-1">1<br><small style="font-size: 0.7rem;">Explorar</small></label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="criteria2" value="3" id="c2-3" onchange="calculateTotal()">
+          <label for="c2-3">3<br><small style="font-size: 0.7rem;">Difuso</small></label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="criteria2" value="5" id="c2-5" onchange="calculateTotal()">
+          <label for="c2-5">5<br><small style="font-size: 0.7rem;">Concreto</small></label>
+        </div>
+      </div>
+      <div class="score-display" id="score2">—</div>
+    </div>
+
+    <div class="criteria-row">
+      <div class="criteria-number">3</div>
+      <div class="criteria-name">Urgencia</div>
+      <div class="radio-group">
+        <div class="radio-option">
+          <input type="radio" name="criteria3" value="1" id="c3-1" onchange="calculateTotal()">
+          <label for="c3-1">1<br><small style="font-size: 0.7rem;">Algún día</small></label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="criteria3" value="3" id="c3-3" onchange="calculateTotal()">
+          <label for="c3-3">3<br><small style="font-size: 0.7rem;">Semestre</small></label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="criteria3" value="5" id="c3-5" onchange="calculateTotal()">
+          <label for="c3-5">5<br><small style="font-size: 0.7rem;">Este mes</small></label>
+        </div>
+      </div>
+      <div class="score-display" id="score3">—</div>
+    </div>
+
+    <div class="criteria-row">
+      <div class="criteria-number">4</div>
+      <div class="criteria-name">Presupuesto</div>
+      <div class="radio-group">
+        <div class="radio-option">
+          <input type="radio" name="criteria4" value="1" id="c4-1" onchange="calculateTotal()">
+          <label for="c4-1">1<br><small style="font-size: 0.7rem;">Sin presu.</small></label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="criteria4" value="3" id="c4-3" onchange="calculateTotal()">
+          <label for="c4-3">3<br><small style="font-size: 0.7rem;">Por buscar</small></label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="criteria4" value="5" id="c4-5" onchange="calculateTotal()">
+          <label for="c4-5">5<br><small style="font-size: 0.7rem;">Asignado</small></label>
+        </div>
+      </div>
+      <div class="score-display" id="score4">—</div>
+    </div>
+
+    <div class="criteria-row">
+      <div class="criteria-number">5</div>
+      <div class="criteria-name">Acceso decision-maker</div>
+      <div class="radio-group">
+        <div class="radio-option">
+          <input type="radio" name="criteria5" value="1" id="c5-1" onchange="calculateTotal()">
+          <label for="c5-1">1<br><small style="font-size: 0.7rem;">Lejano</small></label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="criteria5" value="3" id="c5-3" onchange="calculateTotal()">
+          <label for="c5-3">3<br><small style="font-size: 0.7rem;">Influye</small></label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="criteria5" value="5" id="c5-5" onchange="calculateTotal()">
+          <label for="c5-5">5<br><small style="font-size: 0.7rem;">Directo</small></label>
+        </div>
+      </div>
+      <div class="score-display" id="score5">—</div>
+    </div>
+
+    <div class="criteria-row">
+      <div class="criteria-number">6</div>
+      <div class="criteria-name">Capacidad de compra</div>
+      <div class="radio-group">
+        <div class="radio-option">
+          <input type="radio" name="criteria6" value="1" id="c6-1" onchange="calculateTotal()">
+          <label for="c6-1">1<br><small style="font-size: 0.7rem;">Pequeña</small></label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="criteria6" value="3" id="c6-3" onchange="calculateTotal()">
+          <label for="c6-3">3<br><small style="font-size: 0.7rem;">Mediana</small></label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="criteria6" value="5" id="c6-5" onchange="calculateTotal()">
+          <label for="c6-5">5<br><small style="font-size: 0.7rem;">Grande</small></label>
+        </div>
+      </div>
+      <div class="score-display" id="score6">—</div>
+    </div>
+
+    <div class="criteria-row">
+      <div class="criteria-number">7</div>
+      <div class="criteria-name">Credibilidad del caso</div>
+      <div class="radio-group">
+        <div class="radio-option">
+          <input type="radio" name="criteria7" value="1" id="c7-1" onchange="calculateTotal()">
+          <label for="c7-1">1<br><small style="font-size: 0.7rem;">Genérico</small></label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="criteria7" value="3" id="c7-3" onchange="calculateTotal()">
+          <label for="c7-3">3<br><small style="font-size: 0.7rem;">Interesante</small></label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="criteria7" value="5" id="c7-5" onchange="calculateTotal()">
+          <label for="c7-5">5<br><small style="font-size: 0.7rem;">Publicable</small></label>
+        </div>
+      </div>
+      <div class="score-display" id="score7">—</div>
+    </div>
+  </div>
+
+  <div class="total-score">
+    <span class="total-label">Scoring total:</span>
+    <span class="total-value" id="totalScore">0/35</span>
+  </div>
+
+  <div class="result-box result-green" id="result-green">
+    <div class="result-title">28-35: Prioridad máxima</div>
+    <p>Propuesta en 48h. Este lead tiene todas las características de un cliente ideal.</p>
+  </div>
+
+  <div class="result-box result-blue" id="result-blue">
+    <div class="result-title">20-27: Buen lead</div>
+    <p>Enviar propuesta y hacer seguimiento activo. Alta probabilidad de cierre.</p>
+  </div>
+
+  <div class="result-box result-amber" id="result-amber">
+    <div class="result-title">14-19: Tibio</div>
+    <p>Mantener contacto, no invertir tiempo excesivo. Enviar one-pager y esperar.</p>
+  </div>
+
+  <div class="result-box result-red" id="result-red">
+    <div class="result-title">7-13: Frío</div>
+    <p>No perseguir. Agradecer y dejar puerta abierta para el futuro.</p>
+  </div>
+
+  <h2>Rangos de acción</h2>
+  <table class="actions-table">
+    <thead>
+      <tr>
+        <th>Rango</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>28-35</strong></td>
+        <td>Prioridad máxima. Propuesta en 48h.</td>
+      </tr>
+      <tr>
+        <td><strong>20-27</strong></td>
+        <td>Buen lead. Enviar propuesta, hacer seguimiento activo.</td>
+      </tr>
+      <tr>
+        <td><strong>14-19</strong></td>
+        <td>Tibio. Mantener contacto, no invertir tiempo excesivo. Enviar one-pager y esperar.</td>
+      </tr>
+      <tr>
+        <td><strong>7-13</strong></td>
+        <td>Frío. No perseguir. Agradecer y dejar puerta abierta para el futuro.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Ejemplo de uso</h2>
+  <div class="example-section">
+    <div class="example-header">Lead: Director de Innovación, banco mediano chileno</div>
+    <table class="example-table">
+      <thead>
+        <tr>
+          <th>Criterio</th>
+          <th>Score</th>
+          <th>Nota</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Fit industria</td>
+          <td>5</td>
+          <td>Banca — core</td>
+        </tr>
+        <tr>
+          <td>Dolor claro</td>
+          <td>4</td>
+          <td>Quieren implementar IA en scoring crediticio, regulador encima</td>
+        </tr>
+        <tr>
+          <td>Urgencia</td>
+          <td>4</td>
+          <td>Regulación nueva en 6 meses</td>
+        </tr>
+        <tr>
+          <td>Presupuesto</td>
+          <td>3</td>
+          <td>"Tenemos fondos de innovación, hay que presentar internamente"</td>
+        </tr>
+        <tr>
+          <td>Decision-maker</td>
+          <td>4</td>
+          <td>Hablamos con Gerente de Innovación, reporta a Gerencia General</td>
+        </tr>
+        <tr>
+          <td>Capacidad de compra</td>
+          <td>4</td>
+          <td>Banco mediano, proceso de compra directa < USD 20K</td>
+        </tr>
+        <tr>
+          <td>Credibilidad del caso</td>
+          <td>5</td>
+          <td>Caso publicable, similar a BancoEstado</td>
+        </tr>
+        <tr>
+          <td><strong>Total</strong></td>
+          <td><strong>29/35</strong></td>
+          <td><strong>→ Prioridad máxima</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    function calculateTotal() {
+      let total = 0;
+      for (let i = 1; i <= 7; i++) {
+        const selected = document.querySelector(`input[name="criteria${i}"]:checked`);
+        const scoreDisplay = document.getElementById(`score${i}`);
+        if (selected) {
+          const value = parseInt(selected.value);
+          total += value;
+          scoreDisplay.textContent = value;
+        } else {
+          scoreDisplay.textContent = '—';
+        }
+      }
+
+      document.getElementById('totalScore').textContent = `${total}/35`;
+
+      // Hide all result boxes
+      document.querySelectorAll('.result-box').forEach(box => {
+        box.classList.remove('active');
+      });
+
+      // Show appropriate result box
+      if (total >= 28) {
+        document.getElementById('result-green').classList.add('active');
+      } else if (total >= 20) {
+        document.getElementById('result-blue').classList.add('active');
+      } else if (total >= 14) {
+        document.getElementById('result-amber').classList.add('active');
+      } else if (total >= 7) {
+        document.getElementById('result-red').classList.add('active');
+      }
+    }
+  </script>
+</body>
+</html>

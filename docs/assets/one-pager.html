@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dasein Foresight — Prospectiva Estratégica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --navy: #0A1628;
+      --signal-blue: #4865ff;
+      --horizon-violet: #7a68d6;
+      --foresight-teal: #2f9e90;
+      --slate-white: #ede7dc;
+      --muted: #8899AA;
+      --surface: #111D2E;
+      --border: rgba(136, 153, 170, 0.2);
+    }
+
+    body {
+      font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--navy);
+      color: var(--slate-white);
+      font-size: 14px;
+      line-height: 1.5;
+      padding: 48px 56px;
+      max-width: 210mm;
+      margin: 0 auto;
+      min-height: 297mm;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 32px;
+      margin-bottom: 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: var(--slate-white);
+    }
+
+    .tagline {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 400;
+      max-width: 280px;
+      text-align: right;
+    }
+
+    /* Section Titles */
+    h2 {
+      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+      color: var(--signal-blue);
+      text-transform: uppercase;
+    }
+
+    /* Section 1 — Qué hacemos */
+    .section-intro {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-intro p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--slate-white);
+      max-width: 100%;
+    }
+
+    /* Section 2 — Servicios */
+    .section-services {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .service-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-card.featured {
+      border-color: var(--signal-blue);
+      border-width: 2px;
+      position: relative;
+    }
+
+    .service-card.featured::before {
+      content: 'MÁS POPULAR';
+      position: absolute;
+      top: -10px;
+      right: 12px;
+      background: var(--signal-blue);
+      color: var(--navy);
+      font-size: 9px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 2px;
+      letter-spacing: 0.05em;
+    }
+
+    .service-title {
+      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--slate-white);
+    }
+
+    .service-subtitle {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .service-description {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--slate-white);
+      margin-bottom: 16px;
+      flex-grow: 1;
+    }
+
+    .service-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .service-meta-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+    }
+
+    .service-meta-label {
+      color: var(--muted);
+      font-family: 'Azeret Mono', monospace;
+    }
+
+    .service-meta-value {
+      color: var(--slate-white);
+      font-family: 'Azeret Mono', monospace;
+      font-weight: 500;
+    }
+
+    /* Section 3 — Caso + CTA */
+    .section-footer {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      flex-grow: 1;
+    }
+
+    .case-study {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 24px;
+    }
+
+    .case-study h3 {
+      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--foresight-teal);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .case-study p {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--slate-white);
+    }
+
+    .case-study .quote {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+      font-size: 14px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .cta-block {
+      background: var(--surface);
+      border: 1px solid var(--signal-blue);
+      border-radius: 4px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .cta-block h3 {
+      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 18px;
+      font-weight: 900;
+      margin-bottom: 20px;
+      color: var(--signal-blue);
+      line-height: 1.3;
+    }
+
+    .cta-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .cta-contact-item {
+      font-size: 14px;
+      color: var(--slate-white);
+      text-decoration: none;
+      font-family: 'Azeret Mono', monospace;
+      transition: color 150ms ease;
+    }
+
+    .cta-contact-item:hover {
+      color: var(--signal-blue);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-main {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--slate-white);
+    }
+
+    .footer-meta {
+      font-size: 11px;
+      color: var(--muted);
+      font-family: 'Azeret Mono', monospace;
+    }
+
+    /* Print styles */
+    @media print {
+      @page {
+        size: A4;
+        margin: 15mm;
+      }
+
+      body {
+        background: white;
+        color: #0A1628;
+        padding: 0;
+        min-height: auto;
+      }
+
+      :root {
+        --navy: #0A1628;
+        --signal-blue: #4865ff;
+        --horizon-violet: #7a68d6;
+        --foresight-teal: #2f9e90;
+        --slate-white: #0A1628;
+        --muted: #4A5568;
+        --surface: #F7F9FB;
+        --border: #CBD5E0;
+      }
+
+      header {
+        border-bottom-color: #CBD5E0;
+      }
+
+      .section-intro {
+        border-bottom-color: #CBD5E0;
+      }
+
+      .section-services {
+        border-bottom-color: #CBD5E0;
+      }
+
+      .service-card {
+        background: #F7F9FB;
+        border-color: #CBD5E0;
+        break-inside: avoid;
+      }
+
+      .service-card.featured {
+        border-color: #4865ff;
+      }
+
+      .service-meta {
+        border-top-color: #CBD5E0;
+      }
+
+      .case-study {
+        background: #F7F9FB;
+        border-color: #CBD5E0;
+        break-inside: avoid;
+      }
+
+      .case-study .quote {
+        border-top-color: #CBD5E0;
+      }
+
+      .cta-block {
+        background: #F7F9FB;
+        border-color: #4865ff;
+        break-inside: avoid;
+      }
+
+      footer {
+        border-top-color: #CBD5E0;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Dasein Foresight</div>
+    <div class="tagline">Simulamos futuros para que decidas mejor hoy</div>
+  </header>
+
+  <main>
+    <!-- Section 1 — Qué hacemos -->
+    <section class="section-intro">
+      <h2>Qué hacemos</h2>
+      <p>Somos una consultora de prospectiva estratégica que ayuda a organizaciones a tomar decisiones importantes bajo incertidumbre. Combinamos metodología rigurosa de escenarios con un motor propio de simulación por IA (SignalTwin) para entregar claridad estratégica — no predicciones, no dashboards vacíos, no decks cosméticos.</p>
+    </section>
+
+    <!-- Section 2 — Servicios -->
+    <section class="section-services">
+      <h2>Servicios</h2>
+      <div class="services-grid">
+        <!-- Lectura de Campo -->
+        <div class="service-card">
+          <h3 class="service-title">Lectura de Campo</h3>
+          <p class="service-subtitle">Puerta de entrada</p>
+          <p class="service-description">Escaneo de 15-25 señales + memo ejecutivo + mapa de stakeholders + signposts + plan a 90 días</p>
+          <div class="service-meta">
+            <div class="service-meta-item">
+              <span class="service-meta-label">Duración</span>
+              <span class="service-meta-value">5 días</span>
+            </div>
+            <div class="service-meta-item">
+              <span class="service-meta-label">Desde</span>
+              <span class="service-meta-value">USD 2,500</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Simulación Estratégica -->
+        <div class="service-card featured">
+          <h3 class="service-title">Simulación Estratégica</h3>
+          <p class="service-subtitle">Más popular</p>
+          <p class="service-description">Simulación dual-world completa + escenarios + análisis de robustez + dashboard + workshop directivo</p>
+          <div class="service-meta">
+            <div class="service-meta-item">
+              <span class="service-meta-label">Duración</span>
+              <span class="service-meta-value">4-5 semanas</span>
+            </div>
+            <div class="service-meta-item">
+              <span class="service-meta-label">Desde</span>
+              <span class="service-meta-value">USD 12,000</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Radar Estratégico -->
+        <div class="service-card">
+          <h3 class="service-title">Radar Estratégico</h3>
+          <p class="service-subtitle">Monitoreo continuo</p>
+          <p class="service-description">Vigilancia permanente + escaneo mensual + simulación trimestral + alertas + plan renovado</p>
+          <div class="service-meta">
+            <div class="service-meta-item">
+              <span class="service-meta-label">Duración</span>
+              <span class="service-meta-value">Min. 6 meses</span>
+            </div>
+            <div class="service-meta-item">
+              <span class="service-meta-label">Desde</span>
+              <span class="service-meta-value">USD 5,000/mes</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3 — Caso + CTA -->
+    <section class="section-footer">
+      <div class="case-study">
+        <h3>Caso: BancoEstado</h3>
+        <p>Analizamos la implementación de IA en banca pública. 15 stakeholders mapeados. 4 escenarios evaluados. 3 opciones de decisión testeadas en cada mundo posible.</p>
+        <p class="quote">Resultado: una estrategia robusta que funciona en cualquier futuro regulatorio.</p>
+      </div>
+
+      <div class="cta-block">
+        <h3>Agenda una conversación exploratoria de 30 minutos.</h3>
+        <div class="cta-contact">
+          <a href="mailto:info@daseinforesight.com" class="cta-contact-item">info@daseinforesight.com</a>
+          <a href="https://daseinforesight.com" class="cta-contact-item">daseinforesight.com</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-main">Dasein Foresight — Prospectiva estratégica potenciada por IA</div>
+    <div class="footer-meta">Santiago, Chile | info@daseinforesight.com</div>
+  </footer>
+</body>
+</html>

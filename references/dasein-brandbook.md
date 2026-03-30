@@ -48,7 +48,7 @@ La paleta comunica **sofisticacion intelectual, confianza y vision de futuro**. 
 #### Slate White (Texto principal sobre fondos oscuros)
 
 - **Uso**: Texto principal, headlines sobre fondo oscuro
-- **Hex**: `#E8ECF1`
+- **Hex**: `#ede7dc`
 - **RGB**: `rgb(232, 236, 241)`
 - **HSL**: `hsl(213, 24%, 93%)`
 - **oklch**: `oklch(94% 0.01 260)`
@@ -56,7 +56,7 @@ La paleta comunica **sofisticacion intelectual, confianza y vision de futuro**. 
 #### Signal Blue (Acento primario)
 
 - **Uso**: CTAs principales, links, elementos interactivos, indicadores de datos
-- **Hex**: `#3B82F6`
+- **Hex**: `#4865ff`
 - **RGB**: `rgb(59, 130, 246)`
 - **HSL**: `hsl(217, 91%, 60%)`
 - **oklch**: `oklch(63% 0.19 260)`
@@ -66,7 +66,7 @@ La paleta comunica **sofisticacion intelectual, confianza y vision de futuro**. 
 #### Horizon Violet (Acento secundario)
 
 - **Uso**: Gradientes, elementos de simulacion, indicadores de escenarios futuros
-- **Hex**: `#7C3AED`
+- **Hex**: `#7a68d6`
 - **RGB**: `rgb(124, 58, 237)`
 - **HSL**: `hsl(263, 83%, 58%)`
 - **oklch**: `oklch(50% 0.24 290)`
@@ -74,7 +74,7 @@ La paleta comunica **sofisticacion intelectual, confianza y vision de futuro**. 
 #### Foresight Teal (Terciario)
 
 - **Uso**: Exito, datos positivos, indicadores de oportunidad
-- **Hex**: `#14B8A6`
+- **Hex**: `#2f9e90`
 - **RGB**: `rgb(20, 184, 166)`
 - **HSL**: `hsl(174, 80%, 40%)`
 - **oklch**: `oklch(70% 0.14 180)`
@@ -114,7 +114,7 @@ La paleta comunica **sofisticacion intelectual, confianza y vision de futuro**. 
 --gradient-hero: linear-gradient(135deg, #0A1628 0%, #1A2744 50%, #111D2E 100%);
 
 /* Gradiente de acento - elementos de simulacion, hover states */
---gradient-accent: linear-gradient(135deg, #3B82F6 0%, #7C3AED 100%);
+--gradient-accent: linear-gradient(135deg, #4865ff 0%, #7a68d6 100%);
 
 /* Gradiente sutil - fondos de cards interactivas */
 --gradient-card: linear-gradient(180deg, rgba(59, 130, 246, 0.08) 0%, rgba(124, 58, 237, 0.04) 100%);
@@ -149,20 +149,28 @@ La paleta comunica **sofisticacion intelectual, confianza y vision de futuro**. 
 ### Font Families
 
 ```css
-/* Titulares - geometrica, distintiva, tech-forward */
---font-display: 'Space Grotesk', system-ui, sans-serif;
+/* Display - titulares, secciones, subtitulos */
+--font-display: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
 
-/* Cuerpo - alta legibilidad, profesional */
---font-body: 'Space Grotesk', system-ui, sans-serif;
+/* Body - texto corrido, descripciones, UI */
+--font-body: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
 
-/* Monospace - datos, metricas, codigo, terminologia tecnica */
---font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+/* Monospace - datos, metricas, etiquetas tecnicas, terminal */
+--font-mono: 'Azeret Mono', 'JetBrains Mono', monospace;
 
-/* Editorial - solo para titulos de reportes/memos ejecutivos */
+/* Editorial - solo para titulos de memos ejecutivos y blockquotes */
 --font-editorial: 'Instrument Serif', Georgia, serif;
 ```
 
-**Nota**: Space Grotesk se usa como tipografia principal por su caracter distintivo y tech-forward — ideal para una consultora de prospectiva. Instrument Serif se reserva exclusivamente para titulos de memos ejecutivos y reportes, aportando gravitas editorial.
+**Sistema tipografico:**
+- **Satoshi 900** — Display headlines (hero, titulos principales)
+- **Satoshi 700** — Secciones (H2, nombres de servicio)
+- **Satoshi 500** — Subtitulos, lanes, labels de navegacion
+- **Space Grotesk 400** — Body text, descripciones, parrafos
+- **Azeret Mono 400-500** — Datos, metricas, overlines tecnicos, prefijos terminal
+- **Instrument Serif italic** — Solo titulos editoriales en memos ejecutivos
+
+**Nota**: Satoshi aporta peso y personalidad en titulares (geometrica, con caracter). Space Grotesk se reserva para body text donde su legibilidad brilla. Azeret Mono reemplaza JetBrains Mono por su estetica mas alineada con el sistema visual.
 
 ### Escala Tipografica (Fluid)
 
@@ -220,17 +228,39 @@ La paleta comunica **sofisticacion intelectual, confianza y vision de futuro**. 
 
 | Nivel | Font | Weight | Size Var | Line Height | Letter Spacing | Transform |
 |---|---|---|---|---|---|---|
-| Display | display | 700 | --text-display | 1.05 | -0.03em | none |
-| H1 | display | 700 | --text-h1 | 1.2 | -0.02em | none |
-| H2 | display | 600 | --text-h2 | 1.2 | -0.02em | none |
-| H3 | display | 600 | --text-h3 | 1.3 | -0.01em | none |
-| H4 | body | 600 | --text-h4 | 1.3 | 0 | none |
-| Body | body | 400 | --text-body | 1.65 | 0 | none |
-| Body bold | body | 600 | --text-body | 1.65 | 0 | none |
-| Small | body | 400 | --text-sm | 1.5 | 0 | none |
-| Caption | body | 400 | --text-caption | 1.4 | 0.01em | none |
-| Overline | body | 600 | --text-overline | 1.2 | 0.12em | uppercase |
-| Mono data | mono | 500 | --text-body | 1.5 | -0.02em | none |
+| Display | display (Satoshi) | 900 | --text-display | 0.94 | -0.055em | none |
+| H1 | display (Satoshi) | 900 | --text-h1 | 1.15 | -0.03em | none |
+| H2 | display (Satoshi) | 700 | --text-h2 | 1.15 | -0.02em | none |
+| H3 | display (Satoshi) | 700 | --text-h3 | 1.3 | -0.01em | none |
+| Subtitle | display (Satoshi) | 500 | --text-h4 | 1.3 | 0 | none |
+| Body | body (Space Grotesk) | 400 | --text-body | 1.7 | 0 | none |
+| Body bold | body (Space Grotesk) | 600 | --text-body | 1.7 | 0 | none |
+| Small | body (Space Grotesk) | 400 | --text-sm | 1.5 | 0 | none |
+| Caption | body (Space Grotesk) | 400 | --text-caption | 1.4 | 0.01em | none |
+| Overline | mono (Azeret Mono) | 500 | --text-overline | 1.2 | 0.18em | uppercase |
+| Mono data | mono (Azeret Mono) | 500 | --text-body | 1.5 | -0.02em | none |
+
+### Sistema de Simbolos
+
+Simbolos tipograficos con significado semantico. Se usan en lugar de bullets, separadores e indicadores genericos.
+
+| Simbolo | Uso | Significado |
+|---------|-----|-------------|
+| → | Kickers, CTAs, links de navegacion | Direccion, movimiento |
+| ◆ | Separador en marquees y tickers | Nodo, senal |
+| ※ | Bullets en listas de contenido | Nota, referencia |
+| ◈ | Labels de output/entregables | Resultado, dato |
+| / | Prefijo en pills y tags | Categoria |
+| ◇ | Separador de metadata inline | Metadata ligera |
+| ▸ | Prefijo terminal/typewriter | Proceso, sistema |
+
+**Reglas de uso:**
+- Los simbolos reemplazan bullets estandar (•) y flechas genericas (>)
+- Se renderizan en `--font-mono` (Azeret Mono) cuando aparecen junto a texto mono
+- En contexto body, se renderizan en el font del texto circundante
+- Color por defecto: heredan el color del texto padre
+- Color acentuado permitido: `--signal-red` (opacity 0.5-0.7) para → ◆ / y `--signal-blue` (opacity 0.4-0.6) para ※ ◈ ▸
+- Los simbolos son puntuacion visual, no decoracion: cada uno tiene un significado semantico fijo
 
 ---
 
@@ -275,11 +305,11 @@ La paleta comunica **sofisticacion intelectual, confianza y vision de futuro**. 
 
 - "Agenda una conversacion" (no "Contactanos" ni "Solicita informacion")
 - "Explora tus escenarios" (no "Descubre el futuro")
-- "Comienza con un Pulso Estrategico" (no "Prueba gratis")
+- "Comienza con una Lectura de Campo" (no "Prueba gratis")
 
-#### Descripcion de Servicio (Ejemplo: SignalTwin Strategy)
+#### Descripcion de Servicio (Ejemplo: Simulacion Estrategica)
 
-> **SignalTwin Strategy**
+> **Simulacion Estrategica**
 >
 > Un caso completo de simulacion de futuros. Escaneamos 40-60 senales relevantes para tu industria, construimos un modelo dual-world con IA, y te entregamos un mapa de escenarios con implicaciones estrategicas concretas. En 4-5 semanas, tu equipo directivo tendra un lenguaje comun para hablar del futuro — y un plan para cada version de el.
 
@@ -313,12 +343,42 @@ La paleta comunica **sofisticacion intelectual, confianza y vision de futuro**. 
 
 ### Iconografia
 
+#### Sistema primario: Simbolos tipograficos
+
+El sistema visual de Dasein usa **simbolos tipograficos con significado semantico** como iconografia principal. Son mas ligeros que iconos tradicionales, se alinean perfectamente con el texto, y refuerzan la estetica editorial-tecnica de la marca.
+
+Ver tabla completa en Seccion 3 > Sistema de Simbolos.
+
+**Usos atmosfericos de simbolos:**
+
+| Patron | Descripcion | Donde usarlo |
+|--------|-------------|--------------|
+| Symbol field | Simbolos dispersos como textura de fondo (opacity 3-5%) | Hero, secciones de apertura |
+| Ghost watermark | Simbolo gigante (5-9rem) detras del contenido de una card | Cards de metodo, pasos del proceso |
+| Corner accents | Simbolos pequenos en esquinas de paneles (opacity 12%) | Cards de entregables, paneles destacados |
+| Symbol divider | Linea con simbolos al centro (`◇ → ◆ → ◇`) | Separador entre secciones |
+| Symbol marquee | Simbolos como ritmo entre items de un ticker | Marquee strips, tickers de servicios |
+| HUD data cells | Simbolo como icono de cada metrica en layout tipo dashboard | Metricas, KPIs, datos del caso |
+
+**Reglas para uso atmosferico:**
+- Los simbolos decorativos SIEMPRE llevan `aria-hidden="true"`
+- Opacity maxima para elementos decorativos: 5% (light bg), 4% (dark bg)
+- Font: siempre `--font-mono` (Azeret Mono)
+- No combinar mas de 2 patrones atmosfericos en una misma seccion
+- En `prefers-reduced-motion: reduce`, los symbol fields no se renderizan
+
+#### Sistema secundario: Lucide Icons (funcional)
+
+Para iconografia funcional donde se necesite un icono reconocible (navegacion, acciones de UI, indicadores de estado):
+
 - **Estilo**: Line icons, peso consistente
 - **Peso de linea**: 1.5px (mobile), 2px (desktop)
 - **Tamano base**: 24px grid
 - **Estilo de bordes**: Rounded caps, round joins
 - **Color**: Signal Blue sobre fondos oscuros, Deep Navy sobre fondos claros
 - **Set recomendado**: Lucide Icons (open source, consistente con el estilo)
+
+**Preferencia**: Usar simbolos tipograficos siempre que sea posible. Lucide solo cuando el significado requiere un icono figurativo (ej: radar, layers, git-branch).
 
 ### Uso de Espacio en Blanco
 
@@ -371,7 +431,7 @@ El espacio en blanco (o "espacio oscuro" dado nuestro fondo navy) es un elemento
 ```css
 /* Primary CTA */
 .btn-primary {
-  background: var(--color-signal-blue);  /* #3B82F6 */
+  background: var(--color-signal-blue);  /* #4865ff */
   color: white;
   font-weight: 600;
   font-size: var(--text-sm);
@@ -548,39 +608,38 @@ lo que viene.
 Desde un diagnostico rapido hasta monitoreo continuo.
 ```
 
-#### Card 1: Pulso Estrategico
+#### Card 1: Lectura de Campo
 
 ```
 [Badge] Puerta de entrada
-[H3] Pulso Estrategico
-[Body] Simulacion completa de futuros con nuestro motor SignalTwin,
-enfocada en entregarte claridad rapida. Escaneamos todas las senales
-relevantes para tu industria, corremos la simulacion dual-world,
-y te entregamos un memo ejecutivo con plan de accion a 90 dias.
-Sin dashboard — solo lo que necesitas para decidir ahora.
-[Meta] Desde USD 2,500
+[H3] Lectura de Campo
+[Body] Escaneamos las senales relevantes para tu industria —
+regulatorias, tecnologicas, competitivas, sociales — y te
+entregamos un memo ejecutivo con mapa de stakeholders,
+signposts concretos y plan de accion a 90 dias.
+Claridad rapida para decidir ahora.
+[Meta] Desde USD 2,500 | 5 dias
 [CTA link] Saber mas ->
 ```
 
-#### Card 2: SignalTwin Strategy
+#### Card 2: Simulacion Estrategica
 
 ```
 [Badge] Mas popular
-[H3] SignalTwin Strategy
-[Body] La experiencia completa de simulacion de futuros. Todo lo que
-incluye el Pulso, mas dashboard interactivo con tus escenarios,
-workshop presencial con tu equipo directivo, y acceso al grafo
-de conocimiento de tu industria. El entregable que transforma
-como tu organizacion habla del futuro.
+[H3] Simulacion Estrategica
+[Body] La experiencia completa. Corremos la simulacion dual-world
+con nuestro motor SignalTwin: escenarios plausibles, analisis de
+robustez, dashboard interactivo y workshop con tu equipo directivo.
+El entregable que transforma como tu organizacion habla del futuro.
 [Meta] Desde USD 12,000 | 4-5 semanas
 [CTA link] Saber mas ->
 ```
 
-#### Card 3: Radar Dasein
+#### Card 3: Radar Estrategico
 
 ```
 [Badge] Monitoreo continuo
-[H3] Radar Dasein
+[H3] Radar Estrategico
 [Body] Vigilancia estrategica permanente. Simulacion actualizada
 cada trimestre, escaneo mensual de senales nuevas, alertas cuando
 algo cambia. Tu radar de futuros siempre encendido, con plan de
@@ -589,7 +648,7 @@ accion a 90 dias renovado en cada ciclo.
 [CTA link] Saber mas ->
 ```
 
-**Diseno de cards**: Fondo Surface Dark, borde sutil. La card de SignalTwin Strategy tiene un borde con gradiente accent (Signal Blue -> Horizon Violet) para destacarla. Las otras dos tienen borde neutro.
+**Diseno de cards**: Fondo Surface Dark, borde sutil. La card de Simulacion Estrategica tiene un borde con gradiente accent (Signal Blue -> Horizon Violet) para destacarla. Las otras dos tienen borde neutro.
 
 ### 7.3 Caso de Estudio: BancoEstado
 
@@ -730,13 +789,13 @@ para tu industria.
 
   /* === Gradients === */
   --gradient-hero: linear-gradient(135deg, #0A1628 0%, #1A2744 50%, #111D2E 100%);
-  --gradient-accent: linear-gradient(135deg, #3B82F6 0%, #7C3AED 100%);
+  --gradient-accent: linear-gradient(135deg, #4865ff 0%, #7a68d6 100%);
   --gradient-card: linear-gradient(180deg, rgba(59, 130, 246, 0.08) 0%, rgba(124, 58, 237, 0.04) 100%);
 
   /* === Typography === */
-  --font-display: 'Inter', 'Helvetica Neue', system-ui, sans-serif;
-  --font-body: 'Inter', 'Helvetica Neue', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+  --font-display: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'Azeret Mono', 'JetBrains Mono', monospace;
 
   --text-display: clamp(3rem, 1rem + 7vw, 6rem);
   --text-h1: clamp(2.25rem, 1.5rem + 3vw, 3.75rem);
@@ -816,7 +875,7 @@ para tu industria.
 - **Styling**: CSS custom properties + Tailwind CSS (utility-first)
 - **Animations**: GSAP + ScrollTrigger para reveals, CSS transitions para micro-interacciones
 - **Smooth scroll**: Lenis
-- **Fonts**: Self-hosted via @font-face (no Google Fonts CDN por performance y privacidad)
+- **Fonts**: Satoshi (via Fontshare), Space Grotesk + Azeret Mono + Instrument Serif (self-hosted or Google Fonts)
 - **Icons**: Lucide React
 
 ### Breakpoints

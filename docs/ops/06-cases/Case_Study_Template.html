@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caso de Estudio</title>
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Azeret+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0A1628;
+            --surface: #111D2E;
+            --text: #ede7dc;
+            --muted: #8899AA;
+            --accent: #4865ff;
+            --border: rgba(136, 153, 170, 0.2);
+            --private-bg: rgba(17, 29, 46, 0.4);
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            padding: 3rem 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-family: 'Satoshi', sans-serif;
+            font-weight: 900;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-family: 'Azeret Mono', monospace;
+            font-size: 0.875rem;
+            color: var(--muted);
+            margin-bottom: 3rem;
+            line-height: 1.7;
+        }
+
+        .metadata-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .metadata-section h2 {
+            font-family: 'Satoshi', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .metadata-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .metadata-field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .metadata-field label {
+            font-size: 0.875rem;
+            color: var(--muted);
+        }
+
+        .metadata-field input {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.875rem;
+            padding: 0.5rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox-option input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .public-section {
+            background: var(--surface);
+            border: 2px solid var(--accent);
+            border-radius: 6px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .private-section {
+            background: var(--private-bg);
+            border: 1px solid rgba(136, 153, 170, 0.15);
+            border-radius: 6px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-header h2 {
+            font-family: 'Satoshi', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+        }
+
+        .section-badge {
+            font-family: 'Azeret Mono', monospace;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .badge-public {
+            background: var(--accent);
+            color: white;
+        }
+
+        .badge-private {
+            background: rgba(136, 153, 170, 0.3);
+            color: var(--muted);
+        }
+
+        .section-note {
+            font-family: 'Instrument Serif', serif;
+            font-style: italic;
+            font-size: 0.875rem;
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .content-block {
+            margin-bottom: 2rem;
+        }
+
+        .content-block h3 {
+            font-family: 'Satoshi', sans-serif;
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--accent);
+        }
+
+        .content-block textarea,
+        .content-block input {
+            width: 100%;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.875rem;
+            padding: 0.75rem;
+            resize: vertical;
+        }
+
+        .content-block textarea {
+            min-height: 80px;
+        }
+
+        .quote-block {
+            background: rgba(59, 130, 246, 0.05);
+            border-left: 3px solid var(--accent);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .quote-block textarea {
+            background: transparent;
+            border: none;
+            font-family: 'Instrument Serif', serif;
+            font-style: italic;
+            font-size: 1rem;
+            min-height: 60px;
+        }
+
+        .quote-attribution {
+            margin-top: 0.5rem;
+        }
+
+        .quote-attribution input {
+            background: transparent;
+            border: none;
+            border-bottom: 1px dotted var(--border);
+            font-size: 0.875rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            font-weight: 600;
+            color: var(--muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: rgba(17, 29, 46, 0.5);
+        }
+
+        td input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px dotted rgba(136, 153, 170, 0.1);
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.875rem;
+            padding: 0.25rem 0;
+        }
+
+        .list-group {
+            margin-bottom: 1rem;
+        }
+
+        .list-group-item {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .list-group-item::before {
+            content: "—";
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .list-group-item input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            border-bottom: 1px dotted var(--border);
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.875rem;
+            padding: 0.25rem 0;
+        }
+
+        .publication-status {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1.5rem;
+        }
+
+        .publication-status h2 {
+            font-family: 'Satoshi', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .status-checklist {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .status-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        @media print {
+            body {
+                background: white;
+                color: #000;
+                padding: 1cm;
+            }
+
+            .container {
+                max-width: 100%;
+            }
+
+            .metadata-section,
+            .public-section,
+            .publication-status {
+                background: white;
+                border-color: #ccc;
+            }
+
+            .private-section {
+                background: #f9f9f9;
+                border-color: #ddd;
+            }
+
+            .public-section {
+                border-color: #000;
+            }
+
+            input,
+            textarea {
+                background: white;
+                border-color: #ccc;
+            }
+
+            .section-badge {
+                background: #ddd;
+                color: #666;
+            }
+
+            .content-block h3 {
+                color: #000;
+            }
+
+            th {
+                background: #f5f5f5;
+                color: #666;
+            }
+
+            .quote-block {
+                background: #f5f5f5;
+                border-left-color: #000;
+            }
+        }
+
+        @page {
+            margin: 1cm;
+            size: A4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Caso de Estudio — [NOMBRE_CASO]</h1>
+        <div class="subtitle">
+            Template para documentar casos. Cada caso tiene versión pública y versión privada.<br>
+            La versión pública se usa en ventas, web, y materiales comerciales.<br>
+            La versión privada tiene detalles confidenciales para uso interno.
+        </div>
+
+        <div class="metadata-section">
+            <h2>Metadata</h2>
+            <div class="metadata-grid">
+                <div class="metadata-field">
+                    <label>Industria</label>
+                    <input type="text" placeholder="Sector o industria">
+                </div>
+                <div class="metadata-field">
+                    <label>País</label>
+                    <input type="text" placeholder="País del cliente">
+                </div>
+                <div class="metadata-field">
+                    <label>Fecha</label>
+                    <input type="date">
+                </div>
+                <div class="metadata-field">
+                    <label>Duración del proyecto</label>
+                    <input type="text" placeholder="Semanas o meses">
+                </div>
+            </div>
+            <div style="margin-top: 1rem;">
+                <label style="display: block; margin-bottom: 0.5rem; font-size: 0.875rem; color: var(--muted);">Servicio utilizado</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="servicio1">
+                        <label for="servicio1">Lectura de Campo</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="servicio2">
+                        <label for="servicio2">Simulación Estratégica</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="servicio3">
+                        <label for="servicio3">Radar Estratégico</label>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 1rem;">
+                <label style="display: block; margin-bottom: 0.5rem; font-size: 0.875rem; color: var(--muted);">Estado</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="estado1">
+                        <label for="estado1">Demo (info pública)</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="estado2">
+                        <label for="estado2">Caso real (cliente pagó)</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="estado3">
+                        <label for="estado3">En progreso</label>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 1rem;">
+                <label style="display: block; margin-bottom: 0.5rem; font-size: 0.875rem; color: var(--muted);">Publicable</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="pub1">
+                        <label for="pub1">Sí (con autorización)</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="pub2">
+                        <label for="pub2">Solo versión anónima</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="pub3">
+                        <label for="pub3">No</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="public-section">
+            <div class="section-header">
+                <h2>Versión Pública</h2>
+                <span class="section-badge badge-public">Para web y ventas</span>
+            </div>
+            <div class="section-note">
+                Para web, one-pager, deck, materiales de venta. Max 1 página.
+            </div>
+
+            <div class="content-block">
+                <h3>Contexto</h3>
+                <textarea placeholder="1-2 oraciones sobre la organización y su situación. Puede ser anónimo: 'Un banco estatal de 14M de clientes...'"></textarea>
+            </div>
+
+            <div class="content-block">
+                <h3>Problema</h3>
+                <textarea placeholder="¿Qué decisión enfrentaban? ¿Qué estaba en juego?"></textarea>
+            </div>
+
+            <div class="content-block">
+                <h3>Qué estaba en juego</h3>
+                <textarea placeholder="Consecuencias concretas de decidir mal — regulatorias, reputacionales, operativas, financieras"></textarea>
+            </div>
+
+            <div class="content-block">
+                <h3>Enfoque Dasein</h3>
+                <textarea placeholder="Qué hicimos — metodología en lenguaje claro, no tesis doctoral"></textarea>
+            </div>
+
+            <div class="content-block">
+                <h3>Hallazgo clave</h3>
+                <textarea placeholder="El insight que cambió la conversación — UNO solo, concreto, memorable"></textarea>
+            </div>
+
+            <div class="content-block">
+                <h3>Decisión resultante</h3>
+                <textarea placeholder="Qué decidió o planea decidir el cliente gracias al análisis"></textarea>
+            </div>
+
+            <div class="content-block">
+                <h3>Quote</h3>
+                <div class="quote-block">
+                    <textarea placeholder="Cita del cliente o pseudoquote"></textarea>
+                    <div class="quote-attribution">
+                        <input type="text" placeholder="— Nombre o cargo, empresa o anónimo">
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>Métricas</h3>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>Señales analizadas</th>
+                            <td><input type="text"></td>
+                        </tr>
+                        <tr>
+                            <th>Stakeholders mapeados</th>
+                            <td><input type="text"></td>
+                        </tr>
+                        <tr>
+                            <th>Escenarios evaluados</th>
+                            <td><input type="text"></td>
+                        </tr>
+                        <tr>
+                            <th>Opciones testeadas</th>
+                            <td><input type="text"></td>
+                        </tr>
+                        <tr>
+                            <th>Fuentes consultadas</th>
+                            <td><input type="text"></td>
+                        </tr>
+                        <tr>
+                            <th>Horizonte temporal</th>
+                            <td><input type="text"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="private-section">
+            <div class="section-header">
+                <h2>Versión Privada</h2>
+                <span class="section-badge badge-private">Solo uso interno</span>
+            </div>
+            <div class="section-note">
+                Solo para uso interno. No compartir con prospectos.
+            </div>
+
+            <div class="content-block">
+                <h3>Detalles del cliente</h3>
+                <div class="list-group">
+                    <div class="list-group-item"><input type="text" placeholder="Nombre real: [EMPRESA]"></div>
+                    <div class="list-group-item"><input type="text" placeholder="Contacto: [NOMBRE, CARGO]"></div>
+                    <div class="list-group-item"><input type="text" placeholder="Cómo llegó: [ORIGEN]"></div>
+                    <div class="list-group-item"><input type="text" placeholder="Monto facturado: USD [MONTO]"></div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>Proceso comercial</h3>
+                <div class="list-group">
+                    <div class="list-group-item"><input type="text" placeholder="Duración del ciclo de venta:"></div>
+                    <div class="list-group-item"><input type="text" placeholder="Objeciones principales:"></div>
+                    <div class="list-group-item"><input type="text" placeholder="Qué los convenció:"></div>
+                    <div class="list-group-item"><input type="text" placeholder="Quién aprobó:"></div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>Ejecución</h3>
+                <div class="list-group">
+                    <div class="list-group-item"><input type="text" placeholder="Dificultades encontradas:"></div>
+                    <div class="list-group-item"><input type="text" placeholder="Qué funcionó bien:"></div>
+                    <div class="list-group-item"><input type="text" placeholder="Qué haríamos diferente:"></div>
+                    <div class="list-group-item"><input type="text" placeholder="Tiempo real vs estimado:"></div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>Resultado post-proyecto</h3>
+                <div class="list-group">
+                    <div class="list-group-item"><input type="text" placeholder="¿El cliente implementó las recomendaciones?"></div>
+                    <div class="list-group-item"><input type="text" placeholder="¿Hubo proyecto de seguimiento?"></div>
+                    <div class="list-group-item"><input type="text" placeholder="¿Nos refirió a alguien?"></div>
+                    <div class="list-group-item"><input type="text" placeholder="Net Promoter Score (informal): [1-10]"></div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>Lecciones para Dasein</h3>
+                <div class="list-group">
+                    <div class="list-group-item"><input type="text" placeholder="Sobre el servicio:"></div>
+                    <div class="list-group-item"><input type="text" placeholder="Sobre la venta:"></div>
+                    <div class="list-group-item"><input type="text" placeholder="Sobre la entrega:"></div>
+                    <div class="list-group-item"><input type="text" placeholder="Sobre pricing:"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="publication-status">
+            <h2>Estado de publicación</h2>
+            <div class="status-checklist">
+                <div class="status-item">
+                    <input type="checkbox" id="status1">
+                    <label for="status1">Versión pública redactada</label>
+                </div>
+                <div class="status-item">
+                    <input type="checkbox" id="status2">
+                    <label for="status2">Quote del cliente obtenido (o pseudoquote aprobado)</label>
+                </div>
+                <div class="status-item">
+                    <input type="checkbox" id="status3">
+                    <label for="status3">Métricas verificadas</label>
+                </div>
+                <div class="status-item">
+                    <input type="checkbox" id="status4">
+                    <label for="status4">Publicada en web</label>
+                </div>
+                <div class="status-item">
+                    <input type="checkbox" id="status5">
+                    <label for="status5">Incluida en deck comercial</label>
+                </div>
+                <div class="status-item">
+                    <input type="checkbox" id="status6">
+                    <label for="status6">Incluida en one-pager</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

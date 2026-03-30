@@ -1,0 +1,1354 @@
+---
+/**
+ * Typographic comparison: CURRENT vs PROPOSED system
+ * Current: Satoshi (display/body) + Azeret Mono + Instrument Serif (editorial accent)
+ * Proposed: Instrument Serif (display) + Space Grotesk (body) + Space Mono + Newsreader (editorial prose)
+ */
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Type Test — Dasein Foresight</title>
+
+  <!-- Current fonts -->
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+  <!-- Proposed fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="test-header">
+  <h1>Evolución tipográfica — A / B</h1>
+  <p class="test-note">Izquierda = sistema actual &nbsp;/&nbsp; Derecha = propuesta editorial</p>
+  <div class="toggle-bar">
+    <button class="toggle-btn is-active" data-view="split">Split</button>
+    <button class="toggle-btn" data-view="current">Solo actual</button>
+    <button class="toggle-btn" data-view="proposed">Solo propuesta</button>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 1: HERO
+     ═══════════════════════════════════════════ -->
+
+<section class="test-section">
+  <h2 class="test-section-label">01 — Hero</h2>
+  <div class="test-grid" data-grid>
+
+    <!-- CURRENT -->
+    <div class="test-col test-col--current" data-col="current">
+      <span class="col-label">ACTUAL</span>
+      <div class="hero-demo demo-paper">
+        <p class="cur-kicker">Prospectiva estratégica basada en IA</p>
+        <div class="cur-hero-title">
+          <span>Decidir</span>
+          <span><em class="cur-editorial">antes</em> <span class="cur-mono-small">de</span></span>
+          <span class="cur-strike">reaccionar.</span>
+        </div>
+        <p class="cur-body">
+          Consultora de prospectiva estratégica. Exploramos futuros plausibles
+          para que tu organización decida antes de que la realidad lo haga por ella.
+        </p>
+        <div class="cur-buttons">
+          <span class="cur-btn-primary">Agenda una conversación</span>
+          <span class="cur-btn-secondary">Ver el método</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROPOSED -->
+    <div class="test-col test-col--proposed" data-col="proposed">
+      <span class="col-label">PROPUESTA</span>
+      <div class="hero-demo demo-paper">
+        <p class="pro-kicker">Prospectiva estratégica basada en IA</p>
+        <div class="pro-hero-title">
+          <span>Decidir</span>
+          <span><em class="pro-newsreader-accent">antes</em> <span class="pro-mono-small">de</span></span>
+          <span class="pro-strike">reaccionar.</span>
+        </div>
+        <p class="pro-body">
+          Consultora de prospectiva estratégica. Exploramos futuros plausibles
+          para que tu organización decida antes de que la realidad lo haga por ella.
+        </p>
+        <div class="pro-buttons">
+          <span class="pro-btn-primary">Agenda una conversación</span>
+          <span class="pro-btn-secondary">Ver el método</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 2: DISCLOSURE (Dark)
+     ═══════════════════════════════════════════ -->
+
+<section class="test-section">
+  <h2 class="test-section-label">02 — Hero Disclosure (dark)</h2>
+  <div class="test-grid" data-grid>
+
+    <div class="test-col test-col--current" data-col="current">
+      <span class="col-label">ACTUAL</span>
+      <div class="disclosure-demo demo-dark">
+        <span class="cur-tag">Signal surface</span>
+        <h3 class="cur-disclosure-title">Leemos</h3>
+        <span class="cur-disclosure-word">señales.</span>
+        <p class="cur-disclosure-note">Señales, actores, fricciones y escenarios que luego pasan por simulación.</p>
+      </div>
+    </div>
+
+    <div class="test-col test-col--proposed" data-col="proposed">
+      <span class="col-label">PROPUESTA</span>
+      <div class="disclosure-demo demo-dark">
+        <span class="pro-tag">Signal surface</span>
+        <h3 class="pro-disclosure-title">Leemos</h3>
+        <span class="pro-disclosure-word">señales.</span>
+        <p class="pro-disclosure-note">Señales, actores, fricciones y escenarios que luego pasan por simulación.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 3: AUDIENCE LANES
+     ═══════════════════════════════════════════ -->
+
+<section class="test-section">
+  <h2 class="test-section-label">03 — Audience Lanes</h2>
+  <div class="test-grid" data-grid>
+
+    <div class="test-col test-col--current" data-col="current">
+      <span class="col-label">ACTUAL</span>
+      <div class="audience-demo demo-paper">
+        <span class="cur-kicker">01 / Para quién</span>
+        <h3 class="cur-audience-headline">
+          Estamos construyendo.<br />
+          <em class="cur-editorial">Buscamos a quienes faltan.</em>
+        </h3>
+        <p class="cur-lead">Cuatro formas de trabajar con nosotros, según dónde estés y qué necesites.</p>
+        <div class="lane-demo">
+          <div class="lane-left">
+            <span class="cur-num">01</span>
+            <span class="cur-label-mono">Pilotos</span>
+          </div>
+          <h4 class="cur-lane-title">Organizaciones que quieran probar el enfoque con un caso real.</h4>
+        </div>
+        <div class="lane-demo">
+          <div class="lane-left">
+            <span class="cur-num">02</span>
+            <span class="cur-label-mono">Partners</span>
+          </div>
+          <h4 class="cur-lane-title">Firmas que implementan mejor cuando el mapa ya existe.</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="test-col test-col--proposed" data-col="proposed">
+      <span class="col-label">PROPUESTA</span>
+      <div class="audience-demo demo-paper">
+        <span class="pro-kicker">01 / Para quién</span>
+        <h3 class="pro-audience-headline">
+          Estamos construyendo.<br />
+          <em class="pro-newsreader-accent">Buscamos a quienes faltan.</em>
+        </h3>
+        <p class="pro-lead">Cuatro formas de trabajar con nosotros, según dónde estés y qué necesites.</p>
+        <div class="lane-demo">
+          <div class="lane-left">
+            <span class="pro-num">01</span>
+            <span class="pro-label-mono">Pilotos</span>
+          </div>
+          <h4 class="pro-lane-title">Organizaciones que quieran probar el enfoque con un caso real.</h4>
+        </div>
+        <div class="lane-demo">
+          <div class="lane-left">
+            <span class="pro-num">02</span>
+            <span class="pro-label-mono">Partners</span>
+          </div>
+          <h4 class="pro-lane-title">Firmas que implementan mejor cuando el mapa ya existe.</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 4: METHOD / TIMELINE
+     ═══════════════════════════════════════════ -->
+
+<section class="test-section">
+  <h2 class="test-section-label">04 — Método (Timeline)</h2>
+  <div class="test-grid" data-grid>
+
+    <div class="test-col test-col--current" data-col="current">
+      <span class="col-label">ACTUAL</span>
+      <div class="method-demo demo-paper">
+        <span class="cur-kicker">02 / Método</span>
+        <h3 class="cur-method-headline">
+          Seis pasos para<br />convertir complejidad<br />
+          <em class="cur-editorial">en decisión.</em>
+        </h3>
+        <p class="cur-lead">De la pregunta estratégica al plan a 90 días.</p>
+        <div class="step-demo">
+          <span class="cur-step-num">01</span>
+          <h4 class="cur-step-title">Exploración general</h4>
+          <p class="cur-step-body">Delimitamos la pregunta estratégica, el contexto y los frentes donde una mala lectura puede disparar costos innecesarios.</p>
+          <div class="cur-step-output">
+            <span class="cur-output-label">Output</span>
+            <span class="cur-output-value">Pregunta afinada y entorno legible</span>
+          </div>
+        </div>
+        <p class="cur-terminal">El método no se presenta como misterio. Se despliega como sistema visible.▌</p>
+      </div>
+    </div>
+
+    <div class="test-col test-col--proposed" data-col="proposed">
+      <span class="col-label">PROPUESTA</span>
+      <div class="method-demo demo-paper">
+        <span class="pro-kicker">02 / Método</span>
+        <h3 class="pro-method-headline">
+          Seis pasos para<br />convertir complejidad<br />
+          <em class="pro-newsreader-accent">en decisión.</em>
+        </h3>
+        <p class="pro-lead">De la pregunta estratégica al plan a 90 días.</p>
+        <div class="step-demo">
+          <span class="pro-step-num">01</span>
+          <h4 class="pro-step-title">Exploración general</h4>
+          <p class="pro-step-body">Delimitamos la pregunta estratégica, el contexto y los frentes donde una mala lectura puede disparar costos innecesarios.</p>
+          <div class="pro-step-output">
+            <span class="pro-output-label">Output</span>
+            <span class="pro-output-value">Pregunta afinada y entorno legible</span>
+          </div>
+        </div>
+        <p class="pro-terminal">El método no se presenta como misterio. Se despliega como sistema visible.▌</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 5: FOUNDER
+     ═══════════════════════════════════════════ -->
+
+<section class="test-section">
+  <h2 class="test-section-label">05 — Founder</h2>
+  <div class="test-grid" data-grid>
+
+    <div class="test-col test-col--current" data-col="current">
+      <span class="col-label">ACTUAL</span>
+      <div class="founder-demo demo-paper">
+        <span class="cur-kicker">03 / Origen</span>
+        <h3 class="cur-founder-title">Dasein nace de implementar IA donde el error tiene costo real.</h3>
+        <div class="founder-narrative-demo">
+          <p class="cur-narrative-p cur-narrative-first">
+            Soy Pablo Moraga. Vengo de implementar agentes de IA en entornos reales,
+            donde los errores no son teóricos y las decisiones cambian operaciones.
+          </p>
+          <p class="cur-narrative-p">
+            Dasein Foresight nace desde ahí. No como un ejercicio académico de futuros
+            posibles, sino como una herramienta para tomar mejores decisiones hoy.
+          </p>
+        </div>
+        <div class="byline-demo">
+          <span class="cur-byline-name">Pablo Moraga</span>
+          <span class="cur-byline-sep">/</span>
+          <span class="cur-byline-role">Founder, Dasein Foresight</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="test-col test-col--proposed" data-col="proposed">
+      <span class="col-label">PROPUESTA</span>
+      <div class="founder-demo demo-paper">
+        <span class="pro-kicker">03 / Origen</span>
+        <h3 class="pro-founder-title">Dasein nace de implementar IA donde el error tiene costo real.</h3>
+        <div class="founder-narrative-demo pro-narrative-border">
+          <p class="pro-narrative-p pro-narrative-first">
+            Soy Pablo Moraga. Vengo de implementar agentes de IA en entornos reales,
+            donde los errores no son teóricos y las decisiones cambian operaciones.
+          </p>
+          <p class="pro-narrative-p">
+            Dasein Foresight nace desde ahí. No como un ejercicio académico de futuros
+            posibles, sino como una herramienta para tomar mejores decisiones hoy.
+          </p>
+        </div>
+        <div class="byline-demo">
+          <span class="pro-byline-name">Pablo Moraga</span>
+          <span class="pro-byline-sep">/</span>
+          <span class="pro-byline-role">Founder, Dasein Foresight</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 6: CONTACT (Dark)
+     ═══════════════════════════════════════════ -->
+
+<section class="test-section">
+  <h2 class="test-section-label">06 — Contact (dark)</h2>
+  <div class="test-grid" data-grid>
+
+    <div class="test-col test-col--current" data-col="current">
+      <span class="col-label">ACTUAL</span>
+      <div class="contact-demo demo-dark">
+        <span class="cur-contact-kicker">Próximo paso</span>
+        <h3 class="cur-contact-headline">
+          Hablemos<br />
+          <span class="cur-contact-row"><span class="cur-contact-prep">del</span> <em class="cur-editorial">caso.</em></span>
+        </h3>
+        <p class="cur-contact-body">Una conversación breve basta para entender si el caso necesita un pulso estratégico.</p>
+        <div class="cur-contact-cta">
+          <span class="cur-contact-label">Sesión inicial</span>
+          <span class="cur-contact-title">Agenda una conversación</span>
+          <span class="cur-contact-meta">30 min · remota · Calendly</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="test-col test-col--proposed" data-col="proposed">
+      <span class="col-label">PROPUESTA</span>
+      <div class="contact-demo demo-dark">
+        <span class="pro-contact-kicker">Próximo paso</span>
+        <h3 class="pro-contact-headline">
+          Hablemos<br />
+          <span class="pro-contact-row"><span class="pro-contact-prep">del</span> <em class="pro-newsreader-accent-light">caso.</em></span>
+        </h3>
+        <p class="pro-contact-body">Una conversación breve basta para entender si el caso necesita un pulso estratégico.</p>
+        <div class="pro-contact-cta">
+          <span class="pro-contact-label">Sesión inicial</span>
+          <span class="pro-contact-title">Agenda una conversación</span>
+          <span class="pro-contact-meta">30 min · remota · Calendly</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 7: TYPOGRAPHY SCALE
+     ═══════════════════════════════════════════ -->
+
+<section class="test-section">
+  <h2 class="test-section-label">07 — Escala tipográfica completa</h2>
+  <div class="test-grid" data-grid>
+
+    <div class="test-col test-col--current" data-col="current">
+      <span class="col-label">ACTUAL</span>
+      <div class="scale-demo demo-paper">
+        <div class="scale-row"><span class="scale-label">Display</span><span class="cur-scale-display">Dasein</span></div>
+        <div class="scale-row"><span class="scale-label">H1</span><span class="cur-scale-h1">Prospectiva estratégica</span></div>
+        <div class="scale-row"><span class="scale-label">H2</span><span class="cur-scale-h2">Seis pasos para decidir</span></div>
+        <div class="scale-row"><span class="scale-label">H3</span><span class="cur-scale-h3">Exploración general</span></div>
+        <div class="scale-row"><span class="scale-label">Body</span><span class="cur-scale-body">Consultora de prospectiva estratégica basada en IA para equipos que necesitan leer señales.</span></div>
+        <div class="scale-row"><span class="scale-label">Editorial</span><span class="cur-scale-editorial">antes de reaccionar</span></div>
+        <div class="scale-row"><span class="scale-label">Mono</span><span class="cur-scale-mono">SIGNAL SURFACE · 01 / MÉTODO</span></div>
+        <div class="scale-row"><span class="scale-label">Caption</span><span class="cur-scale-caption">30 MIN · REMOTA · CALENDLY</span></div>
+      </div>
+    </div>
+
+    <div class="test-col test-col--proposed" data-col="proposed">
+      <span class="col-label">PROPUESTA</span>
+      <div class="scale-demo demo-paper">
+        <div class="scale-row"><span class="scale-label">Display</span><span class="pro-scale-display">Dasein</span></div>
+        <div class="scale-row"><span class="scale-label">H1</span><span class="pro-scale-h1">Prospectiva estratégica</span></div>
+        <div class="scale-row"><span class="scale-label">H2</span><span class="pro-scale-h2">Seis pasos para decidir</span></div>
+        <div class="scale-row"><span class="scale-label">H3</span><span class="pro-scale-h3">Exploración general</span></div>
+        <div class="scale-row"><span class="scale-label">Body</span><span class="pro-scale-body">Consultora de prospectiva estratégica basada en IA para equipos que necesitan leer señales.</span></div>
+        <div class="scale-row"><span class="scale-label">Newsreader</span><span class="pro-scale-newsreader">Dasein Foresight nace desde ahí. No como un ejercicio académico de futuros posibles, sino como una herramienta para tomar mejores decisiones hoy cuando la complejidad ya afecta.</span></div>
+        <div class="scale-row"><span class="scale-label">Mono</span><span class="pro-scale-mono">SIGNAL SURFACE · 01 / MÉTODO</span></div>
+        <div class="scale-row"><span class="scale-label">Caption</span><span class="pro-scale-caption">30 MIN · REMOTA · CALENDLY</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ═══════════════════════════
+     TEST HARNESS STYLES
+     ═══════════════════════════ */
+
+  :root {
+    --paper: #f5efe5;
+    --ink: #111111;
+    --ink-soft: #4e4a43;
+    --ink-faint: #8f877a;
+    --navy: #0a1628;
+    --navy-soft: #132238;
+    --signal-red: #ff5c38;
+    --signal-blue: #4865ff;
+    --line: rgba(17, 17, 17, 0.1);
+    --slate-white: #ede7dc;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink);
+    background: #e8e2d8;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .test-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 1.25rem 2rem;
+    background: rgba(17, 17, 17, 0.92);
+    backdrop-filter: blur(12px);
+    color: var(--slate-white);
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .test-header h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .test-note {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(237, 231, 220, 0.5);
+  }
+
+  .toggle-bar {
+    margin-left: auto;
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  .toggle-btn {
+    appearance: none;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: transparent;
+    color: rgba(255,255,255,0.5);
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .toggle-btn.is-active {
+    background: rgba(255,255,255,0.12);
+    color: white;
+    border-color: rgba(255,255,255,0.3);
+  }
+
+  .test-section {
+    padding: 3rem 2rem 1rem;
+  }
+
+  .test-section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .test-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .test-grid.hide-current .test-col--current { display: none; }
+  .test-grid.hide-proposed .test-col--proposed { display: none; }
+  .test-grid.hide-current,
+  .test-grid.hide-proposed {
+    grid-template-columns: 1fr;
+  }
+
+  .col-label {
+    display: block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.75rem;
+  }
+
+  .demo-paper {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: clamp(2rem, 3vw, 3rem);
+  }
+
+  .demo-dark {
+    background: var(--navy);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: clamp(2rem, 3vw, 3rem);
+    color: var(--slate-white);
+  }
+
+  /* ═══════════════════════════
+     CURRENT SYSTEM STYLES
+     ═══════════════════════════ */
+
+  /* — Kickers & labels — */
+  .cur-kicker {
+    font-family: 'Azeret Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .cur-kicker::before {
+    content: '';
+    width: 1.4rem;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.55;
+  }
+
+  /* — Hero title — */
+  .cur-hero-title {
+    font-family: 'Satoshi', sans-serif;
+    font-size: clamp(2.8rem, 2rem + 3vw, 5rem);
+    font-weight: 600;
+    line-height: 0.95;
+    letter-spacing: -0.05em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1em;
+    margin-bottom: 1.5rem;
+  }
+
+  .cur-editorial {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--signal-red);
+  }
+
+  .cur-mono-small {
+    font-family: 'Azeret Mono', monospace;
+    font-size: 0.55em;
+    letter-spacing: 0.04em;
+    font-weight: 400;
+    color: var(--ink-faint);
+  }
+
+  .cur-strike {
+    position: relative;
+    color: var(--ink-faint);
+  }
+
+  .cur-strike::after {
+    content: '';
+    position: absolute;
+    left: -4%; right: -4%; top: 52%;
+    height: 3px;
+    background: var(--signal-red);
+  }
+
+  /* — Body — */
+  .cur-body {
+    font-family: 'Satoshi', sans-serif;
+    font-size: clamp(1rem, 0.95rem + 0.28vw, 1.16rem);
+    line-height: 1.7;
+    color: var(--ink-soft);
+    max-width: 36rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* — Buttons — */
+  .cur-buttons { display: flex; gap: 0.875rem; flex-wrap: wrap; }
+
+  .cur-btn-primary {
+    font-family: 'Azeret Mono', monospace;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--slate-white);
+    background: var(--navy);
+    padding: 0.9rem 1.4rem;
+    border-radius: 100px;
+  }
+
+  .cur-btn-secondary {
+    font-family: 'Azeret Mono', monospace;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    background: rgba(255,255,255,0.62);
+    border: 1px solid rgba(17,17,17,0.12);
+    padding: 0.9rem 1.4rem;
+    border-radius: 100px;
+  }
+
+  /* — Section headlines — */
+  .cur-audience-headline,
+  .cur-method-headline,
+  .cur-founder-title {
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+
+  .cur-audience-headline { font-size: clamp(2rem, 1.5rem + 2vw, 3.5rem); }
+  .cur-method-headline { font-size: clamp(2.2rem, 1.5rem + 2.5vw, 4rem); line-height: 0.92; letter-spacing: -0.05em; }
+  .cur-founder-title { font-size: clamp(2rem, 1.5rem + 2vw, 3.5rem); line-height: 1.15; letter-spacing: -0.02em; max-width: 22ch; }
+
+  .cur-lead {
+    font-family: 'Satoshi', sans-serif;
+    font-size: clamp(1.05rem, 1rem + 0.3vw, 1.2rem);
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin-bottom: 2rem;
+  }
+
+  /* — Audience lanes — */
+  .lane-demo {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: 2rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .lane-left { display: flex; flex-direction: column; gap: 0.35rem; }
+
+  .cur-num {
+    font-family: 'Azeret Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--signal-red);
+  }
+
+  .cur-label-mono {
+    font-family: 'Azeret Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .cur-lane-title {
+    font-family: 'Satoshi', sans-serif;
+    font-size: clamp(1.5rem, 1.1rem + 1vw, 2rem);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    font-weight: 500;
+  }
+
+  /* — Method steps — */
+  .step-demo {
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--line);
+    margin-bottom: 1.5rem;
+  }
+
+  .cur-step-num {
+    display: block;
+    font-family: 'Azeret Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    color: var(--signal-red);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+
+  .cur-step-title {
+    font-family: 'Satoshi', sans-serif;
+    font-size: clamp(1.8rem, 1.2rem + 1.5vw, 2.8rem);
+    line-height: 0.94;
+    letter-spacing: -0.04em;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .cur-step-body {
+    font-family: 'Satoshi', sans-serif;
+    font-size: clamp(1.05rem, 1rem + 0.3vw, 1.2rem);
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin-bottom: 1rem;
+  }
+
+  .cur-step-output {
+    display: flex; align-items: center; gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .cur-output-label {
+    font-family: 'Azeret Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .cur-output-value {
+    font-family: 'Azeret Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .cur-terminal {
+    font-family: 'Azeret Mono', monospace;
+    font-size: 0.82rem;
+    letter-spacing: 0.03em;
+    line-height: 1.85;
+    color: var(--ink-faint);
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+
+  /* — Founder — */
+  .founder-narrative-demo {
+    border-left: 2px solid var(--signal-red);
+    padding-left: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .cur-narrative-p {
+    font-family: 'Satoshi', sans-serif;
+    font-size: clamp(1rem, 0.95rem + 0.28vw, 1.16rem);
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin-bottom: 1rem;
+  }
+
+  .cur-narrative-first { color: var(--ink); }
+
+  .byline-demo {
+    display: flex; align-items: center; gap: 0.6rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .cur-byline-name {
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--ink);
+  }
+
+  .cur-byline-sep { color: var(--ink-faint); font-size: 0.9rem; }
+
+  .cur-byline-role {
+    font-family: 'Azeret Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  /* — Contact — */
+  .cur-contact-kicker {
+    display: flex; align-items: center; gap: 0.6rem;
+    font-family: 'Azeret Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(243,245,248,0.36);
+    margin-bottom: 1.5rem;
+  }
+
+  .cur-contact-kicker::before {
+    content: '';
+    width: 1.4rem; height: 1px;
+    background: currentColor; opacity: 0.55;
+  }
+
+  .cur-contact-headline {
+    font-family: 'Satoshi', sans-serif;
+    font-size: clamp(3rem, 2rem + 3vw, 5rem);
+    font-weight: 600;
+    line-height: 0.92;
+    letter-spacing: -0.055em;
+    color: var(--slate-white);
+    margin-bottom: 1.5rem;
+  }
+
+  .cur-contact-row { display: flex; align-items: baseline; gap: 0.15em; }
+
+  .cur-contact-prep {
+    font-family: 'Azeret Mono', monospace;
+    font-size: 0.45em;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: rgba(243,245,248,0.4);
+  }
+
+  .cur-contact-body {
+    font-family: 'Satoshi', sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.82;
+    color: rgba(243,245,248,0.58);
+    margin-bottom: 2rem;
+  }
+
+  .cur-contact-cta {
+    display: grid; gap: 0.65rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(243,245,248,0.16);
+  }
+
+  .cur-contact-label {
+    font-family: 'Azeret Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(243,245,248,0.38);
+  }
+
+  .cur-contact-title {
+    font-family: 'Satoshi', sans-serif;
+    font-size: clamp(1.5rem, 1.2rem + 1vw, 2.2rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--slate-white);
+  }
+
+  .cur-contact-meta {
+    font-family: 'Azeret Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(243,245,248,0.36);
+  }
+
+  /* — Disclosure (dark) — */
+  .cur-tag {
+    font-family: 'Azeret Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(243,245,248,0.4);
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .cur-disclosure-title {
+    font-family: 'Satoshi', sans-serif;
+    font-size: clamp(1.5rem, 1rem + 1.5vw, 2.2rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    font-weight: 400;
+    color: rgba(243,245,248,0.5);
+    margin-bottom: 0.5rem;
+  }
+
+  .cur-disclosure-word {
+    font-family: 'Satoshi', sans-serif;
+    font-size: clamp(3rem, 2rem + 3vw, 5rem);
+    line-height: 1.1;
+    letter-spacing: -0.05em;
+    font-weight: 600;
+    color: var(--signal-blue);
+    display: block;
+    margin-bottom: 1.5rem;
+  }
+
+  .cur-disclosure-note {
+    font-family: 'Satoshi', sans-serif;
+    font-size: 0.9rem;
+    color: rgba(243,245,248,0.36);
+  }
+
+  /* ═══════════════════════════
+     PROPOSED SYSTEM STYLES
+     ═══════════════════════════ */
+
+  /* — Kickers & labels (Space Mono replaces Azeret Mono) — */
+  .pro-kicker {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .pro-kicker::before {
+    content: '→';
+    color: var(--signal-red);
+    opacity: 0.7;
+  }
+
+  /* — Hero title (Instrument Serif replaces Satoshi) — */
+  .pro-hero-title {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp(2.8rem, 2rem + 3vw, 5rem);
+    font-weight: 400;
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1em;
+    margin-bottom: 1.5rem;
+  }
+
+  .pro-newsreader-accent {
+    font-family: 'Newsreader', Georgia, serif;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--signal-red);
+  }
+
+  .pro-newsreader-accent-light {
+    font-family: 'Newsreader', Georgia, serif;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--signal-red);
+  }
+
+  .pro-mono-small {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.48em;
+    letter-spacing: 0.08em;
+    font-weight: 400;
+    color: var(--ink-faint);
+  }
+
+  .pro-strike {
+    position: relative;
+    color: var(--ink-faint);
+  }
+
+  .pro-strike::after {
+    content: '';
+    position: absolute;
+    left: -4%; right: -4%; top: 52%;
+    height: 2px;
+    background: var(--signal-red);
+  }
+
+  /* — Body (Space Grotesk replaces Satoshi) — */
+  .pro-body {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1rem, 0.95rem + 0.28vw, 1.16rem);
+    line-height: 1.7;
+    color: var(--ink-soft);
+    max-width: 36rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* — Buttons (Space Mono replaces Azeret Mono) — */
+  .pro-buttons { display: flex; gap: 0.875rem; flex-wrap: wrap; }
+
+  .pro-btn-primary {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.84rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--slate-white);
+    background: var(--navy);
+    padding: 0.9rem 1.4rem;
+    border-radius: 100px;
+  }
+
+  .pro-btn-secondary {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.84rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: rgba(255,255,255,0.62);
+    border: 1px solid rgba(17,17,17,0.12);
+    padding: 0.9rem 1.4rem;
+    border-radius: 100px;
+  }
+
+  /* — Section headlines (Instrument Serif replaces Satoshi) — */
+  .pro-audience-headline {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-weight: 400;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 1rem;
+    font-size: clamp(2rem, 1.5rem + 2vw, 3.5rem);
+  }
+
+  .pro-method-headline {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 1rem;
+    font-size: clamp(2.2rem, 1.5rem + 2.5vw, 4rem);
+  }
+
+  .pro-founder-title {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 1rem;
+    font-size: clamp(2rem, 1.5rem + 2vw, 3.5rem);
+    max-width: 22ch;
+  }
+
+  .pro-lead {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.05rem, 1rem + 0.3vw, 1.2rem);
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin-bottom: 2rem;
+  }
+
+  /* — Audience lanes — */
+  .pro-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--signal-red);
+  }
+
+  .pro-label-mono {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .pro-lane-title {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp(1.5rem, 1.1rem + 1vw, 2rem);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    font-weight: 400;
+  }
+
+  /* — Method steps — */
+  .pro-step-num {
+    display: block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    color: var(--signal-red);
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  .pro-step-title {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp(1.8rem, 1.2rem + 1.5vw, 2.8rem);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    font-weight: 400;
+    margin-bottom: 1rem;
+  }
+
+  .pro-step-body {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.05rem, 1rem + 0.3vw, 1.2rem);
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin-bottom: 1rem;
+  }
+
+  .pro-step-output {
+    display: flex; align-items: center; gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .pro-output-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .pro-output-value {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .pro-terminal {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.02em;
+    line-height: 1.85;
+    color: var(--ink-faint);
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+
+  /* — Founder — */
+  .pro-narrative-border {
+    border-left: 2px solid var(--signal-red);
+    padding-left: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .pro-narrative-p {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: clamp(1.05rem, 1rem + 0.3vw, 1.22rem);
+    line-height: 1.75;
+    color: var(--ink-soft);
+    margin-bottom: 1rem;
+    font-weight: 400;
+  }
+
+  .pro-narrative-first {
+    color: var(--ink);
+    font-weight: 400;
+  }
+
+  .pro-byline-name {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-weight: 400;
+    font-size: 1rem;
+    color: var(--ink);
+  }
+
+  .pro-byline-sep { color: var(--ink-faint); font-size: 0.9rem; }
+
+  .pro-byline-role {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  /* — Contact — */
+  .pro-contact-kicker {
+    display: flex; align-items: center; gap: 0.6rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(243,245,248,0.36);
+    margin-bottom: 1.5rem;
+  }
+
+  .pro-contact-kicker::before {
+    content: '→';
+    color: var(--signal-red);
+    opacity: 0.7;
+  }
+
+  .pro-contact-headline {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp(3rem, 2rem + 3vw, 5rem);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--slate-white);
+    margin-bottom: 1.5rem;
+  }
+
+  .pro-contact-row { display: flex; align-items: baseline; gap: 0.15em; }
+
+  .pro-contact-prep {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.45em;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: rgba(243,245,248,0.4);
+  }
+
+  .pro-contact-body {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.82;
+    color: rgba(243,245,248,0.58);
+    margin-bottom: 2rem;
+  }
+
+  .pro-contact-cta {
+    display: grid; gap: 0.65rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(243,245,248,0.16);
+  }
+
+  .pro-contact-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(243,245,248,0.38);
+  }
+
+  .pro-contact-title {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp(1.5rem, 1.2rem + 1vw, 2.2rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--slate-white);
+    font-weight: 400;
+  }
+
+  .pro-contact-meta {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(243,245,248,0.36);
+  }
+
+  /* — Disclosure (dark) — */
+  .pro-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(243,245,248,0.4);
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .pro-disclosure-title {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp(1.5rem, 1rem + 1.5vw, 2.2rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-weight: 400;
+    color: rgba(243,245,248,0.5);
+    margin-bottom: 0.5rem;
+  }
+
+  .pro-disclosure-word {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp(3rem, 2rem + 3vw, 5rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    font-weight: 400;
+    color: var(--signal-blue);
+    display: block;
+    margin-bottom: 1.5rem;
+  }
+
+  .pro-disclosure-note {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.9rem;
+    color: rgba(243,245,248,0.36);
+  }
+
+  /* ═══════════════════════════
+     TYPOGRAPHY SCALE
+     ═══════════════════════════ */
+
+  .scale-demo { display: grid; gap: 1.5rem; }
+
+  .scale-row {
+    display: grid;
+    grid-template-columns: 6rem 1fr;
+    gap: 1rem;
+    align-items: baseline;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .scale-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    padding-top: 0.3em;
+  }
+
+  /* Current scale */
+  .cur-scale-display { font-family: 'Satoshi', sans-serif; font-size: 4rem; font-weight: 600; line-height: 0.94; letter-spacing: -0.055em; }
+  .cur-scale-h1 { font-family: 'Satoshi', sans-serif; font-size: 2.4rem; font-weight: 600; line-height: 1.15; letter-spacing: -0.02em; }
+  .cur-scale-h2 { font-family: 'Satoshi', sans-serif; font-size: 1.8rem; font-weight: 600; line-height: 1.15; letter-spacing: -0.02em; }
+  .cur-scale-h3 { font-family: 'Satoshi', sans-serif; font-size: 1.24rem; font-weight: 600; line-height: 1.15; }
+  .cur-scale-body { font-family: 'Satoshi', sans-serif; font-size: 1.05rem; line-height: 1.7; color: var(--ink-soft); }
+  .cur-scale-editorial { font-family: 'Instrument Serif', Georgia, serif; font-size: 2.4rem; font-style: italic; font-weight: 400; color: var(--signal-red); }
+  .cur-scale-mono { font-family: 'Azeret Mono', monospace; font-size: 0.7rem; letter-spacing: 0.18em; color: var(--ink-faint); }
+  .cur-scale-caption { font-family: 'Azeret Mono', monospace; font-size: 0.6rem; letter-spacing: 0.14em; color: var(--ink-faint); }
+
+  /* Proposed scale */
+  .pro-scale-display { font-family: 'Instrument Serif', Georgia, serif; font-size: 4rem; font-weight: 400; line-height: 0.98; letter-spacing: -0.03em; }
+  .pro-scale-h1 { font-family: 'Instrument Serif', Georgia, serif; font-size: 2.4rem; font-weight: 400; line-height: 1.08; letter-spacing: -0.02em; }
+  .pro-scale-h2 { font-family: 'Instrument Serif', Georgia, serif; font-size: 1.8rem; font-weight: 400; line-height: 1.1; letter-spacing: -0.01em; }
+  .pro-scale-h3 { font-family: 'Instrument Serif', Georgia, serif; font-size: 1.3rem; font-weight: 400; line-height: 1.15; }
+  .pro-scale-body { font-family: 'Space Grotesk', sans-serif; font-size: 1.05rem; line-height: 1.7; color: var(--ink-soft); }
+  .pro-scale-newsreader { font-family: 'Newsreader', Georgia, serif; font-size: 1.1rem; font-style: normal; font-weight: 400; line-height: 1.75; color: var(--ink-soft); }
+  .pro-scale-mono { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.18em; color: var(--ink-faint); }
+  .pro-scale-caption { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.14em; color: var(--ink-faint); }
+
+  /* ═══════════════════════════
+     RESPONSIVE
+     ═══════════════════════════ */
+
+  @media (max-width: 900px) {
+    .test-grid { grid-template-columns: 1fr; }
+    .test-header { flex-wrap: wrap; }
+    .toggle-bar { margin-left: 0; }
+  }
+</style>
+
+<script>
+  const buttons = document.querySelectorAll('.toggle-btn');
+  const grids = document.querySelectorAll('[data-grid]');
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      buttons.forEach((b) => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+
+      const view = btn.getAttribute('data-view');
+
+      grids.forEach((grid) => {
+        grid.classList.remove('hide-current', 'hide-proposed');
+        if (view === 'current') grid.classList.add('hide-proposed');
+        if (view === 'proposed') grid.classList.add('hide-current');
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

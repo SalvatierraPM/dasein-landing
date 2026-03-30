@@ -47,7 +47,7 @@
 | Success | #22C55E | Positive actions, confirmations |
 | Warning | #F59E0B | Cautions, pending states |
 | Error | #EF4444 | Errors, destructive actions |
-| Info | #3B82F6 | Informational messages |
+| Info | #4865ff | Informational messages |
 
 ### Accessibility
 

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contrato Marco de Servicios — Dasein Foresight</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Azeret+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --navy: #0A1628;
+      --blue: #4865ff;
+      --text-screen: #ede7dc;
+      --text-print: #1a1a1a;
+      --surface: #111D2E;
+    }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11pt;
+      line-height: 1.65;
+      background: var(--navy);
+      color: var(--text-screen);
+      padding: 3rem 2rem;
+    }
+
+    .document {
+      max-width: 210mm;
+      margin: 0 auto;
+      background: white;
+      color: var(--text-print);
+      padding: 2.5cm;
+      border-radius: 6px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    h1 {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 2.25rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #666;
+      margin-bottom: 2rem;
+    }
+
+    h3 {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+    }
+
+    .clause-number {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--navy);
+    }
+
+    h4 {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-top: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    strong {
+      font-weight: 600;
+    }
+
+    ul {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    .placeholder {
+      color: var(--blue);
+      font-weight: 600;
+      background: rgba(59, 130, 246, 0.08);
+      padding: 0.125rem 0.375rem;
+      border-radius: 3px;
+    }
+
+    .parties {
+      border-top: 1px solid #e5e5e5;
+      border-bottom: 1px solid #e5e5e5;
+      padding: 1.5rem 0;
+      margin: 2rem 0;
+    }
+
+    .parties p {
+      margin-bottom: 0.75rem;
+    }
+
+    .signature-block {
+      margin-top: 3rem;
+      page-break-inside: avoid;
+    }
+
+    .signature-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5rem;
+    }
+
+    .signature-table th {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 700;
+      text-align: left;
+      padding: 0.75rem;
+      border-bottom: 2px solid var(--navy);
+      font-size: 0.875rem;
+    }
+
+    .signature-table td {
+      padding: 1.5rem 0.75rem;
+      border-bottom: 1px solid #e5e5e5;
+      vertical-align: top;
+    }
+
+    .signature-table td:first-child {
+      font-weight: 600;
+      width: 25%;
+    }
+
+    .signature-line {
+      display: inline-block;
+      border-bottom: 1px solid #333;
+      width: 200px;
+      height: 1.5rem;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #e5e5e5;
+      margin: 2rem 0;
+    }
+
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+
+      .document {
+        max-width: none;
+        box-shadow: none;
+        border-radius: 0;
+        padding: 2.5cm;
+      }
+
+      .placeholder {
+        color: var(--blue);
+        background: none;
+        border-bottom: 1px solid var(--blue);
+      }
+
+      h3 {
+        page-break-after: avoid;
+      }
+
+      h3 + p {
+        page-break-before: avoid;
+      }
+
+      .signature-block {
+        page-break-before: always;
+      }
+    }
+
+    @page {
+      size: A4;
+      margin: 2.5cm;
+    }
+  </style>
+</head>
+<body>
+  <div class="document">
+    <h1>CONTRATO MARCO DE SERVICIOS</h1>
+    <h2>(Master Service Agreement)</h2>
+
+    <hr>
+
+    <div class="parties">
+      <p><strong>Entre:</strong></p>
+
+      <p><strong>Dasein Foresight SpA</strong>, RUT <span class="placeholder">[RUT_DASEIN]</span>, representada por <span class="placeholder">[NOMBRE_REPRESENTANTE_DASEIN]</span>, en adelante "La Consultora"</p>
+
+      <p><strong><span class="placeholder">[NOMBRE_EMPRESA]</span></strong>, RUT <span class="placeholder">[RUT_CLIENTE]</span>, representada por <span class="placeholder">[NOMBRE_REPRESENTANTE_CLIENTE]</span>, en adelante "El Cliente"</p>
+
+      <p><strong>Fecha:</strong> <span class="placeholder">[FECHA]</span></p>
+    </div>
+
+    <hr>
+
+    <h3><span class="clause-number">1.</span> Objeto</h3>
+    <p>La Consultora prestará servicios de prospectiva estratégica, análisis de escenarios y simulación al Cliente, según los términos de este Contrato Marco y las Declaraciones de Trabajo (SOW) que se suscriban como anexos.</p>
+    <p>Cada SOW constituirá un acuerdo independiente sujeto a los términos de este Contrato Marco.</p>
+
+    <h3><span class="clause-number">2.</span> Vigencia</h3>
+    <p>Este contrato entrará en vigor a la fecha de firma y permanecerá vigente por un período de <span class="placeholder">[PERIODO — sugerido: 12 meses]</span>, renovable automáticamente por períodos iguales salvo notificación escrita de cualquiera de las partes con <span class="placeholder">[DIAS_PREAVISO — sugerido: 30]</span> días de anticipación.</p>
+
+    <h3><span class="clause-number">3.</span> Servicios</h3>
+    <p>Los servicios específicos, alcance, entregables, cronograma e inversión se definirán en cada SOW individual. Los servicios disponibles incluyen:</p>
+    <ul>
+      <li><strong>Lectura de Campo</strong> — Escaneo de señales y memo ejecutivo</li>
+      <li><strong>Simulación Estratégica</strong> — Simulación dual-world completa con escenarios</li>
+      <li><strong>Radar Estratégico</strong> — Monitoreo continuo y simulación trimestral</li>
+    </ul>
+
+    <h3><span class="clause-number">4.</span> Propiedad Intelectual</h3>
+    <p><strong>4.1 Entregables del proyecto:</strong> Los entregables específicos producidos bajo cada SOW serán propiedad del Cliente una vez completado el pago total correspondiente.</p>
+    <p><strong>4.2 Propiedad de la Consultora:</strong> La metodología, herramientas, modelos analíticos, algoritmos, y el sistema de simulación SignalTwin (incluyendo su código fuente, arquitectura, y datos de entrenamiento) son y permanecen propiedad exclusiva de la Consultora.</p>
+    <p><strong>4.3 Conocimiento general:</strong> Nada en este contrato impide a la Consultora utilizar conocimientos, técnicas y experiencia generales adquiridos durante la prestación de servicios, siempre que no revelen información confidencial del Cliente.</p>
+
+    <h3><span class="clause-number">5.</span> Confidencialidad</h3>
+    <p>Las partes se comprometen a mantener la confidencialidad de toda información no pública intercambiada en el marco de este contrato, en los términos del Acuerdo de Confidencialidad (NDA) que se suscriba entre las partes.</p>
+
+    <h3><span class="clause-number">6.</span> Pagos</h3>
+    <p><strong>6.1</strong> Los montos, forma de pago e hitos se definirán en cada SOW.</p>
+    <p><strong>6.2</strong> Salvo acuerdo distinto en el SOW, la forma de pago estándar será:</p>
+    <ul>
+      <li>50% al inicio del trabajo</li>
+      <li>50% contra entrega del entregable final</li>
+    </ul>
+    <p><strong>6.3</strong> Las facturas se emitirán en USD. El pago podrá realizarse en CLP al tipo de cambio del día de facturación.</p>
+    <p><strong>6.4</strong> El plazo de pago será de <span class="placeholder">[PLAZO_PAGO — sugerido: 15]</span> días corridos desde la emisión de la factura.</p>
+    <p><strong>6.5</strong> En caso de atraso en el pago superior a <span class="placeholder">[DIAS_ATRASO — sugerido: 30]</span> días, la Consultora podrá suspender los servicios hasta regularización del pago.</p>
+
+    <h3><span class="clause-number">7.</span> Responsabilidad Limitada</h3>
+    <p><strong>7.1</strong> La responsabilidad total de la Consultora bajo este contrato no excederá el monto total pagado por el Cliente en los últimos 12 meses de servicio.</p>
+    <p><strong>7.2</strong> La Consultora no será responsable por daños indirectos, consecuenciales, lucro cesante, ni por decisiones tomadas por el Cliente basadas en los entregables.</p>
+    <p><strong>7.3</strong> Los servicios de la Consultora constituyen análisis prospectivo y recomendaciones estratégicas. No constituyen predicciones, garantías de resultados, ni asesoría legal o financiera.</p>
+
+    <h3><span class="clause-number">8.</span> Terminación</h3>
+    <p><strong>8.1</strong> Cualquiera de las partes podrá terminar este contrato con <span class="placeholder">[DIAS_PREAVISO — sugerido: 30]</span> días de preaviso por escrito.</p>
+    <p><strong>8.2</strong> En caso de terminación, el Cliente pagará por los servicios efectivamente prestados hasta la fecha de terminación, más cualquier gasto irrecuperable en el que la Consultora haya incurrido.</p>
+    <p><strong>8.3</strong> La terminación del Contrato Marco no afecta las obligaciones bajo SOWs en ejecución, salvo acuerdo expreso de las partes.</p>
+
+    <h3><span class="clause-number">9.</span> Fuerza Mayor</h3>
+    <p>Ninguna de las partes será responsable por incumplimientos causados por eventos fuera de su control razonable, incluyendo desastres naturales, pandemias, conflictos bélicos, actos de gobierno, o fallas generalizadas de infraestructura tecnológica.</p>
+
+    <h3><span class="clause-number">10.</span> Ley Aplicable y Jurisdicción</h3>
+    <p>Este contrato se rige por las leyes de la República de Chile. Cualquier controversia será sometida a los tribunales ordinarios de <span class="placeholder">[CIUDAD — default: Santiago]</span>.</p>
+
+    <h3><span class="clause-number">11.</span> Disposiciones Generales</h3>
+    <p><strong>11.1</strong> Este contrato constituye el acuerdo completo entre las partes y reemplaza cualquier acuerdo previo sobre la misma materia.</p>
+    <p><strong>11.2</strong> Cualquier modificación deberá constar por escrito y ser firmada por ambas partes.</p>
+    <p><strong>11.3</strong> La nulidad de cualquier cláusula no afectará la validez del resto del contrato.</p>
+
+    <div class="signature-block">
+      <hr>
+      <h3><span class="clause-number">—</span> Firmas</h3>
+
+      <table class="signature-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Dasein Foresight SpA</th>
+            <th><span class="placeholder">[NOMBRE_EMPRESA]</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Nombre</td>
+            <td><span class="signature-line"></span></td>
+            <td><span class="signature-line"></span></td>
+          </tr>
+          <tr>
+            <td>RUT</td>
+            <td><span class="signature-line"></span></td>
+            <td><span class="signature-line"></span></td>
+          </tr>
+          <tr>
+            <td>Cargo</td>
+            <td><span class="signature-line"></span></td>
+            <td><span class="signature-line"></span></td>
+          </tr>
+          <tr>
+            <td>Firma</td>
+            <td><span class="signature-line"></span></td>
+            <td><span class="signature-line"></span></td>
+          </tr>
+          <tr>
+            <td>Fecha</td>
+            <td><span class="signature-line"></span></td>
+            <td><span class="signature-line"></span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda de Kickoff</title>
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Azeret+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0A1628;
+            --surface: #111D2E;
+            --text: #ede7dc;
+            --muted: #8899AA;
+            --accent: #4865ff;
+            --border: rgba(136, 153, 170, 0.2);
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            padding: 3rem 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-family: 'Satoshi', sans-serif;
+            font-weight: 900;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-family: 'Azeret Mono', monospace;
+            font-size: 0.875rem;
+            color: var(--muted);
+            margin-bottom: 3rem;
+            line-height: 1.7;
+        }
+
+        .project-info {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .project-info h2 {
+            font-family: 'Satoshi', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .info-field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .info-field label {
+            font-size: 0.875rem;
+            color: var(--muted);
+        }
+
+        .info-field input[type="text"],
+        .info-field input[type="date"] {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            padding: 0.5rem 0.75rem;
+        }
+
+        .agenda-section {
+            margin-bottom: 3rem;
+        }
+
+        .agenda-section h2 {
+            font-family: 'Satoshi', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .agenda-item {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .agenda-item-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .agenda-time {
+            font-family: 'Azeret Mono', monospace;
+            font-size: 1.125rem;
+            color: var(--accent);
+            font-weight: 500;
+            flex-shrink: 0;
+        }
+
+        .agenda-item h3 {
+            font-family: 'Satoshi', sans-serif;
+            font-size: 1.125rem;
+            font-weight: 700;
+            flex: 1;
+        }
+
+        .agenda-item ul {
+            list-style: none;
+            margin-left: 1rem;
+        }
+
+        .agenda-item li {
+            position: relative;
+            padding-left: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--muted);
+        }
+
+        .agenda-item li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .notes-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .notes-section h2 {
+            font-family: 'Satoshi', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .notes-section textarea {
+            width: 100%;
+            min-height: 150px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            padding: 0.75rem;
+            resize: vertical;
+        }
+
+        .actions-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1.5rem;
+        }
+
+        .actions-section h2 {
+            font-family: 'Satoshi', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            font-weight: 600;
+            color: var(--muted);
+            font-size: 0.875rem;
+        }
+
+        td input[type="text"],
+        td input[type="date"] {
+            width: 100%;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.875rem;
+            padding: 0.5rem;
+        }
+
+        @media print {
+            body {
+                background: white;
+                color: #000;
+                padding: 1cm;
+            }
+
+            .container {
+                max-width: 100%;
+            }
+
+            .project-info,
+            .agenda-item,
+            .notes-section,
+            .actions-section {
+                background: white;
+                border-color: #ccc;
+            }
+
+            input[type="text"],
+            input[type="date"],
+            textarea {
+                background: white;
+                border-color: #ccc;
+            }
+
+            .agenda-time {
+                color: #000;
+            }
+
+            .agenda-item li {
+                color: #333;
+            }
+
+            th {
+                color: #666;
+            }
+        }
+
+        @page {
+            margin: 1cm;
+            size: A4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Agenda de Kickoff — [NOMBRE_PROYECTO]</h1>
+        <div class="subtitle">
+            Reunión de inicio de proyecto. Duración: 60 minutos.<br>
+            Objetivo: alinear expectativas, validar alcance, establecer ritmo de trabajo.
+        </div>
+
+        <div class="project-info">
+            <h2>Datos</h2>
+            <div class="info-grid">
+                <div class="info-field">
+                    <label>Cliente</label>
+                    <input type="text" placeholder="Nombre de la empresa">
+                </div>
+                <div class="info-field">
+                    <label>Servicio</label>
+                    <input type="text" placeholder="Nombre del servicio">
+                </div>
+                <div class="info-field">
+                    <label>Fecha</label>
+                    <input type="date">
+                </div>
+                <div class="info-field">
+                    <label>Asistentes Dasein</label>
+                    <input type="text" placeholder="Nombres">
+                </div>
+                <div class="info-field">
+                    <label>Asistentes cliente</label>
+                    <input type="text" placeholder="Nombres">
+                </div>
+            </div>
+        </div>
+
+        <div class="agenda-section">
+            <h2>Agenda (60 min)</h2>
+
+            <div class="agenda-item">
+                <div class="agenda-item-header">
+                    <div class="agenda-time">10 min</div>
+                    <h3>1. Contexto y objetivo</h3>
+                </div>
+                <ul>
+                    <li>Revisión del objetivo del proyecto</li>
+                    <li>Confirmación de la pregunta estratégica central</li>
+                    <li>Qué busca el cliente como resultado</li>
+                </ul>
+            </div>
+
+            <div class="agenda-item">
+                <div class="agenda-item-header">
+                    <div class="agenda-time">10 min</div>
+                    <h3>2. Alcance y entregables</h3>
+                </div>
+                <ul>
+                    <li>Qué incluye el proyecto</li>
+                    <li>Qué NO incluye</li>
+                    <li>Formato de entregables (memo, dashboard, workshop)</li>
+                </ul>
+            </div>
+
+            <div class="agenda-item">
+                <div class="agenda-item-header">
+                    <div class="agenda-time">5 min</div>
+                    <h3>3. Roles y responsabilidades</h3>
+                </div>
+                <ul>
+                    <li>Quién es el lead del proyecto en Dasein</li>
+                    <li>Quién es el contacto principal del cliente</li>
+                    <li>Quién participa en entrevistas / workshops</li>
+                    <li>Quién aprueba entregables</li>
+                </ul>
+            </div>
+
+            <div class="agenda-item">
+                <div class="agenda-item-header">
+                    <div class="agenda-time">10 min</div>
+                    <h3>4. Cronograma y hitos</h3>
+                </div>
+                <ul>
+                    <li>Timeline general del proyecto</li>
+                    <li>Fechas clave (entrevistas, entregas parciales, entrega final)</li>
+                    <li>Fecha del workshop (si aplica)</li>
+                </ul>
+            </div>
+
+            <div class="agenda-item">
+                <div class="agenda-item-header">
+                    <div class="agenda-time">10 min</div>
+                    <h3>5. Insumos y dependencias</h3>
+                </div>
+                <ul>
+                    <li>Documentos que necesitamos del cliente</li>
+                    <li>Acceso a stakeholders para entrevistas</li>
+                    <li>Restricciones de calendario</li>
+                    <li>Dependencias externas</li>
+                </ul>
+            </div>
+
+            <div class="agenda-item">
+                <div class="agenda-item-header">
+                    <div class="agenda-time">5 min</div>
+                    <h3>6. Comunicación y ritmo</h3>
+                </div>
+                <ul>
+                    <li>Canal de comunicación principal</li>
+                    <li>Frecuencia de updates (semanal recomendado)</li>
+                    <li>Formato de updates (ver Weekly_Update_Template.md)</li>
+                    <li>Cómo escalar si hay bloqueos</li>
+                </ul>
+            </div>
+
+            <div class="agenda-item">
+                <div class="agenda-item-header">
+                    <div class="agenda-time">5 min</div>
+                    <h3>7. Riesgos y supuestos</h3>
+                </div>
+                <ul>
+                    <li>Supuestos clave del proyecto</li>
+                    <li>Riesgos identificados</li>
+                    <li>Qué pasa si hay atrasos en insumos</li>
+                </ul>
+            </div>
+
+            <div class="agenda-item">
+                <div class="agenda-item-header">
+                    <div class="agenda-time">5 min</div>
+                    <h3>8. Próximos pasos</h3>
+                </div>
+                <ul>
+                    <li>Acciones inmediatas (primeras 48 horas)</li>
+                    <li>Primera entrega parcial esperada</li>
+                    <li>Fecha del próximo check-in</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="notes-section">
+            <h2>Notas de la reunión</h2>
+            <textarea placeholder="Agregar notas, decisiones tomadas, o puntos de discusión importantes..."></textarea>
+        </div>
+
+        <div class="actions-section">
+            <h2>Acciones acordadas</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 50px;">#</th>
+                        <th>Acción</th>
+                        <th style="width: 180px;">Responsable</th>
+                        <th style="width: 140px;">Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="date"></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="date"></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="date"></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="date"></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="date"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

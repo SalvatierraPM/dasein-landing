@@ -68,28 +68,20 @@ Son colores perceptualmente cercanos pero con 20 grados de diferencia en hue. Es
 
 ## 2. Tipografia
 
-### Veredicto: AJUSTE CRITICO REQUERIDO
+### Veredicto: RESUELTO (2026-03-29)
 
-#### Discrepancia principal
+Sistema tipografico final unificado en brandbook, BRAND-AND-PRODUCT-BRIEF, tokens.css y assets comerciales:
 
-| Rol | Brandbook (v1.0) | Design Spec | Estado |
-|-----|-------------------|-------------|--------|
-| Display | `'Inter', 'Helvetica Neue', system-ui` | `'Space Grotesk', system-ui` | **DISCREPANCIA** |
-| Body | `'Inter', 'Helvetica Neue', system-ui` | `'Space Grotesk', system-ui` | **DISCREPANCIA** |
-| Mono | `'JetBrains Mono', 'Fira Code', 'SF Mono'` | `'JetBrains Mono', 'Fira Code'` | Menor (falta SF Mono fallback) |
-| Editorial | (sugerido como alternativa) `'Instrument Serif'` | `'Instrument Serif', Georgia, serif` | OK |
+| Rol | Font | Weight | Estado |
+|-----|------|--------|--------|
+| Display/Hero | Satoshi | 900 | **RESUELTO** |
+| Secciones | Satoshi | 700 | **RESUELTO** |
+| Subtitulos/lanes | Satoshi | 500 | **RESUELTO** |
+| Body | Space Grotesk | 400 | **RESUELTO** |
+| Mono/Data | Azeret Mono | 400-500 | **RESUELTO** |
+| Editorial | Instrument Serif italic | 400 | OK (sin cambios) |
 
-El brandbook vigente (v1.0 en mi workspace) especifica **Inter** como tipografia principal. El design spec usa **Space Grotesk**, probablemente basandose en un borrador anterior del brandbook.
-
-**Impacto**: La tipografia es el elemento de marca mas visible. Space Grotesk (geometrica, con rasgos distintivos como la 'a' de un solo piso y la 'G' con crossbar) transmite tech-forward y modernidad. Inter (neo-grotesca, extremadamente neutral y legible) transmite versatilidad y profesionalismo.
-
-**Mi recomendacion como Director de Marca**: Hay dos caminos validos:
-
-1. **Alinear el spec al brandbook actual**: Reemplazar Space Grotesk por Inter. Esto mantiene coherencia y la decision ya tomada.
-
-2. **Actualizar el brandbook a Space Grotesk**: Si el equipo considera que Space Grotesk refleja mejor la personalidad de Dasein (mas distintiva, mas tech-forward, mas memorable), yo estaria abierto a actualizar el brandbook. Space Grotesk es una excelente fuente para una consultora de prospectiva. La clave es que la decision sea unica y consistente.
-
-**Lo que NO es aceptable**: Que el spec y el brandbook digan cosas diferentes. Debe resolverse antes de implementar.
+La discrepancia Inter vs Space Grotesk queda cerrada. El sistema final combina Satoshi (impacto geometrico en titulares) con Space Grotesk (legibilidad en body) y Azeret Mono (personalidad tecnica en datos). Todos los documentos estan alineados.
 
 #### Escala tipografica — Coincidencia exacta
 

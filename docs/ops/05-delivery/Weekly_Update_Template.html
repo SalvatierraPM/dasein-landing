@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Semanal</title>
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Azeret+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0A1628;
+            --surface: #111D2E;
+            --text: #ede7dc;
+            --muted: #8899AA;
+            --accent: #4865ff;
+            --border: rgba(136, 153, 170, 0.2);
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            padding: 3rem 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-family: 'Satoshi', sans-serif;
+            font-weight: 900;
+            font-size: 2.25rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-family: 'Azeret Mono', monospace;
+            font-size: 0.875rem;
+            color: var(--muted);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .header-info {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1.25rem;
+            margin-bottom: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .header-field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .header-field label {
+            font-size: 0.75rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .header-field input {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.875rem;
+            padding: 0.5rem;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section h2 {
+            font-family: 'Satoshi', sans-serif;
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--accent);
+        }
+
+        .section-note {
+            font-family: 'Instrument Serif', serif;
+            font-style: italic;
+            font-size: 0.875rem;
+            color: var(--muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .content-area {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 1rem;
+            min-height: 100px;
+        }
+
+        .content-area textarea {
+            width: 100%;
+            min-height: 80px;
+            background: transparent;
+            border: none;
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            resize: vertical;
+        }
+
+        .content-area textarea:focus {
+            outline: none;
+        }
+
+        .list-area {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 1rem;
+        }
+
+        .list-item {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .list-item::before {
+            content: "—";
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .list-item input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            border-bottom: 1px dotted var(--border);
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.875rem;
+            padding: 0.25rem 0;
+        }
+
+        .list-item input:focus {
+            outline: none;
+            border-bottom-color: var(--accent);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            font-weight: 600;
+            color: var(--muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: rgba(17, 29, 46, 0.5);
+        }
+
+        td input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px dotted var(--border);
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.875rem;
+            padding: 0.25rem 0;
+        }
+
+        td input:focus {
+            outline: none;
+            border-bottom-color: var(--accent);
+        }
+
+        .footer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-family: 'Azeret Mono', monospace;
+            font-size: 0.875rem;
+            color: var(--muted);
+        }
+
+        @media print {
+            body {
+                background: white;
+                color: #000;
+                padding: 1cm;
+            }
+
+            .container {
+                max-width: 100%;
+            }
+
+            .header-info,
+            .content-area,
+            .list-area,
+            table {
+                background: white;
+                border-color: #ccc;
+            }
+
+            input,
+            textarea {
+                background: white;
+                border-color: #ccc;
+            }
+
+            .section h2 {
+                color: #000;
+            }
+
+            .list-item::before {
+                color: #000;
+            }
+
+            th {
+                background: #f5f5f5;
+                color: #666;
+            }
+        }
+
+        @page {
+            margin: 1cm;
+            size: A4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Update Semanal — [NOMBRE_PROYECTO]</h1>
+        <div class="subtitle">
+            Formato simple. Enviar cada [DÍA] por [CANAL].<br>
+            No necesita ser largo. Necesita ser útil.
+        </div>
+
+        <div class="header-info">
+            <div class="header-field">
+                <label>Proyecto</label>
+                <input type="text" placeholder="Nombre del proyecto">
+            </div>
+            <div class="header-field">
+                <label>Cliente</label>
+                <input type="text" placeholder="Nombre de la empresa">
+            </div>
+            <div class="header-field">
+                <label>Semana</label>
+                <input type="text" placeholder="dd/mm — dd/mm">
+            </div>
+            <div class="header-field">
+                <label>Fase actual</label>
+                <input type="text" placeholder="Fase del proyecto">
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Avance de la semana</h2>
+            <div class="list-area">
+                <div class="list-item"><input type="text" placeholder="Logro o avance 1"></div>
+                <div class="list-item"><input type="text" placeholder="Logro o avance 2"></div>
+                <div class="list-item"><input type="text" placeholder="Logro o avance 3"></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Hallazgos clave</h2>
+            <div class="section-note">Señales, patrones o insights relevantes que surgieron esta semana.</div>
+            <div class="list-area">
+                <div class="list-item"><input type="text" placeholder="Hallazgo 1"></div>
+                <div class="list-item"><input type="text" placeholder="Hallazgo 2"></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Bloqueos</h2>
+            <div class="section-note">Qué nos frena o está pendiente.</div>
+            <div class="list-area">
+                <div class="list-item"><input type="text" placeholder="Bloqueo 1 (si aplica)"></div>
+                <div class="list-item"><input type="text" placeholder="Bloqueo 2 (si aplica)"></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Decisiones pendientes del cliente</h2>
+            <div class="section-note">Si hay algo que necesitamos del cliente para avanzar.</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Decisión</th>
+                        <th>Contexto</th>
+                        <th style="width: 120px;">Fecha límite</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>Próximos pasos</h2>
+            <div style="margin-bottom: 1rem;">
+                <div style="font-weight: 600; margin-bottom: 0.5rem; font-size: 0.875rem;">Esta semana:</div>
+                <div class="list-area">
+                    <div class="list-item"><input type="text" placeholder="Acción 1"></div>
+                    <div class="list-item"><input type="text" placeholder="Acción 2"></div>
+                </div>
+            </div>
+            <div>
+                <div style="font-weight: 600; margin-bottom: 0.5rem; font-size: 0.875rem;">Próxima semana:</div>
+                <div class="list-area">
+                    <div class="list-item"><input type="text" placeholder="Acción 1"></div>
+                    <div class="list-item"><input type="text" placeholder="Acción 2"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            Dasein Foresight — [NOMBRE_PROYECTO]
+        </div>
+    </div>
+</body>
+</html>

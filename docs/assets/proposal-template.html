@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Propuesta de Servicios — Dasein Foresight</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --deep-navy: #0A1628;
+      --signal-blue: #4865ff;
+      --slate-white: #ede7dc;
+      --surface: #111D2E;
+      --text-screen: #ede7dc;
+      --text-print: #1a1a1a;
+      --border-color: rgba(59, 130, 246, 0.2);
+    }
+
+    /* Screen styles */
+    @media screen {
+      body {
+        background: var(--deep-navy);
+        color: var(--text-screen);
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        padding: 2rem;
+      }
+
+      .placeholder {
+        color: var(--signal-blue);
+        font-weight: 500;
+      }
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        background: white;
+        color: var(--text-print);
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 11pt;
+        line-height: 1.5;
+        padding: 0;
+      }
+
+      .placeholder {
+        color: #666;
+        font-weight: 500;
+      }
+
+      .page {
+        page-break-after: always;
+        margin: 2cm;
+        padding: 0;
+      }
+
+      .page:last-child {
+        page-break-after: auto;
+      }
+
+      h1, h2, h3 {
+        page-break-after: avoid;
+      }
+
+      table {
+        page-break-inside: avoid;
+      }
+    }
+
+    .page {
+      max-width: 800px;
+      margin: 0 auto 4rem;
+      background: var(--surface);
+      padding: 3rem;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      min-height: 1000px;
+      position: relative;
+    }
+
+    @media print {
+      .page {
+        background: white;
+        border: none;
+        border-radius: 0;
+        min-height: auto;
+      }
+    }
+
+    .logo {
+      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin-bottom: 6rem;
+    }
+
+    h1 {
+      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: -0.035em;
+      line-height: 1.1;
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 2rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    h3 {
+      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 2rem 0 1rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    .cover-meta {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      font-weight: 400;
+    }
+
+    .confidential {
+      margin-top: 4rem;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      opacity: 0.6;
+    }
+
+    .quote {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      margin: 2rem 0;
+      padding-left: 2rem;
+      border-left: 2px solid var(--signal-blue);
+      opacity: 0.9;
+    }
+
+    ul {
+      list-style: none;
+      margin: 1rem 0 2rem;
+    }
+
+    ul li {
+      padding-left: 1.5rem;
+      position: relative;
+      margin-bottom: 0.75rem;
+    }
+
+    ul li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--signal-blue);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      border: 1px solid var(--border-color);
+      padding: 0.75rem 1rem;
+      text-align: left;
+    }
+
+    th {
+      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 700;
+      background: rgba(59, 130, 246, 0.1);
+    }
+
+    @media print {
+      th {
+        background: #f5f5f5;
+      }
+    }
+
+    tr.highlight {
+      background: rgba(59, 130, 246, 0.15);
+      font-weight: 500;
+    }
+
+    @media print {
+      tr.highlight {
+        background: #e8f0ff;
+      }
+    }
+
+    .price-table th:last-child,
+    .price-table td:last-child {
+      text-align: right;
+      font-family: 'Azeret Mono', monospace;
+      font-weight: 500;
+    }
+
+    .price-table tr:last-child {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .phase {
+      margin: 2rem 0;
+    }
+
+    .phase-header {
+      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .phase-duration {
+      font-size: 0.875rem;
+      opacity: 0.7;
+      font-family: 'Azeret Mono', monospace;
+      margin-top: 0.5rem;
+    }
+
+    .about-section {
+      margin-top: 2rem;
+    }
+
+    .about-section p {
+      margin-bottom: 1.5rem;
+    }
+
+    .steps {
+      counter-reset: step-counter;
+      list-style: none;
+      margin: 2rem 0;
+    }
+
+    .steps li {
+      counter-increment: step-counter;
+      padding-left: 3rem;
+      position: relative;
+      margin-bottom: 1rem;
+    }
+
+    .steps li::before {
+      content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      width: 2rem;
+      height: 2rem;
+      background: var(--signal-blue);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+
+    @media print {
+      .steps li::before {
+        background: #333;
+      }
+    }
+
+    .contact-info {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .contact-info p {
+      margin-bottom: 0.5rem;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 3rem;
+      right: 3rem;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      opacity: 0.5;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    @media print {
+      footer {
+        position: fixed;
+        bottom: 1cm;
+        left: 2cm;
+        right: 2cm;
+      }
+    }
+
+    .footer-left {
+      flex: 1;
+    }
+
+    .footer-right {
+      text-align: right;
+    }
+
+    .comparison-table {
+      font-size: 0.85rem;
+    }
+
+    .comparison-table th {
+      font-size: 1rem;
+    }
+
+    .comparison-table td {
+      vertical-align: top;
+    }
+
+    .mono {
+      font-family: 'Azeret Mono', monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE 1: COVER -->
+  <div class="page">
+    <div class="logo">Dasein Foresight</div>
+
+    <h1>Propuesta de Servicios<br>de Prospectiva Estratégica</h1>
+
+    <div class="cover-meta">
+      <p>Preparada para: <span class="placeholder">[NOMBRE_CLIENTE]</span></p>
+      <p><span class="placeholder">[FECHA]</span></p>
+    </div>
+
+    <div class="confidential">Confidencial</div>
+
+    <footer>
+      <div class="footer-left">Dasein Foresight | Confidencial | <span class="placeholder">[FECHA]</span></div>
+      <div class="footer-right">Página 1</div>
+    </footer>
+  </div>
+
+  <!-- PAGE 2: CONTEXTO Y COMPRENSIÓN -->
+  <div class="page">
+    <h2>Comprensión del contexto</h2>
+
+    <p class="placeholder">[DESCRIPCION_CONTEXTO_CLIENTE — Párrafo describiendo la situación del cliente, la decisión que enfrenta, y por qué requiere análisis prospectivo. 2-3 párrafos.]</p>
+
+    <p class="placeholder">[Continúa con la descripción del contexto estratégico y los desafíos específicos que motivaron esta consulta.]</p>
+
+    <h3>Preguntas estratégicas identificadas</h3>
+
+    <ul>
+      <li class="placeholder">[PREGUNTA_1]</li>
+      <li class="placeholder">[PREGUNTA_2]</li>
+      <li class="placeholder">[PREGUNTA_3]</li>
+    </ul>
+
+    <footer>
+      <div class="footer-left">Dasein Foresight | Confidencial | <span class="placeholder">[FECHA]</span></div>
+      <div class="footer-right">Página 2</div>
+    </footer>
+  </div>
+
+  <!-- PAGE 3: SERVICIO PROPUESTO -->
+  <div class="page">
+    <h2>Servicio propuesto: <span class="placeholder">[NOMBRE_SERVICIO]</span></h2>
+
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Lectura de Campo</th>
+          <th>Simulación Estratégica</th>
+          <th>Radar Estratégico</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Alcance</strong></td>
+          <td>15-25 señales, memo, stakeholders, signposts</td>
+          <td>Simulación dual-world, escenarios, dashboard, workshop</td>
+          <td>Monitoreo continuo, alertas, simulación trimestral</td>
+        </tr>
+        <tr>
+          <td><strong>Plazo</strong></td>
+          <td>5 días</td>
+          <td>4-5 semanas</td>
+          <td>Min. 6 meses</td>
+        </tr>
+        <tr>
+          <td><strong>Inversión</strong></td>
+          <td class="mono">Desde USD 2,500</td>
+          <td class="mono">Desde USD 12,000</td>
+          <td class="mono">Desde USD 5,000/mes</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p><strong>Recomendamos <span class="placeholder">[NOMBRE_SERVICIO]</span> porque:</strong></p>
+    <p class="placeholder">[JUSTIFICACION — Explicar por qué este servicio es el más adecuado para el contexto del cliente, las preguntas estratégicas identificadas, y el horizonte temporal de la decisión.]</p>
+
+    <footer>
+      <div class="footer-left">Dasein Foresight | Confidencial | <span class="placeholder">[FECHA]</span></div>
+      <div class="footer-right">Página 3</div>
+    </footer>
+  </div>
+
+  <!-- PAGE 4: ALCANCE Y ENTREGABLES -->
+  <div class="page">
+    <h2>Alcance del trabajo</h2>
+
+    <div class="phase">
+      <div class="phase-header">Fase 1 — <span class="placeholder">[FASE_1_NOMBRE]</span></div>
+      <ul>
+        <li class="placeholder">[ENTREGABLE_1]</li>
+        <li class="placeholder">[ENTREGABLE_2]</li>
+      </ul>
+      <div class="phase-duration">Duración: <span class="placeholder">[DURACION_FASE_1]</span></div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-header">Fase 2 — <span class="placeholder">[FASE_2_NOMBRE]</span></div>
+      <ul>
+        <li class="placeholder">[ENTREGABLE_3]</li>
+        <li class="placeholder">[ENTREGABLE_4]</li>
+      </ul>
+      <div class="phase-duration">Duración: <span class="placeholder">[DURACION_FASE_2]</span></div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-header">Fase 3 — <span class="placeholder">[FASE_3_NOMBRE]</span></div>
+      <ul>
+        <li class="placeholder">[ENTREGABLE_5]</li>
+        <li class="placeholder">[ENTREGABLE_6]</li>
+      </ul>
+      <div class="phase-duration">Duración: <span class="placeholder">[DURACION_FASE_3]</span></div>
+    </div>
+
+    <h3>Entregable final</h3>
+    <p class="placeholder">[DESCRIPCION_ENTREGABLE_FINAL — Describir el producto final integrado que recibe el cliente al finalizar el proyecto. Ejemplo: "Dashboard interactivo con escenarios completos, análisis de robustez de decisiones, signposts con umbrales, y recomendaciones priorizadas."]</p>
+
+    <footer>
+      <div class="footer-left">Dasein Foresight | Confidencial | <span class="placeholder">[FECHA]</span></div>
+      <div class="footer-right">Página 4</div>
+    </footer>
+  </div>
+
+  <!-- PAGE 5: INVERSIÓN Y CONDICIONES -->
+  <div class="page">
+    <h2>Inversión</h2>
+
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>Concepto</th>
+          <th>Monto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="placeholder">[SERVICIO_PRINCIPAL]</td>
+          <td class="placeholder">USD [MONTO]</td>
+        </tr>
+        <tr>
+          <td class="placeholder">[ADICIONAL_1 — opcional]</td>
+          <td class="placeholder">USD [MONTO]</td>
+        </tr>
+        <tr>
+          <td><strong>Total</strong></td>
+          <td><strong class="placeholder">USD [MONTO_TOTAL]</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Condiciones de pago</h3>
+    <ul>
+      <li class="placeholder">[CONDICION_1 — e.g., "50% al inicio, 50% contra entrega"]</li>
+      <li class="placeholder">[CONDICION_2 — e.g., "Pago mediante transferencia bancaria o tarjeta de crédito"]</li>
+    </ul>
+
+    <p><strong>Validez de esta propuesta:</strong> <span class="placeholder">[DIAS_VALIDEZ]</span> días desde la fecha de presentación.</p>
+
+    <footer>
+      <div class="footer-left">Dasein Foresight | Confidencial | <span class="placeholder">[FECHA]</span></div>
+      <div class="footer-right">Página 5</div>
+    </footer>
+  </div>
+
+  <!-- PAGE 6: SOBRE DASEIN FORESIGHT -->
+  <div class="page">
+    <h2>Sobre Dasein Foresight</h2>
+
+    <div class="about-section">
+      <p>Dasein Foresight es una consultora de prospectiva estratégica que combina metodología rigurosa de escenarios con un motor propio de simulación por IA (SignalTwin). No vendemos predicciones — vendemos claridad estratégica.</p>
+
+      <p>Trabajamos con líderes que enfrentan decisiones complejas bajo incertidumbre profunda: expansión a nuevos mercados, inversiones tecnológicas, estrategias de largo plazo, políticas públicas. Nuestro trabajo no consiste en adivinar el futuro, sino en identificar los futuros posibles, evaluar la robustez de las decisiones frente a esos escenarios, y diseñar signposts concretos para navegar la incertidumbre.</p>
+
+      <h3>Nuestra diferencia</h3>
+      <ul>
+        <li><strong>Motor propio de simulación (SignalTwin)</strong> — Evaluamos la plausibilidad de escenarios mediante un modelo LLM calibrado con prospectiva cuantitativa.</li>
+        <li><strong>Análisis de robustez multi-escenario</strong> — Cada recomendación se prueba contra múltiples futuros posibles.</li>
+        <li><strong>Signposts con umbrales concretos</strong> — No entregamos escenarios estáticos; diseñamos indicadores que permiten detectar cuál escenario se está materializando.</li>
+        <li><strong>Recomendaciones accionables</strong> — Priorizamos opciones estratégicas por urgencia, costo, y capacidad de reconfiguración futura.</li>
+      </ul>
+    </div>
+
+    <footer>
+      <div class="footer-left">Dasein Foresight | Confidencial | <span class="placeholder">[FECHA]</span></div>
+      <div class="footer-right">Página 6</div>
+    </footer>
+  </div>
+
+  <!-- PAGE 7: PRÓXIMOS PASOS -->
+  <div class="page">
+    <h2>Próximos pasos</h2>
+
+    <p>Para avanzar con este proyecto, el proceso es el siguiente:</p>
+
+    <ol class="steps">
+      <li>Confirmar alcance y condiciones</li>
+      <li>Firma de NDA (si aplica)</li>
+      <li>Firma de SOW (Statement of Work)</li>
+      <li>Kick-off: levantamiento de insumos</li>
+      <li>Inicio del trabajo</li>
+    </ol>
+
+    <div class="contact-info">
+      <h3>Contacto</h3>
+      <p><strong class="placeholder">[NOMBRE_CONSULTOR]</strong></p>
+      <p>info@daseinforesight.com</p>
+      <p>daseinforesight.com</p>
+    </div>
+
+    <footer>
+      <div class="footer-left">Dasein Foresight | Confidencial | <span class="placeholder">[FECHA]</span></div>
+      <div class="footer-right">Página 7</div>
+    </footer>
+  </div>
+
+</body>
+</html>

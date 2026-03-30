@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entregable Final</title>
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Azeret+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0A1628;
+            --surface: #111D2E;
+            --text: #ede7dc;
+            --muted: #8899AA;
+            --accent: #4865ff;
+            --border: rgba(136, 153, 170, 0.2);
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            padding: 3rem 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .cover {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 3rem 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            page-break-after: always;
+        }
+
+        .cover h1 {
+            font-family: 'Satoshi', sans-serif;
+            font-weight: 900;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            letter-spacing: -0.03em;
+        }
+
+        .cover-subtitle {
+            font-family: 'Azeret Mono', monospace;
+            font-size: 0.875rem;
+            color: var(--muted);
+            margin-bottom: 3rem;
+            line-height: 1.7;
+        }
+
+        .cover-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            text-align: left;
+            margin-top: 3rem;
+        }
+
+        .cover-field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .cover-field label {
+            font-size: 0.75rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .cover-field input {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            padding: 0.75rem;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+            page-break-inside: avoid;
+        }
+
+        .section-major {
+            page-break-before: always;
+        }
+
+        .section h1 {
+            font-family: 'Satoshi', sans-serif;
+            font-weight: 900;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .section h2 {
+            font-family: 'Satoshi', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            margin-top: 2rem;
+            color: var(--accent);
+        }
+
+        .section h3 {
+            font-family: 'Satoshi', sans-serif;
+            font-weight: 700;
+            font-size: 1.125rem;
+            margin-bottom: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .section-note {
+            font-family: 'Instrument Serif', serif;
+            font-style: italic;
+            font-size: 0.875rem;
+            color: var(--muted);
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            border-left: 2px solid var(--accent);
+        }
+
+        .content-area {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-area textarea {
+            width: 100%;
+            min-height: 100px;
+            background: transparent;
+            border: none;
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            resize: vertical;
+        }
+
+        .content-area textarea:focus {
+            outline: none;
+        }
+
+        .list-area {
+            margin-bottom: 1.5rem;
+        }
+
+        .list-item {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            align-items: flex-start;
+        }
+
+        .list-item::before {
+            content: "—";
+            color: var(--accent);
+            flex-shrink: 0;
+            margin-top: 0.125rem;
+        }
+
+        .list-item input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            border-bottom: 1px dotted var(--border);
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.875rem;
+            padding: 0.25rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 0.875rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            font-weight: 600;
+            color: var(--muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: rgba(17, 29, 46, 0.5);
+        }
+
+        td input,
+        td textarea {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px dotted rgba(136, 153, 170, 0.1);
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.875rem;
+            padding: 0.25rem 0;
+        }
+
+        td textarea {
+            min-height: 60px;
+            resize: vertical;
+        }
+
+        .footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer-main {
+            font-family: 'Satoshi', sans-serif;
+            font-weight: 700;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-meta {
+            font-family: 'Azeret Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--muted);
+        }
+
+        @media print {
+            body {
+                background: white;
+                color: #000;
+                padding: 0;
+            }
+
+            .container {
+                max-width: 100%;
+            }
+
+            .cover,
+            .content-area,
+            table {
+                background: white;
+                border-color: #ccc;
+            }
+
+            input,
+            textarea {
+                background: white;
+                border-color: #ccc;
+            }
+
+            .section h2 {
+                color: #000;
+            }
+
+            .list-item::before {
+                color: #000;
+            }
+
+            th {
+                background: #f5f5f5;
+                color: #666;
+            }
+
+            .section-note {
+                border-left-color: #ccc;
+            }
+        }
+
+        @page {
+            margin: 2cm;
+            size: A4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="cover">
+            <h1>Entregable Final</h1>
+            <div class="cover-subtitle">
+                Estructura del dossier de escenarios y recomendaciones.<br>
+                Adaptar según servicio (Lectura de Campo es más corto, Simulación es completo).
+            </div>
+            <div class="cover-info">
+                <div class="cover-field">
+                    <label>Proyecto</label>
+                    <input type="text" placeholder="Nombre del proyecto">
+                </div>
+                <div class="cover-field">
+                    <label>Cliente</label>
+                    <input type="text" placeholder="Nombre de la empresa">
+                </div>
+                <div class="cover-field">
+                    <label>Servicio</label>
+                    <input type="text" placeholder="Nombre del servicio">
+                </div>
+                <div class="cover-field">
+                    <label>Fecha de entrega</label>
+                    <input type="date">
+                </div>
+                <div class="cover-field">
+                    <label>Clasificación</label>
+                    <input type="text" value="Confidencial" readonly>
+                </div>
+            </div>
+        </div>
+
+        <div class="section section-major">
+            <h1>1. Resumen Ejecutivo</h1>
+            <div class="section-note">
+                1 página máximo. Lo que un directivo necesita leer si solo lee esto.
+            </div>
+            <div class="content-area">
+                <div style="margin-bottom: 1rem;">
+                    <strong>Contexto de la decisión</strong>
+                    <textarea placeholder="Describir el contexto estratégico..."></textarea>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <strong>Principales hallazgos</strong>
+                    <textarea placeholder="Resumir los hallazgos clave..."></textarea>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <strong>Recomendación central</strong>
+                    <textarea placeholder="La recomendación principal..."></textarea>
+                </div>
+                <div>
+                    <strong>3 acciones inmediatas</strong>
+                    <div class="list-area">
+                        <div class="list-item"><input type="text" placeholder="Acción 1"></div>
+                        <div class="list-item"><input type="text" placeholder="Acción 2"></div>
+                        <div class="list-item"><input type="text" placeholder="Acción 3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section section-major">
+            <h1>2. Escenarios</h1>
+            <div class="section-note">
+                Para Simulación Estratégica: escenarios completos con matriz 2x2.<br>
+                Para Lectura de Campo: panorama de señales organizado por horizonte temporal.
+            </div>
+
+            <h2>2.1 Incertidumbres críticas</h2>
+            <div class="list-area">
+                <div class="list-item"><input type="text" placeholder="EJE 1: Descripción"></div>
+                <div class="list-item"><input type="text" placeholder="EJE 2: Descripción"></div>
+            </div>
+
+            <h2>2.2 Escenarios resultantes</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 150px;">Escenario</th>
+                        <th>Descripción</th>
+                        <th style="width: 130px;">Probabilidad</th>
+                        <th>Implicancias</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" placeholder="A — Nombre"></td>
+                        <td><textarea></textarea></td>
+                        <td><input type="text"></td>
+                        <td><textarea></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" placeholder="B — Nombre"></td>
+                        <td><textarea></textarea></td>
+                        <td><input type="text"></td>
+                        <td><textarea></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" placeholder="C — Nombre"></td>
+                        <td><textarea></textarea></td>
+                        <td><input type="text"></td>
+                        <td><textarea></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" placeholder="D — Nombre"></td>
+                        <td><textarea></textarea></td>
+                        <td><input type="text"></td>
+                        <td><textarea></textarea></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section section-major">
+            <h1>3. Hallazgos</h1>
+            <div class="section-note">
+                Señales clave, dinámicas de stakeholders, coaliciones identificadas.
+            </div>
+
+            <h2>3.1 Señales relevantes</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 40px;">#</th>
+                        <th>Señal</th>
+                        <th style="width: 100px;">Tipo</th>
+                        <th style="width: 100px;">Horizonte</th>
+                        <th style="width: 90px;">Certeza</th>
+                        <th>Implicancia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>3.2 Mapa de stakeholders</h2>
+            <div class="content-area">
+                <textarea placeholder="Incluir mapa de actores con posiciones, poder e influencia"></textarea>
+            </div>
+
+            <h2>3.3 Coaliciones identificadas</h2>
+            <div class="content-area">
+                <textarea placeholder="Bloques de actores que se activan bajo ciertos escenarios"></textarea>
+            </div>
+        </div>
+
+        <div class="section section-major">
+            <h1>4. Implicancias estratégicas</h1>
+            <div class="section-note">
+                Qué significan los escenarios para la organización.
+            </div>
+            <div class="list-area">
+                <div class="list-item"><input type="text" placeholder="Implicancia 1"></div>
+                <div class="list-item"><input type="text" placeholder="Implicancia 2"></div>
+                <div class="list-item"><input type="text" placeholder="Implicancia 3"></div>
+            </div>
+        </div>
+
+        <div class="section section-major">
+            <h1>5. Recomendaciones</h1>
+            <div class="section-note">
+                Accionables. Con responsable, plazo y prioridad.
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 40px;">#</th>
+                        <th>Recomendación</th>
+                        <th style="width: 90px;">Prioridad</th>
+                        <th style="width: 100px;">Plazo</th>
+                        <th style="width: 150px;">Responsable</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><textarea></textarea></td>
+                        <td><input type="text" value="P0"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><textarea></textarea></td>
+                        <td><input type="text" value="P1"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><textarea></textarea></td>
+                        <td><input type="text" value="P1"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section section-major">
+            <h1>6. Signposts — Qué monitorear</h1>
+            <div class="section-note">
+                Señales concretas con umbrales de acción.
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Señal</th>
+                        <th>Estado actual</th>
+                        <th>Umbral de acción</th>
+                        <th>Si se activa →</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section section-major">
+            <h1>7. Anexo metodológico</h1>
+            <div class="section-note">
+                Breve descripción de la metodología empleada. Transparencia, no tesis.
+            </div>
+            <div class="content-area">
+                <div class="list-area">
+                    <div class="list-item"><input type="text" placeholder="Fuentes consultadas: [NÚMERO]"></div>
+                    <div class="list-item"><input type="text" placeholder="Señales analizadas: [NÚMERO]"></div>
+                    <div class="list-item"><input type="text" placeholder="Stakeholders mapeados: [NÚMERO]"></div>
+                    <div class="list-item"><input type="text" placeholder="Horizonte temporal: [MESES]"></div>
+                    <div class="list-item"><input type="text" value="Motor de simulación: SignalTwin (dual-world, agentes con memoria persistente)"></div>
+                    <div class="list-item"><input type="text" placeholder="Framework de escenarios: [Schwartz 2x2 / otro]"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section section-major">
+            <h1>8. Próximos pasos sugeridos</h1>
+            <div class="list-area">
+                <div class="list-item"><input type="text" placeholder="Paso 1"></div>
+                <div class="list-item"><input type="text" placeholder="Paso 2"></div>
+                <div class="list-item"><input type="text" placeholder="Paso 3"></div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-main">Dasein Foresight — Simulamos futuros para que decidas mejor hoy</div>
+            <div class="footer-meta">Confidencial — [FECHA]</div>
+        </div>
+    </div>
+</body>
+</html>

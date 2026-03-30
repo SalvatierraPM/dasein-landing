@@ -20,7 +20,7 @@ Use `AskUserQuestion` to collect:
 
 **Primary Color:**
 - Color name (e.g., "Ocean Blue", "Coral", "Forest Green")
-- Hex code (e.g., #3B82F6)
+- Hex code (e.g., #4865ff)
 
 **Secondary Color:**
 - Color name (e.g., "Golden Amber", "Electric Purple")
@@ -105,10 +105,10 @@ If user specifies a preset name, use these defaults:
 
 | Preset | Primary | Secondary | Accent |
 |--------|---------|-----------|--------|
-| ocean-professional | #3B82F6 Ocean Blue | #F59E0B Golden Amber | #10B981 Emerald |
+| ocean-professional | #4865ff Ocean Blue | #F59E0B Golden Amber | #10B981 Emerald |
 | electric-creative | #FF6B6B Coral | #9B5DE5 Electric Purple | #00F5D4 Neon Mint |
 | forest-calm | #059669 Forest Green | #92400E Warm Brown | #FBBF24 Sunlight |
-| midnight-purple | #7C3AED Violet | #EC4899 Pink | #06B6D4 Cyan |
+| midnight-purple | #7a68d6 Violet | #EC4899 Pink | #06B6D4 Cyan |
 | sunset-warm | #F97316 Orange | #DC2626 Red | #FACC15 Yellow |
 
 ## Important

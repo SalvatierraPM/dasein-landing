@@ -60,11 +60,11 @@ Early stage. Tech works. Two demo cases (banking, lithium/geopolitics).
 |------|-------|-----|-----|
 | Deep Navy | oklch(15% 0.04 260) | #0A1628 | Primary bg, hero, header, footer |
 | Surface Dark | oklch(18% 0.03 260) | #111D2E | Cards, panels over navy |
-| Slate White | oklch(94% 0.01 260) | #E8ECF1 | Primary text on dark |
+| Slate White | oklch(94% 0.01 260) | #ede7dc | Primary text on dark |
 | Muted Text | oklch(66% 0.04 250) | #8899AA | Secondary text, captions |
-| Signal Blue | oklch(63% 0.19 260) | #3B82F6 | CTAs, links, data, interactive |
-| Horizon Violet | oklch(50% 0.24 290) | #7C3AED | Simulation, scenarios, future |
-| Foresight Teal | oklch(70% 0.14 180) | #14B8A6 | Success, opportunity |
+| Signal Blue | oklch(63% 0.19 260) | #4865ff | CTAs, links, data, interactive |
+| Horizon Violet | oklch(50% 0.24 290) | #7a68d6 | Simulation, scenarios, future |
+| Foresight Teal | oklch(70% 0.14 180) | #2f9e90 | Success, opportunity |
 | Danger | oklch(63% 0.22 25) | #EF4444 | Alerts, errors, risks |
 
 ### Color ratios
@@ -81,21 +81,44 @@ Early stage. Tech works. Two demo cases (banking, lithium/geopolitics).
 
 ### Gradients
 - Hero: `linear-gradient(135deg, #0A1628, #1A2744, #111D2E)`
-- Accent: `linear-gradient(135deg, #3B82F6, #7C3AED)` — use sparingly
+- Accent: `linear-gradient(135deg, #4865ff, #7a68d6)` — use sparingly
 - Card hover: `linear-gradient(180deg, rgba(59,130,246,0.08), rgba(124,58,237,0.04))`
 
 ---
 
 ## 5. Typography
 
-**RESOLVED** (per DAS-23): Space Grotesk is the primary font. Brandbook updated.
+**RESOLVED** (updated 2026-03-29): Satoshi display + Space Grotesk body + Azeret Mono.
 
 | Role | Font | Weight | When |
 |------|------|--------|------|
-| Display/Headers | Space Grotesk | 600-700 | All headlines |
-| Body | Space Grotesk | 400 | All body text |
-| Monospace/Data | JetBrains Mono | 400-600 | Metrics, code, technical data |
+| Display headlines | Satoshi | 900 | Hero, main titles |
+| Section headers | Satoshi | 700 | H2, service names |
+| Subtitles/lanes | Satoshi | 500 | H4, nav labels, lane titles |
+| Body text | Space Grotesk | 400 | Paragraphs, descriptions, UI |
+| Monospace/Data | Azeret Mono | 400-500 | Metrics, overlines, terminal prefixes |
 | Editorial | Instrument Serif italic | 400 | ONLY for executive memo titles and blockquotes |
+
+### Symbol system
+| Symbol | Use | Meaning |
+|--------|-----|---------|
+| → | Kickers, CTAs | Direction |
+| ◆ | Marquee separator | Node, signal |
+| ※ | List bullets | Reference |
+| ◈ | Output labels | Result, data |
+| / | Pill/tag prefix | Category |
+| ◇ | Inline metadata separator | Light metadata |
+| ▸ | Terminal/typewriter prefix | Process, system |
+
+### Atmospheric symbol patterns
+- Symbol field: scattered symbols as bg texture (opacity 3-5%) — hero, section openers
+- Ghost watermark: giant symbol (5-9rem) behind card content — method steps
+- Corner accents: small symbols in panel corners (opacity 12%) — deliverable cards
+- Symbol divider: line with centered symbols (`◇ → ◆ → ◇`) — section separators
+- Symbol marquee: symbols as rhythm between ticker items
+- HUD data cells: symbol as metric icon in dashboard layouts
+
+Rules: always `aria-hidden="true"`, max 2 atmospheric patterns per section, no render on `prefers-reduced-motion`
 
 ### Type scale (fluid, clamp)
 - Display: clamp(3rem, 1rem + 7vw, 6rem)
@@ -208,7 +231,7 @@ Early stage. Tech works. Two demo cases (banking, lithium/geopolitics).
 ## 10. Branding Agent Decisions (DAS-8, DAS-17, DAS-23, DAS-39, DAS-44, DAS-46)
 
 ### Resolved decisions:
-- Typography: **Space Grotesk adopted** (over Inter). More distinctive, tech-forward. Brandbook updated.
+- Typography: **Satoshi (display) + Space Grotesk (body) + Azeret Mono (data)**. Satoshi 900 for impact, Space Grotesk for readability, Azeret Mono for technical personality. Brandbook updated 2026-03-29.
 - `--color-success` must equal `--color-foresight-teal` (no separate green)
 - `--color-warning` (#F59E0B) accepted as functional color
 - Pink (#EC4899) NOT approved — use existing palette
@@ -216,6 +239,20 @@ Early stage. Tech works. Two demo cases (banking, lithium/geopolitics).
 - Instrument Serif: ONLY for editorial titles in executive memos
 - Signal Blue = open_signal world / Horizon Violet = community_signal world
 - Glassmorphism: only in nav, modals, cards over hero — not everywhere
+
+### Commercial assets (in `docs/assets/`):
+- `one-pager.html` — Institutional one-pager (screen + print)
+- `deck-comercial.html` — 9-slide deck with keyboard navigation
+- `proposal-template.html` — Proposal template with `[PLACEHOLDER]` fields
+- `nda-template.html` — NDA (Chilean/LATAM commercial law)
+- `sow-template.html` — Statement of Work (14 clauses)
+
+### Commercial architecture (FROZEN):
+| Service | Investment |
+|---------|------------|
+| **Lectura de Campo** | From USD 2,500 / 5 days |
+| **Simulación Estratégica** | From USD 12,000 / 4-5 weeks |
+| **Radar Estratégico** | From USD 5,000/month / min 6 months |
 
 ### Standing brand rules:
 - Every piece must be reviewable against the brandbook

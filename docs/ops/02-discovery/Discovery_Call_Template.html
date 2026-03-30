@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discovery Call Template — Dasein Foresight</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Azeret+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #0A1628;
+      --surface: #111D2E;
+      --text: #ede7dc;
+      --muted: #8899AA;
+      --accent: #4865ff;
+      --border: rgba(136, 153, 170, 0.2);
+    }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 700;
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin: 2rem 0 1rem 0;
+      letter-spacing: -0.015em;
+      color: var(--accent);
+    }
+
+    .subtitle {
+      font-size: 1.125rem;
+      color: var(--muted);
+      margin-bottom: 3rem;
+      font-weight: 500;
+    }
+
+    .lead-info {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2rem;
+      margin: 2rem 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .lead-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .lead-field label {
+      font-size: 0.875rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .lead-field input {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.75rem;
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+    }
+
+    .lead-field input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .section-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2rem;
+      margin: 1.5rem 0;
+      page-break-inside: avoid;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-time {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    .section-objective {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .questions {
+      list-style: none;
+      padding: 0;
+    }
+
+    .questions li {
+      padding: 0.75rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .questions li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .notes-area {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .notes-area label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+
+    .notes-area textarea {
+      width: 100%;
+      min-height: 120px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1rem;
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      resize: vertical;
+    }
+
+    .notes-area textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .eval-section {
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+
+    .eval-section h2 {
+      margin-top: 0;
+    }
+
+    .checkbox-group {
+      display: flex;
+      gap: 2rem;
+      margin: 1rem 0;
+      flex-wrap: wrap;
+    }
+
+    .checkbox-group label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+
+    .eval-field {
+      margin: 1rem 0;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .eval-field label {
+      min-width: 200px;
+      font-weight: 600;
+    }
+
+    .eval-field input {
+      flex: 1;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.75rem;
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    @media print {
+      body {
+        background: white;
+        color: #0A1628;
+        padding: 1cm;
+      }
+
+      :root {
+        --bg: white;
+        --surface: white;
+        --text: #0A1628;
+        --muted: #555;
+        --accent: #4865ff;
+        --border: #ddd;
+      }
+
+      h1, h2 {
+        color: #0A1628;
+      }
+
+      .lead-info {
+        background: white;
+        border: 2px solid #ddd;
+      }
+
+      .section-card {
+        background: white;
+        border: 1px solid #ddd;
+      }
+
+      .eval-section {
+        background: white;
+        border: 2px solid #4865ff;
+      }
+
+      .notes-area textarea {
+        background: white;
+        min-height: 150px;
+        border: 1px solid #ddd;
+      }
+
+      input, textarea {
+        background: white !important;
+        border: 1px solid #ddd !important;
+        color: #0A1628 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Discovery Call Template</h1>
+  <p class="subtitle">Guía para llamadas de calificación. No entrar a llamadas como poeta iluminado.<br>
+  Duración target: 30 minutos. Escuchar 70%, hablar 30%.</p>
+
+  <div class="lead-info">
+    <div class="lead-field">
+      <label>Empresa:</label>
+      <input type="text" />
+    </div>
+    <div class="lead-field">
+      <label>Contacto:</label>
+      <input type="text" />
+    </div>
+    <div class="lead-field">
+      <label>Cargo:</label>
+      <input type="text" />
+    </div>
+    <div class="lead-field">
+      <label>Industria:</label>
+      <input type="text" />
+    </div>
+    <div class="lead-field">
+      <label>Fecha de la llamada:</label>
+      <input type="date" />
+    </div>
+    <div class="lead-field">
+      <label>Origen del lead:</label>
+      <input type="text" />
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-header">
+      <h2>1. Contexto</h2>
+      <span class="section-time">10 min</span>
+    </div>
+    <div class="section-objective">
+      Objetivo: entender la situación y la decisión que enfrentan.
+    </div>
+    <ul class="questions">
+      <li>¿Qué decisión importante tienen al frente?</li>
+      <li>¿En qué plazo deben tomarla?</li>
+      <li>¿Qué pasa si la toman mal? ¿Cuál es el costo del error?</li>
+      <li>¿Qué ya han hecho para analizarla? (consultores previos, estudios internos, nada)</li>
+      <li>¿Qué los motivó a buscar ayuda externa ahora?</li>
+    </ul>
+    <div class="notes-area">
+      <label>Notas:</label>
+      <textarea></textarea>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-header">
+      <h2>2. Problema</h2>
+      <span class="section-time">10 min</span>
+    </div>
+    <div class="section-objective">
+      Objetivo: identificar el dolor real y las incertidumbres.
+    </div>
+    <ul class="questions">
+      <li>¿Qué incertidumbres hoy les impiden decidir con confianza?</li>
+      <li>¿Qué actores externos o internos condicionan esa decisión? (reguladores, sindicatos, competidores, directorio)</li>
+      <li>¿Hay presión regulatoria, competitiva, reputacional o política?</li>
+      <li>¿Qué señales están viendo pero no saben cómo interpretar?</li>
+      <li>¿Qué escenarios les preocupan más?</li>
+    </ul>
+    <div class="notes-area">
+      <label>Notas:</label>
+      <textarea></textarea>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-header">
+      <h2>3. Compra</h2>
+      <span class="section-time">5 min</span>
+    </div>
+    <div class="section-objective">
+      Objetivo: calificar la oportunidad comercial.
+    </div>
+    <ul class="questions">
+      <li>¿Quién decide la contratación?</li>
+      <li>¿Quién influye en la decisión? (otros gerentes, directorio, comité)</li>
+      <li>¿Hay presupuesto asignado para este tipo de análisis?</li>
+      <li>¿Qué proceso interno de compra tienen? (orden de compra, licitación, compra directa)</li>
+      <li>¿Qué timing real tiene una contratación? (días, semanas, meses)</li>
+    </ul>
+    <div class="notes-area">
+      <label>Notas:</label>
+      <textarea></textarea>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-header">
+      <h2>4. Cierre</h2>
+      <span class="section-time">5 min</span>
+    </div>
+    <div class="section-objective">
+      Objetivo: definir expectativas y próximo paso concreto.
+    </div>
+    <ul class="questions">
+      <li>¿Qué output esperan ver para decir "esto sirvió"? (memo, escenarios, workshop, dashboard)</li>
+      <li>¿Qué tan urgente es esto del 1 al 10?</li>
+      <li>¿Cuál sería el próximo paso natural?</li>
+    </ul>
+    <div class="notes-area">
+      <label>Notas:</label>
+      <textarea></textarea>
+    </div>
+  </div>
+
+  <div class="eval-section">
+    <h2>Evaluación post-llamada</h2>
+
+    <div style="margin: 1.5rem 0;">
+      <strong>Servicio recomendado:</strong>
+      <div class="checkbox-group">
+        <label><input type="checkbox"> Lectura de Campo</label>
+        <label><input type="checkbox"> Simulación Estratégica</label>
+        <label><input type="checkbox"> Radar Estratégico</label>
+      </div>
+    </div>
+
+    <div class="eval-field">
+      <label>Qualification score:</label>
+      <input type="text" placeholder="___/35 (ver Lead_Qualification_Score.md)" />
+    </div>
+
+    <div class="eval-field">
+      <label>Probabilidad de cierre:</label>
+      <input type="text" placeholder="___%"/>
+    </div>
+
+    <div class="eval-field">
+      <label>Próximo paso:</label>
+      <input type="text" />
+    </div>
+
+    <div class="eval-field">
+      <label>Fecha próximo paso:</label>
+      <input type="date" />
+    </div>
+
+    <div class="notes-area" style="margin-top: 1.5rem; border-top: none;">
+      <label>Notas internas:</label>
+      <textarea></textarea>
+    </div>
+  </div>
+</body>
+</html>

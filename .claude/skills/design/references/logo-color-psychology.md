@@ -30,7 +30,7 @@
 ### Purple
 - **Psychology:** Creativity, wisdom, luxury, mystery
 - **Industries:** Beauty, creative, spiritual, premium
-- **Hex Examples:** Royal #7C3AED, Lavender #A78BFA, Deep #581C87
+- **Hex Examples:** Royal #7a68d6, Lavender #A78BFA, Deep #581C87
 - **Pairings:** Gold, white, pink
 
 ### Orange

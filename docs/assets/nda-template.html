@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acuerdo de Confidencialidad - Dasein Foresight</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-navy: #0A1628;
+            --color-blue: #4865ff;
+            --color-slate: #ede7dc;
+            --color-text: #1E293B;
+            --color-text-muted: #64748B;
+        }
+
+        body {
+            font-family: 'Space Grotesk', -apple-system, system-ui, sans-serif;
+            background-color: var(--color-navy);
+            color: var(--color-slate);
+            line-height: 1.6;
+            padding: 3rem 2rem;
+        }
+
+        .container {
+            max-width: 21cm;
+            margin: 0 auto;
+            background: #fff;
+            color: var(--color-text);
+            padding: 2.5cm;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .doc-title {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: var(--color-navy);
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .doc-subtitle {
+            font-size: 1.125rem;
+            color: var(--color-text-muted);
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .meta-info {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: var(--color-text);
+        }
+
+        .meta-info strong {
+            font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 700;
+        }
+
+        .placeholder {
+            color: var(--color-blue);
+            font-weight: 600;
+        }
+
+        .section {
+            margin-bottom: 2.5rem;
+        }
+
+        .clause-number {
+            font-family: 'Azeret Mono', monospace;
+            font-weight: 500;
+            color: var(--color-blue);
+            margin-bottom: 0.75rem;
+            font-size: 1.125rem;
+        }
+
+        .clause-title {
+            font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 700;
+            font-size: 1.125rem;
+            color: var(--color-navy);
+            margin-bottom: 0.75rem;
+        }
+
+        .clause-content {
+            color: var(--color-text);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .clause-content ul {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .clause-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .subsection {
+            margin-left: 1.5rem;
+            margin-top: 0.75rem;
+        }
+
+        .subsection-label {
+            font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .signatures {
+            margin-top: 4rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .signature-block {
+            border: 1px solid #e2e8f0;
+            padding: 1.5rem;
+        }
+
+        .signature-header {
+            font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 700;
+            color: var(--color-navy);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--color-blue);
+        }
+
+        .signature-field {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .signature-field strong {
+            font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+            display: inline-block;
+            width: 4.5rem;
+            font-weight: 700;
+        }
+
+        .signature-line {
+            display: inline-block;
+            border-bottom: 1px solid #94a3b8;
+            width: calc(100% - 5rem);
+            min-height: 1.5rem;
+        }
+
+        .footer {
+            margin-top: 4rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+            }
+
+            .container {
+                max-width: 100%;
+                box-shadow: none;
+                padding: 2.5cm;
+                margin: 0;
+                color: var(--color-text);
+            }
+
+            .placeholder {
+                color: var(--color-text);
+                font-weight: 600;
+                background: #f1f5f9;
+                padding: 0 0.25rem;
+            }
+
+            .clause-number {
+                color: var(--color-text);
+            }
+
+            .signature-header {
+                border-bottom-color: var(--color-text);
+            }
+
+            @page {
+                size: A4;
+                margin: 2.5cm;
+            }
+
+            .section {
+                page-break-inside: avoid;
+            }
+
+            .signatures {
+                page-break-before: avoid;
+                page-break-inside: avoid;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .container {
+                padding: 1.5rem;
+            }
+
+            .doc-title {
+                font-size: 1.75rem;
+            }
+
+            .signatures {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="doc-title">ACUERDO DE CONFIDENCIALIDAD</h1>
+            <p class="doc-subtitle">(Non-Disclosure Agreement)</p>
+            <div class="meta-info">
+                <p><strong>Entre:</strong> Dasein Foresight SpA ("La Consultora")</p>
+                <p><strong>Y:</strong> <span class="placeholder">[NOMBRE_EMPRESA]</span> ("El Cliente")</p>
+                <p><strong>Fecha:</strong> <span class="placeholder">[FECHA]</span></p>
+            </div>
+        </header>
+
+        <section class="section">
+            <div class="clause-number">1.</div>
+            <h2 class="clause-title">Definición de Información Confidencial</h2>
+            <div class="clause-content">
+                <p>Toda información técnica, comercial, financiera, estratégica, metodológica o de cualquier otra naturaleza que sea divulgada por cualquiera de las partes a la otra, ya sea de forma oral, escrita, electrónica o por cualquier otro medio, en el marco de <span class="placeholder">[DESCRIPCION_PROYECTO]</span>.</p>
+                <p style="margin-top: 1rem;"><strong>Incluye pero no se limita a:</strong></p>
+                <ul>
+                    <li>Datos operativos, financieros y comerciales</li>
+                    <li>Estrategias, planes y proyecciones</li>
+                    <li>Metodologías, algoritmos y modelos analíticos</li>
+                    <li>Resultados de análisis, simulaciones y escenarios</li>
+                    <li>Información sobre clientes, proveedores y socios</li>
+                    <li>Cualquier información marcada como "Confidencial"</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="clause-number">2.</div>
+            <h2 class="clause-title">Obligaciones de Confidencialidad</h2>
+            <div class="clause-content">
+                <p>Las partes se comprometen a:</p>
+                <div class="subsection">
+                    <div class="subsection-label">a) No divulgar la información confidencial a terceros sin autorización escrita previa</div>
+                </div>
+                <div class="subsection">
+                    <div class="subsection-label">b) Utilizar la información exclusivamente para los fines de <span class="placeholder">[DESCRIPCION_PROYECTO]</span></div>
+                </div>
+                <div class="subsection">
+                    <div class="subsection-label">c) Proteger la información con el mismo grado de cuidado que aplican a su propia información confidencial</div>
+                </div>
+                <div class="subsection">
+                    <div class="subsection-label">d) Limitar el acceso a empleados y asesores que necesiten conocerla, bajo obligaciones equivalentes</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="clause-number">3.</div>
+            <h2 class="clause-title">Excepciones</h2>
+            <div class="clause-content">
+                <p>No constituye información confidencial aquella que:</p>
+                <div class="subsection">
+                    <div class="subsection-label">a) Sea o se convierta en información de dominio público sin incumplimiento de este acuerdo</div>
+                </div>
+                <div class="subsection">
+                    <div class="subsection-label">b) Estuviera en posesión legítima de la parte receptora antes de su divulgación</div>
+                </div>
+                <div class="subsection">
+                    <div class="subsection-label">c) Sea desarrollada independientemente sin uso de información confidencial</div>
+                </div>
+                <div class="subsection">
+                    <div class="subsection-label">d) Deba ser divulgada por requerimiento legal o judicial</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="clause-number">4.</div>
+            <h2 class="clause-title">Propiedad Intelectual</h2>
+            <div class="clause-content">
+                <p>La información confidencial sigue siendo propiedad de la parte que la divulga. Este acuerdo no otorga licencia ni derecho alguno sobre propiedad intelectual.</p>
+                <p style="margin-top: 1rem;">Los entregables producidos por Dasein Foresight en el marco de <span class="placeholder">[DESCRIPCION_PROYECTO]</span> serán propiedad del Cliente una vez completado el pago. La metodología, herramientas y modelos analíticos de Dasein Foresight (incluyendo SignalTwin) permanecen como propiedad exclusiva de la Consultora.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="clause-number">5.</div>
+            <h2 class="clause-title">Vigencia</h2>
+            <div class="clause-content">
+                <p>Este acuerdo entrará en vigor a la fecha de firma y las obligaciones de confidencialidad permanecerán vigentes por un período de <span class="placeholder">[PERIODO_VIGENCIA]</span> desde la terminación de la relación comercial.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="clause-number">6.</div>
+            <h2 class="clause-title">Devolución de Información</h2>
+            <div class="clause-content">
+                <p>Al término de la relación o a solicitud de cualquiera de las partes, la parte receptora devolverá o destruirá toda la información confidencial recibida, incluyendo copias.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="clause-number">7.</div>
+            <h2 class="clause-title">Incumplimiento</h2>
+            <div class="clause-content">
+                <p>El incumplimiento de este acuerdo faculta a la parte afectada a ejercer las acciones legales correspondientes y reclamar la indemnización de perjuicios que procedan.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="clause-number">8.</div>
+            <h2 class="clause-title">Ley Aplicable y Jurisdicción</h2>
+            <div class="clause-content">
+                <p>Este acuerdo se rige por las leyes de la República de Chile. Cualquier controversia será sometida a los tribunales ordinarios de <span class="placeholder">[CIUDAD]</span>.</p>
+            </div>
+        </section>
+
+        <div class="signatures">
+            <div class="signature-block">
+                <div class="signature-header">Por Dasein Foresight SpA</div>
+                <div class="signature-field">
+                    <strong>Nombre:</strong><span class="signature-line"></span>
+                </div>
+                <div class="signature-field">
+                    <strong>RUT:</strong><span class="signature-line"></span>
+                </div>
+                <div class="signature-field">
+                    <strong>Cargo:</strong><span class="signature-line"></span>
+                </div>
+                <div class="signature-field">
+                    <strong>Firma:</strong><span class="signature-line"></span>
+                </div>
+                <div class="signature-field">
+                    <strong>Fecha:</strong><span class="signature-line"></span>
+                </div>
+            </div>
+
+            <div class="signature-block">
+                <div class="signature-header">Por <span class="placeholder">[NOMBRE_EMPRESA]</span></div>
+                <div class="signature-field">
+                    <strong>Nombre:</strong><span class="signature-line placeholder">[NOMBRE_REPRESENTANTE]</span>
+                </div>
+                <div class="signature-field">
+                    <strong>RUT:</strong><span class="signature-line placeholder">[RUT]</span>
+                </div>
+                <div class="signature-field">
+                    <strong>Cargo:</strong><span class="signature-line placeholder">[CARGO]</span>
+                </div>
+                <div class="signature-field">
+                    <strong>Firma:</strong><span class="signature-line"></span>
+                </div>
+                <div class="signature-field">
+                    <strong>Fecha:</strong><span class="signature-line"></span>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            Dasein Foresight SpA | Confidencial
+        </footer>
+    </div>
+</body>
+</html>

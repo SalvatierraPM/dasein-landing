@@ -31,7 +31,7 @@ Raw design values - foundation of the design system.
   --color-blue-200: #BFDBFE;
   --color-blue-300: #93C5FD;
   --color-blue-400: #60A5FA;
-  --color-blue-500: #3B82F6;
+  --color-blue-500: #4865ff;
   --color-blue-600: #2563EB;
   --color-blue-700: #1D4ED8;
   --color-blue-800: #1E40AF;

@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Declaración de Trabajo - Dasein Foresight</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-navy: #0A1628;
+            --color-blue: #4865ff;
+            --color-slate: #ede7dc;
+            --color-text: #1E293B;
+            --color-text-muted: #64748B;
+        }
+
+        body {
+            font-family: 'Space Grotesk', -apple-system, system-ui, sans-serif;
+            background-color: var(--color-navy);
+            color: var(--color-slate);
+            line-height: 1.6;
+            padding: 3rem 2rem;
+        }
+
+        .container {
+            max-width: 21cm;
+            margin: 0 auto;
+            background: #fff;
+            color: var(--color-text);
+            padding: 2.5cm;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .doc-title {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: var(--color-navy);
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .doc-subtitle {
+            font-size: 1.125rem;
+            color: var(--color-text-muted);
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .meta-info {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: var(--color-text);
+            text-align: left;
+            display: inline-block;
+        }
+
+        .meta-info div {
+            display: grid;
+            grid-template-columns: 8rem 1fr;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .meta-label {
+            font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 700;
+            color: var(--color-navy);
+        }
+
+        .placeholder {
+            color: var(--color-blue);
+            font-weight: 600;
+        }
+
+        .section {
+            margin-bottom: 2.5rem;
+        }
+
+        .clause-number {
+            font-family: 'Azeret Mono', monospace;
+            font-weight: 500;
+            color: var(--color-blue);
+            margin-bottom: 0.75rem;
+            font-size: 1.125rem;
+        }
+
+        .clause-title {
+            font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 700;
+            font-size: 1.125rem;
+            color: var(--color-navy);
+            margin-bottom: 0.75rem;
+        }
+
+        .clause-content {
+            color: var(--color-text);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .clause-content ul {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .clause-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .subsection {
+            margin-bottom: 0.75rem;
+        }
+
+        .subsection-label {
+            font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        th {
+            font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--color-navy);
+            color: #fff;
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 700;
+            border: 1px solid var(--color-navy);
+        }
+
+        td {
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        .table-total {
+            font-weight: 700;
+            background-color: #f1f5f9;
+        }
+
+        .signatures {
+            margin-top: 4rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .signature-block {
+            border: 1px solid #e2e8f0;
+            padding: 1.5rem;
+        }
+
+        .signature-header {
+            font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 700;
+            color: var(--color-navy);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--color-blue);
+        }
+
+        .signature-field {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .signature-field strong {
+            font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+            display: inline-block;
+            width: 4.5rem;
+            font-weight: 700;
+        }
+
+        .signature-line {
+            display: inline-block;
+            border-bottom: 1px solid #94a3b8;
+            width: calc(100% - 5rem);
+            min-height: 1.5rem;
+        }
+
+        .footer {
+            margin-top: 4rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+            }
+
+            .container {
+                max-width: 100%;
+                box-shadow: none;
+                padding: 2.5cm;
+                margin: 0;
+                color: var(--color-text);
+            }
+
+            .placeholder {
+                color: var(--color-text);
+                font-weight: 600;
+                background: #f1f5f9;
+                padding: 0 0.25rem;
+            }
+
+            .clause-number {
+                color: var(--color-text);
+            }
+
+            .signature-header {
+                border-bottom-color: var(--color-text);
+            }
+
+            th {
+                background-color: #1e293b;
+                color: #fff;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            tr:nth-child(even) {
+                background-color: #f8fafc;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .table-total {
+                background-color: #f1f5f9;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            @page {
+                size: A4;
+                margin: 2.5cm;
+            }
+
+            .section {
+                page-break-inside: avoid;
+            }
+
+            table {
+                page-break-inside: avoid;
+            }
+
+            .signatures {
+                page-break-before: avoid;
+                page-break-inside: avoid;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .container {
+                padding: 1.5rem;
+            }
+
+            .doc-title {
+                font-size: 1.75rem;
+            }
+
+            .meta-info div {
+                grid-template-columns: 1fr;
+                gap: 0.25rem;
+            }
+
+            .signatures {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            table {
+                font-size: 0.8rem;
+            }
+
+            th, td {
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="doc-title">DECLARACIÓN DE TRABAJO</h1>
+            <p class="doc-subtitle">(Statement of Work)</p>
+            <div class="meta-info">
+                <div>
+                    <span class="meta-label">Proyecto:</span>
+                    <span class="placeholder">[NOMBRE_PROYECTO]</span>
+                </div>
+                <div>
+                    <span class="meta-label">Cliente:</span>
+                    <span class="placeholder">[NOMBRE_EMPRESA]</span>
+                </div>
+                <div>
+                    <span class="meta-label">Referencia:</span>
+                    <span class="placeholder">SOW-[AÑO]-[NUMERO]</span>
+                </div>
+                <div>
+                    <span class="meta-label">Fecha:</span>
+                    <span class="placeholder">[FECHA]</span>
+                </div>
+            </div>
+        </header>
+
+        <section class="section">
+            <div class="clause-number">1.</div>
+            <h2 class="clause-title">Partes</h2>
+            <div class="clause-content">
+                <ul>
+                    <li><strong>Dasein Foresight SpA</strong>, RUT <span class="placeholder">[RUT_DASEIN]</span>, representada por <span class="placeholder">[NOMBRE_REPRESENTANTE_DASEIN]</span> ("La Consultora")</li>
+                    <li><strong><span class="placeholder">[NOMBRE_EMPRESA]</span></strong>, RUT <span class="placeholder">[RUT_CLIENTE]</span>, representada por <span class="placeholder">[NOMBRE_REPRESENTANTE_CLIENTE]</span> ("El Cliente")</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="clause-number">2.</div>
+            <h2 class="clause-title">Antecedentes</h2>
+            <div class="clause-content">
+                <p><span class="placeholder">[DESCRIPCION_CONTEXTO — descripción del contexto que motiva este trabajo, la situación del cliente, y la necesidad estratégica identificada]</span></p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="clause-number">3.</div>
+            <h2 class="clause-title">Objetivo del Trabajo</h2>
+            <div class="clause-content">
+                <p><span class="placeholder">[OBJETIVO — descripción clara del objetivo del análisis prospectivo]</span></p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="clause-number">4.</div>
+            <h2 class="clause-title">Servicio Contratado</h2>
+            <div class="clause-content">
+                <p><strong><span class="placeholder">[NOMBRE_SERVICIO]</span>:</strong> <span class="placeholder">[Lectura de Campo / Simulación Estratégica / Radar Estratégico]</span></p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="clause-number">5.</div>
+            <h2 class="clause-title">Alcance</h2>
+            <div class="clause-content">
+                <div class="subsection">
+                    <div class="subsection-label">5.1 Incluido:</div>
+                    <ul>
+                        <li><span class="placeholder">[ITEM_INCLUIDO_1]</span></li>
+                        <li><span class="placeholder">[ITEM_INCLUIDO_2]</span></li>
+                        <li><span class="placeholder">[ITEM_INCLUIDO_3]</span></li>
+                    </ul>
+                </div>
+                <div class="subsection">
+                    <div class="subsection-label">5.2 No incluido:</div>
+                    <ul>
+                        <li>Implementación de recomendaciones</li>
+                        <li>Desarrollo de software</li>
+                        <li><span class="placeholder">[EXCLUSION_ADICIONAL]</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="clause-number">6.</div>
+            <h2 class="clause-title">Entregables</h2>
+            <div class="clause-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 5%;">#</th>
+                            <th style="width: 30%;">Entregable</th>
+                            <th style="width: 45%;">Descripción</th>
+                            <th style="width: 20%;">Fecha estimada</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><span class="placeholder">[ENTREGABLE_1]</span></td>
+                            <td><span class="placeholder">[DESCRIPCION]</span></td>
+                            <td><span class="placeholder">[FECHA]</span></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><span class="placeholder">[ENTREGABLE_2]</span></td>
+                            <td><span class="placeholder">[DESCRIPCION]</span></td>
+                            <td><span class="placeholder">[FECHA]</span></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><span class="placeholder">[ENTREGABLE_3]</span></td>
+                            <td><span class="placeholder">[DESCRIPCION]</span></td>
+                            <td><span class="placeholder">[FECHA]</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="clause-number">7.</div>
+            <h2 class="clause-title">Cronograma</h2>
+            <div class="clause-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 10%;">Fase</th>
+                            <th style="width: 40%;">Actividad</th>
+                            <th style="width: 15%;">Duración</th>
+                            <th style="width: 17.5%;">Inicio</th>
+                            <th style="width: 17.5%;">Fin</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><span class="placeholder">[FASE_1]</span></td>
+                            <td><span class="placeholder">[DURACION]</span></td>
+                            <td><span class="placeholder">[FECHA]</span></td>
+                            <td><span class="placeholder">[FECHA]</span></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><span class="placeholder">[FASE_2]</span></td>
+                            <td><span class="placeholder">[DURACION]</span></td>
+                            <td><span class="placeholder">[FECHA]</span></td>
+                            <td><span class="placeholder">[FECHA]</span></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><span class="placeholder">[FASE_3]</span></td>
+                            <td><span class="placeholder">[DURACION]</span></td>
+                            <td><span class="placeholder">[FECHA]</span></td>
+                            <td><span class="placeholder">[FECHA]</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="margin-top: 1rem;"><strong>Duración total estimada:</strong> <span class="placeholder">[DURACION_TOTAL]</span></p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="clause-number">8.</div>
+            <h2 class="clause-title">Requerimientos del Cliente</h2>
+            <div class="clause-content">
+                <p>Para la ejecución del trabajo, el Cliente se compromete a proporcionar:</p>
+                <ul>
+                    <li><span class="placeholder">[REQUERIMIENTO_1 — e.g., acceso a documentación interna relevante]</span></li>
+                    <li><span class="placeholder">[REQUERIMIENTO_2 — e.g., disponibilidad de stakeholders para entrevistas]</span></li>
+                    <li><span class="placeholder">[REQUERIMIENTO_3 — e.g., punto de contacto designado]</span></li>
+                </ul>
+                <p style="margin-top: 1rem;">Demoras en la entrega de insumos podrán afectar el cronograma.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="clause-number">9.</div>
+            <h2 class="clause-title">Inversión y Forma de Pago</h2>
+            <div class="clause-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 70%;">Concepto</th>
+                            <th style="width: 30%;">Monto (USD)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="placeholder">[SERVICIO]</span></td>
+                            <td><span class="placeholder">[MONTO]</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="placeholder">[ADICIONAL — si aplica]</span></td>
+                            <td><span class="placeholder">[MONTO]</span></td>
+                        </tr>
+                        <tr class="table-total">
+                            <td><strong>Total</strong></td>
+                            <td><strong><span class="placeholder">[MONTO_TOTAL]</span></strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><strong>Forma de pago:</strong></p>
+                <ul>
+                    <li><span class="placeholder">[PORCENTAJE]</span>% al inicio del trabajo</li>
+                    <li><span class="placeholder">[PORCENTAJE]</span>% contra entrega del entregable final</li>
+                </ul>
+                <p style="margin-top: 1rem;"><strong>Facturación:</strong> <span class="placeholder">[CONDICIONES_FACTURACION]</span></p>
+                <p><strong>Moneda:</strong> Dólares estadounidenses (USD). Pago en CLP al tipo de cambio del día de facturación.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="clause-number">10.</div>
+            <h2 class="clause-title">Confidencialidad</h2>
+            <div class="clause-content">
+                <p>Este trabajo se rige por el Acuerdo de Confidencialidad firmado entre las partes con fecha <span class="placeholder">[FECHA_NDA]</span>.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="clause-number">11.</div>
+            <h2 class="clause-title">Propiedad Intelectual</h2>
+            <div class="clause-content">
+                <p>Los entregables producidos serán propiedad del Cliente una vez completado el pago total.</p>
+                <p style="margin-top: 0.5rem;">La metodología, herramientas, modelos y sistema SignalTwin son y permanecen propiedad exclusiva de Dasein Foresight.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="clause-number">12.</div>
+            <h2 class="clause-title">Modificaciones</h2>
+            <div class="clause-content">
+                <p>Cualquier cambio en el alcance, cronograma o inversión deberá ser acordado por escrito entre las partes.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="clause-number">13.</div>
+            <h2 class="clause-title">Terminación</h2>
+            <div class="clause-content">
+                <p>Cualquiera de las partes podrá terminar este SOW con <span class="placeholder">[DIAS_PREAVISO]</span> días de preaviso por escrito. En caso de terminación, el Cliente pagará por el trabajo efectivamente realizado hasta la fecha.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="clause-number">14.</div>
+            <h2 class="clause-title">Ley Aplicable</h2>
+            <div class="clause-content">
+                <p>Este documento se rige por las leyes de la República de Chile.</p>
+            </div>
+        </section>
+
+        <div class="signatures">
+            <div class="signature-block">
+                <div class="signature-header">Por Dasein Foresight SpA</div>
+                <div class="signature-field">
+                    <strong>Nombre:</strong><span class="signature-line"></span>
+                </div>
+                <div class="signature-field">
+                    <strong>RUT:</strong><span class="signature-line"></span>
+                </div>
+                <div class="signature-field">
+                    <strong>Cargo:</strong><span class="signature-line"></span>
+                </div>
+                <div class="signature-field">
+                    <strong>Firma:</strong><span class="signature-line"></span>
+                </div>
+                <div class="signature-field">
+                    <strong>Fecha:</strong><span class="signature-line"></span>
+                </div>
+            </div>
+
+            <div class="signature-block">
+                <div class="signature-header">Por <span class="placeholder">[NOMBRE_EMPRESA]</span></div>
+                <div class="signature-field">
+                    <strong>Nombre:</strong><span class="signature-line placeholder">[NOMBRE_REPRESENTANTE]</span>
+                </div>
+                <div class="signature-field">
+                    <strong>RUT:</strong><span class="signature-line placeholder">[RUT]</span>
+                </div>
+                <div class="signature-field">
+                    <strong>Cargo:</strong><span class="signature-line placeholder">[CARGO]</span>
+                </div>
+                <div class="signature-field">
+                    <strong>Firma:</strong><span class="signature-line"></span>
+                </div>
+                <div class="signature-field">
+                    <strong>Fecha:</strong><span class="signature-line"></span>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            Dasein Foresight SpA | <span class="placeholder">SOW-[AÑO]-[NUMERO]</span> | Confidencial
+        </footer>
+    </div>
+</body>
+</html>

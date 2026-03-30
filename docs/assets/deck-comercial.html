@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dasein Foresight — Deck Comercial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --deep-navy: #0A1628;
+      --signal-blue: #4865ff;
+      --horizon-violet: #7a68d6;
+      --teal: #2f9e90;
+      --slate-white: #ede7dc;
+      --muted: #8899AA;
+      --surface: #111D2E;
+    }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--deep-navy);
+      color: var(--slate-white);
+      overflow: hidden;
+      line-height: 1.6;
+    }
+
+    .deck {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 4rem 6rem;
+      opacity: 0;
+      transform: translateX(100%);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      pointer-events: none;
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    .slide.exiting {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+
+    /* Slide counter */
+    .slide-counter {
+      position: fixed;
+      top: 2rem;
+      right: 2rem;
+      font-family: 'Azeret Mono', monospace;
+      font-size: 0.875rem;
+      color: var(--muted);
+      z-index: 1000;
+    }
+
+    /* Navigation dots */
+    .nav-dots {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 0.75rem;
+      z-index: 1000;
+    }
+
+    .nav-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--muted);
+      opacity: 0.3;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      padding: 0;
+    }
+
+    .nav-dot:hover {
+      opacity: 0.6;
+    }
+
+    .nav-dot.active {
+      background: var(--signal-blue);
+      opacity: 1;
+      width: 24px;
+      border-radius: 4px;
+    }
+
+    /* Typography */
+    .slide h1 {
+      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+      font-size: clamp(3rem, 5vw, 5rem);
+      font-weight: 900;
+      letter-spacing: -0.035em;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      max-width: 1200px;
+      text-align: center;
+    }
+
+    .slide h2 {
+      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 2rem;
+      max-width: 1100px;
+      text-align: center;
+    }
+
+    .slide h3 {
+      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .tagline {
+      font-size: clamp(1.125rem, 1.5vw, 1.5rem);
+      color: var(--muted);
+      font-weight: 400;
+      max-width: 800px;
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+      font-size: clamp(0.875rem, 1.1vw, 1.125rem);
+      color: var(--teal);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+
+    /* Slide 1 — Cover */
+    .slide-cover h1 {
+      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+      font-size: clamp(4rem, 7vw, 7rem);
+      font-weight: 900;
+      margin-bottom: 1rem;
+    }
+
+    /* Slide 2 — Problema */
+    .problem-intro {
+      font-size: clamp(1.5rem, 2.2vw, 2.25rem);
+      max-width: 900px;
+      text-align: center;
+      margin-bottom: 3rem;
+      line-height: 1.4;
+      color: var(--slate-white);
+    }
+
+    .pain-points {
+      display: flex;
+      gap: 2rem;
+      max-width: 1100px;
+      margin-bottom: 2.5rem;
+    }
+
+    .pain-point {
+      flex: 1;
+      padding: 1.5rem;
+      border: 1px solid rgba(136, 153, 170, 0.2);
+      background: rgba(17, 29, 46, 0.4);
+      border-radius: 4px;
+    }
+
+    .pain-point::before {
+      content: '—';
+      color: var(--signal-blue);
+      margin-right: 0.5rem;
+      font-weight: 700;
+    }
+
+    .problem-conclusion {
+      font-size: clamp(1.125rem, 1.5vw, 1.5rem);
+      color: var(--signal-blue);
+      font-weight: 500;
+      font-style: italic;
+    }
+
+    /* Slide 3 — Qué hacemos */
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    .column h3 {
+      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+      color: var(--signal-blue);
+      margin-bottom: 1.5rem;
+      font-size: clamp(1.25rem, 1.8vw, 1.75rem);
+      font-weight: 700;
+    }
+
+    .column ul {
+      list-style: none;
+    }
+
+    .column li {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(136, 153, 170, 0.15);
+      font-size: clamp(1rem, 1.2vw, 1.125rem);
+    }
+
+    .column li:last-child {
+      border-bottom: none;
+    }
+
+    .column.vendemos li::before {
+      content: '✓';
+      color: var(--teal);
+      margin-right: 0.75rem;
+      font-weight: 700;
+    }
+
+    .column.no-vendemos li::before {
+      content: '✗';
+      color: var(--muted);
+      margin-right: 0.75rem;
+    }
+
+    /* Slide 4 — Metodología */
+    .methodology-flow {
+      display: flex;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 2rem 0 2.5rem 0;
+    }
+
+    .method-step {
+      flex: 1;
+      padding: 1.5rem;
+      background: var(--surface);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 4px;
+      position: relative;
+    }
+
+    .method-step::after {
+      content: '→';
+      position: absolute;
+      right: -1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--signal-blue);
+      font-size: 1.5rem;
+    }
+
+    .method-step:last-child::after {
+      display: none;
+    }
+
+    .method-number {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 2rem;
+      font-weight: 500;
+      color: var(--signal-blue);
+      margin-bottom: 0.5rem;
+    }
+
+    .method-title {
+      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--slate-white);
+    }
+
+    .method-desc {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .methodology-note {
+      max-width: 1000px;
+      padding: 1.5rem;
+      background: rgba(124, 58, 237, 0.1);
+      border-left: 3px solid var(--horizon-violet);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* Slide 5 — Servicios */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 1300px;
+      width: 100%;
+    }
+
+    .service-card {
+      padding: 2rem;
+      background: var(--surface);
+      border: 1px solid rgba(136, 153, 170, 0.2);
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-card.featured {
+      border: 2px solid var(--signal-blue);
+      transform: scale(1.02);
+    }
+
+    .service-header {
+      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      margin-bottom: 0.5rem;
+      color: var(--slate-white);
+    }
+
+    .service-badge {
+      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--teal);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .service-badge.featured::before {
+      content: '★';
+      color: var(--signal-blue);
+    }
+
+    .service-desc {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      flex: 1;
+      line-height: 1.6;
+    }
+
+    .service-duration {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(136, 153, 170, 0.15);
+    }
+
+    .service-price {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--signal-blue);
+      margin-top: 0.5rem;
+    }
+
+    /* Slide 6 — Caso BancoEstado */
+    .case-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 2rem 0 2.5rem 0;
+    }
+
+    .metric {
+      text-align: center;
+    }
+
+    .metric-value {
+      font-family: 'Azeret Mono', monospace;
+      font-size: clamp(2.5rem, 4vw, 3.5rem);
+      font-weight: 500;
+      color: var(--signal-blue);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .metric-label {
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .case-insight {
+      max-width: 900px;
+      padding: 1.5rem 2rem;
+      background: rgba(20, 184, 166, 0.1);
+      border-left: 3px solid var(--teal);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+      font-size: 1.05rem;
+    }
+
+    .case-quote {
+      max-width: 800px;
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: var(--slate-white);
+      text-align: center;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    .case-disclaimer {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* Slide 7 — Por qué Dasein */
+    .differentiators {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      max-width: 1200px;
+    }
+
+    .differentiator {
+      padding: 1.5rem;
+      background: rgba(17, 29, 46, 0.6);
+      border-left: 3px solid var(--signal-blue);
+    }
+
+    .diff-number {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 1.5rem;
+      color: var(--signal-blue);
+      margin-bottom: 0.5rem;
+    }
+
+    .diff-title {
+      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--slate-white);
+    }
+
+    .diff-desc {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* Slide 8 — Buscamos */
+    .seeking-intro {
+      font-size: 1.25rem;
+      max-width: 800px;
+      text-align: center;
+      margin-bottom: 2.5rem;
+      color: var(--muted);
+    }
+
+    .seeking-list {
+      max-width: 900px;
+      margin-bottom: 2.5rem;
+    }
+
+    .seeking-item {
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      background: var(--surface);
+      border-left: 3px solid var(--teal);
+    }
+
+    .seeking-title {
+      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--signal-blue);
+      margin-bottom: 0.5rem;
+    }
+
+    .seeking-desc {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .seeking-footer {
+      font-size: 1.25rem;
+      color: var(--slate-white);
+      font-style: italic;
+      font-weight: 500;
+    }
+
+    /* Slide 9 — CTA */
+    .cta-title {
+      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+      font-size: clamp(2.5rem, 4.5vw, 4rem);
+      font-weight: 900;
+      margin-bottom: 2rem;
+    }
+
+    .cta-subtitle {
+      font-size: 1.5rem;
+      max-width: 700px;
+      text-align: center;
+      margin-bottom: 3rem;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    .cta-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .cta-link {
+      font-size: 1.5rem;
+      color: var(--signal-blue);
+      text-decoration: none;
+      padding: 0.75rem 2rem;
+      border: 1px solid var(--signal-blue);
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+
+    .cta-link:hover {
+      background: var(--signal-blue);
+      color: var(--deep-navy);
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        overflow: visible;
+      }
+
+      .deck {
+        height: auto;
+      }
+
+      .slide {
+        position: relative;
+        opacity: 1 !important;
+        transform: none !important;
+        pointer-events: auto !important;
+        page-break-after: always;
+        height: 100vh;
+        width: 100vw;
+      }
+
+      .nav-dots,
+      .slide-counter {
+        display: none;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .slide {
+        padding: 3rem 2rem;
+      }
+
+      .pain-points,
+      .methodology-flow,
+      .services-grid,
+      .differentiators {
+        flex-direction: column;
+        grid-template-columns: 1fr;
+      }
+
+      .two-column {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .method-step::after {
+        display: none;
+      }
+
+      .case-metrics {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .slide {
+        padding: 2rem 1.5rem;
+      }
+
+      .slide-counter {
+        top: 1rem;
+        right: 1rem;
+      }
+
+      .nav-dots {
+        bottom: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck">
+    <!-- Slide counter -->
+    <div class="slide-counter">
+      <span id="current-slide">1</span>/<span id="total-slides">9</span>
+    </div>
+
+    <!-- Slide 1 — Cover -->
+    <div class="slide slide-cover active" data-slide="1">
+      <h1>Dasein Foresight</h1>
+      <p class="tagline">Simulamos futuros para que decidas mejor hoy.</p>
+      <p class="subtitle">Prospectiva estratégica potenciada por IA</p>
+    </div>
+
+    <!-- Slide 2 — El problema -->
+    <div class="slide" data-slide="2">
+      <h2>Las organizaciones toman decisiones estratégicas con herramientas que no están diseñadas para la incertidumbre.</h2>
+      <div class="pain-points">
+        <div class="pain-point">Exceso de ruido, poco criterio</div>
+        <div class="pain-point">Decisiones por moda o presión del entorno</div>
+        <div class="pain-point">Consultoría tradicional: abstracta o poco accionable</div>
+      </div>
+      <p class="problem-conclusion">El mundo cambió. La forma de decidir, no.</p>
+    </div>
+
+    <!-- Slide 3 — Qué hacemos -->
+    <div class="slide" data-slide="3">
+      <h2>No vendemos predicciones. Vendemos claridad estratégica.</h2>
+      <div class="two-column">
+        <div class="column vendemos">
+          <h3>Vendemos</h3>
+          <ul>
+            <li>Exploración de escenarios plausibles</li>
+            <li>Evaluación de riesgos y oportunidades</li>
+            <li>Señales relevantes con umbrales concretos</li>
+            <li>Recomendaciones accionables con roadmap</li>
+          </ul>
+        </div>
+        <div class="column no-vendemos">
+          <h3>No vendemos</h3>
+          <ul>
+            <li>Software o licencias SaaS</li>
+            <li>Predicciones mágicas</li>
+            <li>Dashboards vacíos</li>
+            <li>Decks cosméticos sin criterio</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4 — Cómo funciona -->
+    <div class="slide" data-slide="4">
+      <h2>Cuatro capas de inteligencia prospectiva</h2>
+      <div class="methodology-flow">
+        <div class="method-step">
+          <div class="method-number">1</div>
+          <div class="method-title">Escaneo de Señales</div>
+          <div class="method-desc">Identificación de señales relevantes en el entorno</div>
+        </div>
+        <div class="method-step">
+          <div class="method-number">2</div>
+          <div class="method-title">Modelo Ontológico</div>
+          <div class="method-desc">Estructuración del dominio estratégico</div>
+        </div>
+        <div class="method-step">
+          <div class="method-number">3</div>
+          <div class="method-title">Simulación Dual-World</div>
+          <div class="method-desc">Modelado de escenarios y decisiones</div>
+        </div>
+        <div class="method-step">
+          <div class="method-number">4</div>
+          <div class="method-title">Traducción Estratégica</div>
+          <div class="method-desc">Recomendaciones accionables</div>
+        </div>
+      </div>
+      <div class="methodology-note">
+        <strong>Motor interno: SignalTwin</strong> — simulación con agentes que tienen posiciones reales, memoria persistente y presión lingüística.
+      </div>
+    </div>
+
+    <!-- Slide 5 — Servicios -->
+    <div class="slide" data-slide="5">
+      <h2>Servicios</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-header">Lectura de Campo</div>
+          <div class="service-badge">Puerta de entrada</div>
+          <div class="service-desc">15-25 señales + memo ejecutivo + stakeholders mapeados + signposts con umbrales</div>
+          <div class="service-duration">Duración: 5 días</div>
+          <div class="service-price">Desde USD 2,500</div>
+        </div>
+
+        <div class="service-card featured">
+          <div class="service-header">Simulación Estratégica</div>
+          <div class="service-badge featured">Más popular</div>
+          <div class="service-desc">Simulación dual-world + escenarios + dashboard interactivo + workshop de síntesis</div>
+          <div class="service-duration">Duración: 4-5 semanas</div>
+          <div class="service-price">Desde USD 12,000</div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-header">Radar Estratégico</div>
+          <div class="service-badge">Monitoreo continuo</div>
+          <div class="service-desc">Monitoreo mensual + simulación trimestral + alertas automáticas + acceso a plataforma</div>
+          <div class="service-duration">Duración: Mínimo 6 meses</div>
+          <div class="service-price">Desde USD 5,000/mes</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 6 — Caso BancoEstado -->
+    <div class="slide" data-slide="6">
+      <h2>BancoEstado: anticipando la IA en banca pública</h2>
+      <div class="case-metrics">
+        <div class="metric">
+          <div class="metric-value">15</div>
+          <div class="metric-label">stakeholders mapeados</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">4</div>
+          <div class="metric-label">escenarios evaluados</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">3</div>
+          <div class="metric-label">opciones testeadas</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">~580</div>
+          <div class="metric-label">acciones simuladas</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">42</div>
+          <div class="metric-label">fuentes consultadas</div>
+        </div>
+      </div>
+      <div class="case-insight">
+        <strong>Key insight:</strong> La Opción B (Inclusión Inteligente) es la única que funciona en los 4 mundos posibles. No es la óptima en ninguno — pero es la única que no genera crisis en ninguno.
+      </div>
+      <p class="case-quote">"Por primera vez tuvimos un lenguaje común para hablar de cómo la IA va a cambiar nuestro negocio."</p>
+      <p class="case-disclaimer">Caso elaborado con información pública para demostrar capacidades analíticas.</p>
+    </div>
+
+    <!-- Slide 7 — Por qué Dasein -->
+    <div class="slide" data-slide="7">
+      <h2>Nuestra diferencia</h2>
+      <div class="differentiators">
+        <div class="differentiator">
+          <div class="diff-number">01</div>
+          <div class="diff-title">Motor propio de simulación (SignalTwin)</div>
+          <div class="diff-desc">No opinión, simulación auditable con agentes que tienen posiciones reales y memoria persistente.</div>
+        </div>
+        <div class="differentiator">
+          <div class="diff-number">02</div>
+          <div class="diff-title">Análisis de robustez</div>
+          <div class="diff-desc">No "escenario optimista vs pesimista", sino qué decisión resiste todos los mundos posibles.</div>
+        </div>
+        <div class="differentiator">
+          <div class="diff-number">03</div>
+          <div class="diff-title">Signposts con umbrales</div>
+          <div class="diff-desc">Señales concretas con triggers de acción, no generalidades abstractas.</div>
+        </div>
+        <div class="differentiator">
+          <div class="diff-number">04</div>
+          <div class="diff-title">Recomendaciones accionables</div>
+          <div class="diff-desc">Memo ejecutivo que orienta la decisión, no documento académico de 80 páginas.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 8 — Buscamos -->
+    <div class="slide" data-slide="8">
+      <h2>Buscamos</h2>
+      <p class="seeking-intro">Etapa actual: sistema funcionando, dos casos demostrativos.</p>
+      <div class="seeking-list">
+        <div class="seeking-item">
+          <div class="seeking-title">Pilotos</div>
+          <div class="seeking-desc">Organizaciones con decisiones estratégicas complejas: inversiones de infraestructura, transformación digital, posicionamiento sectorial, regulación.</div>
+        </div>
+        <div class="seeking-item">
+          <div class="seeking-title">Alianzas</div>
+          <div class="seeking-desc">Consultoras de cambio organizacional, implementadores de IA, think tanks, equipos de estrategia corporativa.</div>
+        </div>
+        <div class="seeking-item">
+          <div class="seeking-title">Equipo</div>
+          <div class="seeking-desc">Prospectiva estratégica, IA y simulación social, ciencia social computacional, diseño de producto.</div>
+        </div>
+      </div>
+      <p class="seeking-footer">"Donde termina nuestro trabajo, empieza el tuyo."</p>
+    </div>
+
+    <!-- Slide 9 — CTA -->
+    <div class="slide" data-slide="9">
+      <h2 class="cta-title">El futuro no espera. Hablemos del tuyo.</h2>
+      <p class="cta-subtitle">Agenda una conversación exploratoria de 30 minutos. Sin compromiso. Sin PowerPoints.</p>
+      <div class="cta-contact">
+        <a href="mailto:info@daseinforesight.com" class="cta-link">info@daseinforesight.com</a>
+        <a href="https://daseinforesight.com" class="cta-link" target="_blank">daseinforesight.com</a>
+      </div>
+    </div>
+
+    <!-- Navigation dots -->
+    <div class="nav-dots">
+      <button class="nav-dot active" data-slide="1"></button>
+      <button class="nav-dot" data-slide="2"></button>
+      <button class="nav-dot" data-slide="3"></button>
+      <button class="nav-dot" data-slide="4"></button>
+      <button class="nav-dot" data-slide="5"></button>
+      <button class="nav-dot" data-slide="6"></button>
+      <button class="nav-dot" data-slide="7"></button>
+      <button class="nav-dot" data-slide="8"></button>
+      <button class="nav-dot" data-slide="9"></button>
+    </div>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const navDots = document.querySelectorAll('.nav-dot');
+    const currentSlideEl = document.getElementById('current-slide');
+    const totalSlidesEl = document.getElementById('total-slides');
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+
+    totalSlidesEl.textContent = totalSlides;
+
+    function goToSlide(index) {
+      if (index < 0 || index >= totalSlides) return;
+
+      // Mark current slide as exiting
+      slides[currentSlide].classList.remove('active');
+      slides[currentSlide].classList.add('exiting');
+      navDots[currentSlide].classList.remove('active');
+
+      // Update to new slide
+      currentSlide = index;
+      slides[currentSlide].classList.remove('exiting');
+      slides[currentSlide].classList.add('active');
+      navDots[currentSlide].classList.add('active');
+      currentSlideEl.textContent = currentSlide + 1;
+
+      // Remove exiting class after transition
+      setTimeout(() => {
+        slides.forEach(slide => slide.classList.remove('exiting'));
+      }, 500);
+    }
+
+    function nextSlide() {
+      goToSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      goToSlide(currentSlide - 1);
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        goToSlide(0);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        goToSlide(totalSlides - 1);
+      }
+    });
+
+    // Navigation dot clicks
+    navDots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        goToSlide(index);
+      });
+    });
+
+    // Swipe support for touch devices
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    document.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      if (touchEndX < touchStartX - 50) {
+        nextSlide();
+      }
+      if (touchEndX > touchStartX + 50) {
+        prevSlide();
+      }
+    }
+  </script>
+</body>
+</html>

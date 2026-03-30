@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pipeline de Ventas — Dasein Foresight</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Azeret+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #0A1628;
+      --surface: #111D2E;
+      --text: #ede7dc;
+      --muted: #8899AA;
+      --accent: #4865ff;
+      --border: rgba(136, 153, 170, 0.2);
+    }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 3rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 700;
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 700;
+      font-size: 1.75rem;
+      margin: 3rem 0 1.5rem 0;
+      letter-spacing: -0.015em;
+    }
+
+    .subtitle {
+      font-size: 1.125rem;
+      color: var(--muted);
+      margin-bottom: 3rem;
+      font-weight: 500;
+    }
+
+    .pipeline-flow {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 3rem 0 4rem 0;
+      padding: 2.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+
+    .pipeline-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      min-width: 140px;
+    }
+
+    .pipeline-number {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Azeret Mono', monospace;
+      font-size: 1.5rem;
+      font-weight: 500;
+    }
+
+    .pipeline-connector {
+      height: 2px;
+      width: 40px;
+      background: var(--border);
+      margin: 0 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .pipeline-label {
+      font-weight: 600;
+      text-align: center;
+      font-size: 0.875rem;
+      color: var(--text);
+    }
+
+    .rules-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+
+    .rules-box ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .rules-box li {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .rules-box li:last-child {
+      border-bottom: none;
+    }
+
+    .rules-box li::before {
+      content: '•';
+      color: var(--accent);
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    thead {
+      background: rgba(59, 130, 246, 0.1);
+    }
+
+    th {
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border);
+      color: var(--accent);
+    }
+
+    td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr:hover {
+      background: rgba(59, 130, 246, 0.05);
+    }
+
+    .stage-number {
+      font-family: 'Azeret Mono', monospace;
+      font-weight: 500;
+      color: var(--accent);
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .metric-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem;
+    }
+
+    .metric-label {
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .metric-value {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--accent);
+    }
+
+    .info-box {
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .info-box strong {
+      color: var(--accent);
+    }
+
+    @media print {
+      body {
+        background: white;
+        color: #0A1628;
+        padding: 1.5cm;
+      }
+
+      :root {
+        --bg: white;
+        --surface: white;
+        --text: #0A1628;
+        --muted: #555;
+        --accent: #4865ff;
+        --border: #ddd;
+      }
+
+      h1, h2 {
+        color: #0A1628;
+      }
+
+      .pipeline-flow {
+        background: white;
+      }
+
+      .rules-box {
+        background: white;
+      }
+
+      table {
+        background: white;
+      }
+
+      .metric-card {
+        background: white;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Pipeline de Ventas</h1>
+  <p class="subtitle">6 etapas. No inventes más.</p>
+
+  <div class="pipeline-flow">
+    <div class="pipeline-stage">
+      <div class="pipeline-number">1</div>
+      <div class="pipeline-label">Lead nuevo</div>
+    </div>
+    <div class="pipeline-connector"></div>
+    <div class="pipeline-stage">
+      <div class="pipeline-number">2</div>
+      <div class="pipeline-label">Calificado</div>
+    </div>
+    <div class="pipeline-connector"></div>
+    <div class="pipeline-stage">
+      <div class="pipeline-number">3</div>
+      <div class="pipeline-label">Llamada agendada</div>
+    </div>
+    <div class="pipeline-connector"></div>
+    <div class="pipeline-stage">
+      <div class="pipeline-number">4</div>
+      <div class="pipeline-label">Propuesta enviada</div>
+    </div>
+    <div class="pipeline-connector"></div>
+    <div class="pipeline-stage">
+      <div class="pipeline-number">5</div>
+      <div class="pipeline-label">Negociación</div>
+    </div>
+    <div class="pipeline-connector"></div>
+    <div class="pipeline-stage">
+      <div class="pipeline-number">6</div>
+      <div class="pipeline-label">Ganado / Perdido</div>
+    </div>
+  </div>
+
+  <h2>Etapas</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Etapa</th>
+        <th>Definición</th>
+        <th>Acción requerida</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="stage-number">1</td>
+        <td><strong>Lead nuevo</strong></td>
+        <td>Contacto identificado, aún sin calificar</td>
+        <td>Investigar empresa, agendar discovery call</td>
+      </tr>
+      <tr>
+        <td class="stage-number">2</td>
+        <td><strong>Calificado</strong></td>
+        <td>Discovery call hecha, score > 20/35</td>
+        <td>Preparar propuesta</td>
+      </tr>
+      <tr>
+        <td class="stage-number">3</td>
+        <td><strong>Llamada agendada</strong></td>
+        <td>Reunión de presentación/propuesta agendada</td>
+        <td>Enviar one-pager antes de la llamada</td>
+      </tr>
+      <tr>
+        <td class="stage-number">4</td>
+        <td><strong>Propuesta enviada</strong></td>
+        <td>Propuesta formal enviada al cliente</td>
+        <td>Follow-up a los 3 y 7 días</td>
+      </tr>
+      <tr>
+        <td class="stage-number">5</td>
+        <td><strong>Negociación</strong></td>
+        <td>Cliente interesado, discutiendo términos</td>
+        <td>Resolver objeciones, ajustar alcance/precio si necesario</td>
+      </tr>
+      <tr>
+        <td class="stage-number">6</td>
+        <td><strong>Ganado / Perdido</strong></td>
+        <td>Decisión tomada</td>
+        <td>Si ganado → onboarding. Si perdido → documentar razón.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Reglas del pipeline</h2>
+  <div class="rules-box">
+    <ul>
+      <li><strong>Cada lead tiene un próximo paso con fecha.</strong> Si no lo tiene, está muerto.</li>
+      <li><strong>Si un lead no avanza en 30 días</strong>, baja una etapa o se marca como perdido.</li>
+      <li><strong>Revisar pipeline cada lunes</strong> (15 min, no más).</li>
+      <li><strong>No perseguir leads con score < 20/35</strong> — enviar one-pager y dejar puerta abierta.</li>
+      <li><strong>Tiempo máximo de cotización</strong>: 48 horas después de la llamada de presentación.</li>
+    </ul>
+  </div>
+
+  <h2>Lead Tracker</h2>
+  <div class="info-box">
+    <strong>[DECISIÓN CEO/CTO: Elegir herramienta]</strong><br>
+    Opciones recomendadas: Google Sheets (simple), Notion (si lo mantienen), Airtable (si escalan)
+  </div>
+
+  <h3 style="margin-top: 2rem; font-size: 1.25rem; font-weight: 600;">Campos del tracker</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Campo</th>
+        <th>Tipo</th>
+        <th>Ejemplo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Empresa</td><td>Texto</td><td>BancoEstado</td></tr>
+      <tr><td>Contacto</td><td>Texto</td><td>María González</td></tr>
+      <tr><td>Cargo</td><td>Texto</td><td>Gerente de Innovación</td></tr>
+      <tr><td>Email</td><td>Email</td><td>mgonzalez@bancoestado.cl</td></tr>
+      <tr><td>Teléfono</td><td>Tel</td><td>+56 9 1234 5678</td></tr>
+      <tr><td>Industria</td><td>Select</td><td>Banca / Minería / Educación / Público / Otro</td></tr>
+      <tr><td>País</td><td>Select</td><td>Chile / México / Colombia / Otro</td></tr>
+      <tr><td>Origen</td><td>Select</td><td>LinkedIn / Referido / Evento / Inbound / Cold email</td></tr>
+      <tr><td>Servicio de interés</td><td>Select</td><td>Lectura de Campo / Simulación Estratégica / Radar</td></tr>
+      <tr><td>Dolor principal</td><td>Texto largo</td><td>Implementación de IA sin claridad regulatoria</td></tr>
+      <tr><td>Urgencia (1-10)</td><td>Número</td><td>7</td></tr>
+      <tr><td>Presupuesto estimado</td><td>Número (USD)</td><td>12,000</td></tr>
+      <tr><td>Decision-maker identificado</td><td>Sí/No</td><td>Sí</td></tr>
+      <tr><td>Etapa del pipeline</td><td>Select</td><td>1-6 (ver arriba)</td></tr>
+      <tr><td>Probabilidad de cierre (%)</td><td>Número</td><td>40%</td></tr>
+      <tr><td>Monto estimado (USD)</td><td>Número</td><td>12,000</td></tr>
+      <tr><td>Último contacto</td><td>Fecha</td><td>2026-03-29</td></tr>
+      <tr><td>Próximo paso</td><td>Texto</td><td>Enviar propuesta</td></tr>
+      <tr><td>Fecha próximo paso</td><td>Fecha</td><td>2026-04-02</td></tr>
+      <tr><td>Qualification score</td><td>Número</td><td>29/35</td></tr>
+      <tr><td>Notas</td><td>Texto largo</td><td>Referido por X, interesado en caso similar a BancoEstado</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Métricas clave (revisar mensualmente)</h2>
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-label">Leads nuevos este mes</div>
+      <div class="metric-value">—</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Tasa de calificación</div>
+      <div class="metric-value">—</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Propuestas enviadas</div>
+      <div class="metric-value">—</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Tasa de cierre</div>
+      <div class="metric-value">—</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Ticket promedio</div>
+      <div class="metric-value">—</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Tiempo promedio de ciclo</div>
+      <div class="metric-value">—</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Pipeline total</div>
+      <div class="metric-value">—</div>
+    </div>
+  </div>
+</body>
+</html>
