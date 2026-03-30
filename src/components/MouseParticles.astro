@@ -115,8 +115,8 @@
       });
     }
 
+    let animRunning = false;
     function animate() {
-      requestAnimationFrame(animate);
       ctx!.clearRect(0, 0, W, H);
 
       // Check proximity to each CTA
@@ -170,11 +170,19 @@
           ctx!.fill();
         }
       }
+
+      // Pause loop when no sparks and mouse far from CTAs
+      if (sparks.length > 0) {
+        requestAnimationFrame(animate);
+      } else {
+        animRunning = false;
+      }
     }
 
     window.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
+      if (!animRunning) { animRunning = true; animate(); }
     });
 
     window.addEventListener('mouseleave', () => {
@@ -185,7 +193,6 @@
     const resizeObs = new ResizeObserver(resize);
     resizeObs.observe(document.documentElement);
     resize();
-    animate();
 
     document.addEventListener('astro:before-preparation', () => {
       resizeObs.disconnect();

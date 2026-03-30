@@ -61,9 +61,14 @@
       tick();
     };
 
+    let lastMoveTime = 0;
+    let loopRunning = false;
+
     const onMouseMove = (e: MouseEvent) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
+      lastMoveTime = performance.now();
+      if (!loopRunning) { loopRunning = true; tick(); }
     };
 
     const onScroll = () => {
@@ -71,6 +76,10 @@
     };
 
     const tick = () => {
+      if (performance.now() - lastMoveTime > 2000) {
+        loopRunning = false;
+        return;
+      }
       rafId = requestAnimationFrame(tick);
       const now = performance.now();
 

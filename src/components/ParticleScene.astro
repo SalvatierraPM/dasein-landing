@@ -19,8 +19,6 @@
 </style>
 
 <script>
-  import * as THREE from 'three';
-
   function initAllParticleScenes() {
     const allScenes = document.querySelectorAll('[data-particle-scene]');
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -41,7 +39,9 @@
         const canvas = sceneRoot.querySelector('canvas');
         if (!canvas) return;
 
-        initScene(sceneRoot, canvas as HTMLCanvasElement, THREE);
+        import('three').then((THREE) => {
+          initScene(sceneRoot, canvas as HTMLCanvasElement, THREE);
+        });
       }, {
         rootMargin: '280px 0px',
       });
@@ -55,8 +55,8 @@
   function initScene(root: HTMLElement, canvas: HTMLCanvasElement, THREE: typeof import('three')) {
     const hostSection = root.closest('[data-particle-host]') || root.closest('.signaltwin-section');
     const isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
-    const particleCount = isMobile ? 800 : 2400;
-    const linkCount = isMobile ? 40 : 120;
+    const particleCount = isMobile ? 300 : 800;
+    const linkCount = isMobile ? 15 : 40;
 
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(particleCount * 3);
@@ -205,11 +205,12 @@
         const oy = originalPositions[i + 1];
         const oz = originalPositions[i + 2];
         const wave = Math.sin(elapsed + ox * 0.58 + oz * 0.2) * amplitude;
-        const drift = Math.cos(elapsed * 1.15 + oy * 0.44) * driftScale;
+        const vertDrift = Math.cos(elapsed * 0.9 + ox * 0.44) * driftScale;
         const twist = Math.sin(elapsed * 0.8 + oy * 0.15 + progress * 4) * 0.12;
 
-        array[i] = ox + drift * 0.16;
-        array[i + 1] = oy + wave * 0.52;
+        /* Vertical drift following scroll — X stays subtle, Y is dominant */
+        array[i] = ox + Math.sin(elapsed * 0.7 + oy * 0.32) * 0.08;
+        array[i + 1] = oy + vertDrift * 0.52 + wave * 0.16 - progress * 2.4;
         array[i + 2] = oz + twist + Math.sin(elapsed * 0.9 + ox * 0.32) * 0.08;
       }
 
@@ -239,8 +240,9 @@
       baseMaterial.opacity = 0.66 + progress * 0.14;
       haloMaterial.opacity = 0.06 + progress * 0.06;
 
-      points.rotation.y = elapsed * (0.06 + progress * 0.08);
-      points.rotation.x = Math.sin(elapsed * 0.4) * 0.03 + progress * 0.02;
+      /* Gentle rotation — mostly vertical drift, minimal lateral spin */
+      points.rotation.y = elapsed * 0.03 + Math.sin(elapsed * 0.5) * 0.02;
+      points.rotation.x = progress * 0.06 + Math.sin(elapsed * 0.4) * 0.02;
       haloPoints.rotation.copy(points.rotation);
       links.rotation.copy(points.rotation);
 

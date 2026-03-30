@@ -48,7 +48,7 @@
   import { cnoise4, hash12 } from '../lib/entangled/glsl-noise';
   import { PI, uvFromIndex } from '../lib/entangled/glsl-utils';
 
-  const NUM_POINTS = 120000;
+  const NUM_POINTS = 30000;
   const NUM_X = Math.ceil(Math.sqrt(NUM_POINTS));
   const NUM_Y = NUM_X;
 
@@ -100,7 +100,7 @@
 
   function boot(root: HTMLElement, canvas: HTMLCanvasElement) {
     const isMobile = window.innerWidth < 768;
-    const actualPoints = isMobile ? 40000 : NUM_POINTS;
+    const actualPoints = isMobile ? 10000 : NUM_POINTS;
     const NX = Math.ceil(Math.sqrt(actualPoints));
 
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: false, antialias: false, powerPreference: 'high-performance' });

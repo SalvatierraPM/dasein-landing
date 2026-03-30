@@ -50,19 +50,24 @@ const {
       if (!dot || window.matchMedia('(pointer: coarse)').matches) return;
 
       let mx = 0, my = 0, dx = 0, dy = 0;
+      let running = false;
 
       document.addEventListener('mousemove', (e) => {
         mx = e.clientX;
         my = e.clientY;
+        if (!running) { running = true; tick(); }
       });
 
       function tick() {
         dx += (mx - dx) * 0.15;
         dy += (my - dy) * 0.15;
         dot.style.transform = 'translate(' + (dx - 4) + 'px,' + (dy - 4) + 'px)';
-        requestAnimationFrame(tick);
+        if (Math.abs(mx - dx) + Math.abs(my - dy) > 0.1) {
+          requestAnimationFrame(tick);
+        } else {
+          running = false;
+        }
       }
-      tick();
 
       const growTargets = 'a, button, [data-cursor-grow], .audience-lane, .hero-lexicon-word, .engine-card, .marquee-item';
       document.addEventListener('mouseover', (e) => {
