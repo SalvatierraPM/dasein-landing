@@ -4,7 +4,7 @@ const audienceCards = [
     label: 'Pilotos',
     num: '01',
     title: 'Organizaciones que quieran probar el enfoque con un caso real.',
-    body: 'Un primer caso completo: lectura del sistema, simulación multiagente y cierre en plan a 90 días con workshop ejecutivo. Ideal para validar el método antes de comprometer un proyecto largo.',
+    body: 'Un caso completo: lectura del sistema, simulación multiagente y cierre en plan a 90 días con workshop ejecutivo. El formato ideal para probar el enfoque antes de comprometer un proyecto largo.',
     details: ['Decisiones con componente regulatorio o político', 'Transformaciones donde la lectura del entorno es crítica', 'Casos donde el costo de improvisar supera el costo de modelar'],
   },
   {
@@ -48,7 +48,7 @@ const marqueeItems = ['Pilotos', 'Partners', 'Equipo', 'Investigadores', 'Alianz
   <div class="container">
     <!-- Editorial intro: kicker above, headline flush-left -->
     <div class="audience-intro" data-reveal>
-      <span class="section-kicker">01 / Para quién</span>
+      <span class="section-kicker">06 / Para quién</span>
       <h2 class="audience-headline">
         Estamos construyendo.<br />
         <em>Buscamos a quienes faltan.</em>
@@ -59,7 +59,7 @@ const marqueeItems = ['Pilotos', 'Partners', 'Equipo', 'Investigadores', 'Alianz
     </div>
 
     <!-- Lanes -->
-    <div class="audience-lanes">
+    <div class="audience-lanes" data-reveal-stagger>
       {audienceCards.map((card, i) => (
         <article class="audience-lane" data-reveal data-cursor-grow>
           <div class="audience-lane-left">
@@ -334,6 +334,24 @@ const marqueeItems = ['Pilotos', 'Partners', 'Equipo', 'Investigadores', 'Alianz
     opacity: 0.6;
   }
 
+  /* ─── Lane stagger entrance from left ─── */
+  [data-reveal-stagger] > .audience-lane {
+    opacity: 0;
+    transform: translateX(-12px);
+    transition: opacity 0.5s var(--ease-out-expo), transform 0.5s var(--ease-out-expo);
+  }
+
+  [data-reveal-stagger].revealed > .audience-lane:nth-child(1) { opacity: 1; transform: translateX(0); transition-delay: 0s; }
+  [data-reveal-stagger].revealed > .audience-lane:nth-child(2) { opacity: 1; transform: translateX(0); transition-delay: 0.08s; }
+  [data-reveal-stagger].revealed > .audience-lane:nth-child(3) { opacity: 1; transform: translateX(0); transition-delay: 0.16s; }
+  [data-reveal-stagger].revealed > .audience-lane:nth-child(4) { opacity: 1; transform: translateX(0); transition-delay: 0.24s; }
+
+  /* ─── Toggle rotation on lane hover ─── */
+  .audience-lane:hover .audience-lane-toggle {
+    transform: rotate(12deg);
+    transition: transform 0.3s var(--ease-spring);
+  }
+
   /* ─── Responsive ─── */
   @media (max-width: 720px) {
     .audience-intro {
@@ -446,6 +464,17 @@ const marqueeItems = ['Pilotos', 'Partners', 'Equipo', 'Investigadores', 'Alianz
 
     .audience-lane.is-open .audience-lane-toggle .toggle-v {
       transform: none;
+    }
+
+    [data-reveal-stagger] > .audience-lane {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
+    .audience-lane:hover .audience-lane-toggle {
+      transform: none;
+      transition: none;
     }
   }
 

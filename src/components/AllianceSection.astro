@@ -8,7 +8,7 @@
 
     <!-- Asymmetric header -->
     <div class="alliance-head" data-reveal>
-      <span class="alliance-kicker">05 / Alianzas</span>
+      <span class="alliance-kicker">07 / Alianzas</span>
       <h2 class="alliance-title">Dasein no compite con implementadores.<br>Les deja un mapa mejor.</h2>
     </div>
 
@@ -371,6 +371,13 @@
     height: 1px;
     background: var(--line);
     width: 100%;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.8s var(--ease-out-expo);
+  }
+
+  [data-reveal].revealed .alliance-quote-rule {
+    transform: scaleX(1);
   }
 
   /* ── Reduced motion ── */
@@ -383,6 +390,11 @@
     }
 
     [data-reveal-stagger] .alliance-connector-line {
+      transform: scaleX(1);
+      transition: none;
+    }
+
+    .alliance-quote-rule {
       transform: scaleX(1);
       transition: none;
     }

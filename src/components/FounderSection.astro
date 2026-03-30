@@ -9,8 +9,8 @@ const proofCells = [
     body: 'Cada caso se lee como red de actores, incentivos y fricciones. La recomendación sale del sistema, no de la opinión.',
   },
   {
-    title: 'Primer caso en curso',
-    body: 'Ontología construida, simulación multiagente en desarrollo. El sistema se prueba con decisiones reales, no con demos.',
+    title: 'Motor probado en 3 dominios',
+    body: 'Banca, educación y minería. SignalTwin ya simula ecosistemas complejos con actores, fricciones y memoria.',
   },
 ];
 ---
@@ -20,13 +20,13 @@ const proofCells = [
 
     <!-- Section header — asymmetric kicker + massive title -->
     <header class="founder-header" data-reveal>
-      <span class="section-kicker">03 / Origen</span>
+      <span class="section-kicker">05 / Origen</span>
       <h2 class="founder-title">Dasein nace de operar donde las decisiones tienen consecuencias reales.</h2>
     </header>
 
     <!-- Editorial spread — portrait + narrative -->
     <div class="editorial-spread">
-      <figure class="founder-portrait" data-reveal>
+      <figure class="founder-portrait" data-reveal data-parallax="0.06">
         <img
           src="/founder/pablo-moraga.jpg"
           alt="Pablo Moraga"
@@ -389,6 +389,29 @@ const proofCells = [
   }
 
   /* ------------------------------------------------
+     PROOF NUMBER ENTRANCE — scale down from 1.15
+  ------------------------------------------------ */
+  [data-reveal-stagger] .proof-number {
+    transform: scale(1.15);
+    transition: transform 0.6s var(--ease-spring);
+  }
+
+  [data-reveal-stagger].revealed .proof-number {
+    transform: scale(1);
+  }
+
+  /* ------------------------------------------------
+     DIFF CARD — subtle parallax depth on hover
+  ------------------------------------------------ */
+  .diff-card {
+    transition: transform 0.5s var(--ease-out-expo);
+  }
+
+  .diff-card:hover {
+    transform: translateY(-3px);
+  }
+
+  /* ------------------------------------------------
      RESPONSIVE
   ------------------------------------------------ */
   @media (max-width: 900px) {
@@ -485,6 +508,18 @@ const proofCells = [
 
     .byline-name {
       font-size: var(--text-body);
+    }
+  }
+
+  /* ── Reduced motion ── */
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal-stagger] .proof-number {
+      transform: none;
+      transition: none;
+    }
+
+    .diff-card {
+      transition: none;
     }
   }
 </style>

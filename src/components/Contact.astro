@@ -36,7 +36,7 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
           </a>
         </div>
 
-        <div class="contact-ledger" aria-label="Información de contacto">
+        <div class="contact-ledger" data-reveal-stagger aria-label="Información de contacto">
           <div class="contact-ledger-item">
             <span class="contact-ledger-label">Email</span>
             <a href="mailto:salvatierra.pablom@gmail.com">salvatierra.pablom@gmail.com</a>
@@ -359,10 +359,40 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
     }
   }
 
+  /* ─── Ledger item stagger entrance ─── */
+  [data-reveal-stagger] .contact-ledger-item {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.5s var(--ease-out-expo), transform 0.5s var(--ease-out-expo);
+  }
+
+  [data-reveal-stagger].revealed .contact-ledger-item:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0s; }
+  [data-reveal-stagger].revealed .contact-ledger-item:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.08s; }
+  [data-reveal-stagger].revealed .contact-ledger-item:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.16s; }
+
+  /* ─── CTA hover text-shadow ─── */
+  .contact-cta:hover .contact-cta-title {
+    text-shadow: 0 0 24px rgba(255, 92, 56, 0.3);
+  }
+
+  .contact-cta-title {
+    transition: text-shadow 0.4s var(--ease-out-expo);
+  }
+
   /* ─── Reduced motion ─── */
   @media (prefers-reduced-motion: reduce) {
     .contact-cta-arrow,
     .contact-ledger-item a {
+      transition: none;
+    }
+
+    [data-reveal-stagger] .contact-ledger-item {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
+    .contact-cta-title {
       transition: none;
     }
   }

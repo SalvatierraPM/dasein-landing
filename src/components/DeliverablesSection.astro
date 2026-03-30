@@ -10,8 +10,8 @@ const services = [
       'Reporte de señales procesadas',
       'Mapa de actores con incentivos y fricciones',
     ],
-    investment: 'Desde USD 2,500',
-    duration: '5 días',
+    investment: 'Desde USD 4,500',
+    duration: '7 días',
     ghost: '→',
   },
   {
@@ -26,8 +26,8 @@ const services = [
       'Plan a 90 días con hitos y señales de alerta',
       'Workshop ejecutivo de cierre',
     ],
-    investment: 'Desde USD 12,000',
-    duration: '4–5 semanas',
+    investment: 'Desde USD 18,000',
+    duration: '5–6 semanas',
     ghost: '◈',
   },
 ];
@@ -41,7 +41,7 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
     <!-- Section header -->
     <header class="services-header" data-reveal>
       <div class="services-header__kicker">
-        <span class="section-index">04 / Servicios</span>
+        <span class="section-index">01 / Servicios</span>
       </div>
       <div class="services-header__title">
         <h2>Dos formatos según la profundidad <em>que necesites.</em></h2>
@@ -87,23 +87,24 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
       ))}
     </div>
 
-    <!-- Partner CTA -->
+    <!-- Radar Estratégico — partnership model -->
     <div class="partner-block" data-reveal>
       <div class="partner-block__inner">
         <span class="service-card__ghost" aria-hidden="true">◇</span>
         <div class="partner-block__content">
           <span class="service-card__num">03</span>
-          <h3 class="partner-block__title">¿Implementás estrategia, transformación o IA?</h3>
+          <h3 class="partner-block__title">Radar Estratégico — monitoreo continuo.</h3>
           <p class="partner-block__body">
-            Dasein modela el sistema. Tú despliegas la solución. Buscamos consultoras, firmas de
-            producto y equipos de implementación que quieran recibir un mapa estratégico listo
-            para ejecutar.
+            Para organizaciones que necesitan vigilancia permanente: escaneo mensual de señales,
+            re-simulación trimestral, alertas calibradas y reportes board-ready.
+            Diseñado como partnership a medida — conversemos sobre el formato.
           </p>
+          <span class="partner-block__price">Desde USD 7,500/mes · mínimo 3 meses</span>
         </div>
         <div class="partner-block__action">
-          <span class="partner-block__tag">Become a partner</span>
+          <span class="partner-block__tag">Partnership</span>
           <a class="button button-secondary partner-block__cta" href={calendlyUrl} target="_blank" rel="noreferrer">
-            Hablemos <span aria-hidden="true">→</span>
+            Conversemos <span aria-hidden="true">→</span>
           </a>
         </div>
       </div>
@@ -388,6 +389,14 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
     max-width: 28ch;
   }
 
+  .partner-block__price {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: var(--signal-blue);
+    margin-top: 0.25rem;
+  }
+
   .partner-block__body {
     font-size: var(--text-body);
     line-height: var(--leading-body);
@@ -469,11 +478,46 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
     }
   }
 
+  /* --- Card entrance with scale --- */
+
+  [data-reveal-stagger] .service-card {
+    transform: translateY(24px) scale(0.97);
+    opacity: 0;
+    transition: transform 0.6s var(--ease-out-expo), opacity 0.5s var(--ease-out-expo);
+  }
+
+  [data-reveal-stagger].revealed .service-card {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+
+  [data-reveal-stagger].revealed .service-card:nth-child(2) {
+    transition-delay: 0.12s;
+  }
+
+  /* --- Card hover glow --- */
+
+  .service-card {
+    transition: border-color 0.4s var(--ease-spring), box-shadow 0.4s var(--ease-spring), transform 0.4s var(--ease-spring);
+  }
+
+  .service-card:hover {
+    border-color: rgba(72, 101, 255, 0.25);
+    box-shadow: 0 8px 32px rgba(72, 101, 255, 0.06), 0 0 0 1px rgba(72, 101, 255, 0.08);
+    transform: translateY(-4px);
+  }
+
   /* --- Reduced Motion --- */
 
   @media (prefers-reduced-motion: reduce) {
     .service-card,
     .partner-block__inner {
+      transition: none;
+    }
+
+    [data-reveal-stagger] .service-card {
+      transform: none;
+      opacity: 1;
       transition: none;
     }
   }
