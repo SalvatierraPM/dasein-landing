@@ -8,44 +8,43 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --deep-navy: #0A1628;
+      --paper: #f5efe5;
+      --ink: #111111;
+      --ink-soft: #4e4a43;
+      --ink-faint: #8f877a;
+      --navy: #0a1628;
+      --slate-white: #ede7dc;
+      --muted: #70685d;
       --signal-blue: #4865ff;
+      --signal-red: #ff5c38;
       --horizon-violet: #7a68d6;
       --teal: #2f9e90;
-      --slate-white: #ede7dc;
-      --muted: #8899AA;
-      --surface: #111D2E;
+      --line: rgba(17, 17, 17, 0.1);
+      --font-display: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+      --font-body: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      --font-mono: 'Azeret Mono', 'JetBrains Mono', monospace;
+      --font-editorial: 'Instrument Serif', Georgia, serif;
     }
 
     body {
-      font-family: 'Space Grotesk', sans-serif;
-      background: var(--deep-navy);
-      color: var(--slate-white);
+      font-family: var(--font-body);
+      background: var(--paper);
+      color: var(--ink);
       overflow: hidden;
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
-    .deck {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-    }
+    .deck { position: relative; width: 100vw; height: 100vh; }
 
     .slide {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      inset: 0;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -57,29 +56,19 @@
       pointer-events: none;
     }
 
-    .slide.active {
-      opacity: 1;
-      transform: translateX(0);
-      pointer-events: auto;
-    }
+    .slide.active { opacity: 1; transform: translateX(0); pointer-events: auto; }
+    .slide.exiting { opacity: 0; transform: translateX(-100%); }
 
-    .slide.exiting {
-      opacity: 0;
-      transform: translateX(-100%);
-    }
-
-    /* Slide counter */
     .slide-counter {
       position: fixed;
       top: 2rem;
       right: 2rem;
-      font-family: 'Azeret Mono', monospace;
+      font-family: var(--font-mono);
       font-size: 0.875rem;
-      color: var(--muted);
+      color: var(--ink-faint);
       z-index: 1000;
     }
 
-    /* Navigation dots */
     .nav-dots {
       position: fixed;
       bottom: 2rem;
@@ -91,746 +80,531 @@
     }
 
     .nav-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--muted);
-      opacity: 0.3;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      border: none;
-      padding: 0;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--ink-faint); opacity: 0.25;
+      cursor: pointer; transition: all 0.3s ease;
+      border: none; padding: 0;
     }
+    .nav-dot:hover { opacity: 0.5; }
+    .nav-dot.active { background: var(--signal-blue); opacity: 1; width: 24px; border-radius: 4px; }
 
-    .nav-dot:hover {
-      opacity: 0.6;
-    }
-
-    .nav-dot.active {
-      background: var(--signal-blue);
-      opacity: 1;
-      width: 24px;
-      border-radius: 4px;
-    }
-
-    /* Typography */
     .slide h1 {
-      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+      font-family: var(--font-display);
       font-size: clamp(3rem, 5vw, 5rem);
       font-weight: 900;
-      letter-spacing: -0.035em;
-      line-height: 1.1;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
       margin-bottom: 1.5rem;
-      max-width: 1200px;
-      text-align: center;
-    }
-
-    .slide h2 {
-      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
-      font-size: clamp(2.5rem, 4vw, 4rem);
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      line-height: 1.15;
-      margin-bottom: 2rem;
       max-width: 1100px;
       text-align: center;
     }
 
-    .slide h3 {
-      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
-      font-size: clamp(1.5rem, 2.5vw, 2rem);
+    .slide-cover h1 { font-size: clamp(4rem, 7vw, 7rem); margin-bottom: 1rem; }
+
+    .slide h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 3.5vw, 3.5rem);
       font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 1rem;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 2rem;
+      max-width: 1000px;
+      text-align: center;
     }
+
+    em { font-family: var(--font-editorial); font-style: italic; color: var(--signal-red); }
 
     .tagline {
       font-size: clamp(1.125rem, 1.5vw, 1.5rem);
       color: var(--muted);
-      font-weight: 400;
-      max-width: 800px;
+      max-width: 700px;
       text-align: center;
       margin-bottom: 0.5rem;
     }
 
-    .subtitle {
-      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
-      font-size: clamp(0.875rem, 1.1vw, 1.125rem);
-      color: var(--teal);
+    .kicker {
+      font-family: var(--font-mono);
+      font-size: clamp(0.72rem, 0.85vw, 0.82rem);
+      color: var(--ink-faint);
       font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 1rem;
+      letter-spacing: 0.18em;
+      margin-bottom: 1.2rem;
     }
+    .kicker::before { content: '→ '; color: var(--signal-red); opacity: 0.6; }
 
-    /* Slide 1 — Cover */
-    .slide-cover h1 {
-      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
-      font-size: clamp(4rem, 7vw, 7rem);
-      font-weight: 900;
-      margin-bottom: 1rem;
-    }
-
-    /* Slide 2 — Problema */
-    .problem-intro {
-      font-size: clamp(1.5rem, 2.2vw, 2.25rem);
-      max-width: 900px;
+    .big-quote {
+      font-family: var(--font-editorial);
+      font-style: italic;
+      font-size: clamp(1.6rem, 2.5vw, 2.5rem);
+      color: var(--ink-soft);
+      max-width: 800px;
       text-align: center;
-      margin-bottom: 3rem;
       line-height: 1.4;
-      color: var(--slate-white);
+      margin-top: 1rem;
     }
 
-    .pain-points {
-      display: flex;
+    .consequence {
+      font-family: var(--font-mono);
+      font-size: clamp(0.85rem, 1vw, 1rem);
+      color: var(--signal-red);
+      text-align: center;
+      max-width: 700px;
+      margin-top: 2rem;
+      padding: 1.2rem 2rem;
+      border: 1px solid rgba(255, 92, 56, 0.2);
+      border-radius: 6px;
+      background: rgba(255, 92, 56, 0.04);
+      letter-spacing: 0.02em;
+    }
+
+    /* Cards */
+    .card-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 2rem;
       max-width: 1100px;
+      width: 100%;
+    }
+
+    .card-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    .card {
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.52);
+      border: 1px solid rgba(17, 17, 17, 0.08);
+      border-radius: 6px;
+    }
+
+    .card h3 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .card-num {
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--signal-blue);
+      margin-bottom: 0.75rem;
+    }
+
+    .card-accent {
+      border-left: 3px solid var(--signal-blue);
+      border-radius: 0 6px 6px 0;
+    }
+
+    /* Metrics */
+    .metrics {
+      display: flex;
+      gap: 4rem;
       margin-bottom: 2.5rem;
     }
 
-    .pain-point {
-      flex: 1;
-      padding: 1.5rem;
-      border: 1px solid rgba(136, 153, 170, 0.2);
-      background: rgba(17, 29, 46, 0.4);
-      border-radius: 4px;
-    }
-
-    .pain-point::before {
-      content: '—';
-      color: var(--signal-blue);
-      margin-right: 0.5rem;
-      font-weight: 700;
-    }
-
-    .problem-conclusion {
-      font-size: clamp(1.125rem, 1.5vw, 1.5rem);
-      color: var(--signal-blue);
-      font-weight: 500;
-      font-style: italic;
-    }
-
-    /* Slide 3 — Qué hacemos */
-    .two-column {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      max-width: 1200px;
-      width: 100%;
-    }
-
-    .column h3 {
-      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
-      color: var(--signal-blue);
-      margin-bottom: 1.5rem;
-      font-size: clamp(1.25rem, 1.8vw, 1.75rem);
-      font-weight: 700;
-    }
-
-    .column ul {
-      list-style: none;
-    }
-
-    .column li {
-      padding: 0.75rem 0;
-      border-bottom: 1px solid rgba(136, 153, 170, 0.15);
-      font-size: clamp(1rem, 1.2vw, 1.125rem);
-    }
-
-    .column li:last-child {
-      border-bottom: none;
-    }
-
-    .column.vendemos li::before {
-      content: '✓';
-      color: var(--teal);
-      margin-right: 0.75rem;
-      font-weight: 700;
-    }
-
-    .column.no-vendemos li::before {
-      content: '✗';
-      color: var(--muted);
-      margin-right: 0.75rem;
-    }
-
-    /* Slide 4 — Metodología */
-    .methodology-flow {
-      display: flex;
-      gap: 2rem;
-      max-width: 1200px;
-      margin: 2rem 0 2.5rem 0;
-    }
-
-    .method-step {
-      flex: 1;
-      padding: 1.5rem;
-      background: var(--surface);
-      border: 1px solid rgba(59, 130, 246, 0.3);
-      border-radius: 4px;
-      position: relative;
-    }
-
-    .method-step::after {
-      content: '→';
-      position: absolute;
-      right: -1.5rem;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--signal-blue);
-      font-size: 1.5rem;
-    }
-
-    .method-step:last-child::after {
-      display: none;
-    }
-
-    .method-number {
-      font-family: 'Azeret Mono', monospace;
-      font-size: 2rem;
-      font-weight: 500;
-      color: var(--signal-blue);
-      margin-bottom: 0.5rem;
-    }
-
-    .method-title {
-      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
-      font-size: 1.125rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      color: var(--slate-white);
-    }
-
-    .method-desc {
-      font-size: 0.875rem;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
-    .methodology-note {
-      max-width: 1000px;
-      padding: 1.5rem;
-      background: rgba(124, 58, 237, 0.1);
-      border-left: 3px solid var(--horizon-violet);
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
-
-    /* Slide 5 — Servicios */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      max-width: 1300px;
-      width: 100%;
-    }
-
-    .service-card {
-      padding: 2rem;
-      background: var(--surface);
-      border: 1px solid rgba(136, 153, 170, 0.2);
-      border-radius: 6px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .service-card.featured {
-      border: 2px solid var(--signal-blue);
-      transform: scale(1.02);
-    }
-
-    .service-header {
-      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
-      font-size: 1.5rem;
-      font-weight: 900;
-      margin-bottom: 0.5rem;
-      color: var(--slate-white);
-    }
-
-    .service-badge {
-      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
-      font-size: 0.75rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--teal);
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .service-badge.featured::before {
-      content: '★';
-      color: var(--signal-blue);
-    }
-
-    .service-desc {
-      font-size: 0.95rem;
-      color: var(--muted);
-      margin-bottom: 1rem;
-      flex: 1;
-      line-height: 1.6;
-    }
-
-    .service-duration {
-      font-family: 'Azeret Mono', monospace;
-      font-size: 0.875rem;
-      color: var(--muted);
-      margin-top: 1rem;
-      padding-top: 1rem;
-      border-top: 1px solid rgba(136, 153, 170, 0.15);
-    }
-
-    .service-price {
-      font-family: 'Azeret Mono', monospace;
-      font-size: 1.25rem;
-      font-weight: 500;
-      color: var(--signal-blue);
-      margin-top: 0.5rem;
-    }
-
-    /* Slide 6 — Caso BancoEstado */
-    .case-metrics {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      max-width: 1100px;
-      margin: 2rem 0 2.5rem 0;
-    }
-
-    .metric {
-      text-align: center;
-    }
+    .metric { text-align: center; }
 
     .metric-value {
-      font-family: 'Azeret Mono', monospace;
+      font-family: var(--font-mono);
       font-size: clamp(2.5rem, 4vw, 3.5rem);
-      font-weight: 500;
+      font-weight: 600;
       color: var(--signal-blue);
       line-height: 1;
       margin-bottom: 0.5rem;
     }
 
-    .metric-label {
-      font-size: 0.95rem;
-      color: var(--muted);
-    }
+    .metric-label { font-size: 0.9rem; color: var(--muted); }
 
-    .case-insight {
-      max-width: 900px;
-      padding: 1.5rem 2rem;
-      background: rgba(20, 184, 166, 0.1);
-      border-left: 3px solid var(--teal);
-      margin-bottom: 2rem;
-      line-height: 1.6;
-      font-size: 1.05rem;
-    }
-
-    .case-quote {
-      max-width: 800px;
-      font-family: 'Instrument Serif', serif;
-      font-style: italic;
-      font-size: 1.25rem;
-      color: var(--slate-white);
-      text-align: center;
-      margin-bottom: 1rem;
-      line-height: 1.5;
-    }
-
-    .case-disclaimer {
-      font-size: 0.75rem;
-      color: var(--muted);
-      font-style: italic;
-    }
-
-    /* Slide 7 — Por qué Dasein */
-    .differentiators {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
+    /* Levels */
+    .levels {
+      display: flex;
       gap: 2rem;
-      max-width: 1200px;
+      max-width: 1100px;
+      width: 100%;
     }
 
-    .differentiator {
-      padding: 1.5rem;
-      background: rgba(17, 29, 46, 0.6);
-      border-left: 3px solid var(--signal-blue);
+    .level {
+      flex: 1;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.52);
+      border: 1px solid rgba(17, 17, 17, 0.08);
+      border-radius: 6px;
+      text-align: center;
     }
 
-    .diff-number {
-      font-family: 'Azeret Mono', monospace;
-      font-size: 1.5rem;
-      color: var(--signal-blue);
+    .level-name {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
       margin-bottom: 0.5rem;
     }
 
-    .diff-title {
-      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
-      font-size: 1.125rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      color: var(--slate-white);
-    }
-
-    .diff-desc {
+    .level-desc {
       font-size: 0.95rem;
       color: var(--muted);
-      line-height: 1.5;
-    }
-
-    /* Slide 8 — Buscamos */
-    .seeking-intro {
-      font-size: 1.25rem;
-      max-width: 800px;
-      text-align: center;
-      margin-bottom: 2.5rem;
-      color: var(--muted);
-    }
-
-    .seeking-list {
-      max-width: 900px;
-      margin-bottom: 2.5rem;
-    }
-
-    .seeking-item {
-      padding: 1.5rem;
+      line-height: 1.6;
       margin-bottom: 1rem;
-      background: var(--surface);
-      border-left: 3px solid var(--teal);
     }
 
-    .seeking-title {
-      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--signal-blue);
+    .level-range {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--ink);
       margin-bottom: 0.5rem;
     }
 
-    .seeking-desc {
-      font-size: 1rem;
-      color: var(--muted);
-      line-height: 1.6;
+    .level-time {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--ink-faint);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
     }
 
-    .seeking-footer {
-      font-size: 1.25rem;
-      color: var(--slate-white);
-      font-style: italic;
+    .level-products {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.4s var(--ease-out-expo), opacity 0.3s ease, margin-top 0.3s ease;
+      margin-top: 0;
+    }
+
+    .level:hover .level-products {
+      max-height: 200px;
+      opacity: 1;
+      margin-top: 1rem;
+    }
+
+    .level-product {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+      border-top: 1px solid var(--line);
+      font-size: 0.85rem;
+    }
+
+    .level-product-name {
+      color: var(--ink-soft);
+    }
+
+    .level-product-price {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
       font-weight: 500;
+      color: var(--signal-blue);
     }
 
-    /* Slide 9 — CTA */
-    .cta-title {
-      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
-      font-size: clamp(2.5rem, 4.5vw, 4rem);
-      font-weight: 900;
-      margin-bottom: 2rem;
+    .level.featured {
+      border: 2px solid var(--navy);
+      position: relative;
     }
 
-    .cta-subtitle {
-      font-size: 1.5rem;
-      max-width: 700px;
-      text-align: center;
-      margin-bottom: 3rem;
-      line-height: 1.5;
-      color: var(--muted);
+    .level.featured::before {
+      content: '◆ MÁS COMÚN';
+      position: absolute;
+      top: -9px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--navy);
+      color: var(--slate-white);
+      font-family: var(--font-mono);
+      font-size: 8px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 2px;
+      letter-spacing: 0.08em;
     }
 
+    /* Insight block */
+    .insight-block {
+      max-width: 900px;
+      padding: 2rem;
+      background: rgba(47, 158, 144, 0.06);
+      border-left: 3px solid var(--teal);
+      border-radius: 0 6px 6px 0;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: var(--ink-soft);
+    }
+
+    .insight-block strong { color: var(--ink); }
+
+    /* CTA */
     .cta-contact {
       display: flex;
       flex-direction: column;
       gap: 1rem;
       align-items: center;
+      margin-top: 2rem;
     }
 
     .cta-link {
-      font-size: 1.5rem;
-      color: var(--signal-blue);
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+      color: var(--slate-white);
       text-decoration: none;
-      padding: 0.75rem 2rem;
-      border: 1px solid var(--signal-blue);
-      border-radius: 4px;
-      transition: all 0.3s ease;
+      padding: 0.9rem 2.5rem;
+      background: var(--navy);
+      border-radius: 100px;
+      transition: transform 0.3s ease;
+    }
+    .cta-link:hover { transform: translateY(-1px); }
+
+    .cta-ghost {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      color: var(--ink-soft);
+      text-decoration: none;
+      padding: 0.6rem 1.4rem;
+      background: rgba(255,255,255,0.62);
+      border: 1px solid var(--line);
+      border-radius: 100px;
     }
 
-    .cta-link:hover {
-      background: var(--signal-blue);
-      color: var(--deep-navy);
-    }
-
-    /* Print styles */
+    /* Print */
     @media print {
-      body {
-        overflow: visible;
-      }
-
-      .deck {
-        height: auto;
-      }
-
-      .slide {
-        position: relative;
-        opacity: 1 !important;
-        transform: none !important;
-        pointer-events: auto !important;
-        page-break-after: always;
-        height: 100vh;
-        width: 100vw;
-      }
-
-      .nav-dots,
-      .slide-counter {
-        display: none;
-      }
+      body { overflow: visible; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .deck { height: auto; }
+      .slide { position: relative; opacity: 1 !important; transform: none !important; pointer-events: auto !important; page-break-after: always; height: 100vh; }
+      .nav-dots, .slide-counter { display: none; }
     }
 
-    /* Responsive */
     @media (max-width: 1024px) {
-      .slide {
-        padding: 3rem 2rem;
-      }
-
-      .pain-points,
-      .methodology-flow,
-      .services-grid,
-      .differentiators {
-        flex-direction: column;
-        grid-template-columns: 1fr;
-      }
-
-      .two-column {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-
-      .method-step::after {
-        display: none;
-      }
-
-      .case-metrics {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 768px) {
-      .slide {
-        padding: 2rem 1.5rem;
-      }
-
-      .slide-counter {
-        top: 1rem;
-        right: 1rem;
-      }
-
-      .nav-dots {
-        bottom: 1rem;
-      }
+      .slide { padding: 3rem 2rem; }
+      .card-grid-2, .card-grid-3, .levels { grid-template-columns: 1fr; flex-direction: column; }
+      .metrics { flex-direction: column; gap: 2rem; }
     }
   </style>
 </head>
 <body>
   <div class="deck">
-    <!-- Slide counter -->
-    <div class="slide-counter">
-      <span id="current-slide">1</span>/<span id="total-slides">9</span>
-    </div>
+    <div class="slide-counter"><span id="cs">1</span>/<span id="ts">10</span></div>
 
-    <!-- Slide 1 — Cover -->
+    <!-- 1 — COVER -->
     <div class="slide slide-cover active" data-slide="1">
-      <h1>Dasein Foresight</h1>
-      <p class="tagline">Simulamos futuros para que decidas mejor hoy.</p>
-      <p class="subtitle">Prospectiva estratégica potenciada por IA</p>
+      <p class="kicker">Consultoría de prospectiva estratégica</p>
+      <h1>Decidir <em>antes</em> de reaccionar.</h1>
+      <p class="tagline">Simulamos escenarios para que tu equipo decida con información, no con urgencia.</p>
     </div>
 
-    <!-- Slide 2 — El problema -->
+    <!-- 2 — DOLOR / ENEMIGO -->
     <div class="slide" data-slide="2">
-      <h2>Las organizaciones toman decisiones estratégicas con herramientas que no están diseñadas para la incertidumbre.</h2>
-      <div class="pain-points">
-        <div class="pain-point">Exceso de ruido, poco criterio</div>
-        <div class="pain-point">Decisiones por moda o presión del entorno</div>
-        <div class="pain-point">Consultoría tradicional: abstracta o poco accionable</div>
+      <p class="kicker">El problema</p>
+      <h2>Su equipo toma decisiones de millones con herramientas que <em>no modelan incertidumbre.</em></h2>
+      <div class="card-grid-3" style="margin-bottom:2rem">
+        <div class="card">
+          <h3>Frameworks estáticos</h3>
+          <p>FODA, PESTEL, matrices BCG. Diseñados para mercados estables. No capturan cómo interactúan actores bajo presión.</p>
+        </div>
+        <div class="card">
+          <h3>Decisiones bajo presión</h3>
+          <p>Cuando el regulador se mueve o la comunidad escala, su equipo improvisa. No porque le falte talento — le falta un mapa.</p>
+        </div>
+        <div class="card">
+          <h3>Consultoría de espejo retrovisor</h3>
+          <p>Informes de 80 páginas que describen lo que ya pasó. Benchmarks de otras industrias. Escenarios que confirman lo que el CEO quería oír.</p>
+        </div>
       </div>
-      <p class="problem-conclusion">El mundo cambió. La forma de decidir, no.</p>
+      <p class="consequence">El costo de una mala decisión estratégica no aparece en ningún presupuesto. Pero se paga.</p>
     </div>
 
-    <!-- Slide 3 — Qué hacemos -->
+    <!-- 3 — PROMESA -->
     <div class="slide" data-slide="3">
-      <h2>No vendemos predicciones. Vendemos claridad estratégica.</h2>
-      <div class="two-column">
-        <div class="column vendemos">
-          <h3>Vendemos</h3>
-          <ul>
-            <li>Exploración de escenarios plausibles</li>
-            <li>Evaluación de riesgos y oportunidades</li>
-            <li>Señales relevantes con umbrales concretos</li>
-            <li>Recomendaciones accionables con roadmap</li>
-          </ul>
-        </div>
-        <div class="column no-vendemos">
-          <h3>No vendemos</h3>
-          <ul>
-            <li>Software o licencias SaaS</li>
-            <li>Predicciones mágicas</li>
-            <li>Dashboards vacíos</li>
-            <li>Decks cosméticos sin criterio</li>
-          </ul>
-        </div>
-      </div>
+      <p class="kicker">Nuestra promesa</p>
+      <h2>No vendemos predicciones. Vendemos <em>claridad</em> estratégica.</h2>
+      <p class="tagline">Simulamos cómo se comportarían los actores reales de su ecosistema bajo escenarios que aún no existen. Para que usted decida antes de que el escenario lo alcance.</p>
+      <p class="big-quote">"La diferencia entre predecir y simular es la diferencia entre apostar y decidir."</p>
     </div>
 
-    <!-- Slide 4 — Cómo funciona -->
+    <!-- 4 — EDGE: ROBUSTEZ -->
     <div class="slide" data-slide="4">
-      <h2>Cuatro capas de inteligencia prospectiva</h2>
-      <div class="methodology-flow">
-        <div class="method-step">
-          <div class="method-number">1</div>
-          <div class="method-title">Escaneo de Señales</div>
-          <div class="method-desc">Identificación de señales relevantes en el entorno</div>
+      <p class="kicker">Nuestro edge</p>
+      <h2>No buscamos el mejor escenario. Buscamos la decisión que <em>sobrevive todos.</em></h2>
+      <div class="card-grid-2">
+        <div class="card card-accent">
+          <h3>Análisis de robustez</h3>
+          <p>Cada decisión se testea contra múltiples escenarios. No preguntamos "¿qué pasa si sale bien?" — preguntamos "¿en cuántos mundos posibles esta decisión no falla?"</p>
         </div>
-        <div class="method-step">
-          <div class="method-number">2</div>
-          <div class="method-title">Modelo Ontológico</div>
-          <div class="method-desc">Estructuración del dominio estratégico</div>
-        </div>
-        <div class="method-step">
-          <div class="method-number">3</div>
-          <div class="method-title">Simulación Dual-World</div>
-          <div class="method-desc">Modelado de escenarios y decisiones</div>
-        </div>
-        <div class="method-step">
-          <div class="method-number">4</div>
-          <div class="method-title">Traducción Estratégica</div>
-          <div class="method-desc">Recomendaciones accionables</div>
+        <div class="card card-accent">
+          <h3>Compromisos reales, no opiniones</h3>
+          <p>Entendemos quién realmente decide, qué incentivos tiene y dónde se rompe la coordinación. Medimos compromisos entre actores, no sentimiento de mercado.</p>
         </div>
       </div>
-      <div class="methodology-note">
-        <strong>Motor interno: SignalTwin</strong> — simulación con agentes que tienen posiciones reales, memoria persistente y presión lingüística.
+      <div class="insight-block" style="margin-top:2rem">
+        <strong>Ejemplo:</strong> Si su organización evalúa 3 opciones estratégicas, nuestra simulación le muestra cuál de las 3 funciona en los 4 escenarios posibles — no cuál suena mejor en un workshop.
       </div>
     </div>
 
-    <!-- Slide 5 — Servicios -->
+    <!-- 5 — CAPACIDADES / PRUEBA -->
     <div class="slide" data-slide="5">
-      <h2>Servicios</h2>
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="service-header">Lectura de Campo</div>
-          <div class="service-badge">Puerta de entrada</div>
-          <div class="service-desc">15-25 señales + memo ejecutivo + stakeholders mapeados + signposts con umbrales</div>
-          <div class="service-duration">Duración: 5 días</div>
-          <div class="service-price">Desde USD 4,500</div>
+      <p class="kicker">Lo que ya hacemos</p>
+      <h2>Motor propio de <em>simulación</em> estratégica</h2>
+      <div class="metrics">
+        <div class="metric"><div class="metric-value">200+</div><div class="metric-label">señales escaneadas por proyecto</div></div>
+        <div class="metric"><div class="metric-value">12–60</div><div class="metric-label">actores IA por simulación</div></div>
+        <div class="metric"><div class="metric-value">3</div><div class="metric-label">escenarios accionables entregados</div></div>
+      </div>
+      <div class="card-grid-2">
+        <div class="card">
+          <h3>Dos mundos paralelos</h3>
+          <p>Simulamos reacción rápida (tipo redes sociales) y deliberación profunda (tipo mesa de negociación) simultáneamente. Conectados por un puente de eventos.</p>
         </div>
-
-        <div class="service-card featured">
-          <div class="service-header">Simulación Estratégica</div>
-          <div class="service-badge featured">Más popular</div>
-          <div class="service-desc">Simulación dual-world + escenarios + dashboard interactivo + workshop de síntesis</div>
-          <div class="service-duration">Duración: 4-5 semanas</div>
-          <div class="service-price">Desde USD 18,000</div>
-        </div>
-
-        <div class="service-card">
-          <div class="service-header">Radar Estratégico</div>
-          <div class="service-badge">Monitoreo continuo</div>
-          <div class="service-desc">Monitoreo mensual + simulación trimestral + alertas automáticas + acceso a plataforma</div>
-          <div class="service-duration">Duración: Mínimo 3 meses</div>
-          <div class="service-price">Desde USD 7,500/mes</div>
+        <div class="card">
+          <h3>Agentes con memoria</h3>
+          <p>Cada actor tiene posición real, incentivos calibrados y memoria persistente. No son bots genéricos — son réplicas conductuales de sus stakeholders reales.</p>
         </div>
       </div>
     </div>
 
-    <!-- Slide 6 — Caso BancoEstado -->
+    <!-- 6 — CÓMO FUNCIONA (simplificado) -->
     <div class="slide" data-slide="6">
-      <h2>BancoEstado: anticipando la IA en banca pública</h2>
-      <div class="case-metrics">
-        <div class="metric">
-          <div class="metric-value">15</div>
-          <div class="metric-label">stakeholders mapeados</div>
+      <p class="kicker">Cómo funciona</p>
+      <h2>De señales a <em>decisiones</em></h2>
+      <div class="card-grid-2" style="max-width:1000px">
+        <div class="card card-accent">
+          <div class="card-num">01</div>
+          <h3>Escuchamos lo que otros no capturan</h3>
+          <p>Escaneamos señales en reguladores, competencia, stakeholders y medios. Identificamos compromisos que se están haciendo — y los que se están rompiendo.</p>
         </div>
-        <div class="metric">
-          <div class="metric-value">4</div>
-          <div class="metric-label">escenarios evaluados</div>
+        <div class="card card-accent">
+          <div class="card-num">02</div>
+          <h3>Modelamos su mundo</h3>
+          <p>Mapeamos quién realmente decide, qué incentivos tiene, con quién se coordina y dónde se acumula presión. No un organigrama — un modelo operativo.</p>
         </div>
-        <div class="metric">
-          <div class="metric-value">3</div>
-          <div class="metric-label">opciones testeadas</div>
+        <div class="card card-accent">
+          <div class="card-num">03</div>
+          <h3>Simulamos escenarios</h3>
+          <p>Enfrentamos su ecosistema a perturbaciones reales: cambios regulatorios, movimientos de competencia, escaladas sociales. Cada escenario tiene trazabilidad completa.</p>
         </div>
-        <div class="metric">
-          <div class="metric-value">~580</div>
-          <div class="metric-label">acciones simuladas</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">42</div>
-          <div class="metric-label">fuentes consultadas</div>
+        <div class="card card-accent">
+          <div class="card-num">04</div>
+          <h3>Entregamos decisiones, no informes</h3>
+          <p>Memo ejecutivo con escenarios, puntos de inflexión y plan de acción. Workshop con su equipo directivo para convertir evidencia en movimiento.</p>
         </div>
       </div>
-      <div class="case-insight">
-        <strong>Key insight:</strong> La Opción B (Inclusión Inteligente) es la única que funciona en los 4 mundos posibles. No es la óptima en ninguno — pero es la única que no genera crisis en ninguno.
-      </div>
-      <p class="case-quote">"Por primera vez tuvimos un lenguaje común para hablar de cómo la IA va a cambiar nuestro negocio."</p>
-      <p class="case-disclaimer">Caso elaborado con información pública para demostrar capacidades analíticas.</p>
     </div>
 
-    <!-- Slide 7 — Por qué Dasein -->
+    <!-- 7 — NIVELES (sin precios, sin catálogo) -->
     <div class="slide" data-slide="7">
-      <h2>Nuestra diferencia</h2>
-      <div class="differentiators">
-        <div class="differentiator">
-          <div class="diff-number">01</div>
-          <div class="diff-title">Motor propio de simulación (SignalTwin)</div>
-          <div class="diff-desc">No opinión, simulación auditable con agentes que tienen posiciones reales y memoria persistente.</div>
+      <p class="kicker">Cómo trabajamos</p>
+      <h2>Tres niveles de <em>profundidad</em></h2>
+      <div class="levels">
+        <div class="level">
+          <div class="level-name">Decisión puntual</div>
+          <div class="level-range">$2.5K – $8.5K</div>
+          <div class="level-desc">Una pregunta estratégica urgente. Escaneo focalizado + memo ejecutivo con señales e interpretación.</div>
+          <div class="level-time">Días</div>
+          <div class="level-products">
+            <div class="level-product"><span class="level-product-name">Pulso Rápido</span><span class="level-product-price">$2,500</span></div>
+            <div class="level-product"><span class="level-product-name">Lectura de Campo</span><span class="level-product-price">$8,500</span></div>
+          </div>
         </div>
-        <div class="differentiator">
-          <div class="diff-number">02</div>
-          <div class="diff-title">Análisis de robustez</div>
-          <div class="diff-desc">No "escenario optimista vs pesimista", sino qué decisión resiste todos los mundos posibles.</div>
+        <div class="level featured">
+          <div class="level-name">Sistema estratégico</div>
+          <div class="level-range">$18K – $38K</div>
+          <div class="level-desc">Simulación completa de su ecosistema. Escenarios navegables, análisis de robustez, workshop con directorio.</div>
+          <div class="level-time">Semanas</div>
+          <div class="level-products">
+            <div class="level-product"><span class="level-product-name">Simulación Táctica</span><span class="level-product-price">$18,000</span></div>
+            <div class="level-product"><span class="level-product-name">Simulación Estratégica</span><span class="level-product-price">$38,000</span></div>
+          </div>
         </div>
-        <div class="differentiator">
-          <div class="diff-number">03</div>
-          <div class="diff-title">Signposts con umbrales</div>
-          <div class="diff-desc">Señales concretas con triggers de acción, no generalidades abstractas.</div>
-        </div>
-        <div class="differentiator">
-          <div class="diff-number">04</div>
-          <div class="diff-title">Recomendaciones accionables</div>
-          <div class="diff-desc">Memo ejecutivo que orienta la decisión, no documento académico de 80 páginas.</div>
+        <div class="level">
+          <div class="level-name">Monitoreo continuo</div>
+          <div class="level-range">$10K/mes</div>
+          <div class="level-desc">Vigilancia permanente de señales. Re-simulación trimestral. Su modelo del mundo se actualiza 4 veces al año.</div>
+          <div class="level-time">Continuo · min 6 meses</div>
+          <div class="level-products">
+            <div class="level-product"><span class="level-product-name">Radar Estratégico</span><span class="level-product-price">$10,000/mes</span></div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Slide 8 — Buscamos -->
+    <!-- 8 — PRESENCIA -->
     <div class="slide" data-slide="8">
-      <h2>Buscamos</h2>
-      <p class="seeking-intro">Etapa actual: sistema funcionando, dos casos demostrativos.</p>
-      <div class="seeking-list">
-        <div class="seeking-item">
-          <div class="seeking-title">Pilotos</div>
-          <div class="seeking-desc">Organizaciones con decisiones estratégicas complejas: inversiones de infraestructura, transformación digital, posicionamiento sectorial, regulación.</div>
+      <p class="kicker">Presencia</p>
+      <h2>Construido en <em>Chile y México</em></h2>
+      <p class="tagline" style="margin-bottom:2rem">Los modelos de foresight anglosajones asumen mercados estables e instituciones predecibles. Latinoamérica no funciona así.</p>
+      <div class="card-grid-2" style="max-width:900px">
+        <div class="card">
+          <h3>Santiago, Chile</h3>
+          <p>Fundador y equipo de simulación. Experiencia directa en banca, minería, educación superior y gobierno.</p>
         </div>
-        <div class="seeking-item">
-          <div class="seeking-title">Alianzas</div>
-          <div class="seeking-desc">Consultoras de cambio organizacional, implementadores de IA, think tanks, equipos de estrategia corporativa.</div>
-        </div>
-        <div class="seeking-item">
-          <div class="seeking-title">Equipo</div>
-          <div class="seeking-desc">Prospectiva estratégica, IA y simulación social, ciencia social computacional, diseño de producto.</div>
+        <div class="card">
+          <h3>Ciudad de México</h3>
+          <p>CTO y operaciones técnicas. Acceso directo al ecosistema empresarial e institucional mexicano.</p>
         </div>
       </div>
-      <p class="seeking-footer">"Donde termina nuestro trabajo, empieza el tuyo."</p>
+      <p class="big-quote" style="margin-top:2rem">"Operamos donde la incertidumbre institucional es la norma, no la excepción."</p>
     </div>
 
-    <!-- Slide 9 — CTA -->
+    <!-- 9 — THE ASK -->
     <div class="slide" data-slide="9">
-      <h2 class="cta-title">El futuro no espera. Hablemos del tuyo.</h2>
-      <p class="cta-subtitle">Agenda una conversación exploratoria de 30 minutos. Sin compromiso. Sin PowerPoints.</p>
-      <div class="cta-contact">
-        <a href="mailto:info@daseinforesight.com" class="cta-link">info@daseinforesight.com</a>
-        <a href="https://daseinforesight.com" class="cta-link" target="_blank">daseinforesight.com</a>
+      <p class="kicker">The Ask</p>
+      <h2>USD $150K pre-seed para capturar una ventana de <em>18 meses</em></h2>
+      <div class="card-grid-2" style="margin-bottom:2rem">
+        <div class="card">
+          <h3>Por qué ahora</h3>
+          <p>Zero competidores directos — globalmente. 27+ papers académicos en pipeline van a cerrar el gap. El Linguistic Lens es patentable y la patente original de Flores está expirada. Cada mes sin proteger la IP es riesgo.</p>
+        </div>
+        <div class="card">
+          <h3>Por qué $150K</h3>
+          <p>Margen bruto ~88%. Cada simulación cuesta $100–200 en LLM y un proyecto requiere 8–25 corridas. No necesitamos capital para escalar operación — necesitamos comprar tiempo mientras el pipeline madura.</p>
+        </div>
+      </div>
+      <div class="card-grid-3" style="max-width:1000px">
+        <div class="card" style="text-align:center">
+          <div class="card-num">40%</div>
+          <h3>Runway</h3>
+          <p>6 meses de operación extendida. Bridge hasta que revenue cubra burn.</p>
+        </div>
+        <div class="card" style="text-align:center">
+          <div class="card-num">30%</div>
+          <h3>Growth</h3>
+          <p>Marketing, eventos sectoriales, entrada a México, analista de foresight.</p>
+        </div>
+        <div class="card" style="text-align:center">
+          <div class="card-num">20%</div>
+          <h3>IP + Producto</h3>
+          <p>Patente provisional, migración técnica, frontend. El 10% restante es buffer.</p>
+        </div>
+      </div>
+      <div class="consequence" style="margin-top:1.5rem">
+        SAFE con cap $1M ◇ Instrumento estándar ◇ Sin board seats ◇ Dilución estimada 13-17%
       </div>
     </div>
 
-    <!-- Navigation dots -->
+    <!-- 10 — CTA -->
+    <div class="slide" data-slide="10">
+      <p class="kicker">Siguiente paso</p>
+      <h1>El futuro no espera. <em>Hablemos.</em></h1>
+      <p class="tagline">Si le interesa la oportunidad como inversor — o como cliente — la conversación empieza igual: 30 minutos, sin compromiso.</p>
+      <div class="cta-contact">
+        <a href="mailto:info@daseinfs.com" class="cta-link">Agenda una conversación →</a>
+        <a href="https://daseinfs.com" class="cta-ghost" target="_blank">daseinfs.com</a>
+      </div>
+    </div>
+
     <div class="nav-dots">
       <button class="nav-dot active" data-slide="1"></button>
       <button class="nav-dot" data-slide="2"></button>
@@ -841,93 +615,12 @@
       <button class="nav-dot" data-slide="7"></button>
       <button class="nav-dot" data-slide="8"></button>
       <button class="nav-dot" data-slide="9"></button>
+      <button class="nav-dot" data-slide="10"></button>
     </div>
   </div>
 
   <script>
-    const slides = document.querySelectorAll('.slide');
-    const navDots = document.querySelectorAll('.nav-dot');
-    const currentSlideEl = document.getElementById('current-slide');
-    const totalSlidesEl = document.getElementById('total-slides');
-    let currentSlide = 0;
-    const totalSlides = slides.length;
-
-    totalSlidesEl.textContent = totalSlides;
-
-    function goToSlide(index) {
-      if (index < 0 || index >= totalSlides) return;
-
-      // Mark current slide as exiting
-      slides[currentSlide].classList.remove('active');
-      slides[currentSlide].classList.add('exiting');
-      navDots[currentSlide].classList.remove('active');
-
-      // Update to new slide
-      currentSlide = index;
-      slides[currentSlide].classList.remove('exiting');
-      slides[currentSlide].classList.add('active');
-      navDots[currentSlide].classList.add('active');
-      currentSlideEl.textContent = currentSlide + 1;
-
-      // Remove exiting class after transition
-      setTimeout(() => {
-        slides.forEach(slide => slide.classList.remove('exiting'));
-      }, 500);
-    }
-
-    function nextSlide() {
-      goToSlide(currentSlide + 1);
-    }
-
-    function prevSlide() {
-      goToSlide(currentSlide - 1);
-    }
-
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight' || e.key === ' ') {
-        e.preventDefault();
-        nextSlide();
-      } else if (e.key === 'ArrowLeft') {
-        e.preventDefault();
-        prevSlide();
-      } else if (e.key === 'Home') {
-        e.preventDefault();
-        goToSlide(0);
-      } else if (e.key === 'End') {
-        e.preventDefault();
-        goToSlide(totalSlides - 1);
-      }
-    });
-
-    // Navigation dot clicks
-    navDots.forEach((dot, index) => {
-      dot.addEventListener('click', () => {
-        goToSlide(index);
-      });
-    });
-
-    // Swipe support for touch devices
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    document.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    });
-
-    document.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-    });
-
-    function handleSwipe() {
-      if (touchEndX < touchStartX - 50) {
-        nextSlide();
-      }
-      if (touchEndX > touchStartX + 50) {
-        prevSlide();
-      }
-    }
+    const S=document.querySelectorAll('.slide'),D=document.querySelectorAll('.nav-dot'),C=document.getElementById('cs'),T=document.getElementById('ts');let c=0;const n=S.length;T.textContent=n;function go(i){if(i<0||i>=n)return;S[c].classList.remove('active');S[c].classList.add('exiting');D[c].classList.remove('active');c=i;S[c].classList.remove('exiting');S[c].classList.add('active');D[c].classList.add('active');C.textContent=c+1;setTimeout(()=>S.forEach(s=>s.classList.remove('exiting')),500)}document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();go(c+1)}else if(e.key==='ArrowLeft'){e.preventDefault();go(c-1)}else if(e.key==='Home'){e.preventDefault();go(0)}else if(e.key==='End'){e.preventDefault();go(n-1)}});D.forEach((d,i)=>d.addEventListener('click',()=>go(i)));let tX=0;document.addEventListener('touchstart',e=>tX=e.changedTouches[0].screenX);document.addEventListener('touchend',e=>{const d=e.changedTouches[0].screenX-tX;if(d<-50)go(c+1);if(d>50)go(c-1)});
   </script>
 </body>
 </html>

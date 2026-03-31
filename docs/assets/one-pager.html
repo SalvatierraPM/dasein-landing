@@ -8,451 +8,391 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --navy: #0A1628;
+      --paper: #f5efe5;
+      --ink: #111111;
+      --ink-soft: #4e4a43;
+      --ink-faint: #8f877a;
+      --navy: #0a1628;
+      --slate-white: #ede7dc;
+      --muted: #70685d;
       --signal-blue: #4865ff;
+      --signal-red: #ff5c38;
       --horizon-violet: #7a68d6;
       --foresight-teal: #2f9e90;
-      --slate-white: #ede7dc;
-      --muted: #8899AA;
-      --surface: #111D2E;
-      --border: rgba(136, 153, 170, 0.2);
+      --line: rgba(17, 17, 17, 0.1);
+      --font-display: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+      --font-body: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      --font-mono: 'Azeret Mono', 'JetBrains Mono', monospace;
+      --font-editorial: 'Instrument Serif', Georgia, serif;
     }
 
+    @page { size: A4; margin: 0; }
+
     body {
-      font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--navy);
-      color: var(--slate-white);
+      font-family: var(--font-body);
+      background: var(--paper);
+      color: var(--ink);
       font-size: 14px;
-      line-height: 1.5;
+      line-height: 1.55;
       padding: 48px 56px;
       max-width: 210mm;
       margin: 0 auto;
       min-height: 297mm;
       display: flex;
       flex-direction: column;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Header */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-bottom: 32px;
-      margin-bottom: 40px;
-      border-bottom: 1px solid var(--border);
+      padding-bottom: 28px;
+      margin-bottom: 36px;
+      border-bottom: 1px solid var(--line);
     }
 
     .logo {
-      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+      font-family: var(--font-display);
       font-size: 20px;
       font-weight: 900;
-      letter-spacing: -0.02em;
-      color: var(--slate-white);
+      letter-spacing: -0.03em;
+      color: var(--ink);
     }
 
     .tagline {
       font-size: 13px;
       color: var(--muted);
-      font-weight: 400;
-      max-width: 280px;
+      max-width: 260px;
       text-align: right;
     }
 
-    /* Section Titles */
     h2 {
-      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
-      font-size: 16px;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      margin-bottom: 16px;
-      color: var(--signal-blue);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 14px;
     }
 
-    /* Section 1 — Qué hacemos */
+    h2::before {
+      content: '→ ';
+      color: var(--signal-red);
+      opacity: 0.6;
+    }
+
     .section-intro {
-      margin-bottom: 40px;
-      padding-bottom: 40px;
-      border-bottom: 1px solid var(--border);
+      margin-bottom: 36px;
+      padding-bottom: 36px;
+      border-bottom: 1px solid var(--line);
     }
 
     .section-intro p {
       font-size: 15px;
       line-height: 1.7;
-      color: var(--slate-white);
+      color: var(--ink-soft);
       max-width: 100%;
     }
 
-    /* Section 2 — Servicios */
-    .section-services {
-      margin-bottom: 40px;
-      padding-bottom: 40px;
-      border-bottom: 1px solid var(--border);
+    .section-intro em {
+      font-family: var(--font-editorial);
+      font-style: italic;
+      color: var(--signal-red);
     }
 
-    .services-grid {
+    .section-services {
+      margin-bottom: 36px;
+      padding-bottom: 36px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .services-row-top {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .services-row-bottom {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
     }
 
     .service-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 20px;
+      background: rgba(255, 255, 255, 0.52);
+      border: 1px solid rgba(17, 17, 17, 0.08);
+      border-radius: 6px;
+      padding: 16px;
       display: flex;
       flex-direction: column;
     }
 
     .service-card.featured {
-      border-color: var(--signal-blue);
+      border-color: var(--navy);
       border-width: 2px;
       position: relative;
     }
 
     .service-card.featured::before {
-      content: 'MÁS POPULAR';
+      content: '◆ MÁS POPULAR';
       position: absolute;
-      top: -10px;
+      top: -9px;
       right: 12px;
-      background: var(--signal-blue);
-      color: var(--navy);
-      font-size: 9px;
-      font-weight: 700;
-      padding: 4px 8px;
+      background: var(--navy);
+      color: var(--slate-white);
+      font-family: var(--font-mono);
+      font-size: 8px;
+      font-weight: 600;
+      padding: 3px 8px;
       border-radius: 2px;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.08em;
     }
 
     .service-title {
-      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
-      font-size: 16px;
+      font-family: var(--font-display);
+      font-size: 15px;
       font-weight: 700;
-      margin-bottom: 8px;
-      color: var(--slate-white);
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+      color: var(--ink);
     }
 
     .service-subtitle {
-      font-size: 11px;
-      color: var(--muted);
-      margin-bottom: 12px;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--ink-faint);
+      margin-bottom: 10px;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.1em;
     }
 
     .service-description {
-      font-size: 13px;
-      line-height: 1.6;
-      color: var(--slate-white);
-      margin-bottom: 16px;
+      font-size: 12px;
+      line-height: 1.55;
+      color: var(--ink-soft);
+      margin-bottom: 12px;
       flex-grow: 1;
     }
 
     .service-meta {
       display: flex;
-      flex-direction: column;
-      gap: 6px;
-      padding-top: 12px;
-      border-top: 1px solid var(--border);
-    }
-
-    .service-meta-item {
-      display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 12px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
     }
 
     .service-meta-label {
-      color: var(--muted);
-      font-family: 'Azeret Mono', monospace;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--ink-faint);
     }
 
     .service-meta-value {
-      color: var(--slate-white);
-      font-family: 'Azeret Mono', monospace;
-      font-weight: 500;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink);
     }
 
-    /* Section 3 — Caso + CTA */
     .section-footer {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 24px;
+      gap: 16px;
       flex-grow: 1;
     }
 
     .case-study {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 24px;
+      background: rgba(255, 255, 255, 0.52);
+      border: 1px solid rgba(17, 17, 17, 0.08);
+      border-radius: 6px;
+      padding: 20px;
     }
 
     .case-study h3 {
-      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 12px;
-      color: var(--foresight-teal);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+      color: var(--foresight-teal);
     }
 
     .case-study p {
-      font-size: 13px;
+      font-size: 12px;
       line-height: 1.6;
-      color: var(--slate-white);
+      color: var(--ink-soft);
     }
 
     .case-study .quote {
-      font-family: 'Instrument Serif', Georgia, serif;
+      font-family: var(--font-editorial);
       font-style: italic;
-      font-size: 14px;
-      margin-top: 12px;
-      padding-top: 12px;
-      border-top: 1px solid var(--border);
+      font-size: 13px;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
       color: var(--muted);
     }
 
     .cta-block {
-      background: var(--surface);
-      border: 1px solid var(--signal-blue);
-      border-radius: 4px;
-      padding: 24px;
+      background: var(--navy);
+      border-radius: 6px;
+      padding: 20px;
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
 
     .cta-block h3 {
-      font-family: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+      font-family: var(--font-display);
       font-size: 18px;
       font-weight: 900;
-      margin-bottom: 20px;
-      color: var(--signal-blue);
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      color: var(--signal-red);
       line-height: 1.3;
     }
 
     .cta-contact {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 6px;
     }
 
     .cta-contact-item {
-      font-size: 14px;
+      font-size: 13px;
       color: var(--slate-white);
       text-decoration: none;
-      font-family: 'Azeret Mono', monospace;
-      transition: color 150ms ease;
+      font-family: var(--font-mono);
+      font-size: 12px;
     }
 
-    .cta-contact-item:hover {
-      color: var(--signal-blue);
-    }
-
-    /* Footer */
     footer {
-      margin-top: 40px;
-      padding-top: 24px;
-      border-top: 1px solid var(--border);
+      margin-top: 36px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
     .footer-main {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 500;
-      color: var(--slate-white);
+      color: var(--ink);
     }
 
     .footer-meta {
-      font-size: 11px;
+      font-size: 10px;
       color: var(--muted);
-      font-family: 'Azeret Mono', monospace;
+      font-family: var(--font-mono);
     }
 
-    /* Print styles */
     @media print {
-      @page {
-        size: A4;
-        margin: 15mm;
-      }
-
-      body {
-        background: white;
-        color: #0A1628;
-        padding: 0;
-        min-height: auto;
-      }
-
-      :root {
-        --navy: #0A1628;
-        --signal-blue: #4865ff;
-        --horizon-violet: #7a68d6;
-        --foresight-teal: #2f9e90;
-        --slate-white: #0A1628;
-        --muted: #4A5568;
-        --surface: #F7F9FB;
-        --border: #CBD5E0;
-      }
-
-      header {
-        border-bottom-color: #CBD5E0;
-      }
-
-      .section-intro {
-        border-bottom-color: #CBD5E0;
-      }
-
-      .section-services {
-        border-bottom-color: #CBD5E0;
-      }
-
-      .service-card {
-        background: #F7F9FB;
-        border-color: #CBD5E0;
-        break-inside: avoid;
-      }
-
-      .service-card.featured {
-        border-color: #4865ff;
-      }
-
-      .service-meta {
-        border-top-color: #CBD5E0;
-      }
-
-      .case-study {
-        background: #F7F9FB;
-        border-color: #CBD5E0;
-        break-inside: avoid;
-      }
-
-      .case-study .quote {
-        border-top-color: #CBD5E0;
-      }
-
-      .cta-block {
-        background: #F7F9FB;
-        border-color: #4865ff;
-        break-inside: avoid;
-      }
-
-      footer {
-        border-top-color: #CBD5E0;
-      }
-
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
+      @page { size: A4; margin: 15mm; }
+      body { padding: 0; min-height: auto; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .service-card, .case-study, .cta-block { break-inside: avoid; }
     }
   </style>
 </head>
 <body>
   <header>
     <div class="logo">Dasein Foresight</div>
-    <div class="tagline">Simulamos futuros para que decidas mejor hoy</div>
+    <div class="tagline">Simulamos escenarios para que tu equipo decida con información, no con urgencia.</div>
   </header>
 
   <main>
-    <!-- Section 1 — Qué hacemos -->
     <section class="section-intro">
       <h2>Qué hacemos</h2>
-      <p>Somos una consultora de prospectiva estratégica que ayuda a organizaciones a tomar decisiones importantes bajo incertidumbre. Combinamos metodología rigurosa de escenarios con un motor propio de simulación por IA (SignalTwin) para entregar claridad estratégica — no predicciones, no dashboards vacíos, no decks cosméticos.</p>
+      <p>Somos una consultoría de prospectiva estratégica que ayuda a organizaciones a <em>decidir antes de reaccionar.</em> Combinamos la tradición de la ontología del lenguaje (Flores, Echeverría) con un motor propio de simulación por IA para entregar claridad estratégica — no predicciones, no dashboards vacíos, no decks cosméticos.</p>
     </section>
 
-    <!-- Section 2 — Servicios -->
     <section class="section-services">
       <h2>Servicios</h2>
-      <div class="services-grid">
-        <!-- Lectura de Campo -->
+      <div class="services-row-top">
+        <div class="service-card">
+          <h3 class="service-title">Pulso Rápido</h3>
+          <p class="service-subtitle">Door opener · 2-3 días</p>
+          <p class="service-description">1 pregunta estratégica urgente. Memo ejecutivo 3-5 páginas con señales e interpretación.</p>
+          <div class="service-meta">
+            <span class="service-meta-label">Desde</span>
+            <span class="service-meta-value">USD 2,500</span>
+          </div>
+        </div>
+
         <div class="service-card">
           <h3 class="service-title">Lectura de Campo</h3>
-          <p class="service-subtitle">Puerta de entrada</p>
-          <p class="service-description">Escaneo de 15-25 señales + memo ejecutivo + mapa de stakeholders + signposts + plan a 90 días</p>
+          <p class="service-subtitle">Puerta de entrada · 5-7 días</p>
+          <p class="service-description">Radiografía del ecosistema. Lente Lingüística + mapa de actores. 4 entregables.</p>
           <div class="service-meta">
-            <div class="service-meta-item">
-              <span class="service-meta-label">Duración</span>
-              <span class="service-meta-value">5 días</span>
-            </div>
-            <div class="service-meta-item">
-              <span class="service-meta-label">Desde</span>
-              <span class="service-meta-value">USD 4,500</span>
-            </div>
+            <span class="service-meta-label">Desde</span>
+            <span class="service-meta-value">USD 8,500</span>
           </div>
         </div>
 
-        <!-- Simulación Estratégica -->
         <div class="service-card featured">
-          <h3 class="service-title">Simulación Estratégica</h3>
-          <p class="service-subtitle">Más popular</p>
-          <p class="service-description">Simulación dual-world completa + escenarios + análisis de robustez + dashboard + workshop directivo</p>
+          <h3 class="service-title">Simulación Táctica</h3>
+          <p class="service-subtitle">Más popular · 2-3 semanas</p>
+          <p class="service-description">1 decisión simulada. Incluye Lectura + Motor Dual-World + dashboard + memo.</p>
           <div class="service-meta">
-            <div class="service-meta-item">
-              <span class="service-meta-label">Duración</span>
-              <span class="service-meta-value">4-5 semanas</span>
-            </div>
-            <div class="service-meta-item">
-              <span class="service-meta-label">Desde</span>
-              <span class="service-meta-value">USD 18,000</span>
-            </div>
+            <span class="service-meta-label">Desde</span>
+            <span class="service-meta-value">USD 18,000</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="services-row-bottom">
+        <div class="service-card">
+          <h3 class="service-title">Simulación Estratégica</h3>
+          <p class="service-subtitle">Ecosistema completo · 5-6 semanas</p>
+          <p class="service-description">Ontología 4 capas + simulación completa. 7 entregables + workshop directivo.</p>
+          <div class="service-meta">
+            <span class="service-meta-label">Desde</span>
+            <span class="service-meta-value">USD 38,000</span>
           </div>
         </div>
 
-        <!-- Radar Estratégico -->
         <div class="service-card">
           <h3 class="service-title">Radar Estratégico</h3>
-          <p class="service-subtitle">Monitoreo continuo</p>
-          <p class="service-description">Vigilancia permanente + escaneo mensual + simulación trimestral + alertas + plan renovado</p>
+          <p class="service-subtitle">Monitoreo continuo · Min. 6 meses</p>
+          <p class="service-description">Scan mensual + re-simulación trimestral + alertas + acceso prioritario.</p>
           <div class="service-meta">
-            <div class="service-meta-item">
-              <span class="service-meta-label">Duración</span>
-              <span class="service-meta-value">Min. 3 meses</span>
-            </div>
-            <div class="service-meta-item">
-              <span class="service-meta-label">Desde</span>
-              <span class="service-meta-value">USD 7,500/mes</span>
-            </div>
+            <span class="service-meta-label">Desde</span>
+            <span class="service-meta-value">USD 10,000/mes</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Section 3 — Caso + CTA -->
     <section class="section-footer">
       <div class="case-study">
-        <h3>Caso: BancoEstado</h3>
-        <p>Analizamos la implementación de IA en banca pública. 15 stakeholders mapeados. 4 escenarios evaluados. 3 opciones de decisión testeadas en cada mundo posible.</p>
-        <p class="quote">Resultado: una estrategia robusta que funciona en cualquier futuro regulatorio.</p>
+        <h3>Metodología</h3>
+        <p>Escaneo de 200+ señales curadas a 18-24 clave. Ontología de 4 capas. Simulación dual-world con agentes que tienen posiciones reales y memoria persistente. Lente Lingüística basada en Flores y Echeverría.</p>
+        <p class="quote">No predecimos. Simulamos escenarios para que su equipo decida con evidencia.</p>
       </div>
 
       <div class="cta-block">
         <h3>Agenda una conversación exploratoria de 30 minutos.</h3>
         <div class="cta-contact">
-          <a href="mailto:info@daseinforesight.com" class="cta-contact-item">info@daseinforesight.com</a>
-          <a href="https://daseinforesight.com" class="cta-contact-item">daseinforesight.com</a>
+          <a href="mailto:info@daseinfs.com" class="cta-contact-item">→ info@daseinfs.com</a>
+          <a href="https://daseinfs.com" class="cta-contact-item">→ daseinfs.com</a>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <div class="footer-main">Dasein Foresight — Prospectiva estratégica potenciada por IA</div>
-    <div class="footer-meta">Santiago, Chile | info@daseinforesight.com</div>
+    <div class="footer-main">Dasein Foresight — Prospectiva estratégica basada en IA</div>
+    <div class="footer-meta">Santiago, Chile · Ciudad de México</div>
   </footer>
 </body>
 </html>
