@@ -63,7 +63,7 @@ const steps = [
         <em>en decisión.</em>
       </h2>
       <p class="method-lead">
-        De tu pregunta a un plan a 90 días. Cada paso produce algo concreto
+        De tu pregunta a un plan a <span class="method-lead-data">90 días.</span> Cada paso produce algo concreto
         que puedes revisar, cuestionar y usar.
       </p>
     </div>
@@ -335,6 +335,13 @@ const steps = [
     max-width: 38rem;
     color: var(--ink-soft);
     font-size: clamp(1.05rem, 1rem + 0.3vw, 1.2rem);
+  }
+
+  .method-lead-data {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.01em;
   }
 
   /* === Scrollytelling container === */

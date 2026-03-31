@@ -27,7 +27,7 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
 
       <div class="contact-aside">
         <p class="contact-body">
-          30 minutos para entender tu caso y ver si podemos ayudar.
+          <span class="contact-data">30 minutos</span> para entender tu caso y ver si podemos <em>ayudar.</em>
         </p>
 
         <div class="contact-cta-block">
@@ -148,6 +148,19 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
     font-size: clamp(1rem, 0.96rem + 0.24vw, 1.12rem);
     line-height: 1.82;
     max-width: 30ch;
+  }
+
+  .contact-data {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: rgba(243, 245, 248, 0.82);
+    letter-spacing: -0.01em;
+  }
+
+  .contact-body em {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    color: rgba(243, 245, 248, 0.72);
   }
 
   .contact-cta-block {

@@ -41,16 +41,16 @@ const proofCells = [
         <div class="narrative-inner">
           <p data-narrative-p>
             Soy Pablo Moraga. Vengo de operar tecnología donde equivocarte
-            tiene costo real — en operaciones, mercados y personas.
+            tiene <em>costo real</em> — en operaciones, mercados y personas.
           </p>
           <p data-narrative-p>
             Esa experiencia me enseñó que antes de cualquier implementación
-            hace falta leer el sistema: actores, incentivos, fricciones,
+            hace falta <em>leer el sistema:</em> actores, incentivos, fricciones,
             restricciones y consecuencias que ningún dashboard muestra.
           </p>
           <p data-narrative-p>
             Dasein nace desde ahí. No como ejercicio académico, sino como
-            herramienta de prospectiva para decidir mejor hoy — en cualquier
+            herramienta de prospectiva para <em>decidir mejor hoy</em> — en cualquier
             industria donde la complejidad ya superó la intuición.
           </p>
         </div>
@@ -210,6 +210,12 @@ const proofCells = [
   }
 
   .narrative-inner p:first-child {
+    color: var(--ink);
+  }
+
+  .narrative-inner em {
+    font-family: var(--font-editorial);
+    font-style: italic;
     color: var(--ink);
   }
 

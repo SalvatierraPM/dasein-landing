@@ -6,8 +6,8 @@ const services = [
     num: '01',
     name: 'Lectura de Campo',
     tag: 'Entry point',
-    headline: 'Entender qué está pasando antes de actuar.',
-    body: 'Escaneamos señales regulatorias, competitivas y tecnológicas. Mapeamos quién juega y qué quiere. Te devolvemos un reporte con lo que otros no están viendo.',
+    headline: 'Entender qué está pasando <em>antes de actuar.</em>',
+    body: 'Escaneamos señales regulatorias, competitivas y tecnológicas. Mapeamos quién juega y qué quiere. Te devolvemos un reporte con lo que otros <em>no están viendo.</em>',
     entregables: [
       'Reporte de señales procesadas',
       'Mapa de actores con incentivos y fricciones',
@@ -20,8 +20,8 @@ const services = [
     num: '02',
     name: 'Simulación Estratégica',
     tag: 'Core',
-    headline: 'Simular cómo reaccionan los actores antes de que tú actúes.',
-    body: 'Simulamos cómo se comportarían los actores clave — reguladores, competidores, aliados — frente a cada decisión que podrías tomar. Cada recomendación viene con su evidencia.',
+    headline: 'Simular cómo reaccionan los actores <em>antes de que tú actúes.</em>',
+    body: 'Simulamos cómo se comportarían los actores clave — reguladores, competidores, aliados — frente a cada decisión que podrías tomar. Cada recomendación viene con <em>su evidencia.</em>',
     entregables: [
       'Dossier de escenarios con evidencia trazable',
       'Cada recomendación apunta a su señal de origen',
@@ -69,8 +69,8 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
             <span class="service-card__tag">{svc.tag}</span>
           </div>
           <h3 class="service-card__name">{svc.name}</h3>
-          <p class="service-card__headline">{svc.headline}</p>
-          <p class="service-card__body">{svc.body}</p>
+          <p class="service-card__headline" set:html={svc.headline} />
+          <p class="service-card__body" set:html={svc.body} />
 
           <div class="service-card__entregables">
             <span class="service-card__entregables-label">Entregables</span>
@@ -100,11 +100,11 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
         <span class="service-card__ghost" aria-hidden="true">◇</span>
         <div class="partner-block__content">
           <span class="service-card__num">03</span>
-          <h3 class="partner-block__title">Radar Estratégico — monitoreo continuo.</h3>
+          <h3 class="partner-block__title">Radar Estratégico — <em>monitoreo continuo.</em></h3>
           <p class="partner-block__body">
-            Para organizaciones que necesitan vigilancia permanente: escaneo mensual de señales,
-            re-simulación trimestral, alertas calibradas y reportes board-ready.
-            Diseñado como partnership a medida — conversemos sobre el formato.
+            Para organizaciones que necesitan vigilancia permanente: escaneo mensual,
+            re-simulación trimestral, alertas calibradas y reportes <em>board-ready.</em>
+            Diseñado como partnership a medida.
           </p>
           <span class="partner-block__price">Desde USD 7,500/mes · mínimo 3 meses</span>
         </div>
@@ -283,12 +283,20 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
   }
 
   .service-card__headline {
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 1rem + 0.5vw, 1.5rem);
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    max-width: 32ch;
+  }
+
+  .service-card__headline em {
     font-family: var(--font-editorial);
     font-style: italic;
-    font-size: clamp(1.1rem, 1rem + 0.3vw, 1.3rem);
-    line-height: 1.45;
+    font-weight: 400;
     color: var(--signal-red);
-    max-width: 32ch;
   }
 
   .service-card__body {
@@ -296,6 +304,12 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
     line-height: var(--leading-body);
     color: var(--ink-soft);
     max-width: 44ch;
+  }
+
+  .service-card__body em {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    color: var(--ink);
   }
 
   /* --- Entregables list --- */
@@ -421,6 +435,19 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
     letter-spacing: var(--tracking-heading);
     color: var(--ink);
     max-width: 28ch;
+  }
+
+  .partner-block__title em {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--signal-red);
+  }
+
+  .partner-block__body em {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    color: var(--ink);
   }
 
   .partner-block__price {

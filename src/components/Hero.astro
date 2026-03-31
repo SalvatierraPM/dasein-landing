@@ -87,7 +87,7 @@ const stripLoop = [...strips, ...strips, ...strips];
 
       <p class="hero-body" data-hero-body>
         Simulamos escenarios para que tu equipo decida
-        con información, no con urgencia.
+        con <em>información,</em> no con urgencia.
       </p>
 
       <div class="button-row hero-actions" data-hero-actions>
@@ -262,6 +262,12 @@ const stripLoop = [...strips, ...strips, ...strips];
     text-align: center;
     opacity: 0;
     transform: translateY(16px);
+  }
+
+  .hero-body em {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    color: var(--signal-red);
   }
 
   .hero-body.is-visible {
