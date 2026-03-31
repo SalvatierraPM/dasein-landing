@@ -1,0 +1,174 @@
+---
+/**
+ * SignalTicker — Bloomberg-style horizontal data band with scroll-driven counters.
+ * Sits between Method and Founder as an editorial credibility strip.
+ */
+const metrics = [
+  { value: 60, suffix: '', label: 'señales por caso', prefix: 'hasta ' },
+  { value: 25, suffix: '', label: 'actores simulados', prefix: '' },
+  { value: 100, suffix: '+', label: 'rondas de simulación', prefix: '' },
+  { value: 3, suffix: '', label: 'escenarios trazables', prefix: '' },
+  { value: 90, suffix: '', label: 'días de plan ejecutivo', prefix: '' },
+];
+
+// Duplicate for seamless loop
+const loopMetrics = [...metrics, ...metrics, ...metrics];
+---
+
+<div class="ticker-band" data-ticker>
+  <div class="ticker-border"></div>
+
+  <div class="ticker-track-wrapper">
+    <div class="ticker-track" data-ticker-track>
+      {loopMetrics.map((m) => (
+        <div class="ticker-item">
+          <span class="ticker-value">
+            <span class="ticker-prefix">{m.prefix}</span>
+            <span class="ticker-number" data-ticker-count={m.value}>{m.value}</span>
+            <span class="ticker-suffix">{m.suffix}</span>
+          </span>
+          <span class="ticker-label">{m.label}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="ticker-border"></div>
+</div>
+
+<style>
+  .ticker-band {
+    position: relative;
+    overflow: hidden;
+    padding-block: 0;
+    background: var(--paper-deep, #efe6d8);
+  }
+
+  .ticker-border {
+    height: 1px;
+    background: var(--line);
+  }
+
+  .ticker-track-wrapper {
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, black 6%, black 94%, transparent);
+    padding-block: clamp(2rem, 3vw, 3.5rem);
+  }
+
+  .ticker-track {
+    display: flex;
+    gap: clamp(3rem, 5vw, 6rem);
+    width: max-content;
+    animation: ticker-scroll 40s linear infinite;
+    will-change: transform;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+
+  @keyframes ticker-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-33.333%); }
+  }
+
+  .ticker-item {
+    display: flex;
+    align-items: baseline;
+    gap: clamp(0.5rem, 1vw, 0.85rem);
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .ticker-value {
+    font-family: var(--font-mono);
+    font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.4rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+
+  .ticker-prefix {
+    font-size: 0.55em;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: var(--ink-faint);
+    text-transform: lowercase;
+  }
+
+  .ticker-suffix {
+    font-size: 0.7em;
+    color: var(--signal-red);
+  }
+
+  .ticker-label {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-size: clamp(0.85rem, 0.78rem + 0.3vw, 1.05rem);
+    color: var(--ink-faint);
+    letter-spacing: -0.01em;
+  }
+
+  /* Separator dot between items */
+  .ticker-item + .ticker-item::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--signal-red);
+    opacity: 0.35;
+    flex-shrink: 0;
+    align-self: center;
+    margin-right: clamp(2rem, 4vw, 5rem);
+  }
+
+  .ticker-band:hover .ticker-track {
+    animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ticker-track {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  /* Counter animation: numbers count up when ticker enters viewport */
+  (() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const ticker = document.querySelector('[data-ticker]');
+    if (!ticker) return;
+
+    let counted = false;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting || counted) return;
+        counted = true;
+
+        const numbers = ticker.querySelectorAll<HTMLElement>('[data-ticker-count]');
+        numbers.forEach((el) => {
+          const target = parseInt(el.dataset.tickerCount || '0', 10);
+          const duration = 1400;
+          const start = performance.now();
+
+          const tick = (now: number) => {
+            const t = Math.min((now - start) / duration, 1);
+            const ease = 1 - Math.pow(1 - t, 4);
+            el.textContent = String(Math.round(target * ease));
+            if (t < 1) requestAnimationFrame(tick);
+          };
+
+          el.textContent = '0';
+          requestAnimationFrame(tick);
+        });
+
+        observer.unobserve(ticker);
+      });
+    }, { threshold: 0.3 });
+
+    observer.observe(ticker);
+  })();
+</script>

@@ -525,17 +525,14 @@ const proofCells = [
     }
   }
 
-  /* === Narrative: scroll-linked continuous opacity (Apple-style) === */
+  /* === Narrative: scroll-linked continuous opacity === */
   .js [data-narrative-p] {
-    opacity: 0.12;
-    filter: blur(1.5px);
-    transition: filter 0.15s ease;
+    opacity: 0.15;
   }
 
   @media (prefers-reduced-motion: reduce) {
     .js [data-narrative-p] {
       opacity: 1;
-      filter: none;
     }
   }
 </style>
@@ -564,12 +561,9 @@ const proofCells = [
         const dist = Math.abs(pCenter - center) / (vh * 0.5);
         // Clamp: 1 = at center (full), 0 = far away (dim)
         const progress = Math.max(0, Math.min(1, 1 - dist));
-        // Map to opacity range: 0.12 → 1
-        const opacity = 0.12 + progress * 0.88;
-        const blur = (1 - progress) * 1.5;
-
+        // Map to opacity range: 0.15 → 1 (no blur)
+        const opacity = 0.15 + progress * 0.85;
         p.style.opacity = String(opacity);
-        p.style.filter = blur > 0.1 ? `blur(${blur}px)` : 'none';
       });
     };
 
