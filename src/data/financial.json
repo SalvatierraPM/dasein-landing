@@ -14,10 +14,11 @@
   },
   "fixed_costs_monthly": {
     "infra_cloud": 150,
-    "ai_api_costs": 200,
+    "ai_api_costs": 0,
     "domains_hosting": 30,
     "tools_subscriptions": 120,
-    "total": 500
+    "total_infra": 300,
+    "note": "AI API = $0 (sponsored/company-lent). Salaries ramp from $1K to $3.5K per person over 24mo."
   },
   "scenarios": [
     {
@@ -33,24 +34,132 @@
         "1 Radar recién en mes 12"
       ],
       "monthly": [
-        { "month": "2026-04", "revenue": 0,     "costs": 500,  "deals": "", "notes": "Pre-launch, website deploy" },
-        { "month": "2026-05", "revenue": 2500,   "costs": 550,  "deals": "1x Pulso", "notes": "Primer cliente piloto" },
-        { "month": "2026-06", "revenue": 0,      "costs": 550,  "deals": "", "notes": "" },
-        { "month": "2026-07", "revenue": 8500,   "costs": 600,  "deals": "1x Lectura", "notes": "" },
-        { "month": "2026-08", "revenue": 0,      "costs": 600,  "deals": "", "notes": "" },
-        { "month": "2026-09", "revenue": 2500,   "costs": 650,  "deals": "1x Pulso", "notes": "" },
-        { "month": "2026-10", "revenue": 8500,   "costs": 700,  "deals": "1x Lectura", "notes": "" },
-        { "month": "2026-11", "revenue": 0,      "costs": 700,  "deals": "", "notes": "" },
-        { "month": "2026-12", "revenue": 18000,  "costs": 750,  "deals": "1x Tactica", "notes": "Primer proyecto grande" },
-        { "month": "2027-01", "revenue": 2500,   "costs": 800,  "deals": "1x Pulso", "notes": "" },
-        { "month": "2027-02", "revenue": 8500,   "costs": 800,  "deals": "1x Lectura", "notes": "" },
-        { "month": "2027-03", "revenue": 10000,  "costs": 850,  "deals": "Radar inicio", "notes": "Primer retainer" },
-        { "month": "2027-04", "revenue": 18500,  "costs": 900,  "deals": "Radar + 1x Lectura", "notes": "" },
-        { "month": "2027-05", "revenue": 12500,  "costs": 900,  "deals": "Radar + 1x Pulso", "notes": "" },
-        { "month": "2027-06", "revenue": 10000,  "costs": 950,  "deals": "Radar", "notes": "" },
-        { "month": "2027-07", "revenue": 18500,  "costs": 1000, "deals": "Radar + 1x Lectura", "notes": "" },
-        { "month": "2027-08", "revenue": 28000,  "costs": 1000, "deals": "Radar + 1x Tactica", "notes": "" },
-        { "month": "2027-09", "revenue": 12500,  "costs": 1050, "deals": "Radar + 1x Pulso", "notes": "" }
+        {
+          "month": "2026-04",
+          "revenue": 0,
+          "costs": 2300,
+          "deals": "",
+          "notes": "Pre-launch, website deploy"
+        },
+        {
+          "month": "2026-05",
+          "revenue": 2500,
+          "costs": 2508,
+          "deals": "1x Pulso",
+          "notes": "Primer cliente piloto"
+        },
+        {
+          "month": "2026-06",
+          "revenue": 0,
+          "costs": 2716,
+          "deals": "",
+          "notes": ""
+        },
+        {
+          "month": "2026-07",
+          "revenue": 8500,
+          "costs": 2924,
+          "deals": "1x Lectura",
+          "notes": ""
+        },
+        {
+          "month": "2026-08",
+          "revenue": 0,
+          "costs": 3134,
+          "deals": "",
+          "notes": ""
+        },
+        {
+          "month": "2026-09",
+          "revenue": 2500,
+          "costs": 3342,
+          "deals": "1x Pulso",
+          "notes": ""
+        },
+        {
+          "month": "2026-10",
+          "revenue": 8500,
+          "costs": 3550,
+          "deals": "1x Lectura",
+          "notes": ""
+        },
+        {
+          "month": "2026-11",
+          "revenue": 0,
+          "costs": 3758,
+          "deals": "",
+          "notes": ""
+        },
+        {
+          "month": "2026-12",
+          "revenue": 18000,
+          "costs": 3966,
+          "deals": "1x Tactica",
+          "notes": "Primer proyecto grande"
+        },
+        {
+          "month": "2027-01",
+          "revenue": 2500,
+          "costs": 4176,
+          "deals": "1x Pulso",
+          "notes": ""
+        },
+        {
+          "month": "2027-02",
+          "revenue": 8500,
+          "costs": 4384,
+          "deals": "1x Lectura",
+          "notes": ""
+        },
+        {
+          "month": "2027-03",
+          "revenue": 10000,
+          "costs": 4592,
+          "deals": "Radar inicio",
+          "notes": "Primer retainer"
+        },
+        {
+          "month": "2027-04",
+          "revenue": 18500,
+          "costs": 4800,
+          "deals": "Radar + 1x Lectura",
+          "notes": ""
+        },
+        {
+          "month": "2027-05",
+          "revenue": 12500,
+          "costs": 5008,
+          "deals": "Radar + 1x Pulso",
+          "notes": ""
+        },
+        {
+          "month": "2027-06",
+          "revenue": 10000,
+          "costs": 5216,
+          "deals": "Radar",
+          "notes": ""
+        },
+        {
+          "month": "2027-07",
+          "revenue": 18500,
+          "costs": 5424,
+          "deals": "Radar + 1x Lectura",
+          "notes": ""
+        },
+        {
+          "month": "2027-08",
+          "revenue": 28000,
+          "costs": 5634,
+          "deals": "Radar + 1x Tactica",
+          "notes": ""
+        },
+        {
+          "month": "2027-09",
+          "revenue": 12500,
+          "costs": 5842,
+          "deals": "Radar + 1x Pulso",
+          "notes": ""
+        }
       ]
     },
     {
@@ -66,24 +175,132 @@
         "Contratación part-time mes 10"
       ],
       "monthly": [
-        { "month": "2026-04", "revenue": 2500,   "costs": 500,  "deals": "1x Pulso", "notes": "Primer piloto via red coaching" },
-        { "month": "2026-05", "revenue": 8500,   "costs": 550,  "deals": "1x Lectura", "notes": "" },
-        { "month": "2026-06", "revenue": 2500,   "costs": 600,  "deals": "1x Pulso", "notes": "" },
-        { "month": "2026-07", "revenue": 18000,  "costs": 650,  "deals": "1x Tactica", "notes": "Upgrade de cliente Lectura" },
-        { "month": "2026-08", "revenue": 11000,  "costs": 700,  "deals": "1x Lectura + 1x Pulso", "notes": "" },
-        { "month": "2026-09", "revenue": 8500,   "costs": 750,  "deals": "1x Lectura", "notes": "" },
-        { "month": "2026-10", "revenue": 18000,  "costs": 800,  "deals": "1x Tactica", "notes": "" },
-        { "month": "2026-11", "revenue": 18500,  "costs": 850,  "deals": "Radar inicio + 1x Lectura", "notes": "Primer retainer" },
-        { "month": "2026-12", "revenue": 48000,  "costs": 900,  "deals": "Radar + 1x Estrategica", "notes": "Deal grande Q4" },
-        { "month": "2027-01", "revenue": 20500,  "costs": 3500, "deals": "Radar + 1x Lectura + 1x Pulso", "notes": "Hire part-time" },
-        { "month": "2027-02", "revenue": 28000,  "costs": 3500, "deals": "Radar + 1x Tactica", "notes": "" },
-        { "month": "2027-03", "revenue": 12500,  "costs": 3500, "deals": "Radar + 1x Pulso", "notes": "" },
-        { "month": "2027-04", "revenue": 28500,  "costs": 3800, "deals": "Radar + 1x Tactica + 1x Pulso", "notes": "" },
-        { "month": "2027-05", "revenue": 29000,  "costs": 3800, "deals": "2x Radar + 1x Lectura", "notes": "Segundo Radar" },
-        { "month": "2027-06", "revenue": 58000,  "costs": 4000, "deals": "2x Radar + 1x Estrategica", "notes": "" },
-        { "month": "2027-07", "revenue": 30500,  "costs": 4000, "deals": "2x Radar + 1x Lectura + 1x Pulso", "notes": "" },
-        { "month": "2027-08", "revenue": 38000,  "costs": 4200, "deals": "2x Radar + 1x Tactica", "notes": "" },
-        { "month": "2027-09", "revenue": 22500,  "costs": 4200, "deals": "2x Radar + 1x Pulso", "notes": "" }
+        {
+          "month": "2026-04",
+          "revenue": 2500,
+          "costs": 2300,
+          "deals": "1x Pulso",
+          "notes": "Primer piloto via red coaching"
+        },
+        {
+          "month": "2026-05",
+          "revenue": 8500,
+          "costs": 2508,
+          "deals": "1x Lectura",
+          "notes": ""
+        },
+        {
+          "month": "2026-06",
+          "revenue": 2500,
+          "costs": 2716,
+          "deals": "1x Pulso",
+          "notes": ""
+        },
+        {
+          "month": "2026-07",
+          "revenue": 18000,
+          "costs": 2924,
+          "deals": "1x Tactica",
+          "notes": "Upgrade de cliente Lectura"
+        },
+        {
+          "month": "2026-08",
+          "revenue": 11000,
+          "costs": 3134,
+          "deals": "1x Lectura + 1x Pulso",
+          "notes": ""
+        },
+        {
+          "month": "2026-09",
+          "revenue": 8500,
+          "costs": 3342,
+          "deals": "1x Lectura",
+          "notes": ""
+        },
+        {
+          "month": "2026-10",
+          "revenue": 18000,
+          "costs": 3550,
+          "deals": "1x Tactica",
+          "notes": ""
+        },
+        {
+          "month": "2026-11",
+          "revenue": 18500,
+          "costs": 3758,
+          "deals": "Radar inicio + 1x Lectura",
+          "notes": "Primer retainer"
+        },
+        {
+          "month": "2026-12",
+          "revenue": 48000,
+          "costs": 3966,
+          "deals": "Radar + 1x Estrategica",
+          "notes": "Deal grande Q4"
+        },
+        {
+          "month": "2027-01",
+          "revenue": 20500,
+          "costs": 5676,
+          "deals": "Radar + 1x Lectura + 1x Pulso",
+          "notes": "Hire part-time"
+        },
+        {
+          "month": "2027-02",
+          "revenue": 28000,
+          "costs": 5884,
+          "deals": "Radar + 1x Tactica",
+          "notes": ""
+        },
+        {
+          "month": "2027-03",
+          "revenue": 12500,
+          "costs": 6092,
+          "deals": "Radar + 1x Pulso",
+          "notes": ""
+        },
+        {
+          "month": "2027-04",
+          "revenue": 28500,
+          "costs": 6300,
+          "deals": "Radar + 1x Tactica + 1x Pulso",
+          "notes": ""
+        },
+        {
+          "month": "2027-05",
+          "revenue": 29000,
+          "costs": 6508,
+          "deals": "2x Radar + 1x Lectura",
+          "notes": "Segundo Radar"
+        },
+        {
+          "month": "2027-06",
+          "revenue": 58000,
+          "costs": 6716,
+          "deals": "2x Radar + 1x Estrategica",
+          "notes": ""
+        },
+        {
+          "month": "2027-07",
+          "revenue": 30500,
+          "costs": 6924,
+          "deals": "2x Radar + 1x Lectura + 1x Pulso",
+          "notes": ""
+        },
+        {
+          "month": "2027-08",
+          "revenue": 38000,
+          "costs": 7134,
+          "deals": "2x Radar + 1x Tactica",
+          "notes": ""
+        },
+        {
+          "month": "2027-09",
+          "revenue": 22500,
+          "costs": 7342,
+          "deals": "2x Radar + 1x Pulso",
+          "notes": ""
+        }
       ]
     },
     {
@@ -100,24 +317,132 @@
         "Mexico genera deals desde mes 10"
       ],
       "monthly": [
-        { "month": "2026-04", "revenue": 8500,   "costs": 500,  "deals": "1x Lectura", "notes": "Quick win red coaching" },
-        { "month": "2026-05", "revenue": 11000,  "costs": 600,  "deals": "1x Lectura + 1x Pulso", "notes": "" },
-        { "month": "2026-06", "revenue": 18000,  "costs": 650,  "deals": "1x Tactica", "notes": "" },
-        { "month": "2026-07", "revenue": 20500,  "costs": 700,  "deals": "1x Tactica + 1x Pulso", "notes": "" },
-        { "month": "2026-08", "revenue": 27000,  "costs": 750,  "deals": "1x Lectura + 1x Tactica + 1x Pulso", "notes": "" },
-        { "month": "2026-09", "revenue": 46500,  "costs": 800,  "deals": "1x Estrategica + 1x Lectura", "notes": "Primer deal grande" },
-        { "month": "2026-10", "revenue": 29000,  "costs": 3500, "deals": "1x Tactica + 1x Lectura + Pulso", "notes": "Team hire" },
-        { "month": "2026-11", "revenue": 38500,  "costs": 3800, "deals": "2x Radar + 1x Tactica + Pulso", "notes": "2 retainers" },
-        { "month": "2026-12", "revenue": 66500,  "costs": 4000, "deals": "2x Radar + 1x Estrategica + Lectura", "notes": "" },
-        { "month": "2027-01", "revenue": 38500,  "costs": 4500, "deals": "2x Radar + 1x Tactica + Pulso", "notes": "" },
-        { "month": "2027-02", "revenue": 29000,  "costs": 4500, "deals": "2x Radar + 1x Lectura", "notes": "" },
-        { "month": "2027-03", "revenue": 48500,  "costs": 5000, "deals": "3x Radar + 1x Tactica + Pulso", "notes": "3er Radar" },
-        { "month": "2027-04", "revenue": 68000,  "costs": 5500, "deals": "3x Radar + 1x Estrategica", "notes": "Mexico deal" },
-        { "month": "2027-05", "revenue": 48500,  "costs": 5500, "deals": "3x Radar + 1x Tactica + Pulso", "notes": "" },
-        { "month": "2027-06", "revenue": 39000,  "costs": 6000, "deals": "3x Radar + 1x Lectura", "notes": "" },
-        { "month": "2027-07", "revenue": 78000,  "costs": 6500, "deals": "3x Radar + 1x Estrategica + Lectura", "notes": "" },
-        { "month": "2027-08", "revenue": 58500,  "costs": 6500, "deals": "3x Radar + 1x Tactica + Lectura + Pulso", "notes": "" },
-        { "month": "2027-09", "revenue": 50500,  "costs": 7000, "deals": "4x Radar + 1x Lectura", "notes": "4to Radar" }
+        {
+          "month": "2026-04",
+          "revenue": 8500,
+          "costs": 2300,
+          "deals": "1x Lectura",
+          "notes": "Quick win red coaching"
+        },
+        {
+          "month": "2026-05",
+          "revenue": 11000,
+          "costs": 2508,
+          "deals": "1x Lectura + 1x Pulso",
+          "notes": ""
+        },
+        {
+          "month": "2026-06",
+          "revenue": 18000,
+          "costs": 2716,
+          "deals": "1x Tactica",
+          "notes": ""
+        },
+        {
+          "month": "2026-07",
+          "revenue": 20500,
+          "costs": 2924,
+          "deals": "1x Tactica + 1x Pulso",
+          "notes": ""
+        },
+        {
+          "month": "2026-08",
+          "revenue": 27000,
+          "costs": 3134,
+          "deals": "1x Lectura + 1x Tactica + 1x Pulso",
+          "notes": ""
+        },
+        {
+          "month": "2026-09",
+          "revenue": 46500,
+          "costs": 3342,
+          "deals": "1x Estrategica + 1x Lectura",
+          "notes": "Primer deal grande"
+        },
+        {
+          "month": "2026-10",
+          "revenue": 29000,
+          "costs": 5050,
+          "deals": "1x Tactica + 1x Lectura + Pulso",
+          "notes": "Team hire"
+        },
+        {
+          "month": "2026-11",
+          "revenue": 38500,
+          "costs": 5258,
+          "deals": "2x Radar + 1x Tactica + Pulso",
+          "notes": "2 retainers"
+        },
+        {
+          "month": "2026-12",
+          "revenue": 66500,
+          "costs": 5466,
+          "deals": "2x Radar + 1x Estrategica + Lectura",
+          "notes": ""
+        },
+        {
+          "month": "2027-01",
+          "revenue": 38500,
+          "costs": 5676,
+          "deals": "2x Radar + 1x Tactica + Pulso",
+          "notes": ""
+        },
+        {
+          "month": "2027-02",
+          "revenue": 29000,
+          "costs": 5884,
+          "deals": "2x Radar + 1x Lectura",
+          "notes": ""
+        },
+        {
+          "month": "2027-03",
+          "revenue": 48500,
+          "costs": 7592,
+          "deals": "3x Radar + 1x Tactica + Pulso",
+          "notes": "3er Radar"
+        },
+        {
+          "month": "2027-04",
+          "revenue": 68000,
+          "costs": 7800,
+          "deals": "3x Radar + 1x Estrategica",
+          "notes": "Mexico deal"
+        },
+        {
+          "month": "2027-05",
+          "revenue": 48500,
+          "costs": 8008,
+          "deals": "3x Radar + 1x Tactica + Pulso",
+          "notes": ""
+        },
+        {
+          "month": "2027-06",
+          "revenue": 39000,
+          "costs": 8216,
+          "deals": "3x Radar + 1x Lectura",
+          "notes": ""
+        },
+        {
+          "month": "2027-07",
+          "revenue": 78000,
+          "costs": 8424,
+          "deals": "3x Radar + 1x Estrategica + Lectura",
+          "notes": ""
+        },
+        {
+          "month": "2027-08",
+          "revenue": 58500,
+          "costs": 8634,
+          "deals": "3x Radar + 1x Tactica + Lectura + Pulso",
+          "notes": ""
+        },
+        {
+          "month": "2027-09",
+          "revenue": 50500,
+          "costs": 8842,
+          "deals": "4x Radar + 1x Lectura",
+          "notes": "4to Radar"
+        }
       ]
     },
     {
@@ -134,24 +459,132 @@
         "Chile + Mexico + Colombia"
       ],
       "monthly": [
-        { "month": "2026-04", "revenue": 8500,   "costs": 500,  "deals": "1x Lectura", "notes": "" },
-        { "month": "2026-05", "revenue": 20500,  "costs": 600,  "deals": "1x Tactica + 1x Pulso", "notes": "" },
-        { "month": "2026-06", "revenue": 18000,  "costs": 700,  "deals": "1x Tactica", "notes": "Aplicación aceleradora" },
-        { "month": "2026-07", "revenue": 46500,  "costs": 800,  "deals": "1x Estrategica + 1x Lectura", "notes": "Demo day prep" },
-        { "month": "2026-08", "revenue": 29000,  "costs": 1000, "deals": "1x Tactica + 1x Lectura + Pulso", "notes": "Aceleradora inicio" },
-        { "month": "2026-09", "revenue": 56500,  "costs": 1500, "deals": "1x Estrategica + 1x Tactica", "notes": "" },
-        { "month": "2026-10", "revenue": 48500,  "costs": 8000, "deals": "2x Radar + 1x Tactica + Lectura + Pulso", "notes": "Team hire x3" },
-        { "month": "2026-11", "revenue": 76500,  "costs": 10000,"deals": "2x Radar + 1x Estrategica + Lectura + Pulso", "notes": "" },
-        { "month": "2026-12", "revenue": 58000,  "costs": 12000,"deals": "3x Radar + 1x Tactica + Lectura", "notes": "Seed close" },
-        { "month": "2027-01", "revenue": 68500,  "costs": 15000,"deals": "3x Radar + 1x Estrategica + Pulso", "notes": "Capital deployed" },
-        { "month": "2027-02", "revenue": 49000,  "costs": 15000,"deals": "3x Radar + 1x Tactica", "notes": "" },
-        { "month": "2027-03", "revenue": 78500,  "costs": 16000,"deals": "4x Radar + 1x Estrategica + Pulso", "notes": "4to Radar" },
-        { "month": "2027-04", "revenue": 88000,  "costs": 18000,"deals": "4x Radar + 1x Estrategica + Tactica", "notes": "Colombia deal" },
-        { "month": "2027-05", "revenue": 69000,  "costs": 18000,"deals": "4x Radar + 1x Tactica + Lectura + Pulso", "notes": "" },
-        { "month": "2027-06", "revenue": 96500,  "costs": 20000,"deals": "5x Radar + 1x Estrategica + Lectura", "notes": "5to Radar" },
-        { "month": "2027-07", "revenue": 108000, "costs": 22000,"deals": "5x Radar + 1x Estrategica + Tactica", "notes": "" },
-        { "month": "2027-08", "revenue": 79000,  "costs": 22000,"deals": "5x Radar + 1x Tactica + Lectura + Pulso", "notes": "" },
-        { "month": "2027-09", "revenue": 118500, "costs": 24000,"deals": "6x Radar + 1x Estrategica + Tactica", "notes": "6to Radar" }
+        {
+          "month": "2026-04",
+          "revenue": 8500,
+          "costs": 2300,
+          "deals": "1x Lectura",
+          "notes": ""
+        },
+        {
+          "month": "2026-05",
+          "revenue": 20500,
+          "costs": 2508,
+          "deals": "1x Tactica + 1x Pulso",
+          "notes": ""
+        },
+        {
+          "month": "2026-06",
+          "revenue": 18000,
+          "costs": 2716,
+          "deals": "1x Tactica",
+          "notes": "Aplicación aceleradora"
+        },
+        {
+          "month": "2026-07",
+          "revenue": 46500,
+          "costs": 2924,
+          "deals": "1x Estrategica + 1x Lectura",
+          "notes": "Demo day prep"
+        },
+        {
+          "month": "2026-08",
+          "revenue": 29000,
+          "costs": 3134,
+          "deals": "1x Tactica + 1x Lectura + Pulso",
+          "notes": "Aceleradora inicio"
+        },
+        {
+          "month": "2026-09",
+          "revenue": 56500,
+          "costs": 3342,
+          "deals": "1x Estrategica + 1x Tactica",
+          "notes": ""
+        },
+        {
+          "month": "2026-10",
+          "revenue": 48500,
+          "costs": 8050,
+          "deals": "2x Radar + 1x Tactica + Lectura + Pulso",
+          "notes": "Team hire x3"
+        },
+        {
+          "month": "2026-11",
+          "revenue": 76500,
+          "costs": 8258,
+          "deals": "2x Radar + 1x Estrategica + Lectura + Pulso",
+          "notes": ""
+        },
+        {
+          "month": "2026-12",
+          "revenue": 58000,
+          "costs": 8466,
+          "deals": "3x Radar + 1x Tactica + Lectura",
+          "notes": "Seed close"
+        },
+        {
+          "month": "2027-01",
+          "revenue": 68500,
+          "costs": 8676,
+          "deals": "3x Radar + 1x Estrategica + Pulso",
+          "notes": "Capital deployed"
+        },
+        {
+          "month": "2027-02",
+          "revenue": 49000,
+          "costs": 8884,
+          "deals": "3x Radar + 1x Tactica",
+          "notes": ""
+        },
+        {
+          "month": "2027-03",
+          "revenue": 78500,
+          "costs": 10592,
+          "deals": "4x Radar + 1x Estrategica + Pulso",
+          "notes": "4to Radar"
+        },
+        {
+          "month": "2027-04",
+          "revenue": 88000,
+          "costs": 10800,
+          "deals": "4x Radar + 1x Estrategica + Tactica",
+          "notes": "Colombia deal"
+        },
+        {
+          "month": "2027-05",
+          "revenue": 69000,
+          "costs": 11008,
+          "deals": "4x Radar + 1x Tactica + Lectura + Pulso",
+          "notes": ""
+        },
+        {
+          "month": "2027-06",
+          "revenue": 96500,
+          "costs": 11216,
+          "deals": "5x Radar + 1x Estrategica + Lectura",
+          "notes": "5to Radar"
+        },
+        {
+          "month": "2027-07",
+          "revenue": 108000,
+          "costs": 11424,
+          "deals": "5x Radar + 1x Estrategica + Tactica",
+          "notes": ""
+        },
+        {
+          "month": "2027-08",
+          "revenue": 79000,
+          "costs": 11634,
+          "deals": "5x Radar + 1x Tactica + Lectura + Pulso",
+          "notes": ""
+        },
+        {
+          "month": "2027-09",
+          "revenue": 118500,
+          "costs": 11842,
+          "deals": "6x Radar + 1x Estrategica + Tactica",
+          "notes": "6to Radar"
+        }
       ]
     }
   ]
