@@ -29,7 +29,11 @@ import BrandLogo from '../components/BrandLogo.astro';
         />
       </a>
 
-      <div class="nav-links">
+      <button class="nav-burger" id="nav-burger" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="nav-links" id="nav-links">
         <a href="#servicios">Servicios</a>
         <a href="#metodo">Método</a>
         <a href="#sobre">Origen</a>
@@ -79,6 +83,24 @@ import BrandLogo from '../components/BrandLogo.astro';
 
     syncNav();
     window.addEventListener('scroll', syncNav, { passive: true });
+
+    // Mobile burger menu
+    const burger = document.getElementById('nav-burger');
+    const navLinks = document.getElementById('nav-links');
+    if (burger && navLinks) {
+      burger.addEventListener('click', () => {
+        const open = navLinks.classList.toggle('is-open');
+        burger.classList.toggle('is-open', open);
+        burger.setAttribute('aria-expanded', String(open));
+      });
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('is-open');
+          burger.classList.remove('is-open');
+          burger.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
 
     document.addEventListener('astro:before-preparation', () => {
       revealObserver.disconnect();
@@ -258,25 +280,89 @@ import BrandLogo from '../components/BrandLogo.astro';
     background: rgba(17, 17, 17, 0.12);
   }
 
+  /* Burger button — hidden on desktop */
+  .nav-burger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 10;
+  }
+
+  .nav-burger span {
+    display: block;
+    width: 20px;
+    height: 1.5px;
+    background: var(--ink);
+    transition: transform 0.25s ease, opacity 0.2s ease;
+    transform-origin: center;
+  }
+
+  .nav-burger.is-open span:nth-child(1) {
+    transform: translateY(5.5px) rotate(45deg);
+  }
+  .nav-burger.is-open span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-burger.is-open span:nth-child(3) {
+    transform: translateY(-5.5px) rotate(-45deg);
+  }
+
   @media (max-width: 840px) {
     .nav-wrap {
-      align-items: flex-start;
-      flex-direction: column;
+      flex-wrap: nowrap;
     }
 
     .brand-lockup {
       min-width: 0;
+      flex: 1;
+    }
+
+    .nav-burger {
+      display: flex;
     }
 
     .nav-links {
-      width: 100%;
-      justify-content: space-between;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: stretch;
+      background: rgba(248, 244, 237, 0.97);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(17, 17, 17, 0.08);
+      padding: 1rem var(--gutter);
+      gap: 0;
+      transform: translateY(-10px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.25s var(--ease-out-expo), opacity 0.2s ease;
+    }
+
+    .nav-links.is-open {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .nav-links a {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(17, 17, 17, 0.06);
+      font-size: 0.8rem;
+    }
+
+    .nav-links a:last-child {
+      border-bottom: none;
     }
 
     .nav-links .nav-cta {
-      display: inline-flex;
-      padding: 0.6rem 0.85rem;
-      font-size: 0.65rem;
+      margin-top: 0.5rem;
+      text-align: center;
+      border-radius: var(--radius-full);
     }
   }
 </style>
