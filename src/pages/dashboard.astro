@@ -1,0 +1,875 @@
+---
+import financialData from '../data/financial.json';
+const scenarios = financialData.scenarios;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>DASEIN FORESIGHT — Dashboard</title>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Azeret+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══ TOKENS ═══ */
+:root {
+  --bg: #060d18; --bg-1: #0a1628; --bg-2: #0e1e36; --bg-3: #132844; --bg-4: #183252;
+  --blue: #4865ff; --blue-20: rgba(72,101,255,.2); --blue-10: rgba(72,101,255,.1); --blue-05: rgba(72,101,255,.05);
+  --teal: #2dd4a8; --teal-20: rgba(45,212,168,.2);
+  --amber: #f0b232; --amber-20: rgba(240,178,50,.2);
+  --red: #ff5c38; --red-20: rgba(255,92,56,.2);
+  --violet: #7a68d6;
+  --green: #34d399;
+  --t1: #eae4d9; --t2: #a09889; --t3: #706860; --t4: #4a453f; --t5: #2a2722;
+  --brd: rgba(255,255,255,.06); --brd-h: rgba(255,255,255,.12);
+  --fd: 'Satoshi',sans-serif; --fb: 'Space Grotesk',sans-serif; --fm: 'Azeret Mono',monospace;
+  --eo: cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{font-family:var(--fb);font-size:.9rem;line-height:1.5;color:var(--t1);background:var(--bg);min-height:100vh}
+body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.02;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-repeat:repeat}
+::selection{background:rgba(72,101,255,.3)}
+::-webkit-scrollbar{width:4px;height:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.08);border-radius:2px}
+a{color:inherit;text-decoration:none}
+
+/* ═══ SHELL ═══ */
+.shell{max-width:1480px;margin:0 auto;padding:clamp(1rem,3vw,2.5rem)}
+
+/* ═══ TOPBAR ═══ */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding-bottom:1.25rem;margin-bottom:1.5rem;border-bottom:1px solid var(--brd)}
+.brand{display:flex;align-items:baseline;gap:.75rem}
+.logo{font-family:var(--fd);font-size:clamp(1.1rem,.9rem+.7vw,1.5rem);font-weight:200;letter-spacing:.12em;color:var(--t1)}
+.logo b{font-weight:700;color:var(--blue)}
+.tag{font-family:var(--fm);font-size:.6rem;color:var(--t4);letter-spacing:.2em;text-transform:uppercase}
+.back{font-family:var(--fm);font-size:.65rem;color:var(--t3);letter-spacing:.06em;transition:color .15s}.back:hover{color:var(--blue)}
+
+/* ═══ HERO KPIS (always visible) ═══ */
+.hero-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(.5rem,1vw,.75rem);margin-bottom:2rem}
+.hero-kpi{background:var(--bg-2);border:1px solid var(--brd);border-radius:4px;padding:clamp(.75rem,1.5vw,1.25rem);position:relative;overflow:hidden}
+.hero-kpi canvas{position:absolute;bottom:0;left:0;width:100%;height:40px;opacity:.35}
+.hk-val{font-family:var(--fd);font-size:clamp(1.5rem,1rem+1.5vw,2.5rem);font-weight:900;letter-spacing:-.03em;line-height:1;color:var(--t1);position:relative;z-index:1}
+.hk-val.up{color:var(--green)}.hk-val.accent{color:var(--blue)}
+.hk-sub{font-family:var(--fm);font-size:.55rem;font-weight:500;color:var(--t3);letter-spacing:.14em;text-transform:uppercase;margin-top:.4rem;position:relative;z-index:1}
+.hk-delta{font-family:var(--fm);font-size:.6rem;color:var(--teal);margin-top:.25rem;position:relative;z-index:1}
+
+/* ═══ ACCORDION SECTIONS ═══ */
+.acc{margin-bottom:.5rem}
+.acc-head{display:flex;align-items:center;gap:1rem;padding:1rem 0;cursor:pointer;border-bottom:1px solid var(--brd);transition:border-color .15s;user-select:none}
+.acc-head:hover{border-color:var(--brd-h)}
+.acc-chevron{width:20px;height:20px;flex-shrink:0;transition:transform .4s var(--eo)}
+.acc-chevron svg{width:100%;height:100%;fill:none;stroke:var(--t3);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.acc[open] .acc-chevron{transform:rotate(180deg)}
+.acc-title{font-family:var(--fd);font-size:clamp(1rem,.85rem+.5vw,1.3rem);font-weight:700;color:var(--t1);flex:1}
+.acc-badge{font-family:var(--fm);font-size:.55rem;color:var(--t4);letter-spacing:.1em;text-transform:uppercase;padding:.25rem .6rem;border:1px solid var(--brd);border-radius:3px}
+.acc-body{padding:1.5rem 0 2rem;animation:slideDown .5s var(--eo)}
+@keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ═══ SCENARIO PILLS ═══ */
+.sc-pills{display:flex;gap:.5rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.sc-pill{font-family:var(--fm);font-size:.62rem;font-weight:500;letter-spacing:.06em;padding:.5rem 1rem;border:1px solid var(--brd);border-radius:3px;background:transparent;color:var(--t3);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:.5rem}
+.sc-pill:hover{border-color:var(--brd-h);color:var(--t2)}
+.sc-pill.on{border-color:currentColor;background:rgba(255,255,255,.04)}
+.sc-pill .dot{width:7px;height:7px;border-radius:50%}
+
+/* ═══ KPI ROW ═══ */
+.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(.4rem,.8vw,.75rem);margin-bottom:1.75rem}
+.kpi{background:var(--bg-2);border:1px solid var(--brd);border-radius:4px;padding:clamp(.6rem,1.2vw,1rem) clamp(.75rem,1.5vw,1.25rem);position:relative;overflow:hidden}
+.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.kpi canvas{position:absolute;bottom:0;right:0;width:60%;height:32px;opacity:.3}
+.kv{font-family:var(--fd);font-size:clamp(1.2rem,.9rem+1vw,1.8rem);font-weight:900;letter-spacing:-.02em;line-height:1;color:var(--t1);position:relative;z-index:1}
+.kv.pos{color:var(--green)}.kv.neg{color:var(--red)}
+.kl{font-family:var(--fm);font-size:.52rem;font-weight:600;color:var(--t4);letter-spacing:.14em;text-transform:uppercase;margin-top:.35rem;position:relative;z-index:1}
+
+/* ═══ CHART PANELS ═══ */
+.charts-row{display:grid;grid-template-columns:1fr 280px;gap:clamp(.75rem,1.5vw,1.25rem);margin-bottom:1.5rem}
+.cpanel{background:var(--bg-1);border:1px solid var(--brd);border-radius:4px;padding:clamp(.75rem,1.5vw,1.25rem);position:relative}
+.cpanel-full{grid-column:1/-1}
+.clabel{font-family:var(--fm);font-size:.55rem;font-weight:600;color:var(--t4);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:.75rem}
+.clabel::after{content:'';flex:1;height:1px;background:var(--brd)}
+.chart-wrap{position:relative}
+.chart-wrap canvas{width:100%;display:block;border-radius:2px}
+.tooltip{position:absolute;pointer-events:none;background:var(--bg-3);border:1px solid var(--brd-h);border-radius:4px;padding:.5rem .75rem;font-family:var(--fm);font-size:.65rem;color:var(--t1);z-index:10;opacity:0;transition:opacity .15s;white-space:nowrap;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.tooltip.show{opacity:1}
+.tooltip-row{display:flex;justify-content:space-between;gap:1rem;line-height:1.6}
+.tooltip-k{color:var(--t3)}.tooltip-v{font-weight:600}
+.crosshair{position:absolute;top:0;width:1px;background:rgba(255,255,255,.1);pointer-events:none;opacity:0;transition:opacity .15s}
+.crosshair.show{opacity:1}
+
+/* ═══ LEGEND ═══ */
+.legend{display:flex;gap:1.25rem;margin-bottom:.75rem;flex-wrap:wrap}
+.legend-i{display:flex;align-items:center;gap:.4rem;font-family:var(--fm);font-size:.58rem;color:var(--t2);letter-spacing:.03em;cursor:pointer;transition:opacity .15s}
+.legend-i:hover{opacity:.7}
+.legend-bar{width:14px;height:3px;border-radius:1px}
+
+/* ═══ SC SIDEBAR CARDS ═══ */
+.sc-sidebar{display:flex;flex-direction:column;gap:.5rem}
+.sc-side{background:var(--bg-2);border:1px solid var(--brd);border-radius:4px;padding:clamp(.6rem,1.2vw,.9rem);cursor:pointer;transition:all .3s var(--eo);position:relative;border-left:3px solid transparent}
+.sc-side:hover{border-color:var(--brd-h);transform:translateX(2px)}
+.sc-side.on{background:var(--bg-3);border-color:var(--brd-h)}
+.sc-n{font-family:var(--fd);font-size:.8rem;font-weight:700;color:var(--t1)}
+.sc-p{font-family:var(--fm);font-size:.52rem;color:var(--t4);letter-spacing:.06em;margin-top:.1rem}
+.sc-m{display:flex;flex-direction:column;gap:.2rem;margin-top:.5rem;padding-top:.4rem;border-top:1px solid var(--brd)}
+.sc-mr{display:flex;justify-content:space-between;font-size:.68rem}.sc-mk{color:var(--t3)}.sc-mv{font-family:var(--fm);font-weight:600;color:var(--t2);font-size:.62rem}
+
+/* ═══ DEAL STRIP ═══ */
+.deal-strip{display:flex;gap:.35rem;overflow-x:auto;padding-bottom:.5rem;margin-bottom:1rem}
+.deal-strip::-webkit-scrollbar{height:3px}
+.dc{flex:0 0 auto;width:clamp(70px,5vw,90px);background:var(--bg-2);border:1px solid var(--brd);border-radius:3px;padding:.4rem .5rem;text-align:center;transition:border-color .15s;position:relative}
+.dc.has{border-color:var(--blue-20)}
+.dc-bar{position:absolute;bottom:0;left:0;right:0;border-radius:0 0 3px 3px;transition:height .4s var(--eo)}
+.dc-mo{font-family:var(--fm);font-size:.48rem;font-weight:600;color:var(--t4);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.2rem;position:relative;z-index:1}
+.dc-tx{font-size:.58rem;color:var(--t3);line-height:1.25;min-height:2em;position:relative;z-index:1}
+.dc-rv{font-family:var(--fm);font-size:.6rem;font-weight:600;color:var(--blue);margin-top:.2rem;position:relative;z-index:1}
+
+/* ═══ ASSUMPTIONS ═══ */
+.assum{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.4rem;margin-top:1rem}
+.assum-i{font-size:.78rem;color:var(--t2);padding:.4rem .65rem;background:var(--bg-2);border:1px solid var(--brd);border-radius:3px;display:flex;align-items:baseline;gap:.5rem}
+.assum-i::before{content:'※';font-family:var(--fm);font-size:.6rem;color:var(--t5);flex-shrink:0}
+
+/* ═══ INFO GRID (for non-financial sections) ═══ */
+.info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:.75rem}
+.info-card{background:var(--bg-2);border:1px solid var(--brd);border-radius:4px;padding:clamp(1rem,2vw,1.5rem);transition:border-color .15s}
+.info-card:hover{border-color:var(--brd-h)}
+.ic-stat{font-family:var(--fd);font-size:clamp(1.4rem,1rem+1.2vw,2.2rem);font-weight:900;color:var(--blue);margin-bottom:.2rem}
+.ic-title{font-family:var(--fd);font-size:.9rem;font-weight:700;color:var(--t1);margin-bottom:.25rem}
+.ic-desc{font-size:.78rem;color:var(--t3);line-height:1.5}
+.ic-meta{font-family:var(--fm);font-size:.52rem;color:var(--t5);letter-spacing:.12em;text-transform:uppercase;margin-top:.6rem}
+
+/* ═══ TABLE ═══ */
+.dtable{width:100%;border-collapse:collapse;margin-top:.75rem}
+.dtable th,.dtable td{text-align:left;padding:.55rem .65rem;border-bottom:1px solid var(--brd);font-size:.78rem}
+.dtable th{font-family:var(--fm);font-size:.55rem;font-weight:600;color:var(--t4);letter-spacing:.14em;text-transform:uppercase}
+.dtable td{color:var(--t2)}
+.dtable td:nth-child(3){font-family:var(--fm);font-weight:600;color:var(--t1)}
+.tier-dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:.4rem;vertical-align:middle}
+
+/* ═══ BREAKEVEN MARKER ═══ */
+.be-marker{position:absolute;pointer-events:none;z-index:5}
+.be-flag{font-family:var(--fm);font-size:.55rem;font-weight:600;color:var(--teal);background:rgba(45,212,168,.12);border:1px solid rgba(45,212,168,.3);padding:.2rem .5rem;border-radius:3px;white-space:nowrap}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:1024px){
+  .charts-row{grid-template-columns:1fr}
+  .sc-sidebar{flex-direction:row;overflow-x:auto;padding-bottom:.5rem}.sc-side{min-width:180px;flex-shrink:0}
+  .kpi-row{grid-template-columns:repeat(3,1fr)}
+  .hero-kpis{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:640px){
+  .topbar{flex-direction:column;gap:.5rem;align-items:flex-start}
+  .kpi-row{grid-template-columns:repeat(2,1fr)}
+  .hero-kpis{grid-template-columns:1fr 1fr}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0ms!important;transition-duration:0ms!important}}
+</style>
+</head>
+
+<body>
+<div class="shell">
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">DASEIN <b>FORESIGHT</b></div>
+      <span class="tag">Dashboard Interno</span>
+    </div>
+    <a href="/" class="back">&larr; Volver al sitio</a>
+  </header>
+
+  <!-- ═══ HERO KPIS ═══ -->
+  <div class="hero-kpis" id="heroKpis"></div>
+
+  <!-- ═══ FINANZAS ═══ -->
+  <details class="acc" open id="accFinanzas">
+    <summary class="acc-head">
+      <span class="acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+      <span class="acc-title">Finanzas</span>
+      <span class="acc-badge">4 escenarios &middot; 18 meses</span>
+    </summary>
+    <div class="acc-body">
+      <div class="sc-pills" id="scPills"></div>
+      <div class="kpi-row" id="kpiRow"></div>
+
+      <div class="charts-row">
+        <div class="cpanel">
+          <div class="clabel">Revenue mensual vs costos operativos</div>
+          <div class="chart-wrap" id="mainChartWrap">
+            <canvas id="mainChart" height="280"></canvas>
+            <div class="crosshair" id="mainCross"></div>
+            <div class="tooltip" id="mainTip"></div>
+            <div class="be-marker" id="beMarker"><div class="be-flag" id="beFlag"></div></div>
+          </div>
+        </div>
+        <div class="sc-sidebar" id="scSidebar"></div>
+      </div>
+
+      <div class="cpanel cpanel-full" style="margin-bottom:1.5rem">
+        <div class="clabel">Cashflow acumulado neto — todos los escenarios</div>
+        <div class="legend" id="legend"></div>
+        <div class="chart-wrap" id="overlayChartWrap">
+          <canvas id="overlayChart" height="220"></canvas>
+          <div class="crosshair" id="overlayCross"></div>
+          <div class="tooltip" id="overlayTip"></div>
+        </div>
+      </div>
+
+      <div class="clabel" style="margin-bottom:.5rem">Pipeline de deals por mes</div>
+      <div class="deal-strip" id="dealStrip"></div>
+
+      <div class="clabel" style="margin-top:1.25rem;margin-bottom:.5rem">Supuestos del escenario</div>
+      <div class="assum" id="assum"></div>
+    </div>
+  </details>
+
+  <!-- ═══ INTELIGENCIA ═══ -->
+  <details class="acc">
+    <summary class="acc-head">
+      <span class="acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+      <span class="acc-title">Inteligencia de Mercado</span>
+      <span class="acc-badge">Signal flow activo</span>
+    </summary>
+    <div class="acc-body">
+      <div class="info-grid">
+        <div class="info-card"><div class="ic-stat">200+</div><div class="ic-title">Senales capturadas</div><div class="ic-desc">Scanner automatizado — escaneo diario de fuentes, papers, noticias y regulaciones.</div><div class="ic-meta">Scanner activo &middot; Cada 24h</div></div>
+        <div class="info-card"><div class="ic-stat">40-50</div><div class="ic-title">Senales filtradas</div><div class="ic-desc">Post-filtro por sector, geografia y alineacion con ICPs. Relevancia > 6/10.</div><div class="ic-meta">Filtro semantico</div></div>
+        <div class="info-card"><div class="ic-stat">18-24</div><div class="ic-title">Clusters activos</div><div class="ic-desc">Agrupaciones tematicas que alimentan escenarios y simulacion.</div><div class="ic-meta">Clustering semantico</div></div>
+        <div class="info-card"><div class="ic-stat">4-5</div><div class="ic-title">Incertidumbres criticas</div><div class="ic-desc">Ejes de incertidumbre para la matriz de escenarios.</div><div class="ic-meta">Input SimEngine</div></div>
+      </div>
+    </div>
+  </details>
+
+  <!-- ═══ PIPELINE ═══ -->
+  <details class="acc">
+    <summary class="acc-head">
+      <span class="acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+      <span class="acc-title">Pipeline Comercial</span>
+      <span class="acc-badge">5 tiers &middot; ~99% margen</span>
+    </summary>
+    <div class="acc-body">
+      <div class="cpanel" style="margin-bottom:1rem">
+        <div class="clabel">Pricing v2 — Marzo 2026</div>
+        <table class="dtable">
+          <thead><tr><th>Tier</th><th>Servicio</th><th>Precio</th><th>Duracion</th></tr></thead>
+          <tbody>
+            <tr><td><span class="tier-dot" style="background:var(--t3)"></span>0</td><td>Pulso Rapido</td><td>$2,500</td><td>2-3 dias</td></tr>
+            <tr><td><span class="tier-dot" style="background:var(--teal)"></span>1</td><td>Lectura de Campo</td><td>$8,500</td><td>5-7 dias</td></tr>
+            <tr><td><span class="tier-dot" style="background:var(--amber)"></span>2</td><td>Simulacion Tactica</td><td>$18,000</td><td>2-3 semanas</td></tr>
+            <tr><td><span class="tier-dot" style="background:var(--blue)"></span>3</td><td>Simulacion Estrategica</td><td>$38,000</td><td>5-6 semanas</td></tr>
+            <tr><td><span class="tier-dot" style="background:var(--violet)"></span>4</td><td>Radar Estrategico</td><td>$10,000/mes</td><td>Continuo</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="info-grid">
+        <div class="info-card"><div class="ic-stat">$226K</div><div class="ic-title">LTV Year 1 path</div><div class="ic-desc">Lectura &rarr; Estrategica &rarr; Radar. Upsell natural por profundizacion.</div></div>
+        <div class="info-card"><div class="ic-stat">~99%</div><div class="ic-title">Gross margin</div><div class="ic-desc">COGS $12-21 por simulacion. Margen puro consultoria + IA.</div></div>
+        <div class="info-card"><div class="ic-stat">$2-5M</div><div class="ic-title">SOM 24 meses</div><div class="ic-desc">Chile + Mexico. SAM $150-250M. TAM $6.5-8.2B.</div></div>
+      </div>
+    </div>
+  </details>
+
+  <!-- ═══ MARCA ═══ -->
+  <details class="acc">
+    <summary class="acc-head">
+      <span class="acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+      <span class="acc-title">Marca &amp; Contenido</span>
+      <span class="acc-badge">6 assets</span>
+    </summary>
+    <div class="acc-body">
+      <div class="info-grid">
+        <div class="info-card"><div class="ic-title">Landing page</div><div class="ic-desc">Astro 6 + Three.js. Scrollytelling con particulas WebGL.</div><div class="ic-meta">dasein-dashboard.netlify.app</div></div>
+        <div class="info-card"><div class="ic-title">Deck comercial</div><div class="ic-desc">9 slides HTML interactivo. Keyboard nav, fullscreen.</div><div class="ic-meta">docs/assets/deck-comercial.html</div></div>
+        <div class="info-card"><div class="ic-title">One-pager institucional</div><div class="ic-desc">A4 printable. Dark screen / light print.</div><div class="ic-meta">docs/assets/one-pager.html</div></div>
+        <div class="info-card"><div class="ic-title">Templates legales</div><div class="ic-desc">NDA, SOW, Proposal. Derecho comercial Chile/LATAM.</div><div class="ic-meta">docs/assets/</div></div>
+        <div class="info-card"><div class="ic-title">Brand system</div><div class="ic-desc">Satoshi + Space Grotesk + Azeret Mono. Navy + Signal Blue.</div><div class="ic-meta">dasein-brandbook.md</div></div>
+        <div class="info-card"><div class="ic-title">Content pipeline</div><div class="ic-desc">LinkedIn + X. Auto-generacion desde senales.</div><div class="ic-meta">Content Queue</div></div>
+      </div>
+    </div>
+  </details>
+
+  <!-- ═══ SISTEMA ═══ -->
+  <details class="acc">
+    <summary class="acc-head">
+      <span class="acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+      <span class="acc-title">Sistema &amp; Operaciones</span>
+      <span class="acc-badge">$500/mes &middot; 8 cron jobs</span>
+    </summary>
+    <div class="acc-body">
+      <div class="kpi-row" style="grid-template-columns:repeat(4,1fr);margin-bottom:1.25rem">
+        <div class="kpi"><div class="kv">$500</div><div class="kl">Costo mensual</div></div>
+        <div class="kpi"><div class="kv">8</div><div class="kl">Cron jobs</div></div>
+        <div class="kpi"><div class="kv">6</div><div class="kl">Tools auto</div></div>
+        <div class="kpi"><div class="kv">$150</div><div class="kl">Cloud / mes</div></div>
+      </div>
+      <div class="info-grid">
+        <div class="info-card"><div class="ic-title">Signal Scanner</div><div class="ic-desc">Escaneo diario. Papers, noticias, regulaciones.</div><div class="ic-meta">Cron diario</div></div>
+        <div class="info-card"><div class="ic-title">Opportunity Scanner</div><div class="ic-desc">Fondos, grants, aceleradoras con countdown.</div><div class="ic-meta">Cron diario</div></div>
+        <div class="info-card"><div class="ic-title">Knowledge Base</div><div class="ic-desc">Extraccion automatica por tipo y sector.</div><div class="ic-meta">Continua</div></div>
+        <div class="info-card"><div class="ic-title">Content Queue</div><div class="ic-desc">Borradores LinkedIn + X desde senales.</div><div class="ic-meta">Auto-gen</div></div>
+        <div class="info-card"><div class="ic-title">Proposal Generator</div><div class="ic-desc">Templates auto-populados por prospecto.</div><div class="ic-meta">On-demand</div></div>
+        <div class="info-card"><div class="ic-title">Telegram + Briefing</div><div class="ic-desc">Resumen diario con senales y tareas.</div><div class="ic-meta">Push diario</div></div>
+      </div>
+      <div class="cpanel" style="margin-top:1rem">
+        <div class="clabel">Desglose de costos</div>
+        <table class="dtable">
+          <thead><tr><th>Item</th><th>Costo/mes</th></tr></thead>
+          <tbody>
+            <tr><td>Cloud (AWS Bedrock)</td><td>$150</td></tr>
+            <tr><td>AI API costs</td><td>$200</td></tr>
+            <tr><td>Dominios + hosting</td><td>$30</td></tr>
+            <tr><td>Tools + subscriptions</td><td>$120</td></tr>
+            <tr><td style="font-weight:700;color:var(--t1)">Total</td><td style="font-weight:700;color:var(--t1)">$500</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </details>
+
+</div>
+
+<script define:vars={{ scenarios }}>
+/* ═══════════════════════════════════════════
+   DASEIN DASHBOARD — Canvas Chart Engine
+   ═══════════════════════════════════════════ */
+
+const DPR = window.devicePixelRatio || 1;
+let activeSc = 'base';
+
+const COLORS = {
+  supervivencia: { main: '#ff5c38', fill: 'rgba(255,92,56,.12)', light: 'rgba(255,92,56,.6)' },
+  base:          { main: '#f0b232', fill: 'rgba(240,178,50,.12)', light: 'rgba(240,178,50,.6)' },
+  crecimiento:   { main: '#2dd4a8', fill: 'rgba(45,212,168,.12)', light: 'rgba(45,212,168,.6)' },
+  acelerado:     { main: '#4865ff', fill: 'rgba(72,101,255,.12)', light: 'rgba(72,101,255,.6)' }
+};
+
+/* ── Helpers ── */
+function fmt(v) {
+  if (v == null) return '--';
+  const a = Math.abs(v), s = v < 0 ? '-' : '';
+  if (a >= 1e6) return s + '$' + (a/1e6).toFixed(1) + 'M';
+  if (a >= 1e3) return s + '$' + (a/1e3).toFixed(a>=1e5?0:1) + 'K';
+  return s + '$' + a;
+}
+function fmtFull(v) {
+  if (v == null) return '--';
+  return (v < 0 ? '-' : '') + '$' + Math.abs(v).toLocaleString('en-US');
+}
+function esc(s) { return s ? String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') : ''; }
+function getSc() { return scenarios.find(s => s.id === activeSc) || scenarios[0]; }
+
+function calcScStats(sc) {
+  const revs = sc.monthly.map(m => m.revenue);
+  const costs = sc.monthly.map(m => m.costs);
+  const totalR = revs.reduce((a,b)=>a+b,0);
+  const totalC = costs.reduce((a,b)=>a+b,0);
+  let cum = 0, beIdx = -1;
+  const cumSeries = sc.monthly.map((m,i) => { cum += m.revenue - m.costs; if (cum > 0 && beIdx < 0) beIdx = i; return cum; });
+  return { revs, costs, totalR, totalC, net: totalR-totalC, peak: Math.max(...revs), avg: Math.round(totalR/revs.length), beIdx, cumSeries };
+}
+
+/* ── Setup Canvas ── */
+function setupCanvas(canvas, w, h) {
+  canvas.width = w * DPR;
+  canvas.height = h * DPR;
+  canvas.style.width = w + 'px';
+  canvas.style.height = h + 'px';
+  const ctx = canvas.getContext('2d');
+  ctx.scale(DPR, DPR);
+  return ctx;
+}
+
+/* ── Smooth Bezier Path ── */
+function bezierPath(ctx, pts, tension = .3) {
+  if (pts.length < 2) return;
+  ctx.moveTo(pts[0][0], pts[0][1]);
+  for (let i = 0; i < pts.length - 1; i++) {
+    const p0 = pts[Math.max(0, i-1)];
+    const p1 = pts[i];
+    const p2 = pts[i+1];
+    const p3 = pts[Math.min(pts.length-1, i+2)];
+    const cp1x = p1[0] + (p2[0] - p0[0]) * tension;
+    const cp1y = p1[1] + (p2[1] - p0[1]) * tension;
+    const cp2x = p2[0] - (p3[0] - p1[0]) * tension;
+    const cp2y = p2[1] - (p3[1] - p1[1]) * tension;
+    ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, p2[0], p2[1]);
+  }
+}
+
+/* ── Sparkline ── */
+function drawSparkline(canvas, data, color) {
+  const w = canvas.parentElement.offsetWidth;
+  const h = 32;
+  const ctx = setupCanvas(canvas, w, h);
+  const n = data.length;
+  if (n < 2) return;
+  const max = Math.max(...data, 1);
+  const min = Math.min(...data, 0);
+  const range = max - min || 1;
+  const pad = 2;
+  const pts = data.map((v, i) => [pad + (i/(n-1)) * (w - pad*2), pad + (1 - (v-min)/range) * (h - pad*2)]);
+
+  // Gradient fill
+  ctx.beginPath();
+  bezierPath(ctx, pts);
+  ctx.lineTo(pts[pts.length-1][0], h);
+  ctx.lineTo(pts[0][0], h);
+  ctx.closePath();
+  const grd = ctx.createLinearGradient(0, 0, 0, h);
+  grd.addColorStop(0, color.replace(')', ',.2)').replace('rgb','rgba'));
+  grd.addColorStop(1, 'transparent');
+  ctx.fillStyle = grd;
+  ctx.fill();
+
+  // Line
+  ctx.beginPath();
+  bezierPath(ctx, pts);
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  // End dot
+  const last = pts[pts.length-1];
+  ctx.beginPath();
+  ctx.arc(last[0], last[1], 2, 0, Math.PI*2);
+  ctx.fillStyle = color;
+  ctx.fill();
+}
+
+/* ═══ MAIN CHART (Revenue bars + Cost line + Breakeven) ═══ */
+function drawMainChart() {
+  const sc = getSc();
+  const stats = calcScStats(sc);
+  const canvas = document.getElementById('mainChart');
+  const wrap = document.getElementById('mainChartWrap');
+  const w = wrap.offsetWidth;
+  const h = 280;
+  const ctx = setupCanvas(canvas, w, h);
+  const col = COLORS[sc.id] || COLORS.base;
+
+  const pad = { t: 20, r: 20, b: 36, l: 52 };
+  const cW = w - pad.l - pad.r;
+  const cH = h - pad.t - pad.b;
+  const n = stats.revs.length;
+  const maxV = Math.max(...stats.revs, ...stats.costs, 1) * 1.08;
+  const barW = Math.max(cW / n * .55, 4);
+  const step = cW / n;
+
+  const x = i => pad.l + step * i + step/2;
+  const y = v => pad.t + cH - (v / maxV) * cH;
+
+  // Grid lines
+  ctx.strokeStyle = 'rgba(255,255,255,.04)';
+  ctx.lineWidth = .5;
+  for (let p = 0; p <= 1; p += .25) {
+    const yp = y(maxV * p);
+    ctx.beginPath(); ctx.moveTo(pad.l, yp); ctx.lineTo(w - pad.r, yp); ctx.stroke();
+    ctx.fillStyle = '#4a453f';
+    ctx.font = '9px "Azeret Mono"';
+    ctx.textAlign = 'right';
+    ctx.fillText(fmt(maxV * p), pad.l - 8, yp + 3);
+  }
+
+  // Revenue bars with rounded tops and gradient
+  stats.revs.forEach((v, i) => {
+    if (v <= 0) return;
+    const bx = x(i) - barW/2;
+    const bh = (v / maxV) * cH;
+    const by = y(v);
+    const r = Math.min(3, barW/2);
+
+    // Bar gradient
+    const grd = ctx.createLinearGradient(bx, by, bx, by + bh);
+    grd.addColorStop(0, col.main);
+    grd.addColorStop(1, col.fill);
+    ctx.fillStyle = grd;
+
+    // Rounded rect top
+    ctx.beginPath();
+    ctx.moveTo(bx + r, by);
+    ctx.lineTo(bx + barW - r, by);
+    ctx.quadraticCurveTo(bx + barW, by, bx + barW, by + r);
+    ctx.lineTo(bx + barW, by + bh);
+    ctx.lineTo(bx, by + bh);
+    ctx.lineTo(bx, by + r);
+    ctx.quadraticCurveTo(bx, by, bx + r, by);
+    ctx.fill();
+
+    // Bar glow
+    ctx.shadowColor = col.main;
+    ctx.shadowBlur = 6;
+    ctx.fillStyle = 'transparent';
+    ctx.fill();
+    ctx.shadowBlur = 0;
+  });
+
+  // Cost line — smooth bezier
+  const costPts = stats.costs.map((v,i) => [x(i), y(v)]);
+  ctx.beginPath();
+  bezierPath(ctx, costPts, .25);
+  ctx.strokeStyle = '#ff5c38';
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([5, 4]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Revenue dots
+  stats.revs.forEach((v, i) => {
+    if (v <= 0) return;
+    ctx.beginPath();
+    ctx.arc(x(i), y(v), 3, 0, Math.PI*2);
+    ctx.fillStyle = col.main;
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(x(i), y(v), 1.5, 0, Math.PI*2);
+    ctx.fillStyle = '#0a1628';
+    ctx.fill();
+  });
+
+  // Breakeven line
+  if (stats.beIdx >= 0) {
+    const bx = x(stats.beIdx);
+    ctx.beginPath();
+    ctx.moveTo(bx, pad.t);
+    ctx.lineTo(bx, pad.t + cH);
+    ctx.strokeStyle = 'rgba(45,212,168,.35)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([3, 3]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Position breakeven flag
+    const marker = document.getElementById('beMarker');
+    const flag = document.getElementById('beFlag');
+    marker.style.left = (bx - 2) + 'px';
+    marker.style.top = (pad.t - 4) + 'px';
+    flag.textContent = 'Breakeven ' + sc.monthly[stats.beIdx].month.slice(2);
+    marker.style.display = 'block';
+  } else {
+    document.getElementById('beMarker').style.display = 'none';
+  }
+
+  // Month labels
+  ctx.fillStyle = '#4a453f';
+  ctx.font = '9px "Azeret Mono"';
+  ctx.textAlign = 'center';
+  sc.monthly.forEach((m, i) => {
+    if (i % 3 === 0 || i === n-1) {
+      ctx.fillText(m.month.slice(2), x(i), h - 8);
+    }
+  });
+
+  // Legend
+  ctx.font = '9px "Azeret Mono"';
+  ctx.textAlign = 'right';
+  ctx.fillStyle = 'rgba(255,92,56,.5)';
+  ctx.fillText('--- costos', w - pad.r, pad.t - 6);
+  ctx.fillStyle = col.light;
+  ctx.fillText('revenue', w - pad.r - 80, pad.t - 6);
+
+  // Store chart metadata for tooltip
+  canvas._meta = { pad, cW, cH, step, x, y, maxV, n, stats, sc, col };
+}
+
+/* ═══ OVERLAY CHART (all scenarios cumulative) ═══ */
+function drawOverlayChart() {
+  const canvas = document.getElementById('overlayChart');
+  const wrap = document.getElementById('overlayChartWrap');
+  const w = wrap.offsetWidth;
+  const h = 220;
+  const ctx = setupCanvas(canvas, w, h);
+
+  const pad = { t: 16, r: 20, b: 32, l: 56 };
+  const cW = w - pad.l - pad.r;
+  const cH = h - pad.t - pad.b;
+
+  const allSeries = scenarios.map(sc => calcScStats(sc).cumSeries);
+  const allVals = allSeries.flat();
+  const minV = Math.min(...allVals, 0);
+  const maxV = Math.max(...allVals, 1);
+  const range = maxV - minV || 1;
+  const n = scenarios[0].monthly.length;
+  const step = cW / (n - 1 || 1);
+
+  const x = i => pad.l + i * step;
+  const y = v => pad.t + cH - ((v - minV) / range) * cH;
+
+  // Grid
+  ctx.strokeStyle = 'rgba(255,255,255,.04)';
+  ctx.lineWidth = .5;
+  for (let p = 0; p <= 1; p += .2) {
+    const val = minV + range * p;
+    const yp = y(val);
+    ctx.beginPath(); ctx.moveTo(pad.l, yp); ctx.lineTo(w - pad.r, yp); ctx.stroke();
+    ctx.fillStyle = '#4a453f';
+    ctx.font = '9px "Azeret Mono"';
+    ctx.textAlign = 'right';
+    ctx.fillText(fmt(val), pad.l - 8, yp + 3);
+  }
+
+  // Zero line
+  const zeroY = y(0);
+  ctx.beginPath();
+  ctx.moveTo(pad.l, zeroY);
+  ctx.lineTo(w - pad.r, zeroY);
+  ctx.strokeStyle = 'rgba(255,255,255,.12)';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([4, 4]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Draw each scenario (inactive first, active last)
+  const order = scenarios.map((sc, i) => ({ sc, i, active: sc.id === activeSc })).sort((a,b) => a.active - b.active);
+
+  order.forEach(({ sc, i, active }) => {
+    const col = COLORS[sc.id] || COLORS.base;
+    const pts = allSeries[i].map((v, j) => [x(j), y(v)]);
+
+    // Gradient fill
+    ctx.beginPath();
+    bezierPath(ctx, pts, .25);
+    ctx.lineTo(pts[pts.length-1][0], y(0));
+    ctx.lineTo(pts[0][0], y(0));
+    ctx.closePath();
+    const grd = ctx.createLinearGradient(0, pad.t, 0, pad.t + cH);
+    grd.addColorStop(0, active ? col.fill.replace('.12', '.18') : col.fill.replace('.12', '.05'));
+    grd.addColorStop(1, 'transparent');
+    ctx.fillStyle = grd;
+    ctx.fill();
+
+    // Line
+    ctx.beginPath();
+    bezierPath(ctx, pts, .25);
+    ctx.strokeStyle = col.main;
+    ctx.lineWidth = active ? 2.5 : 1.2;
+    ctx.globalAlpha = active ? 1 : .4;
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+
+    // End label
+    if (active) {
+      const last = pts[pts.length - 1];
+      ctx.beginPath();
+      ctx.arc(last[0], last[1], 4, 0, Math.PI*2);
+      ctx.fillStyle = col.main;
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(last[0], last[1], 2, 0, Math.PI*2);
+      ctx.fillStyle = '#060d18';
+      ctx.fill();
+    }
+  });
+
+  // Month labels
+  ctx.fillStyle = '#4a453f';
+  ctx.font = '9px "Azeret Mono"';
+  ctx.textAlign = 'center';
+  scenarios[0].monthly.forEach((m, i) => {
+    if (i % 3 === 0 || i === n-1) ctx.fillText(m.month.slice(2), x(i), h - 8);
+  });
+
+  canvas._meta = { pad, cW, cH, step, x, y, range, minV, maxV, n, allSeries };
+}
+
+/* ═══ TOOLTIP INTERACTIONS ═══ */
+function setupTooltip(canvasId, crossId, tipId, getTooltipContent) {
+  const canvas = document.getElementById(canvasId);
+  const cross = document.getElementById(crossId);
+  const tip = document.getElementById(tipId);
+  const wrap = canvas.parentElement;
+
+  wrap.addEventListener('mousemove', e => {
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const meta = canvas._meta;
+    if (!meta) return;
+
+    const { pad, step, n } = meta;
+    const relX = mx - pad.l;
+    let idx = Math.round(relX / step);
+    if (canvasId === 'mainChart') idx = Math.round((relX - step/2) / step);
+    idx = Math.max(0, Math.min(n - 1, idx));
+
+    const xPos = canvasId === 'mainChart' ? meta.x(idx) : meta.x(idx);
+
+    // Crosshair
+    cross.style.left = xPos + 'px';
+    cross.style.height = (meta.cH + meta.pad.t) + 'px';
+    cross.style.top = meta.pad.t + 'px';
+    cross.classList.add('show');
+
+    // Tooltip content
+    const content = getTooltipContent(idx, meta);
+    tip.innerHTML = content;
+    tip.classList.add('show');
+
+    // Position tooltip
+    const tipW = tip.offsetWidth;
+    const wrapW = wrap.offsetWidth;
+    const left = xPos + 12;
+    tip.style.left = (left + tipW > wrapW ? xPos - tipW - 12 : left) + 'px';
+    tip.style.top = (meta.pad.t + 8) + 'px';
+  });
+
+  wrap.addEventListener('mouseleave', () => {
+    cross.classList.remove('show');
+    tip.classList.remove('show');
+  });
+}
+
+/* ═══ RENDER ALL ═══ */
+function renderAll() {
+  const sc = getSc();
+  const stats = calcScStats(sc);
+  const col = COLORS[sc.id] || COLORS.base;
+
+  // Hero KPIs
+  const baseStats = calcScStats(scenarios.find(s=>s.id==='base') || scenarios[0]);
+  const accStats = calcScStats(scenarios.find(s=>s.id==='acelerado') || scenarios[3]);
+  document.getElementById('heroKpis').innerHTML = [
+    { val: fmt(baseStats.totalR), sub: 'Revenue base 18m', color: '', spark: baseStats.revs, sparkCol: COLORS.base.main },
+    { val: fmt(baseStats.net), sub: 'Profit base 18m', color: 'up', spark: baseStats.cumSeries, sparkCol: '#34d399' },
+    { val: fmt(accStats.totalR), sub: 'Revenue acelerado', color: 'accent', spark: accStats.revs, sparkCol: '#4865ff' },
+    { val: '~99%', sub: 'Gross margin', color: '', spark: null, sparkCol: '' },
+  ].map((k,i) => `
+    <div class="hero-kpi">
+      ${k.spark ? `<canvas class="hk-spark" data-idx="${i}"></canvas>` : ''}
+      <div class="hk-val ${k.color}">${k.val}</div>
+      <div class="hk-sub">${k.sub}</div>
+    </div>`
+  ).join('');
+
+  // Draw hero sparklines
+  const sparkData = [
+    { data: baseStats.revs, col: COLORS.base.main },
+    { data: baseStats.cumSeries, col: '#34d399' },
+    { data: accStats.revs, col: '#4865ff' },
+  ];
+  document.querySelectorAll('.hk-spark').forEach(c => {
+    const idx = +c.dataset.idx;
+    if (sparkData[idx]) drawSparkline(c, sparkData[idx].data, sparkData[idx].col);
+  });
+
+  // Scenario pills
+  document.getElementById('scPills').innerHTML = scenarios.map(s =>
+    `<button class="sc-pill ${s.id===activeSc?'on':''}" data-sc="${s.id}" style="${s.id===activeSc?'color:'+COLORS[s.id].main+';border-color:'+COLORS[s.id].main:''}">
+      <span class="dot" style="background:${COLORS[s.id].main}"></span>${s.name}<span style="color:var(--t4);margin-left:.2rem">${s.probability}%</span>
+    </button>`
+  ).join('');
+  document.querySelectorAll('.sc-pill').forEach(b => b.addEventListener('click', () => { activeSc = b.dataset.sc; renderAll(); }));
+
+  // KPI Row
+  const el = document.getElementById('kpiRow');
+  el.innerHTML = [
+    { v: fmt(stats.totalR), l: 'Revenue 18m', c: '', bar: col.main, spark: stats.revs, sparkCol: col.main },
+    { v: fmt(stats.net), l: 'Net profit', c: stats.net>=0?'pos':'neg', spark: stats.cumSeries, sparkCol: stats.net>=0?'#34d399':'#ff5c38' },
+    { v: fmt(stats.avg), l: 'Avg mensual', c: '', spark: null },
+    { v: fmt(stats.peak), l: 'Peak month', c: '', spark: null },
+    { v: stats.beIdx>=0 ? sc.monthly[stats.beIdx].month.slice(2) : '--', l: 'Breakeven', c: '', spark: null },
+  ].map((k,i) => `
+    <div class="kpi" style="--bar:${k.bar||'transparent'}">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:${k.bar||'var(--brd)'}"></div>
+      ${k.spark ? `<canvas class="kpi-spark" data-kidx="${i}"></canvas>` : ''}
+      <div class="kv ${k.c}">${k.v}</div>
+      <div class="kl">${k.l}</div>
+    </div>`
+  ).join('');
+
+  // KPI sparklines
+  const kpiSparkData = [
+    { data: stats.revs, col: col.main },
+    { data: stats.cumSeries, col: stats.net>=0?'#34d399':'#ff5c38' },
+  ];
+  document.querySelectorAll('.kpi-spark').forEach(c => {
+    const idx = +c.dataset.kidx;
+    if (kpiSparkData[idx]) drawSparkline(c, kpiSparkData[idx].data, kpiSparkData[idx].col);
+  });
+
+  // Scenario sidebar
+  document.getElementById('scSidebar').innerHTML = scenarios.map(s => {
+    const st = calcScStats(s);
+    const c = COLORS[s.id];
+    return `
+    <div class="sc-side ${s.id===activeSc?'on':''}" data-sc="${s.id}" style="border-left-color:${c.main}">
+      <div class="sc-n">${s.name}</div>
+      <div class="sc-p">${s.probability}% probabilidad</div>
+      <div class="sc-m">
+        <div class="sc-mr"><span class="sc-mk">Revenue</span><span class="sc-mv">${fmt(st.totalR)}</span></div>
+        <div class="sc-mr"><span class="sc-mk">Profit</span><span class="sc-mv" style="color:${st.net>=0?'var(--green)':'var(--red)'}">${fmt(st.net)}</span></div>
+        <div class="sc-mr"><span class="sc-mk">Breakeven</span><span class="sc-mv">${st.beIdx>=0?s.monthly[st.beIdx].month.slice(2):'--'}</span></div>
+      </div>
+    </div>`;
+  }).join('');
+  document.querySelectorAll('.sc-side').forEach(c => c.addEventListener('click', () => { activeSc = c.dataset.sc; renderAll(); }));
+
+  // Legend
+  document.getElementById('legend').innerHTML = scenarios.map(s =>
+    `<div class="legend-i" data-sc="${s.id}" style="${s.id===activeSc?'opacity:1':''}">
+      <span class="legend-bar" style="background:${COLORS[s.id].main}"></span>${s.name}
+    </div>`
+  ).join('');
+  document.querySelectorAll('.legend-i').forEach(l => l.addEventListener('click', () => { activeSc = l.dataset.sc; renderAll(); }));
+
+  // Deal strip
+  const maxRev = Math.max(...stats.revs, 1);
+  document.getElementById('dealStrip').innerHTML = sc.monthly.map((m,i) => {
+    const hasRev = m.revenue > 0;
+    const barH = Math.round((m.revenue / maxRev) * 24);
+    return `
+    <div class="dc ${hasRev?'has':''}">
+      <div class="dc-bar" style="height:${barH}px;background:${col.fill}"></div>
+      <div class="dc-mo">${m.month.slice(5)}</div>
+      <div class="dc-tx">${esc(m.deals)||'\u2014'}</div>
+      ${hasRev?`<div class="dc-rv">${fmt(m.revenue)}</div>`:''}
+    </div>`;
+  }).join('');
+
+  // Assumptions
+  document.getElementById('assum').innerHTML = (sc.assumptions||[]).map(a => `<div class="assum-i">${esc(a)}</div>`).join('');
+
+  // Draw canvas charts
+  drawMainChart();
+  drawOverlayChart();
+}
+
+/* ═══ INIT ═══ */
+renderAll();
+
+// Main chart tooltip
+setupTooltip('mainChart', 'mainCross', 'mainTip', (idx, meta) => {
+  const m = meta.sc.monthly[idx];
+  const net = m.revenue - m.costs;
+  return `
+    <div style="font-weight:700;margin-bottom:4px;color:${meta.col.main}">${m.month}</div>
+    <div class="tooltip-row"><span class="tooltip-k">Revenue</span><span class="tooltip-v">${fmtFull(m.revenue)}</span></div>
+    <div class="tooltip-row"><span class="tooltip-k">Costos</span><span class="tooltip-v">${fmtFull(m.costs)}</span></div>
+    <div class="tooltip-row" style="border-top:1px solid rgba(255,255,255,.08);padding-top:3px;margin-top:3px">
+      <span class="tooltip-k">Neto</span><span class="tooltip-v" style="color:${net>=0?'var(--green)':'var(--red)'}">${fmtFull(net)}</span>
+    </div>
+    ${m.deals ? `<div style="margin-top:4px;color:var(--t3);font-size:.6rem">${esc(m.deals)}</div>` : ''}`;
+});
+
+// Overlay chart tooltip
+setupTooltip('overlayChart', 'overlayCross', 'overlayTip', (idx, meta) => {
+  return scenarios.map((sc, si) => {
+    const val = meta.allSeries[si][idx];
+    const c = COLORS[sc.id];
+    const isActive = sc.id === activeSc;
+    return `<div class="tooltip-row" style="${isActive?'font-weight:700':'opacity:.6'}">
+      <span style="color:${c.main}">${sc.name}</span>
+      <span class="tooltip-v" style="margin-left:1rem">${fmtFull(val)}</span>
+    </div>`;
+  }).join('') + `<div style="margin-top:3px;color:var(--t4);font-size:.55rem">${scenarios[0].monthly[idx].month}</div>`;
+});
+
+// Resize handler
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => { drawMainChart(); drawOverlayChart(); }, 150);
+});
+</script>
+</body>
+</html>
