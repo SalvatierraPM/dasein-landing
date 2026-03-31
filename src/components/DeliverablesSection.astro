@@ -1,36 +1,62 @@
 ---
 import TextSplitter from './TextSplitter.astro';
 
-const services = [
+const tiers = [
+  {
+    num: '00',
+    name: 'Pulso Rápido',
+    tag: 'Quick read',
+    price: '$2,500',
+    priceNum: 2500,
+    time: '2–3 días',
+    headline: 'Una pregunta, <em>una respuesta.</em>',
+    body: 'Memo de 3–5 páginas para una decisión específica: señales clave, interpretación y 3 preguntas críticas que deberías estar haciendo.',
+    includes: ['Memo ejecutivo 3–5 páginas', 'Top señales relevantes', '3 preguntas críticas'],
+  },
   {
     num: '01',
     name: 'Lectura de Campo',
-    tag: 'Entry point',
-    headline: 'Entender qué está pasando <em>antes de actuar.</em>',
-    body: 'Escaneamos señales regulatorias, competitivas y tecnológicas. Mapeamos quién juega y qué quiere. Te devolvemos un reporte con lo que otros <em>no están viendo.</em>',
-    entregables: [
-      'Reporte de señales procesadas',
-      'Mapa de actores con incentivos y fricciones',
-    ],
-    investment: 'Desde USD 4,500',
-    duration: '7 días',
-    ghost: '→',
+    tag: 'Full scan',
+    price: '$8,500',
+    priceNum: 8500,
+    time: '5–7 días',
+    headline: 'Ver el terreno completo <em>antes de actuar.</em>',
+    body: 'Radar visual del entorno + narrativa ejecutiva + mapa de 15–25 actores con sus incentivos. Incluye signposts y plan a 90 días.',
+    includes: ['Radar visual + narrativa (2 pág)', 'Mapa de stakeholders (15–25)', 'Signposts monitoreables', 'Plan a 90 días'],
   },
   {
     num: '02',
+    name: 'Simulación Táctica',
+    tag: 'First sim',
+    price: '$18,000',
+    priceNum: 18000,
+    time: '2–3 semanas',
+    headline: 'Simular una decisión <em>antes de tomarla.</em>',
+    body: 'Una decisión concreta simulada con su contexto modelado: 3 escenarios trazables, dashboard interactivo y reporte ejecutivo.',
+    includes: ['Contexto modelado', '3 escenarios simulados', 'Dashboard interactivo', 'Reporte ejecutivo'],
+  },
+  {
+    num: '03',
     name: 'Simulación Estratégica',
-    tag: 'Core',
-    headline: 'Simular cómo reaccionan los actores <em>antes de que tú actúes.</em>',
-    body: 'Simulamos cómo se comportarían los actores clave — reguladores, competidores, aliados — frente a cada decisión que podrías tomar. Cada recomendación viene con <em>su evidencia.</em>',
-    entregables: [
-      'Dossier de escenarios con evidencia trazable',
-      'Cada recomendación apunta a su señal de origen',
-      'Plan a 90 días con hitos y señales de alerta',
-      'Workshop ejecutivo de cierre',
-    ],
-    investment: 'Desde USD 18,000',
-    duration: '5–6 semanas',
-    ghost: '◈',
+    tag: 'Full ecosystem',
+    price: '$38,000',
+    priceNum: 38000,
+    time: '5–6 semanas',
+    featured: true,
+    headline: 'El ecosistema completo, <em>simulado.</em>',
+    body: 'Ecosistema completo simulado: 18–24 señales priorizadas, actores modelados, 3–4 escenarios, workshop presencial y matriz de acción. Todo con evidencia trazable.',
+    includes: ['Modelo completo del ecosistema', '18–24 señales priorizadas', '3–4 escenarios con evidencia', 'Dashboard interactivo', 'Dossier ejecutivo', 'Workshop presencial', 'Matriz de acción'],
+  },
+  {
+    num: '04',
+    name: 'Radar Estratégico',
+    tag: 'Ongoing',
+    price: '$10,000/mes',
+    priceNum: 10000,
+    time: 'Continuo · min 6 meses',
+    headline: 'Monitoreo permanente. <em>Siempre adelante.</em>',
+    body: 'Escaneo mensual de señales, re-simulación trimestral, sesión trimestral con tu equipo y acceso prioritario.',
+    includes: ['Scan mensual de señales', 'Re-simulación trimestral', 'Sesión trimestral', 'Acceso prioritario'],
   },
 ];
 
@@ -46,7 +72,7 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
         <span class="section-index">01 / Servicios</span>
       </div>
       <div class="services-header__title" data-line-reveal>
-        <h2>Uno lee el terreno. El otro simula <em>lo que viene.</em></h2>
+        <h2>Cinco formatos. Desde una pregunta rápida hasta <em>monitoreo continuo.</em></h2>
         <div class="services-header__copy">
           <TextSplitter
             text="No vendemos horas de consultoría. Vendemos entregables que un directorio puede usar para decidir."
@@ -59,62 +85,54 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
       </div>
     </header>
 
-    <!-- Service cards -->
-    <div class="services-grid" data-reveal-stagger>
-      {services.map((svc) => (
-        <article class="service-card" data-reveal>
-          <span class="service-card__ghost" aria-hidden="true">{svc.ghost}</span>
-          <div class="service-card__head">
-            <span class="service-card__num">{svc.num}</span>
-            <span class="service-card__tag">{svc.tag}</span>
-          </div>
-          <h3 class="service-card__name">{svc.name}</h3>
-          <p class="service-card__headline" set:html={svc.headline} />
-          <p class="service-card__body" set:html={svc.body} />
-
-          <div class="service-card__entregables">
-            <span class="service-card__entregables-label">Entregables</span>
-            <ul>
-              {svc.entregables.map((e) => (
-                <li>{e}</li>
-              ))}
-            </ul>
+    <!-- Pricing lanes -->
+    <div class="pricing-lanes" data-reveal-stagger>
+      {tiers.map((tier) => (
+        <article
+          class={`pricing-lane ${tier.featured ? 'pricing-lane--featured' : ''}`}
+          role="button"
+          tabindex="0"
+          data-reveal
+          data-cursor-grow
+        >
+          <div class="pricing-lane__left">
+            <span class="pricing-lane__num">{tier.num}</span>
+            <span class="pricing-lane__tag">{tier.tag}</span>
           </div>
 
-          <div class="service-card__footer">
-            <div class="service-card__meta">
-              <span class="service-card__investment" data-count-target={svc.investment}>{svc.investment}</span>
-              <span class="service-card__duration">{svc.duration}</span>
+          <div class="pricing-lane__center">
+            <h3 class="pricing-lane__name">{tier.name}</h3>
+            <div class="pricing-lane__expand">
+              <p class="pricing-lane__headline" set:html={tier.headline} />
+              <p class="pricing-lane__body">{tier.body}</p>
+              <ul class="pricing-lane__includes">
+                {tier.includes.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
             </div>
-            <a class="button button-primary service-card__cta" href={calendlyUrl} target="_blank" rel="noreferrer">
-              Conversemos <span aria-hidden="true">→</span>
-            </a>
           </div>
+
+          <div class="pricing-lane__right">
+            <span class="pricing-lane__price" data-count-target={`USD ${tier.price}`}>USD {tier.price}</span>
+            <span class="pricing-lane__time">{tier.time}</span>
+          </div>
+
+          <span class="pricing-lane__toggle" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path class="toggle-h" d="M0 7h14" stroke="currentColor" stroke-width="1.5"/>
+              <path class="toggle-v" d="M7 0v14" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </span>
         </article>
       ))}
     </div>
 
-    <!-- Radar Estratégico — partnership model -->
-    <div class="partner-block" data-scale-in>
-      <div class="partner-block__inner">
-        <span class="service-card__ghost" aria-hidden="true">◇</span>
-        <div class="partner-block__content">
-          <span class="service-card__num">03</span>
-          <h3 class="partner-block__title">Radar Estratégico — <em>monitoreo continuo.</em></h3>
-          <p class="partner-block__body">
-            Para organizaciones que necesitan vigilancia permanente: escaneo mensual,
-            re-simulación trimestral, alertas calibradas y reportes <em>board-ready.</em>
-            Diseñado como partnership a medida.
-          </p>
-          <span class="partner-block__price">Desde USD 7,500/mes · mínimo 3 meses</span>
-        </div>
-        <div class="partner-block__action">
-          <span class="partner-block__tag">Partnership</span>
-          <a class="button button-secondary partner-block__cta" href={calendlyUrl} target="_blank" rel="noreferrer">
-            Conversemos <span aria-hidden="true">→</span>
-          </a>
-        </div>
-      </div>
+    <!-- Bottom CTA -->
+    <div class="services-cta" data-reveal>
+      <a class="button button-primary" href={calendlyUrl} target="_blank" rel="noreferrer">
+        Conversemos sobre tu caso <span aria-hidden="true">→</span>
+      </a>
     </div>
 
   </div>
@@ -161,7 +179,7 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
     line-height: var(--leading-heading);
     letter-spacing: var(--tracking-heading);
     color: var(--ink);
-    max-width: 22ch;
+    max-width: 24ch;
   }
 
   .services-header__title h2 em {
@@ -178,313 +196,231 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
     max-width: 48ch;
   }
 
-  /* --- Service cards grid --- */
+  /* --- Pricing lanes --- */
 
-  .services-grid {
+  .pricing-lanes {
     display: grid;
-    grid-template-columns: 1fr 1fr;
     gap: 0;
     border-top: 1px solid var(--line);
   }
 
-  .service-card {
+  .pricing-lane {
+    display: grid;
+    grid-template-columns: clamp(6rem, 9vw, 9rem) 1fr auto;
+    gap: clamp(1.5rem, 3vw, 3rem);
+    align-items: start;
+    padding-block: clamp(2rem, 3vw, 3.5rem);
+    border-bottom: 1px solid var(--line);
+    cursor: pointer;
+    position: relative;
+    outline: none;
+    transition: background-color 0.3s ease;
+  }
+
+  .pricing-lane:hover,
+  .pricing-lane:focus-visible {
+    background: rgba(72, 101, 255, 0.02);
+  }
+
+  .pricing-lane:focus-visible {
+    outline: 2px solid var(--signal-blue);
+    outline-offset: -2px;
+  }
+
+  /* Featured tier accent */
+  .pricing-lane--featured {
+    border-left: 3px solid var(--signal-red);
+    padding-left: clamp(1.5rem, 2vw, 2.5rem);
+    margin-left: -3px;
+  }
+
+  .pricing-lane--featured .pricing-lane__name {
+    color: var(--signal-red);
+  }
+
+  /* --- Left column: num + tag --- */
+
+  .pricing-lane__left {
     display: flex;
     flex-direction: column;
-    gap: clamp(1rem, 1.5vw, 1.5rem);
-    padding: clamp(2.5rem, 3.5vw, 4rem);
-    border-bottom: 1px solid var(--line);
-    position: relative;
-    overflow: hidden;
+    gap: 0.3rem;
+    padding-top: 0.15rem;
   }
 
-  /* Scroll-driven entrance: clip-path wipe + tilt */
-  .js .service-card {
-    opacity: 0;
-    clip-path: inset(0 100% 0 0);
-    transform: translateX(-24px);
-    transition: opacity 0.9s var(--ease-out-expo),
-                clip-path 0.9s var(--ease-out-expo),
-                transform 0.9s var(--ease-out-expo);
-  }
-
-  .js .service-card.is-scrolled-in {
-    opacity: 1;
-    clip-path: inset(0 0 0 0);
-    transform: translateX(0);
-  }
-
-  .js .service-card:nth-child(2) {
-    transition-delay: 0.2s;
-    clip-path: inset(0 0 0 100%);
-    transform: translateX(24px);
-  }
-
-  .js .service-card:nth-child(2).is-scrolled-in {
-    clip-path: inset(0 0 0 0);
-    transform: translateX(0);
-  }
-
-  .service-card__ghost {
-    position: absolute;
-    top: 0.5rem;
-    right: 1rem;
+  .pricing-lane__num {
     font-family: var(--font-mono);
-    font-size: clamp(5rem, 4rem + 4vw, 9rem);
-    font-weight: 600;
-    line-height: 1;
-    color: var(--ink);
-    opacity: 0.035;
-    user-select: none;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .service-card:first-child {
-    border-right: 1px solid var(--line);
-  }
-
-  /* --- Card head --- */
-
-  .service-card__head {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .service-card__num {
-    font-family: var(--font-mono);
-    font-size: clamp(1.4rem, 1rem + 1vw, 2rem);
+    font-size: clamp(1.2rem, 0.9rem + 0.8vw, 1.7rem);
     font-weight: 500;
     letter-spacing: var(--tracking-mono);
     line-height: 1;
     color: var(--signal-red);
+    transition: transform 0.5s var(--ease-spring), opacity 0.4s ease;
   }
 
-  .service-card__tag {
+  .js .pricing-lane:not(.revealed) .pricing-lane__num {
+    opacity: 0;
+    transform: scale(1.3);
+  }
+
+  .js .pricing-lane.revealed .pricing-lane__num {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .pricing-lane__tag {
     font-family: var(--font-mono);
     font-size: var(--text-overline);
     letter-spacing: var(--tracking-overline);
     text-transform: uppercase;
     color: var(--ink-faint);
-    padding: 0.25rem 0.6rem;
-    border: 1px solid var(--line);
-    border-radius: 2px;
+    transition: color 0.3s ease;
   }
 
-  /* --- Card content --- */
+  .pricing-lane:hover .pricing-lane__tag {
+    color: var(--ink-soft);
+  }
 
-  .service-card__name {
+  /* --- Center column: name + expandable content --- */
+
+  .pricing-lane__name {
     font-family: var(--font-display);
-    font-size: clamp(1.8rem, 1.2rem + 1.5vw, 2.8rem);
-    font-weight: 700;
-    line-height: 1.05;
-    letter-spacing: var(--tracking-heading);
+    font-size: clamp(1.5rem, 1rem + 1.2vw, 2.4rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
     color: var(--ink);
+    transition: color 0.3s ease;
+    padding-right: 2.5rem;
   }
 
-  .service-card__headline {
+  .pricing-lane:hover .pricing-lane__name {
+    color: var(--signal-red);
+  }
+
+  /* Expandable details */
+  .pricing-lane__expand {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition:
+      grid-template-rows 0.5s var(--ease-out-expo),
+      opacity 0.4s var(--ease-out-expo),
+      margin-top 0.4s var(--ease-out-expo);
+    margin-top: 0;
+  }
+
+  .pricing-lane__expand > * {
+    overflow: hidden;
+  }
+
+  .pricing-lane.is-open .pricing-lane__expand {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    margin-top: clamp(0.8rem, 1.2vw, 1.2rem);
+  }
+
+  .pricing-lane__headline {
     font-family: var(--font-display);
-    font-size: clamp(1.2rem, 1rem + 0.5vw, 1.5rem);
+    font-size: clamp(1rem, 0.9rem + 0.3vw, 1.2rem);
     font-weight: 500;
-    line-height: 1.25;
-    letter-spacing: -0.02em;
+    line-height: 1.3;
     color: var(--ink);
-    max-width: 32ch;
+    margin-bottom: 0.6rem;
   }
 
-  .service-card__headline em {
+  .pricing-lane__headline em {
     font-family: var(--font-editorial);
     font-style: italic;
     font-weight: 400;
     color: var(--signal-red);
   }
 
-  .service-card__body {
-    font-size: var(--text-body);
+  .pricing-lane__body {
+    font-size: var(--text-sm);
     line-height: var(--leading-body);
     color: var(--ink-soft);
-    max-width: 44ch;
+    max-width: 52ch;
+    margin-bottom: 0.8rem;
   }
 
-  .service-card__body em {
-    font-family: var(--font-editorial);
-    font-style: italic;
-    color: var(--ink);
-  }
-
-  /* --- Entregables list --- */
-
-  .service-card__entregables {
-    padding-top: clamp(1rem, 1.5vw, 1.5rem);
-    border-top: 1px solid var(--line);
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .service-card__entregables-label {
-    font-family: var(--font-mono);
-    font-size: var(--text-overline);
-    letter-spacing: var(--tracking-overline);
-    text-transform: uppercase;
-    color: var(--ink-faint);
-  }
-
-  .service-card__entregables-label::before {
-    content: '◈';
-    color: var(--signal-blue);
-    opacity: 0.6;
-    margin-right: 0.3rem;
-  }
-
-  .service-card__entregables ul {
+  .pricing-lane__includes {
     list-style: none;
     padding: 0;
-    display: grid;
-    gap: 0.45rem;
-  }
-
-  .service-card__entregables li {
-    font-family: var(--font-mono);
-    font-size: 0.76rem;
-    letter-spacing: 0.02em;
-    color: var(--ink-faint);
-    padding-left: 1.4rem;
-    position: relative;
-  }
-
-  .service-card__entregables li::before {
-    content: '※';
-    position: absolute;
-    left: 0;
-    top: 0;
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    color: var(--signal-blue);
-    opacity: 0.6;
-  }
-
-  /* --- Card footer --- */
-
-  .service-card__footer {
-    margin-top: auto;
-    padding-top: clamp(1.5rem, 2vw, 2rem);
     display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 1rem;
+    flex-wrap: wrap;
+    gap: 0.4rem;
   }
 
-  .service-card__meta {
+  .pricing-lane__includes li {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    padding: 0.35rem 0.6rem;
+    border-radius: var(--radius-full);
+    background: rgba(17, 17, 17, 0.04);
+    border: 1px solid rgba(17, 17, 17, 0.06);
+  }
+
+  /* --- Right column: price + time --- */
+
+  .pricing-lane__right {
     display: flex;
     flex-direction: column;
+    align-items: flex-end;
     gap: 0.2rem;
+    padding-top: 0.15rem;
   }
 
-  .service-card__investment {
+  .pricing-lane__price {
     font-family: var(--font-mono);
     font-size: clamp(1rem, 0.8rem + 0.5vw, 1.3rem);
     font-weight: 600;
-    letter-spacing: var(--tracking-mono);
+    letter-spacing: -0.01em;
     color: var(--ink);
     font-variant-numeric: tabular-nums;
+    white-space: nowrap;
   }
 
-  .service-card__duration {
+  .pricing-lane__time {
     font-family: var(--font-mono);
-    font-size: var(--text-overline);
-    letter-spacing: var(--tracking-overline);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--ink-faint);
+    white-space: nowrap;
   }
 
-  .service-card__cta {
-    flex-shrink: 0;
+  /* --- Toggle icon --- */
+
+  .pricing-lane__toggle {
+    position: absolute;
+    top: clamp(2rem, 3vw, 3.5rem);
+    right: 0;
+    color: var(--ink-faint);
+    transition: color 0.3s ease;
   }
 
-  /* --- Partner block --- */
+  .pricing-lane__toggle .toggle-v {
+    transition: transform 0.4s var(--ease-out-expo);
+    transform-origin: center;
+  }
 
-  .partner-block {
+  .pricing-lane.is-open .pricing-lane__toggle .toggle-v {
+    transform: scaleY(0);
+  }
+
+  .pricing-lane:hover .pricing-lane__toggle {
+    color: var(--signal-red);
+  }
+
+  /* --- Bottom CTA --- */
+
+  .services-cta {
+    display: flex;
+    justify-content: center;
     margin-top: clamp(3rem, 4vw, 5rem);
-  }
-
-  .partner-block__inner {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: clamp(3rem, 4vw, 5rem);
-    align-items: center;
-    padding: clamp(2.5rem, 3.5vw, 4rem);
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    background: rgba(17, 17, 17, 0.02);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .partner-block__content {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .partner-block__title {
-    font-family: var(--font-display);
-    font-size: clamp(1.4rem, 1rem + 1vw, 2rem);
-    font-weight: 700;
-    line-height: 1.15;
-    letter-spacing: var(--tracking-heading);
-    color: var(--ink);
-    max-width: 28ch;
-  }
-
-  .partner-block__title em {
-    font-family: var(--font-editorial);
-    font-style: italic;
-    font-weight: 400;
-    color: var(--signal-red);
-  }
-
-  .partner-block__body em {
-    font-family: var(--font-editorial);
-    font-style: italic;
-    color: var(--ink);
-  }
-
-  .partner-block__price {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    letter-spacing: 0.04em;
-    color: var(--signal-blue);
-    margin-top: 0.25rem;
-  }
-
-  .partner-block__body {
-    font-size: var(--text-body);
-    line-height: var(--leading-body);
-    color: var(--ink-soft);
-    max-width: 50ch;
-  }
-
-  .partner-block__action {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .partner-block__tag {
-    font-family: var(--font-mono);
-    font-size: var(--text-overline);
-    letter-spacing: var(--tracking-overline);
-    text-transform: uppercase;
-    color: var(--ink-faint);
-  }
-
-  .partner-block__tag::before {
-    content: '→';
-    color: var(--signal-red);
-    opacity: 0.6;
-    margin-right: 0.4rem;
   }
 
   /* --- Responsive --- */
@@ -496,128 +432,87 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
     }
   }
 
-  @media (max-width: 860px) {
-    .services-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .service-card:first-child {
-      border-right: none;
-    }
-
-    .service-card {
-      padding: clamp(2rem, 3vw, 3rem) 0;
-    }
-
-    .service-card__footer {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .service-card__cta {
-      width: 100%;
-      text-align: center;
-    }
-
-    .partner-block__inner {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-
-    .partner-block__action {
-      align-items: flex-start;
-    }
-
-    .partner-block__cta {
-      width: 100%;
-      text-align: center;
-    }
-
-    .services-header {
-      grid-template-columns: 1fr;
+  @media (max-width: 700px) {
+    .pricing-lane {
+      grid-template-columns: auto 1fr;
       gap: 1rem;
     }
-  }
 
-  /* --- Card entrance with scale --- */
+    .pricing-lane__right {
+      grid-column: 1 / -1;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 1rem;
+    }
 
-  [data-reveal-stagger] .service-card {
-    transform: translateY(24px) scale(0.97);
-    opacity: 0;
-    transition: transform 0.6s var(--ease-out-expo), opacity 0.5s var(--ease-out-expo);
-  }
-
-  [data-reveal-stagger].revealed .service-card {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-
-  [data-reveal-stagger].revealed .service-card:nth-child(2) {
-    transition-delay: 0.12s;
-  }
-
-  /* --- Card hover glow --- */
-
-  .service-card {
-    transition: border-color 0.4s var(--ease-spring), box-shadow 0.4s var(--ease-spring), transform 0.4s var(--ease-spring);
-  }
-
-  .service-card:hover {
-    border-color: rgba(72, 101, 255, 0.25);
-    box-shadow: 0 8px 32px rgba(72, 101, 255, 0.06), 0 0 0 1px rgba(72, 101, 255, 0.08);
-    transform: translateY(-4px);
+    .pricing-lane__name {
+      padding-right: 2rem;
+    }
   }
 
   /* --- Reduced Motion --- */
 
   @media (prefers-reduced-motion: reduce) {
-    .service-card,
-    .partner-block__inner {
+    .pricing-lane,
+    .pricing-lane__expand,
+    .pricing-lane__toggle .toggle-v {
       transition: none;
     }
 
-    [data-reveal-stagger] .service-card {
-      transform: none;
+    .js .pricing-lane:not(.revealed) .pricing-lane__num {
       opacity: 1;
-      transition: none;
+      transform: none;
     }
-  }
 
-  @media (prefers-reduced-motion: reduce) {
-    .js .service-card {
+    .pricing-lane__expand {
+      grid-template-rows: 1fr;
       opacity: 1;
-      transform: none;
-      transition: none;
     }
   }
 </style>
 
 <script>
-  /* === Service cards: scroll-driven entrance + counter === */
+  /* === Pricing lanes: expand/collapse + counter === */
   (() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const lanes = document.querySelectorAll<HTMLElement>('.pricing-lane');
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-    // Card entrance with perspective tilt
-    const cards = document.querySelectorAll('.service-card');
-    const cardObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-scrolled-in');
-          cardObserver.unobserve(entry.target);
+    const toggleLane = (lane: HTMLElement) => {
+      const wasOpen = lane.classList.contains('is-open');
+      lanes.forEach((l) => l.classList.remove('is-open'));
+      if (!wasOpen) lane.classList.add('is-open');
+    };
+
+    lanes.forEach((lane) => {
+      lane.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleLane(lane);
         }
       });
-    }, { threshold: 0.2, rootMargin: '0px 0px -8% 0px' });
 
-    cards.forEach((card) => cardObserver.observe(card));
+      if (isTouchDevice) {
+        lane.addEventListener('click', () => toggleLane(lane));
+      } else {
+        lane.addEventListener('mouseenter', () => {
+          lanes.forEach((l) => l.classList.remove('is-open'));
+          lane.classList.add('is-open');
+        });
+        lane.addEventListener('mouseleave', () => {
+          lane.classList.remove('is-open');
+        });
+      }
+    });
 
-    // Counter animation on investment numbers
+    // Counter animation on prices
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     const counters = document.querySelectorAll<HTMLElement>('[data-count-target]');
     const counterObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
         const el = entry.target as HTMLElement;
         const raw = el.dataset.countTarget || '';
-        // Extract number: "Desde USD 4,500" → 4500
         const match = raw.match(/([\d,]+)/);
         if (!match) return;
         const target = parseInt(match[1].replace(/,/g, ''), 10);
@@ -628,7 +523,7 @@ const calendlyUrl = 'https://calendly.com/salvatierra-pablom/30min';
 
         const tick = (now: number) => {
           const t = Math.min((now - start) / duration, 1);
-          const ease = 1 - Math.pow(1 - t, 4); // ease-out-quart
+          const ease = 1 - Math.pow(1 - t, 4);
           const current = Math.round(target * ease);
           el.textContent = prefix + current.toLocaleString('en-US') + suffix;
           if (t < 1) requestAnimationFrame(tick);
