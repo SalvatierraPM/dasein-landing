@@ -12,6 +12,7 @@ const tiers = [
     level: 'puntual',
     levelColor: 'var(--foresight-teal)',
     headline: 'Una pregunta, <em>una respuesta.</em>',
+    benefit: 'Obtén claridad sobre lo que se está moviendo en tu entorno en 3 días.',
     body: 'Qué se está moviendo, qué señales hay, qué preguntas deberías estar haciéndote. Respuesta rápida a 1 decisión concreta.',
     includes: ['Memo ejecutivo', 'Señales clave', '3 preguntas críticas'],
   },
@@ -25,6 +26,7 @@ const tiers = [
     level: 'puntual',
     levelColor: 'var(--foresight-teal)',
     headline: 'El mapa completo de tu entorno <em>antes de actuar.</em>',
+    benefit: 'Identifica quién importa, qué fuerzas se mueven y dónde están los riesgos antes de que te afecten.',
     body: 'Quién importa, qué fuerzas se mueven, dónde están los riesgos, y qué hacer en los próximos 90 días.',
     includes: ['Radar visual del entorno', 'Mapa de actores (15–25)', 'Signposts', 'Plan a 90 días'],
   },
@@ -38,6 +40,7 @@ const tiers = [
     level: 'estrategico',
     levelColor: 'var(--signal-blue)',
     headline: 'Ensaya una decisión <em>antes de tomarla.</em>',
+    benefit: 'Ve cómo reaccionaría tu ecosistema ante una decisión concreta antes de comprometerte.',
     body: 'Simulamos cómo reaccionan los actores y te mostramos 3 futuros posibles en un dashboard interactivo.',
     includes: ['1 decisión simulada', '3 escenarios', 'Dashboard interactivo', 'Reporte ejecutivo'],
   },
@@ -52,6 +55,7 @@ const tiers = [
     levelColor: 'var(--signal-blue)',
     featured: true,
     headline: 'Todo tu ecosistema, <em>simulado.</em>',
+    benefit: 'Tu directorio toma decisiones con escenarios simulados, no con intuición.',
     body: 'Todos los actores, todas las dinámicas. Con taller presencial donde tu directorio convierte resultados en decisiones.',
     includes: ['Ecosistema completo', '12–60 actores', 'Dashboard + dossier', 'Workshop presencial', 'Matriz de acción'],
   },
@@ -65,6 +69,7 @@ const tiers = [
     level: 'continuo',
     levelColor: 'var(--horizon-violet)',
     headline: 'Vigilancia permanente. <em>Siempre adelante.</em>',
+    benefit: 'Tu equipo nunca más decide con información de hace 6 meses.',
     body: 'Cada mes detectamos qué cambió, cada trimestre re-simulamos. Tu equipo nunca más decide con información vieja.',
     includes: ['Scan mensual de señales', 'Re-simulación trimestral', 'Sesión trimestral', 'Acceso prioritario'],
   },
@@ -130,6 +135,7 @@ const bookingUrl = 'https://daseinforesight.zohobookings.com/#/47316330000000490
             <h3 class="pricing-lane__name">{tier.name}</h3>
             <div class="pricing-lane__expand">
               <p class="pricing-lane__headline" set:html={tier.headline} />
+              {tier.benefit && <p class="pricing-lane__benefit">{tier.benefit}</p>}
               <p class="pricing-lane__body">{tier.body}</p>
               <ul class="pricing-lane__includes">
                 {tier.includes.map((item) => (
@@ -392,6 +398,16 @@ const bookingUrl = 'https://daseinforesight.zohobookings.com/#/47316330000000490
     font-style: italic;
     font-weight: 400;
     color: var(--signal-red);
+  }
+
+  .pricing-lane__benefit {
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    line-height: var(--leading-body);
+    color: var(--ink);
+    max-width: 52ch;
+    margin-bottom: 0.5rem;
   }
 
   .pricing-lane__body {
