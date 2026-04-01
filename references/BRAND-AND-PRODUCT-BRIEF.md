@@ -251,7 +251,7 @@ Rules: always `aria-hidden="true"`, max 2 atmospheric patterns per section, no r
 | Service | Investment |
 |---------|------------|
 | **Lectura de Campo** | From USD 2,500 / 5 days |
-| **Simulación Estratégica** | From USD 12,000 / 4-5 weeks |
+| **Simulación Táctica** | From USD 12,000 / 4-5 weeks |
 | **Radar Estratégico** | From USD 5,000/month / min 6 months |
 
 ### Standing brand rules:

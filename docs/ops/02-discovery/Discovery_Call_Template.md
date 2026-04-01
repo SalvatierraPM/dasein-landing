@@ -72,7 +72,7 @@
 
 ## Evaluación post-llamada
 
-- **Servicio recomendado:** [ ] Lectura de Campo  [ ] Simulación Estratégica  [ ] Radar Estratégico
+- **Servicio recomendado:** [ ] Lectura de Campo  [ ] Simulación Táctica  [ ] Radar Estratégico
 - **Qualification score:** ___/35 (ver Lead_Qualification_Score.md)
 - **Probabilidad de cierre:** ___%
 - **Próximo paso:**

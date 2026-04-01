@@ -44,7 +44,7 @@
 | Industria | Select | Banca / Minería / Educación / Público / Otro |
 | País | Select | Chile / México / Colombia / Otro |
 | Origen | Select | LinkedIn / Referido / Evento / Inbound / Cold email |
-| Servicio de interés | Select | Lectura de Campo / Simulación Estratégica / Radar |
+| Servicio de interés | Select | Lectura de Campo / Simulación Táctica / Radar |
 | Dolor principal | Texto largo | Implementación de IA sin claridad regulatoria |
 | Urgencia (1-10) | Número | 7 |
 | Presupuesto estimado | Número (USD) | 18,000 |

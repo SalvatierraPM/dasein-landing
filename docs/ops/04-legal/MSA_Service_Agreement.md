@@ -28,7 +28,7 @@ Este contrato entrará en vigor a la fecha de firma y permanecerá vigente por u
 Los servicios específicos, alcance, entregables, cronograma e inversión se definirán en cada SOW individual. Los servicios disponibles incluyen:
 
 - **Lectura de Campo** — Escaneo de señales y memo ejecutivo
-- **Simulación Estratégica** — Simulación dual-world completa con escenarios
+- **Simulación Táctica** — Simulación dual-world completa con escenarios
 - **Radar Estratégico** — Monitoreo continuo y simulación trimestral
 
 ### 4. Propiedad Intelectual

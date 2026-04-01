@@ -26,7 +26,7 @@
 
 ## 2. Escenarios
 
-> Para Simulación Estratégica: escenarios completos con matriz 2x2.
+> Para Simulación Táctica: escenarios completos con matriz 2x2.
 > Para Lectura de Campo: panorama de señales organizado por horizonte temporal.
 
 ### 2.1 Incertidumbres críticas

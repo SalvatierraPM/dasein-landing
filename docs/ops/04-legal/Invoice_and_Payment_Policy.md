@@ -22,7 +22,7 @@
 | Servicio | Estructura de pago |
 |----------|-------------------|
 | Lectura de Campo | 100% al inicio (proyecto corto, 5 días) |
-| Simulación Estratégica | 50% al inicio + 50% contra entrega final |
+| Simulación Táctica | 50% al inicio + 50% contra entrega final |
 | Radar Estratégico | Pago mensual anticipado (día 1 de cada mes) |
 
 ## Anticipo requerido

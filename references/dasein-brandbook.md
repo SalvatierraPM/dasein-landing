@@ -307,9 +307,9 @@ Simbolos tipograficos con significado semantico. Se usan en lugar de bullets, se
 - "Explora tus escenarios" (no "Descubre el futuro")
 - "Comienza con una Lectura de Campo" (no "Prueba gratis")
 
-#### Descripcion de Servicio (Ejemplo: Simulacion Estrategica)
+#### Descripcion de Servicio (Ejemplo: Simulacion Táctica)
 
-> **Simulacion Estrategica**
+> **Simulacion Táctica**
 >
 > Un caso completo de simulacion de futuros. Escaneamos 40-60 senales relevantes para tu industria, construimos un modelo dual-world con IA, y te entregamos un mapa de escenarios con implicaciones estrategicas concretas. En 4-5 semanas, tu equipo directivo tendra un lenguaje comun para hablar del futuro — y un plan para cada version de el.
 
@@ -622,11 +622,11 @@ Claridad rapida para decidir ahora.
 [CTA link] Saber mas ->
 ```
 
-#### Card 2: Simulacion Estrategica
+#### Card 2: Simulacion Táctica
 
 ```
 [Badge] Mas popular
-[H3] Simulacion Estrategica
+[H3] Simulacion Táctica
 [Body] La experiencia completa. Corremos la simulacion dual-world
 con nuestro motor SignalTwin: escenarios plausibles, analisis de
 robustez, dashboard interactivo y workshop con tu equipo directivo.
@@ -648,7 +648,7 @@ accion a 90 dias renovado en cada ciclo.
 [CTA link] Saber mas ->
 ```
 
-**Diseno de cards**: Fondo Surface Dark, borde sutil. La card de Simulacion Estrategica tiene un borde con gradiente accent (Signal Blue -> Horizon Violet) para destacarla. Las otras dos tienen borde neutro.
+**Diseno de cards**: Fondo Surface Dark, borde sutil. La card de Simulacion Táctica tiene un borde con gradiente accent (Signal Blue -> Horizon Violet) para destacarla. Las otras dos tienen borde neutro.
 
 ### 7.3 Caso de Estudio: BancoEstado
 

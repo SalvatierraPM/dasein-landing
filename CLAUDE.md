@@ -63,12 +63,14 @@ docs/ops/
 ```
 
 ### Commercial Architecture (FROZEN)
-Three services, three depth levels:
+Five services, three depth levels:
 | Service | Position | Investment |
 |---------|----------|------------|
-| **Lectura de Campo** | Entry door | From USD 4,500 / 7 days |
-| **Simulación Estratégica** | Core (most popular) | From USD 18,000 / 5-6 weeks |
-| **Radar Estratégico** | Continuous monitoring | From USD 7,500/month / min 3 months |
+| **Pulso Rápido** | Quick read | USD $2,500–$3,500 / 2–3 days |
+| **Lectura de Campo** | Full scan | USD $8,500–$12,000 / 5–7 days |
+| **Simulación Táctica** | First sim | USD $16,000–$22,000 / 2–3 weeks |
+| **Simulación Estratégica** | Full ecosystem (featured) | USD $38,000–$55,000 / 5–6 weeks |
+| **Radar Estratégico** | Continuous monitoring | USD $10,000–$15,000/month / min 6 months |
 
 ### Rules
 - `.claude/rules/design-quality.md` — Anti-vibecode policy with banned patterns and required qualities

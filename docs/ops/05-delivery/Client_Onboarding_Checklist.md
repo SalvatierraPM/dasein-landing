@@ -8,7 +8,7 @@
 ## Datos del proyecto
 
 - **Cliente:**
-- **Servicio:** [ ] Lectura de Campo  [ ] Simulación Estratégica  [ ] Radar Estratégico
+- **Servicio:** [ ] Lectura de Campo  [ ] Simulación Táctica  [ ] Radar Estratégico
 - **Fecha de inicio:**
 - **Lead del proyecto:**
 

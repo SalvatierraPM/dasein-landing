@@ -220,7 +220,7 @@ Somos una consultora de prospectiva estrategica que ayuda a organizaciones a tom
 | Servicio | Que incluye | Plazo | Inversion |
 |----------|-------------|-------|-----------|
 | **Lectura de Campo** | Escaneo de 15-25 senales + memo ejecutivo + mapa de stakeholders + signposts | 5 dias | Desde USD 2,500 |
-| **Simulacion Estrategica** | Simulacion completa dual-world + escenarios + dashboard + workshop con equipo directivo | 4-5 semanas | Desde USD 12,000 |
+| **Simulacion Táctica** | Simulacion completa dual-world + escenarios + dashboard + workshop con equipo directivo | 4-5 semanas | Desde USD 12,000 |
 | **Radar Estrategico** | Monitoreo continuo + alertas de senales criticas + simulacion trimestral actualizada | Continuo (min. 6 meses) | Desde USD 5,000/mes |
 
 ### Hablemos

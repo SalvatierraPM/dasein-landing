@@ -7,9 +7,9 @@
     "pricing": {
       "pulso_rapido": 2500,
       "lectura_campo": 8500,
-      "simulacion_tactica": 18000,
-      "simulacion_estrategica": 38000,
-      "radar_estrategico_monthly": 10000
+      "simulacion_tactica": [16000, 22000],
+      "simulacion_estrategica": [38000, 55000],
+      "radar_estrategico_monthly": [10000, 15000]
     }
   },
   "fixed_costs_monthly": {

@@ -11,7 +11,7 @@
 **Tamaño:** Bancos grandes y medianos, cajas de compensación, aseguradoras
 **Dolor:** Implementación de IA en contextos regulados (CMF, Ley de Datos Personales), riesgo reputacional, presión competitiva de fintechs
 **Trigger de compra:** Nueva regulación próxima, competidor lanzó producto IA, directorio exige plan de IA
-**Servicio natural:** Simulación Estratégica (decisiones complejas con múltiples stakeholders)
+**Servicio natural:** Simulación Táctica (decisiones complejas con múltiples stakeholders)
 **Ticket promedio:** USD 18,000-35,000
 **Ciclo de venta:** 4-8 semanas
 **Caso demo:** BancoEstado (análisis público)
@@ -24,7 +24,7 @@
 **Tamaño:** Grandes mineras, empresas de energía renovable, utilities
 **Dolor:** Transición energética, geopolítica de litio/cobre, regulación ambiental, licencia social
 **Trigger de compra:** Cambio regulatorio ambiental, conflicto comunitario, presión ESG de inversionistas
-**Servicio natural:** Simulación Estratégica o Radar Estratégico (monitoreo continuo de señales geopolíticas)
+**Servicio natural:** Simulación Táctica o Radar Estratégico (monitoreo continuo de señales geopolíticas)
 **Ticket promedio:** USD 15,000-60,000/año
 **Ciclo de venta:** 6-12 semanas
 **Caso demo:** Litio/geopolítica (en desarrollo)
@@ -37,7 +37,7 @@
 **Tamaño:** Universidades Tier 1 y 2, centros de investigación
 **Dolor:** Impacto de IA generativa en modelos educativos, integridad académica, rediseño curricular, competencia de plataformas online
 **Trigger de compra:** Incidente de plagio con IA, presión del Mineduc, pérdida de matrícula
-**Servicio natural:** Lectura de Campo (diagnóstico rápido) → Simulación Estratégica (rediseño)
+**Servicio natural:** Lectura de Campo (diagnóstico rápido) → Simulación Táctica (rediseño)
 **Ticket promedio:** USD 4,500-18,000
 **Ciclo de venta:** 8-16 semanas (burocracia institucional)
 **Caso demo:** Pendiente
@@ -50,7 +50,7 @@
 **Tamaño:** Ministerios, servicios públicos, municipalidades grandes, empresas del Estado
 **Dolor:** Diseño de política pública bajo incertidumbre, adopción tecnológica en gobierno, presión ciudadana
 **Trigger de compra:** Cambio de gobierno, nueva agenda digital, crisis de legitimidad institucional
-**Servicio natural:** Lectura de Campo (por presupuesto) → Simulación Estratégica (si hay fondos de innovación)
+**Servicio natural:** Lectura de Campo (por presupuesto) → Simulación Táctica (si hay fondos de innovación)
 **Ticket promedio:** USD 4,500-18,000
 **Ciclo de venta:** 12-24 semanas (licitación o compra directa si < umbral)
 **Caso demo:** Pendiente (adaptar BancoEstado como referencia de institución pública)

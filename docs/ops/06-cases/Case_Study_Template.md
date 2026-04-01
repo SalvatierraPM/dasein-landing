@@ -10,7 +10,7 @@
 
 - **Industria:** [INDUSTRIA]
 - **País:** [PAÍS]
-- **Servicio utilizado:** [ ] Lectura de Campo  [ ] Simulación Estratégica  [ ] Radar Estratégico
+- **Servicio utilizado:** [ ] Lectura de Campo  [ ] Simulación Táctica  [ ] Radar Estratégico
 - **Fecha:** [FECHA]
 - **Duración del proyecto:** [DURACIÓN]
 - **Estado:** [ ] Demo (info pública)  [ ] Caso real (cliente pagó)  [ ] En progreso

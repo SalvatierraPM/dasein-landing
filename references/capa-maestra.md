@@ -29,7 +29,7 @@ Tres servicios, tres niveles de profundidad:
 | Servicio | Posición | Inversión |
 |----------|----------|-----------|
 | **Lectura de Campo** | Puerta de entrada | Desde USD 2,500 |
-| **Simulación Estratégica** | Core (más popular) | Desde USD 12,000 |
+| **Simulación Táctica** | Core (más popular) | Desde USD 12,000 |
 | **Radar Estratégico** | Monitoreo continuo | Desde USD 5,000/mes |
 
 ---
@@ -145,7 +145,7 @@ En esta etapa conviene partir con una oferta corta y clara. No diez servicios ra
 
 **Plazo:** 5 días | **Inversión:** Desde USD 2,500
 
-### Servicio 2 — Simulación Estratégica
+### Servicio 2 — Simulación Táctica
 **Objetivo:** evaluar una decisión relevante bajo distintos futuros plausibles mediante simulación dual-world completa.
 
 **Ejemplos de uso:**
@@ -341,13 +341,13 @@ Traducir tendencias difusas en una estrategia concreta con acciones priorizadas.
 | Servicio | Inversión | Plazo |
 |----------|-----------|-------|
 | **Lectura de Campo** | Desde USD 2,500 | 5 días |
-| **Simulación Estratégica** | Desde USD 12,000 | 4-5 semanas |
+| **Simulación Táctica** | Desde USD 12,000 | 4-5 semanas |
 | **Radar Estratégico** | Desde USD 5,000/mes | Mínimo 6 meses |
 
 Precios "desde" — escalan según complejidad del caso y número de stakeholders.
 
 ### 13.2 Modelo de entrada
-La **Lectura de Campo** funciona como discovery pagado: permite al cliente obtener valor inmediato (memo + signposts) y a nosotros validar el caso antes de proponer una Simulación Estratégica completa.
+La **Lectura de Campo** funciona como discovery pagado: permite al cliente obtener valor inmediato (memo + signposts) y a nosotros validar el caso antes de proponer una Simulación Táctica completa.
 
 ### 13.3 Modelo de alianzas
 "Donde termina nuestro trabajo, empieza el tuyo." Dasein entrega el mapa estratégico → el partner implementa la transformación. Modelo de referral con consultoras de cambio, implementadores de IA, y think tanks.
