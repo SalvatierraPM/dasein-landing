@@ -20,7 +20,7 @@ import BrandLogo from '../components/BrandLogo.astro';
   title="Dasein Foresight — Prospectiva estratégica basada en IA"
   description="Dasein Foresight es una consultora de prospectiva estratégica basada en IA que combina señales, simulación y lectura de sistemas complejos para ayudar a organizaciones a decidir mejor bajo incertidumbre."
 >
-  <nav class="site-nav" id="site-nav">
+  <nav class="site-nav" id="site-nav" aria-label="Navegación principal">
     <div class="container nav-wrap">
       <a href="#hero" class="brand-lockup">
         <BrandLogo
@@ -43,7 +43,7 @@ import BrandLogo from '../components/BrandLogo.astro';
   </nav>
 
   <MouseParticles />
-  <main class="page-shell">
+  <main class="page-shell" id="main-content">
     <DecorativeAccents />
     <Hero />
     <DeliverablesSection />

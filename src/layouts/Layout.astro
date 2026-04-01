@@ -8,6 +8,8 @@ const {
   title = 'Dasein Foresight — Prospectiva estratégica basada en IA',
   description = 'Consultora de prospectiva estratégica basada en IA para equipos que necesitan leer señales, modelar sistemas y decidir mejor bajo complejidad.'
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 <!DOCTYPE html>
 <html lang="es">
@@ -19,6 +21,7 @@ const {
   <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
   <link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
 
   <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,18 +32,113 @@ const {
   <title>{title}</title>
 
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://www.daseinfs.com/">
+  <link rel="canonical" href={canonicalURL.href}>
   <meta property="og:title" content={title}>
   <meta property="og:description" content={description}>
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.daseinfs.com/">
+  <meta property="og:url" content={canonicalURL.href}>
   <meta property="og:image" content="https://www.daseinfs.com/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="es_CL">
+  <meta property="og:site_name" content="Dasein Foresight">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content={title}>
   <meta name="twitter:description" content={description}>
   <meta name="twitter:image" content="https://www.daseinfs.com/og-image.png">
+
+  <!-- Structured Data -->
+  <script is:inline type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.daseinfs.com/#organization",
+        "name": "Dasein Foresight",
+        "url": "https://www.daseinfs.com",
+        "logo": "https://www.daseinfs.com/brand/dasein-mark-tight.png",
+        "description": "Consultora de prospectiva estratégica basada en IA que combina señales, simulación y lectura de sistemas complejos para ayudar a organizaciones a decidir mejor bajo incertidumbre.",
+        "foundingDate": "2025",
+        "founder": {
+          "@type": "Person",
+          "name": "Pablo Moraga",
+          "jobTitle": "Founder & CEO",
+          "email": "pablo@daseinfs.com"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Santiago",
+          "addressCountry": "CL"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+56-9-3905-6565",
+          "contactType": "sales",
+          "email": "pablo@daseinfs.com",
+          "availableLanguage": ["Spanish", "English"]
+        },
+        "sameAs": [
+          "https://github.com/SalvatierraPM",
+          "https://substack.com/@pavlogalgo"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.daseinfs.com/#website",
+        "url": "https://www.daseinfs.com",
+        "name": "Dasein Foresight",
+        "publisher": { "@id": "https://www.daseinfs.com/#organization" },
+        "inLanguage": "es"
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://www.daseinfs.com/#service",
+        "name": "Dasein Foresight",
+        "description": "Prospectiva estratégica basada en IA: signal scanning, actor mapping, scenario simulation y decisión bajo incertidumbre para equipos directivos.",
+        "provider": { "@id": "https://www.daseinfs.com/#organization" },
+        "areaServed": ["CL", "MX", "LATAM"],
+        "serviceType": "Strategic Foresight Consulting",
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Servicios de Prospectiva",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "name": "Pulso Rápido",
+              "description": "Respuesta rápida a 1 decisión concreta. Señales clave, memo ejecutivo, 3 preguntas críticas.",
+              "priceSpecification": { "@type": "PriceSpecification", "price": "2500", "priceCurrency": "USD", "minPrice": "2500", "maxPrice": "3500" }
+            },
+            {
+              "@type": "Offer",
+              "name": "Lectura de Campo",
+              "description": "Mapa completo del entorno: actores, fuerzas, riesgos y plan a 90 días.",
+              "priceSpecification": { "@type": "PriceSpecification", "price": "8500", "priceCurrency": "USD", "minPrice": "8500", "maxPrice": "12000" }
+            },
+            {
+              "@type": "Offer",
+              "name": "Simulación Táctica",
+              "description": "Simulación de 1 decisión con 3 escenarios posibles en dashboard interactivo.",
+              "priceSpecification": { "@type": "PriceSpecification", "price": "16000", "priceCurrency": "USD", "minPrice": "16000", "maxPrice": "22000" }
+            },
+            {
+              "@type": "Offer",
+              "name": "Simulación Estratégica",
+              "description": "Simulación de ecosistema completo: 12-60 actores, dashboard, dossier y workshop presencial.",
+              "priceSpecification": { "@type": "PriceSpecification", "price": "38000", "priceCurrency": "USD", "minPrice": "38000", "maxPrice": "55000" }
+            },
+            {
+              "@type": "Offer",
+              "name": "Radar Estratégico",
+              "description": "Vigilancia continua: scan mensual de señales, re-simulación trimestral, sesiones ejecutivas.",
+              "priceSpecification": { "@type": "UnitPriceSpecification", "price": "10000", "priceCurrency": "USD", "minPrice": "10000", "maxPrice": "15000", "billingDuration": "P1M", "referenceQuantity": { "@type": "QuantitativeValue", "value": "6", "unitCode": "MON" } }
+            }
+          ]
+        }
+      }
+    ]
+  }
+  </script>
 
   <script is:inline>
     const root = document.documentElement;
@@ -71,6 +169,7 @@ const {
   </noscript>
 </head>
 <body class="grain">
+  <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
   <div class="cursor-dot" aria-hidden="true"></div>
   <slot />
 
@@ -148,4 +247,28 @@ const {
 
 <style is:global>
   @import '../styles/global.css';
+
+  /* Skip navigation link — visually hidden, appears on focus */
+  .skip-link {
+    position: fixed;
+    top: -100%;
+    left: 1rem;
+    z-index: 10000;
+    padding: 0.75rem 1.25rem;
+    background: var(--navy, #0A1628);
+    color: var(--slate-white, #ede7dc);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    border-radius: 0 0 6px 6px;
+    text-decoration: none;
+    transition: top 0.2s ease;
+  }
+
+  .skip-link:focus {
+    top: 0;
+    outline: 2px solid var(--signal-blue, #4865FF);
+    outline-offset: 2px;
+  }
 </style>

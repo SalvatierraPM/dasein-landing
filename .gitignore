@@ -39,3 +39,6 @@ references/
 output/
 video-remotion/
 .vercel
+
+# Local Netlify folder
+.netlify

@@ -115,6 +115,8 @@ const bookingUrl = 'https://daseinforesight.zohobookings.com/#/47316330000000490
             data-level={tier.level}
             role="button"
             tabindex="0"
+            aria-expanded="false"
+            aria-label={`${tier.name} — ${tier.tag} — USD ${tier.price}`}
             data-reveal
             data-cursor-grow
           >
@@ -536,8 +538,14 @@ const bookingUrl = 'https://daseinforesight.zohobookings.com/#/47316330000000490
 
     const toggleLane = (lane: HTMLElement) => {
       const wasOpen = lane.classList.contains('is-open');
-      lanes.forEach((l) => l.classList.remove('is-open'));
-      if (!wasOpen) lane.classList.add('is-open');
+      lanes.forEach((l) => {
+        l.classList.remove('is-open');
+        l.setAttribute('aria-expanded', 'false');
+      });
+      if (!wasOpen) {
+        lane.classList.add('is-open');
+        lane.setAttribute('aria-expanded', 'true');
+      }
     };
 
     lanes.forEach((lane) => {

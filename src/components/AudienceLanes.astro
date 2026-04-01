@@ -49,7 +49,7 @@ const marqueeItems = ['Pilotos', 'Partners', 'Alianzas'];
     <!-- Lanes -->
     <div class="audience-lanes" data-reveal-stagger>
       {audienceCards.map((card, i) => (
-        <article class="audience-lane" role="button" tabindex="0" data-reveal data-cursor-grow>
+        <article class="audience-lane" role="button" tabindex="0" aria-expanded="false" aria-label={`${card.label}: ${card.title}`} data-reveal data-cursor-grow>
           <div class="audience-lane-left">
             <span class="audience-num">{card.num}</span>
             <span class="audience-label">{card.label}</span>
@@ -518,8 +518,14 @@ const marqueeItems = ['Pilotos', 'Partners', 'Alianzas'];
 
   const toggleLane = (lane: Element) => {
     const wasOpen = lane.classList.contains('is-open');
-    lanes.forEach((l) => l.classList.remove('is-open'));
-    if (!wasOpen) lane.classList.add('is-open');
+    lanes.forEach((l) => {
+      l.classList.remove('is-open');
+      l.setAttribute('aria-expanded', 'false');
+    });
+    if (!wasOpen) {
+      lane.classList.add('is-open');
+      lane.setAttribute('aria-expanded', 'true');
+    }
   };
 
   lanes.forEach((lane) => {

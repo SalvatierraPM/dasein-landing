@@ -1,0 +1,16 @@
+{
+  "name": "Dasein Foresight",
+  "short_name": "Dasein",
+  "description": "Consultora de prospectiva estrategica basada en IA",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#f8f4ed",
+  "theme_color": "#f5efe5",
+  "icons": [
+    {
+      "src": "/favicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

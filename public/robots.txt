@@ -1,0 +1,22 @@
+# Dasein Foresight — www.daseinfs.com
+
+User-agent: *
+Allow: /
+Disallow: /dashboard
+Disallow: /type-test
+
+# AI Crawlers — allowed
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Sitemap
+Sitemap: https://www.daseinfs.com/sitemap-index.xml

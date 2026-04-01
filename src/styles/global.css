@@ -60,6 +60,23 @@ a {
     transform var(--dur-fast) ease;
 }
 
+/* Global focus-visible styles for keyboard navigation */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--signal-blue, #4865FF);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.section-dark a:focus-visible,
+.section-dark button:focus-visible,
+.section-dark [tabindex]:focus-visible,
+.section-dark [role="button"]:focus-visible {
+  outline-color: var(--signal-red, #FF5C38);
+}
+
 img, video, svg, canvas {
   display: block;
   max-width: 100%;

@@ -1,0 +1,46 @@
+# Dasein Foresight
+
+> Consultora de prospectiva estrategica basada en IA para organizaciones que necesitan decidir bajo incertidumbre.
+
+## What We Do
+
+Dasein Foresight combines signal scanning, actor mapping, and multiagent simulation to help executive teams make strategic decisions before they become urgent. We deliver structured foresight — not opinions, not decks — actionable intelligence a board can use to decide.
+
+## Core Methodology
+
+1. Signal Scanning — Detect 200+ weak signals from diverse sources, filter to 40-50 relevant ones
+2. Actor Mapping — Map 15-60 stakeholders, their positions, incentives, and likely moves
+3. Scenario Simulation — Multiagent AI simulates how actors interact under different conditions
+4. Strategic Decision Support — Deliver dashboards, dossiers, and action matrices for executive teams
+
+## Services & Pricing (USD)
+
+- Pulso Rapido ($2,500-$3,500, 2-3 days): Quick read on 1 decision. Memo, key signals, 3 critical questions.
+- Lectura de Campo ($8,500-$12,000, 5-7 days): Full environment scan. Actor map, risk radar, 90-day plan.
+- Simulacion Tactica ($16,000-$22,000, 2-3 weeks): Simulate 1 decision, 3 scenarios, interactive dashboard.
+- Simulacion Estrategica ($38,000-$55,000, 5-6 weeks): Full ecosystem simulation. 12-60 actors, workshop, action matrix.
+- Radar Estrategico ($10,000-$15,000/month, min 6 months): Ongoing monitoring. Monthly signal scan, quarterly re-simulation.
+
+## Who We Serve
+
+- Corporate strategy teams navigating regulation, competition, or market shifts
+- Government and public policy teams modeling stakeholder dynamics
+- Industry associations mapping ecosystem forces
+- Innovation labs exploring adjacent futures
+
+## Location & Contact
+
+- Based in Santiago, Chile. Serving Latin America.
+- Founder: Pablo Moraga (pablo@daseinfs.com)
+- Phone: +56 9 3905 6565
+- Website: https://www.daseinfs.com
+- Booking: https://daseinforesight.zohobookings.com/#/4731633000000049054
+
+## Technology
+
+Built on SignalTwin, a proprietary multiagent simulation engine. Combines NLP signal processing, ontological actor modeling (inspired by Fernando Flores and Humberto Echeverria), and scenario generation through agent-based simulation.
+
+## Links
+
+- GitHub: https://github.com/SalvatierraPM
+- Substack: https://substack.com/@pavlogalgo
