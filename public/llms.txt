@@ -15,11 +15,11 @@ Dasein Foresight combines signal scanning, actor mapping, and multiagent simulat
 
 ## Services & Pricing (USD)
 
-- Pulso Rapido ($2,500-$3,500, 2-3 days): Quick read on 1 decision. Memo, key signals, 3 critical questions.
-- Lectura de Campo ($8,500-$12,000, 5-7 days): Full environment scan. Actor map, risk radar, 90-day plan.
-- Simulacion Tactica ($16,000-$22,000, 2-3 weeks): Simulate 1 decision, 3 scenarios, interactive dashboard.
-- Simulacion Estrategica ($38,000-$55,000, 5-6 weeks): Full ecosystem simulation. 12-60 actors, workshop, action matrix.
-- Radar Estrategico ($10,000-$15,000/month, min 6 months): Ongoing monitoring. Monthly signal scan, quarterly re-simulation.
+- Pulso Rapido ($1,500, 2-3 days): Quick read on 1 decision. Memo, key signals, 3 critical questions.
+- Lectura de Campo ($5,000, 5-7 days): Full environment scan. Actor map, risk radar, 90-day plan.
+- Simulacion Tactica ($12,000, 2-3 weeks): Simulate 1 decision, 3 scenarios, interactive dashboard.
+- Simulacion Estrategica ($28,000, 5-6 weeks): Full ecosystem simulation. 12-60 actors, workshop, action matrix.
+- Radar Estrategico ($6,000/month, min 6 months): Ongoing monitoring. Monthly signal scan, quarterly re-simulation.
 
 ## Who We Serve
 
