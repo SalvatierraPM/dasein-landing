@@ -97,6 +97,11 @@ const bookingUrl = 'https://daseinforesight.zohobookings.com/#/47316330000000490
             delay={300}
           />
         </div>
+        <aside class="launch-aside" data-reveal>
+          <span class="launch-aside__symbol" aria-hidden="true">※</span>
+          <span class="launch-aside__text">Precios de lanzamiento</span>
+          <span class="launch-aside__line" aria-hidden="true"></span>
+        </aside>
       </div>
     </header>
 
@@ -146,6 +151,7 @@ const bookingUrl = 'https://daseinforesight.zohobookings.com/#/47316330000000490
           </div>
 
           <div class="pricing-lane__right">
+            <span class="pricing-lane__launch-badge">launch</span>
             <span class="pricing-lane__price" data-count-target={`USD ${tier.price}`}>USD {tier.price}</span>
             <span class="pricing-lane__time">{tier.time}</span>
           </div>
@@ -228,6 +234,40 @@ const bookingUrl = 'https://daseinforesight.zohobookings.com/#/47316330000000490
     line-height: var(--leading-body);
     color: var(--ink-soft);
     max-width: 48ch;
+  }
+
+  /* --- Launch aside (header) --- */
+
+  .launch-aside {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: clamp(1.5rem, 2vw, 2.5rem);
+  }
+
+  .launch-aside__symbol {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    color: var(--foresight-teal);
+    line-height: 1;
+  }
+
+  .launch-aside__text {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    white-space: nowrap;
+  }
+
+  .launch-aside__line {
+    flex: 1;
+    height: 1px;
+    background: var(--foresight-teal);
+    opacity: 0.2;
+    max-width: 8rem;
   }
 
   /* --- Level markers --- */
@@ -446,6 +486,26 @@ const bookingUrl = 'https://daseinforesight.zohobookings.com/#/47316330000000490
     align-items: flex-end;
     gap: 0.2rem;
     padding-top: 0.15rem;
+  }
+
+  .pricing-lane__launch-badge {
+    font-family: var(--font-mono);
+    font-size: 0.56rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--foresight-teal);
+    border: 1px solid var(--foresight-teal-dim);
+    border-radius: var(--radius-full);
+    padding: 0.18rem 0.55rem;
+    line-height: 1;
+    align-self: flex-end;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+  }
+
+  .pricing-lane:hover .pricing-lane__launch-badge {
+    opacity: 1;
   }
 
   .pricing-lane__price {
