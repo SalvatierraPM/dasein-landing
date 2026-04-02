@@ -90,6 +90,15 @@ const stripLoop = [...strips, ...strips, ...strips];
         con <em>información,</em> no con urgencia.
       </p>
 
+      <div class="hero-proof-block" data-hero-proof>
+        <ul class="hero-proof-list">
+          <li><span class="hero-proof-bullet">※</span> Revisiones de decisión en días, no semanas</li>
+          <li><span class="hero-proof-bullet">※</span> Escenarios claros con evidencia trazable</li>
+          <li><span class="hero-proof-bullet">※</span> Equipos alineados con un modelo compartido</li>
+        </ul>
+        <p class="hero-proof-invite">Pide una muestra de 1 página con el formato de nuestro entregable.</p>
+      </div>
+
       <div class="button-row hero-actions" data-hero-actions>
         <a class="button button-primary" href="https://daseinforesight.zohobookings.com/#/4731633000000049054" target="_blank" rel="noreferrer">Agenda una conversación</a>
         <a class="button button-secondary" href="#metodo">Ver el método</a>
@@ -276,6 +285,54 @@ const stripLoop = [...strips, ...strips, ...strips];
     transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
   }
 
+  .hero-proof-block {
+    max-width: 30rem;
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  .hero-proof-block.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+  }
+
+  .hero-proof-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    text-align: left;
+  }
+
+  .hero-proof-list li {
+    font-family: var(--font-body);
+    font-size: clamp(0.85rem, 0.8rem + 0.25vw, 0.95rem);
+    color: var(--ink-soft);
+    line-height: 1.5;
+    display: flex;
+    align-items: baseline;
+    gap: 0.5em;
+  }
+
+  .hero-proof-bullet {
+    font-family: var(--font-mono);
+    font-size: 0.7em;
+    color: var(--signal-blue);
+    flex-shrink: 0;
+  }
+
+  .hero-proof-invite {
+    margin-top: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: clamp(0.72rem, 0.68rem + 0.2vw, 0.8rem);
+    color: var(--ink-faint);
+    letter-spacing: 0.02em;
+    text-align: center;
+  }
+
   .hero-actions {
     opacity: 0;
     transform: translateY(12px);
@@ -299,6 +356,7 @@ const stripLoop = [...strips, ...strips, ...strips];
   @media (prefers-reduced-motion: reduce) {
     .hero-word,
     .hero-body,
+    .hero-proof-block,
     .hero-actions,
     .hero-kicker {
       opacity: 1 !important;
@@ -582,6 +640,10 @@ const stripLoop = [...strips, ...strips, ...strips];
       text-align: center;
     }
 
+    .hero-proof-block {
+      max-width: 90%;
+    }
+
     .hero-actions {
       flex-direction: column;
       width: 100%;
@@ -632,6 +694,7 @@ const stripLoop = [...strips, ...strips, ...strips];
 
     const words = stage.querySelectorAll('[data-word]');
     const body = stage.querySelector('[data-hero-body]');
+    const proof = stage.querySelector('[data-hero-proof]');
     const actions = stage.querySelector('[data-hero-actions]');
     const kicker = stage.querySelector('.hero-kicker');
     const strikeWord = stage.querySelector('[data-strike]');
@@ -669,10 +732,15 @@ const stripLoop = [...strips, ...strips, ...strips];
       body?.classList.add('is-visible');
     }, strikeDelay + 500);
 
+    // Proof block after body
+    setTimeout(() => {
+      proof?.classList.add('is-visible');
+    }, strikeDelay + 900);
+
     // CTAs last
     setTimeout(() => {
       actions?.classList.add('is-visible');
-    }, strikeDelay + 800);
+    }, strikeDelay + 1200);
   })();
 
   /* === Lexicon carousel (scroll-driven) === */
