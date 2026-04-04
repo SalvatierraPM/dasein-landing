@@ -167,7 +167,7 @@ import BrandLogo from '../components/BrandLogo.astro';
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
       const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789/·—';
-      const kickers = document.querySelectorAll<HTMLElement>('.section-kicker, .section-index');
+      const kickers = document.querySelectorAll<HTMLElement>('.section-kicker:not(.hero-kicker), .section-index');
 
       const scramble = (el: HTMLElement) => {
         const original = el.textContent || '';

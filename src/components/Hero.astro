@@ -3,21 +3,6 @@ import ParticleScene from './ParticleScene.astro';
 import ParticleNetwork from './ParticleNetwork.astro';
 import Aurora from './Aurora.astro';
 
-const proofPoints = [
-  {
-    label: 'Promesa',
-    value: 'Decidir con anticipación antes de quedar reactivos',
-  },
-  {
-    label: 'Formato',
-    value: 'Señales, simulación y criterio operativo',
-  },
-  {
-    label: 'Cadencia',
-    value: '4-5 semanas por caso completo',
-  },
-];
-
 const lexicon = [
   'señales.',
   'actores.',
@@ -32,13 +17,6 @@ const strips = [
   'decisión bajo incertidumbre',
   'prospectiva estratégica',
   'criterio para decidir',
-];
-
-const disclosurePills = [
-  'Signal scanning',
-  'Actor mapping',
-  'Scenario logic',
-  'Trazabilidad',
 ];
 
 const stripLoop = [...strips, ...strips, ...strips];
@@ -90,18 +68,16 @@ const stripLoop = [...strips, ...strips, ...strips];
         con <em>información,</em> no con urgencia.
       </p>
 
-      <div class="hero-proof-block" data-hero-proof>
-        <ul class="hero-proof-list">
-          <li><span class="hero-proof-bullet">※</span> Revisiones de decisión en días, no semanas</li>
-          <li><span class="hero-proof-bullet">※</span> Escenarios claros con evidencia trazable</li>
-          <li><span class="hero-proof-bullet">※</span> Equipos alineados con un modelo compartido</li>
-        </ul>
-        <p class="hero-proof-invite">Pide una muestra de 1 página con el formato de nuestro entregable.</p>
-      </div>
-
       <div class="button-row hero-actions" data-hero-actions>
-        <a class="button button-primary" href="https://daseinforesight.zohobookings.com/#/4731633000000049054" target="_blank" rel="noreferrer">Agenda una conversación</a>
-        <a class="button button-secondary" href="#metodo">Ver el método</a>
+        <a
+          class="button button-primary hero-primary-cta"
+          href="https://daseinforesight.zohobookings.com/#/4731633000000049054"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Agenda una conversación"
+        >
+          <span class="hero-primary-title">Agenda una conversación</span>
+        </a>
       </div>
     </div>
 
@@ -285,55 +261,11 @@ const stripLoop = [...strips, ...strips, ...strips];
     transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
   }
 
-  .hero-proof-block {
-    max-width: 30rem;
-    opacity: 0;
-    transform: translateY(14px);
-  }
-
-  .hero-proof-block.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
-  }
-
-  .hero-proof-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.45rem;
-    text-align: left;
-  }
-
-  .hero-proof-list li {
-    font-family: var(--font-body);
-    font-size: clamp(0.85rem, 0.8rem + 0.25vw, 0.95rem);
-    color: var(--ink-soft);
-    line-height: 1.5;
-    display: flex;
-    align-items: baseline;
-    gap: 0.5em;
-  }
-
-  .hero-proof-bullet {
-    font-family: var(--font-mono);
-    font-size: 0.7em;
-    color: var(--signal-blue);
-    flex-shrink: 0;
-  }
-
-  .hero-proof-invite {
-    margin-top: 0.75rem;
-    font-family: var(--font-mono);
-    font-size: clamp(0.72rem, 0.68rem + 0.2vw, 0.8rem);
-    color: var(--ink-faint);
-    letter-spacing: 0.02em;
-    text-align: center;
-  }
-
   .hero-actions {
+    display: grid;
+    justify-items: center;
+    gap: 0.8rem;
+    width: 100%;
     opacity: 0;
     transform: translateY(12px);
   }
@@ -353,10 +285,32 @@ const stripLoop = [...strips, ...strips, ...strips];
     transition: opacity 0.5s ease;
   }
 
+  .hero-primary-cta {
+    min-width: min(100%, 22rem);
+    padding-inline: 1.7rem 1.9rem;
+    border-color: rgba(255, 255, 255, 0.04);
+  }
+
+  .hero-primary-cta:hover {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .hero-primary-cta .btn-eye + .btn-eye {
+    margin-left: -0.18rem;
+  }
+
+  .hero-primary-title {
+    font-family: var(--font-mono);
+    font-size: clamp(0.98rem, 0.93rem + 0.25vw, 1.08rem);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--slate-white);
+    line-height: 1.2;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .hero-word,
     .hero-body,
-    .hero-proof-block,
     .hero-actions,
     .hero-kicker {
       opacity: 1 !important;
@@ -368,28 +322,6 @@ const stripLoop = [...strips, ...strips, ...strips];
     .hero-word--strike {
       color: var(--ink-faint) !important;
     }
-  }
-
-  .hero-proof-grid {
-    display: grid;
-    gap: 0.9rem;
-    width: 100%;
-    max-width: 54rem;
-  }
-
-  .hero-proof {
-    padding: 1rem 1.15rem 1.15rem;
-  }
-
-  .hero-proof-label {
-    display: inline-block;
-    margin-bottom: 0.35rem;
-    color: var(--ink-faint);
-  }
-
-  .hero-proof p {
-    color: var(--ink);
-    line-height: 1.42;
   }
 
   .hero-strip-wrap {
@@ -562,10 +494,6 @@ const stripLoop = [...strips, ...strips, ...strips];
   }
 
   @media (min-width: 980px) {
-    .hero-proof-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
     .hero-disclosure-grid {
       grid-template-columns: minmax(0, 0.78fr) minmax(360px, 1.04fr);
     }
@@ -640,12 +568,7 @@ const stripLoop = [...strips, ...strips, ...strips];
       text-align: center;
     }
 
-    .hero-proof-block {
-      max-width: 90%;
-    }
-
     .hero-actions {
-      flex-direction: column;
       width: 100%;
       max-width: 90%;
     }
@@ -653,6 +576,10 @@ const stripLoop = [...strips, ...strips, ...strips];
     .hero-actions .button {
       width: 100%;
       text-align: center;
+    }
+
+    .hero-primary-cta {
+      padding: 1rem;
     }
 
     .hero-strip .marquee-item {
@@ -694,7 +621,6 @@ const stripLoop = [...strips, ...strips, ...strips];
 
     const words = stage.querySelectorAll('[data-word]');
     const body = stage.querySelector('[data-hero-body]');
-    const proof = stage.querySelector('[data-hero-proof]');
     const actions = stage.querySelector('[data-hero-actions]');
     const kicker = stage.querySelector('.hero-kicker');
     const strikeWord = stage.querySelector('[data-strike]');
@@ -732,15 +658,10 @@ const stripLoop = [...strips, ...strips, ...strips];
       body?.classList.add('is-visible');
     }, strikeDelay + 500);
 
-    // Proof block after body
-    setTimeout(() => {
-      proof?.classList.add('is-visible');
-    }, strikeDelay + 900);
-
-    // CTAs last
+    // CTA enters shortly after the body so the fold resolves faster
     setTimeout(() => {
       actions?.classList.add('is-visible');
-    }, strikeDelay + 1200);
+    }, strikeDelay + 760);
   })();
 
   /* === Lexicon carousel (scroll-driven) === */
